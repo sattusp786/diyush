@@ -1,4 +1,4 @@
-<?php
+<?php 
 class ControllerProductProduct extends Controller {
 	private $error = array();
 
