@@ -3,3 +3,6 @@
 /image/cache/*
 config.php
 admin/config.php
+storage/*
+.htpasswd
+.htaccess
