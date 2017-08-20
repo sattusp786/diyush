@@ -51,6 +51,7 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
+
 			// Attributes
 			$attribute = array();
 			
@@ -125,6 +126,35 @@ class ControllerCommonColumnLeft extends Controller {
 					'name'	   => $this->language->get('text_catalog'),
 					'href'     => '',
 					'children' => $catalog
+				);		
+			}
+
+			// Masters
+			$masters = array();
+			
+			if ($this->user->hasPermission('access', 'masters/metal_price')) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_metal_price'),
+					'href'     => $this->url->link('masters/metal_price', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'masters/stone_price')) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_stone_price'),
+					'href'     => $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+
+			if ($masters) {
+				$data['menus'][] = array(
+					'id'       => 'menu-masters',
+					'icon'	   => 'fa-tags', 
+					'name'	   => $this->language->get('text_masters'),
+					'href'     => '',
+					'children' => $masters
 				);		
 			}
 			
