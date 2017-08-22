@@ -34,6 +34,10 @@ $_['entry_cut']          = 'Cut';
 $_['entry_price']      	  = 'Price';
 $_['entry_status']        = 'Status';
 
+//Buttons
+$_['button_import']        = 'Import';
+$_['button_export']        = 'Export';
+
 // Help
 $_['help_code']           = 'The code the customer enters to get the discount.';
 

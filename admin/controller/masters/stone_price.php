@@ -156,9 +156,13 @@ class ControllerMastersStonePrice extends Controller {
 			'href' => $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . $url, true)
 		);
 
+		$data['export'] = $this->url->link('masters/stone_price/export', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL');
+		
 		$data['add'] = $this->url->link('masters/stone_price/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
 		$data['delete'] = $this->url->link('masters/stone_price/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
+		$data['user_token'] = $this->session->data['user_token'];
+		
 		$data['stone_prices'] = array();
 
 		$filter_data = array(
@@ -511,4 +515,81 @@ class ControllerMastersStonePrice extends Controller {
 
 		return !$this->error;
 	}
+	
+	public function import() {
+
+		$this->load->language('masters/stone_price');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('masters/stone_price');
+
+		//&& $this->validateImport()
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') ) {
+
+			$this->model_masters_stone_price->importStonePrice($this->request->files);
+			
+			$this->session->data['success'] = $this->language->get('text_success');
+			
+			$url = '';
+			
+			/*
+			if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' .$this->request->get['filter_model'];
+			}
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' .$this->request->get['filter_title'];
+			}
+			
+			if (isset($this->request->get['filter_category'])) {
+				$url .= '&filter_category=' .$this->request->get['filter_category'];
+			}
+			*/
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->response->redirect($this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . $url, true));
+		}
+
+		if (isset($this->error['import_file'])) {
+			$this->error['warning'] = $this->error['import_file'];
+		}
+
+		$this->getList();
+	}
+	
+	public function export()
+    {
+        $this->load->model('masters/stone_price');
+        
+        $data = array(
+            'sort' => 'code',
+            'order' => 'ASC'
+        );
+        
+        $stone_price = "Stone Price ID,Diamond Type,Shape,Carat From,Carat To,Clarity,Color,Lab,Cut,Price,Status\n";
+        $results     = $this->model_masters_stone_price->getStonePriceExport($data);		
+		
+			if($results){
+				foreach ($results as $result) {
+					
+					$stone_price .= $this->db->escape($result['stone_price_id']) . "," . $this->db->escape($result['diamond_type']) . "," . $this->db->escape($result['shape']) . "," . $this->db->escape($result['carat_from']) . "," . $this->db->escape($result['carat_to']) . "," . $this->db->escape($result['clarity']) . "," . $this->db->escape($result['color']) . "," . $this->db->escape($result['lab']) . "," . $this->db->escape($result['cut']) . "," . $this->db->escape($result['price']) . "," . $this->db->escape($result['status']) . "\n";
+				}
+			}
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+			header("Content-Length: " . strlen($stone_price));
+			header("Content-type: text/x-csv");
+			header("Content-Disposition: attachment; filename=stone_price.csv");
+			echo $stone_price;
+			exit;
+    }
 }
