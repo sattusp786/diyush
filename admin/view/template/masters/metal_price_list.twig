@@ -30,6 +30,12 @@
       </div>
       <div class="panel-body">
         <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-metal_price">
+		<div class="box">
+		    <input type="file" name="import_file" id="import_file" class="col-sm-4">
+			<a onclick="importmetalprice();" data-toggle="tooltip" title="{{ button_import }}" class="btn btn-primary"><i class="fa fa-upload"></i> </a> 
+			<a href="{{ export }}" data-toggle="tooltip" title="{{ button_export }}" class="btn btn-primary"><i class="fa fa-download"></i> </a>
+			<br/><br/>
+		</div>
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
@@ -91,4 +97,17 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+function importmetalprice() {
+    var impurl = 'index.php?route=masters/metal_price/import&user_token={{ user_token }}';
+    if($("#import_file").val() != ''){
+	var didConfirm = confirm("Remove all previous data. Are you sure about this action ?");
+	if (didConfirm == true) {
+	$('#form-metal_price').attr('action', impurl); 
+	$('#form-metal_price').submit();
+	}    
+     }else{  alert("Please select valid file or file format (.csv)!") }
+}
+
+</script>
 {{ footer }}

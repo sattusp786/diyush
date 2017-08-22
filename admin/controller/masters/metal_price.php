@@ -156,9 +156,13 @@ class ControllerMastersMetalPrice extends Controller {
 			'href' => $this->url->link('masters/metal_price', 'user_token=' . $this->session->data['user_token'] . $url, true)
 		);
 
+		$data['export'] = $this->url->link('masters/metal_price/export', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL');
+		
 		$data['add'] = $this->url->link('masters/metal_price/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
 		$data['delete'] = $this->url->link('masters/metal_price/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
+		$data['user_token'] = $this->session->data['user_token'];
+		
 		$data['metal_prices'] = array();
 
 		$filter_data = array(
@@ -391,4 +395,81 @@ class ControllerMastersMetalPrice extends Controller {
 
 		return !$this->error;
 	}
+	
+	public function import() {
+
+		$this->load->language('masters/metal_price');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('masters/metal_price');
+
+		//&& $this->validateImport()
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') ) {
+
+			$this->model_masters_metal_price->importMetalPrice($this->request->files);
+			
+			$this->session->data['success'] = $this->language->get('text_success');
+			
+			$url = '';
+			
+			/*
+			if (isset($this->request->get['filter_model'])) {
+			$url .= '&filter_model=' .$this->request->get['filter_model'];
+			}
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' .$this->request->get['filter_title'];
+			}
+			
+			if (isset($this->request->get['filter_category'])) {
+				$url .= '&filter_category=' .$this->request->get['filter_category'];
+			}
+			*/
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->response->redirect($this->url->link('masters/metal_price', 'user_token=' . $this->session->data['user_token'] . $url, true));
+		}
+
+		if (isset($this->error['import_file'])) {
+			$this->error['warning'] = $this->error['import_file'];
+		}
+
+		$this->getList();
+	}
+	
+	public function export()
+    {
+        $this->load->model('masters/metal_price');
+        
+        $data = array(
+            'sort' => 'code',
+            'order' => 'ASC'
+        );
+        
+        $metal_price = "Metal Price ID,Name,Code,Price,Status\n";
+        $results     = $this->model_masters_metal_price->getMetalPriceExport($data);		
+		
+			if($results){
+				foreach ($results as $result) {
+					
+					$metal_price .= $this->db->escape($result['metal_price_id']) . "," . $this->db->escape($result['name']) . "," . $this->db->escape($result['code']) . "," . $this->db->escape($result['price']) . "," . $this->db->escape($result['status']) . "\n";
+				}
+			}
+			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+			header("Content-Length: " . strlen($metal_price));
+			header("Content-type: text/x-csv");
+			header("Content-Disposition: attachment; filename=metal_price.csv");
+			echo $metal_price;
+			exit;
+    }
 }

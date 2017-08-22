@@ -73,4 +73,71 @@ class ModelMastersMetalPrice extends Model {
 
 		return $query->row['total'];
 	}
+	
+	public function importMetalPrice($import_file) {
+	
+		$truncate = $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "metal_price ");
+
+		$row = 0;
+		if (($handle = fopen($import_file['import_file']['tmp_name'], "r")) !== FALSE) {
+
+			while (($data = fgetcsv($handle, 0, ',', '"')) !== FALSE) {
+
+				$fields = array();
+				if ($row == 0 || empty($data[0])) {
+					$row++;
+					continue;
+				}
+				
+				$data['name'] 		= $data[1];
+				$data['code'] 		= $data[2];
+				$data['price'] 		= $data[3];
+				$data['status'] 	= $data[4];
+		
+				$this->addMetalPrice($data);
+				
+				$row++;
+			}
+		}
+
+		fclose($handle);
+	}
+	
+	public function getMetalPriceExport($data = array(),$mode=null) {
+		$sql = "SELECT * FROM " . DB_PREFIX . "metal_price WHERE 1 ";
+
+		$sort_data = array(
+			'metal_price_id',
+			'name',
+			'code',
+			'price'
+		);
+		
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY code";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int) $data['start'] . "," . (int) $data['limit'];
+		}
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
 }
