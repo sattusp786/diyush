@@ -235,6 +235,75 @@ class Cart {
 					$recurring = false;
 				}
 
+				//Code added by Paul to calculate price starts...
+				$final_price = 0;
+				$final_option = array();
+				if(!empty($option_data)){
+					foreach($option_data as $option){
+						$final_option[$option['name']] = $option['value'];
+					}
+				}
+				
+				//Calculate Metal Price..
+				$metal_price = 0;
+				$metal_weight = $product_query->row['weight'] + $option_weight;
+				
+				$metal_price_per_gram = 0;
+				$get_metal_price = $this->db->query("SELECT * FROM " . DB_PREFIX . "metal_price WHERE name = '".$final_option['Metal']."' ");
+				if($get_metal_price->num_rows){
+					$metal_price_per_gram = $get_metal_price->row['price'];
+				}
+				
+				if($metal_price_per_gram > 0){
+					$metal_price = $metal_price_per_gram * $metal_weight;
+				}
+				
+				//Calculate Stone Price..
+				$stone_price = 0;
+				
+				$stone_sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE 1 ";
+				
+				if(isset($final_option['Stone Type']) && !empty($final_option['Stone Type'])){
+					$stone_sql .= " AND diamond_type = '".$final_option['Stone Type']."' ";
+				}
+				
+				if(isset($final_option['Shape']) && !empty($final_option['Shape'])){
+					$stone_sql .= " AND shape = '".$final_option['Shape']."' ";
+				}
+				
+				if(isset($final_option['Carat']) && !empty($final_option['Carat'])){
+					$stone_sql .= " AND '".$final_option['Carat']."' between carat_from AND carat_to ";
+				}
+				
+				if(isset($final_option['Clarity']) && !empty($final_option['Clarity'])){
+					$stone_sql .= " AND clarity = '".$final_option['Clarity']."' ";
+				}
+				
+				if(isset($final_option['Colour']) && !empty($final_option['Colour'])){
+					$stone_sql .= " AND color = '".$final_option['Colour']."' ";
+				}
+				
+				if(isset($final_option['Certificate']) && !empty($final_option['Certificate'])){
+					$stone_sql .= " AND lab = '".$final_option['Certificate']."' ";
+				}
+				
+				if(isset($final_option['Cut']) && !empty($final_option['Cut'])){
+					$stone_sql .= " AND cut = '".$final_option['Cut']."' ";
+				}
+				
+				$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 1 ";
+				
+				$get_stone_price = $this->db->query($stone_sql);
+				
+				if($get_stone_price->num_rows){
+					$stone_price = $get_stone_price->row['price'];
+				}
+				
+				$final_price = $metal_price + $stone_price;
+				//Code added by Paul to calculate price ends...
+				
+				
+				
 				$product_data[] = array(
 					'cart_id'         => $cart['cart_id'],
 					'product_id'      => $product_query->row['product_id'],
@@ -248,8 +317,8 @@ class Cart {
 					'minimum'         => $product_query->row['minimum'],
 					'subtract'        => $product_query->row['subtract'],
 					'stock'           => $stock,
-					'price'           => ($price + $option_price),
-					'total'           => ($price + $option_price) * $cart['quantity'],
+					'price'           => ($final_price + $option_price),
+					'total'           => ($final_price + $option_price) * $cart['quantity'],
 					'reward'          => $reward * $cart['quantity'],
 					'points'          => ($product_query->row['points'] ? ($product_query->row['points'] + $option_points) * $cart['quantity'] : 0),
 					'tax_class_id'    => $product_query->row['tax_class_id'],
