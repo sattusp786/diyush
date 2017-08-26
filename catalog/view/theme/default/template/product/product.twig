@@ -130,17 +130,18 @@
             <li>{{ text_reward }} {{ reward }}</li>
             {% endif %}
             <li>{{ text_stock }} {{ stock }}</li>
+            <li>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</li>
           </ul>
           {% if price %}
           <ul class="list-unstyled">
             {% if not special %}
             <li>
-              <h2>{{ price }}</h2>
+              <h2 class="final_price">{{ price }}</h2>
             </li>
             {% else %}
             <li><span style="text-decoration: line-through;">{{ price }}</span></li>
             <li>
-              <h2>{{ special }}</h2>
+              <h2 class="final_price">{{ special }}</h2>
             </li>
             {% endif %}
             {% if tax %}
@@ -159,6 +160,7 @@
             {% endif %}
           </ul>
           {% endif %}
+		  <form name="product-option-form" id="product-option-form" onsubmit="return false" action="" method="post">
           <div id="product"> {% if options %}
             <hr>
             <h3>{{ text_option }}</h3>
@@ -166,13 +168,15 @@
             {% if option.type == 'select' %}
             <div class="form-group{% if option.required %} required {% endif %}">
               <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
-              <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control">
+              <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control product-option">
                 <option value="">{{ text_select }}</option>
+				{% set o = 1 %}
                 {% for option_value in option.product_option_value %}
-                <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+                <option value="{{ option_value.product_option_value_id }}" {% if o == 1 %} SELECTED {% endif %}>{{ option_value.name }}
                 {% if option_value.price %}
                 ({{ option_value.price_prefix }}{{ option_value.price }})
                 {% endif %} </option>
+				{% set o = o + 1 %}
                 {% endfor %}
               </select>
             </div>
@@ -283,6 +287,7 @@
             {% if minimum > 1 %}
             <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
             {% endif %}</div>
+			</form>
           {% if review_status %}
           <div class="rating">
             <p>{% for i in 1..5 %}
@@ -537,6 +542,33 @@ $('#button-review').on('click', function() {
 	});
 });
 
+$('.product-option').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=product/product/add&product_id={{ product_id }}',
+		type: 'post',
+		dataType: 'json',
+		data: $("#product-option-form").serialize(),
+		beforeSend: function() {
+			$('#button-cart').button('loading');
+		},
+		complete: function() {
+			$('#button-cart').button('reset');
+		},
+		success: function(json) {
+			$('.alert-dismissible').remove();
+
+			if (json['error']) {
+				$('#product-option-form').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+			}
+
+			if (json['success'] == '1') {
+				$(".metal_weight").html(json['weight']);
+				$(".final_price").html(json['price']);
+			}
+		}
+	});
+});
+
 $(document).ready(function() {
 	$('.thumbnails').magnificPopup({
 		type:'image',
@@ -545,6 +577,8 @@ $(document).ready(function() {
 			enabled: true
 		}
 	});
+	
+	$(".product-option").change();
 });
 //--></script> 
 {{ footer }} 

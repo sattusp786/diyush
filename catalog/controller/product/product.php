@@ -240,6 +240,7 @@ class ControllerProductProduct extends Controller {
 			$data['model'] = $product_info['model'];
 			$data['reward'] = $product_info['reward'];
 			$data['points'] = $product_info['points'];
+			$data['weight'] = round($product_info['weight'],2);
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
 
 			if ($product_info['quantity'] <= 0) {
@@ -656,6 +657,81 @@ class ControllerProductProduct extends Controller {
 			}
 		}
 
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+	
+	
+	public function add() {
+		$this->language->load('checkout/cart');
+				
+		$hold = array();
+		$json = array();
+				
+		if (isset($this->request->get['product_id'])) {
+			$product_id = $this->request->get['product_id'];
+		} else {
+			$product_id = 0;
+		}
+		
+		$this->load->model('catalog/product');
+						
+		$product_info = $this->model_catalog_product->getProduct($product_id);
+		
+		if ($product_info) {
+			if (isset($this->request->post['quantity'])) {
+				$quantity = $this->request->post['quantity'];
+			} else {
+		       $quantity = 1;								
+			}
+												
+			if (isset($this->request->post['option'])) {
+				$option = array_filter($this->request->post['option']);
+			} else {
+				$option = array();	
+			}
+			
+			if (isset($this->session->data['cart'])) {
+				$hold = $this->session->data['cart'];
+			}
+
+			$this->cart->clear();
+			$this->cart->add($product_id, $quantity, $option);
+
+			$json['success'] = '0';
+
+			unset($this->session->data['shipping_method']);
+			unset($this->session->data['shipping_methods']);
+			unset($this->session->data['payment_method']);
+			unset($this->session->data['payment_methods']);
+							
+			foreach ($this->cart->getProducts() as $product) {
+				
+				// Display prices
+				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+					$unit_price = $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'));
+					
+					$price = $this->currency->format($unit_price, $this->session->data['currency']);
+					$total = $this->currency->format($unit_price * $product['quantity'], $this->session->data['currency']);
+				} else {
+					$price = false;
+					$total = false;
+				}
+				
+				$json['price'] = $total;
+				$json['weight'] = round($product['weight'],2);
+			}
+			
+			if($json['price'] != ''){
+				$json['success'] = '1';
+			}
+			
+			$this->cart->clear();
+			if($hold){				
+				$this->session->data['cart'] = $hold; 
+			}
+		}
+		
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
