@@ -147,6 +147,14 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
+			
+			if ($this->user->hasPermission('access', 'masters/stone_mapping')) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_stone_mapping'),
+					'href'     => $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
 
 			if ($masters) {
 				$data['menus'][] = array(

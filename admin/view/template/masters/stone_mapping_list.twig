@@ -3,7 +3,7 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right"><a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-stone_price').submit() : false;"><i class="fa fa-trash-o"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-stone_mapping').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
@@ -29,7 +29,7 @@
         <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
       </div>
       <div class="panel-body">
-        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-stone_price">
+        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-stone_mapping">
 			<div class="box">
 				<input type="file" name="import_file" id="import_file" class="col-sm-4">
 				<a onclick="importstoneprice();" data-toggle="tooltip" title="{{ button_import }}" class="btn btn-primary"><i class="fa fa-upload"></i> </a> 
@@ -95,25 +95,25 @@
                 </tr>
               </thead>
               <tbody>
-                {% if stone_prices %}
-                {% for stone_price in stone_prices %}
+                {% if stone_mappings %}
+                {% for stone_mapping in stone_mappings %}
                 <tr>
-                  <td class="text-center">{% if stone_price.stone_price_id in selected %}
-                    <input type="checkbox" name="selected[]" value="{{ stone_price.stone_price_id }}" checked="checked" />
+                  <td class="text-center">{% if stone_mapping.stone_mapping_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ stone_mapping.stone_mapping_id }}" checked="checked" />
                     {% else %}
-                    <input type="checkbox" name="selected[]" value="{{ stone_price.stone_price_id }}" />
+                    <input type="checkbox" name="selected[]" value="{{ stone_mapping.stone_mapping_id }}" />
                     {% endif %}</td>
-                  <td class="text-left">{{ stone_price.diamond_type }}</td>
-                  <td class="text-left">{{ stone_price.shape }}</td>
-                  <td class="text-left">{{ stone_price.carat_from }}</td>
-                  <td class="text-left">{{ stone_price.carat_to }}</td>
-                  <td class="text-left">{{ stone_price.clarity }}</td>
-                  <td class="text-left">{{ stone_price.color }}</td>
-                  <td class="text-left">{{ stone_price.lab }}</td>
-                  <td class="text-left">{{ stone_price.cut }}</td>
-                  <td class="text-right">{{ stone_price.price }}</td>
-                  <td class="text-left">{{ stone_price.status }}</td>
-                  <td class="text-right"><a href="{{ stone_price.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-left">{{ stone_mapping.diamond_type }}</td>
+                  <td class="text-left">{{ stone_mapping.shape }}</td>
+                  <td class="text-left">{{ stone_mapping.carat_from }}</td>
+                  <td class="text-left">{{ stone_mapping.carat_to }}</td>
+                  <td class="text-left">{{ stone_mapping.clarity }}</td>
+                  <td class="text-left">{{ stone_mapping.color }}</td>
+                  <td class="text-left">{{ stone_mapping.lab }}</td>
+                  <td class="text-left">{{ stone_mapping.cut }}</td>
+                  <td class="text-right">{{ stone_mapping.price }}</td>
+                  <td class="text-left">{{ stone_mapping.status }}</td>
+                  <td class="text-right"><a href="{{ stone_mapping.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
                 {% else %}
@@ -135,12 +135,12 @@
 </div>
 <script type="text/javascript">
 function importstoneprice() {
-    var impurl = 'index.php?route=masters/stone_price/import&user_token={{ user_token }}';
+    var impurl = 'index.php?route=masters/stone_mapping/import&user_token={{ user_token }}';
     if($("#import_file").val() != ''){
 	var didConfirm = confirm("Remove all previous data. Are you sure about this action ?");
 	if (didConfirm == true) {
-	$('#form-stone_price').attr('action', impurl); 
-	$('#form-stone_price').submit();
+	$('#form-stone_mapping').attr('action', impurl); 
+	$('#form-stone_mapping').submit();
 	}    
      }else{  alert("Please select valid file or file format (.csv)!") }
 }

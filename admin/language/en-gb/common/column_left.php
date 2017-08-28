@@ -8,6 +8,7 @@ $_['text_banner']               = 'Banners';
 $_['text_catalog']              = 'Catalog';
 $_['text_metal_price']          = 'Metal Price';
 $_['text_stone_price']          = 'Stone Price';
+$_['text_stone_mapping']        = 'Stone Mapping';
 $_['text_masters']              = 'Masters';
 $_['text_category']             = 'Categories';
 $_['text_country']              = 'Countries';
