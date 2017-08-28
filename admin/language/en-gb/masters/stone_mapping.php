@@ -9,30 +9,19 @@ $_['text_add']            = 'Add Stone Mapping';
 $_['text_edit']           = 'Edit Stone Mapping';
 
 // Column
-$_['column_diamond_type']  = 'Diamond Type';
-$_['column_shape']         = 'Shape';
-$_['column_carat_from']    = 'Carat From';
-$_['column_carat_to']      = 'Carat To';
-$_['column_clarity']       = 'Clarity';
-$_['column_color']         = 'Color';
-$_['column_lab']         	= 'Lab';
-$_['column_cut']         	= 'Cut';
-$_['column_price']     	  = 'Mapping';
-$_['column_status']       = 'Status';
-$_['column_date_added']   = 'Date Added';
+$_['column_name']  		   = 'Name';
+$_['column_certificate']   = 'Certificate';
+$_['column_total']    	   = 'Total';
+$_['column_markup_percent']    = 'Markup Percent';
+$_['column_markup_fixed']      = 'Markup Fixed';
 $_['column_action']       = 'Action';
 
 // Entry
-$_['entry_diamond_type']          = 'Diamond Type';
-$_['entry_shape']          = 'Shape';
-$_['entry_carat_from']          = 'Carat From';
-$_['entry_carat_to']          = 'Carat To';
-$_['entry_clarity']          = 'Clarity';
-$_['entry_color']          = 'Color';
-$_['entry_lab']          = 'Lab';
-$_['entry_cut']          = 'Cut';
-$_['entry_price']      	  = 'Mapping';
-$_['entry_status']        = 'Status';
+$_['entry_name']          = 'Name';
+$_['entry_certificate']      = 'Certificate';
+$_['entry_total']          = 'Total';
+$_['entry_markup_percent']    = 'Markup Percent';
+$_['entry_markup_fixed']      = 'Markup Fixed';
 
 //Buttons
 $_['button_import']        = 'Import';
@@ -44,12 +33,8 @@ $_['help_code']           = 'The code the customer enters to get the discount.';
 // Error
 $_['error_permission']    = 'Warning: You do not have permission to modify stone_mappings!';
 $_['error_exists']        = 'Warning: Stone Mapping code is already in use!';
-$_['error_diamond_type']  = 'Diamond Type must be between 2 and 20 characters!';
-$_['error_shape']         = 'Shape must be between 2 and 20 characters!';
-$_['error_carat_from']    = 'Carat From must be between 2 and 20 characters!';
-$_['error_carat_to']      = 'Carat To must be between 2 and 20 characters!';
-$_['error_clarity']       = 'Clarity must be between 2 and 20 characters!';
-$_['error_color']         = 'Color must be between 1 and 20 characters!';
-$_['error_lab']           = 'Lab must be between 2 and 20 characters!';
-$_['error_cut']           = 'Cut must be between 2 and 20 characters!';
-$_['error_price']         = 'Mapping should be greater than 0!';
+$_['error_name']  			= 'Name must be between 2 and 20 characters!';
+$_['error_certificate']         = 'Certificate must be between 2 and 20 characters!';
+$_['error_total']    			= 'Total must be between 2 and 20 characters!';
+$_['error_markup_percent']      = 'Markup Percent must be between 2 and 20 characters!';
+$_['error_markup_fixed']       = 'Markup Fixed must be between 2 and 20 characters!';

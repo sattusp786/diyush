@@ -33,21 +33,17 @@ class ModelMastersStoneMapping extends Model {
 		$sql = "SELECT * FROM " . DB_PREFIX . "stone_mapping";
 
 		$sort_data = array(
-			'diamond_type',
-			'shape',
-			'carat_from',
-			'carat_to',
-			'clarity',
-			'color',
-			'lab',
-			'cut',
-			'price'
+			'name',
+			'certificate',
+			'total',
+			'markup_percent',
+			'markup_fixed'
 		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY diamond_type";
+			$sql .= " ORDER BY name";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {

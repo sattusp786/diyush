@@ -178,18 +178,13 @@ class ControllerMastersStoneMapping extends Controller {
 
 		foreach ($results as $result) {
 			$data['stone_mappings'][] = array(
-				'stone_mapping_id'  	 => $result['stone_mapping_id'],
-				'diamond_type'       => $result['diamond_type'],
-				'shape'       		=> $result['shape'],
-				'carat_from'       => $result['carat_from'],
-				'carat_to'       => $result['carat_to'],
-				'clarity'       => $result['clarity'],
-				'color'       => $result['color'],
-				'lab'       => $result['lab'],
-				'cut'       => $result['cut'],
-				'price'   	=> $result['price'],
-				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
-				'edit'       => $this->url->link('masters/stone_mapping/edit', 'user_token=' . $this->session->data['user_token'] . '&stone_mapping_id=' . $result['stone_mapping_id'] . $url, true)
+				'stone_mapping_id'  	=> $result['stone_mapping_id'],
+				'name'       			=> $result['name'],
+				'certificate'       	=> $result['certificate'],
+				'total'       			=> $result['total'],
+				'markup_percent'       	=> $result['markup_percent'],
+				'markup_fixed'       	=> $result['markup_fixed'],
+				'edit'       			=> $this->url->link('masters/stone_mapping/edit', 'user_token=' . $this->session->data['user_token'] . '&stone_mapping_id=' . $result['stone_mapping_id'] . $url, true)
 			);
 		}
 
@@ -225,16 +220,11 @@ class ControllerMastersStoneMapping extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_diamond_type'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=diamond_type' . $url, true);
-		$data['sort_shape'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=shape' . $url, true);
-		$data['sort_carat_from'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=carat_from' . $url, true);
-		$data['sort_carat_to'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=carat_to' . $url, true);
-		$data['sort_clarity'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=clarity' . $url, true);
-		$data['sort_color'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=color' . $url, true);
-		$data['sort_lab'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=lab' . $url, true);
-		$data['sort_cut'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=cut' . $url, true);
-		$data['sort_price'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=price' . $url, true);
-		$data['sort_status'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=status' . $url, true);
+		$data['sort_name'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
+		$data['sort_certificate'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=certificate' . $url, true);
+		$data['sort_total'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=total' . $url, true);
+		$data['sort_markup_percent'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=markup_percent' . $url, true);
+		$data['sort_markup_fixed'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=markup_fixed' . $url, true);
 
 		$url = '';
 
