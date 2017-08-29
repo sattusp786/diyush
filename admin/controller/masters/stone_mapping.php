@@ -275,58 +275,34 @@ class ControllerMastersStoneMapping extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		if (isset($this->error['diamond_type'])) {
-			$data['error_diamond_type'] = $this->error['diamond_type'];
+		if (isset($this->error['name'])) {
+			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_diamond_type'] = '';
+			$data['error_name'] = '';
 		}
 
-		if (isset($this->error['shape'])) {
-			$data['error_shape'] = $this->error['shape'];
+		if (isset($this->error['certificate'])) {
+			$data['error_certificate'] = $this->error['certificate'];
 		} else {
-			$data['error_shape'] = '';
+			$data['error_certificate'] = '';
 		}
 
-		if (isset($this->error['carat_from'])) {
-			$data['error_carat_from'] = $this->error['carat_from'];
+		if (isset($this->error['total'])) {
+			$data['error_total'] = $this->error['total'];
 		} else {
-			$data['error_carat_from'] = '';
+			$data['error_total'] = '';
 		}
 
-		if (isset($this->error['carat_to'])) {
-			$data['error_carat_to'] = $this->error['carat_to'];
+		if (isset($this->error['markup_percent'])) {
+			$data['error_markup_percent'] = $this->error['markup_percent'];
 		} else {
-			$data['error_carat_to'] = '';
+			$data['error_markup_percent'] = '';
 		}
 
-		if (isset($this->error['clarity'])) {
-			$data['error_clarity'] = $this->error['clarity'];
+		if (isset($this->error['markup_fixed'])) {
+			$data['error_markup_fixed'] = $this->error['markup_fixed'];
 		} else {
-			$data['error_clarity'] = '';
-		}
-
-		if (isset($this->error['color'])) {
-			$data['error_color'] = $this->error['color'];
-		} else {
-			$data['error_color'] = '';
-		}
-
-		if (isset($this->error['lab'])) {
-			$data['error_lab'] = $this->error['lab'];
-		} else {
-			$data['error_lab'] = '';
-		}
-
-		if (isset($this->error['cut'])) {
-			$data['error_cut'] = $this->error['cut'];
-		} else {
-			$data['error_cut'] = '';
-		}
-
-		if (isset($this->error['price'])) {
-			$data['error_price'] = $this->error['price'];
-		} else {
-			$data['error_price'] = '';
+			$data['error_markup_fixed'] = '';
 		}
 
 		$url = '';
@@ -367,85 +343,94 @@ class ControllerMastersStoneMapping extends Controller {
 			$stone_mapping_info = $this->model_masters_stone_mapping->getStoneMapping($this->request->get['stone_mapping_id']);
 		}
 
-		if (isset($this->request->post['diamond_type'])) {
-			$data['diamond_type'] = $this->request->post['diamond_type'];
+		if (isset($this->request->post['name'])) {
+			$data['name'] = $this->request->post['name'];
 		} elseif (!empty($stone_mapping_info)) {
-			$data['diamond_type'] = $stone_mapping_info['diamond_type'];
+			$data['name'] = $stone_mapping_info['name'];
 		} else {
-			$data['diamond_type'] = '';
+			$data['name'] = '';
 		}
 
-		if (isset($this->request->post['shape'])) {
-			$data['shape'] = $this->request->post['shape'];
+		if (isset($this->request->post['certificate'])) {
+			$data['certificate'] = $this->request->post['certificate'];
 		} elseif (!empty($stone_mapping_info)) {
-			$data['shape'] = $stone_mapping_info['shape'];
+			$data['certificate'] = $stone_mapping_info['certificate'];
 		} else {
-			$data['shape'] = '';
+			$data['certificate'] = '';
 		}
 
-		if (isset($this->request->post['carat_from'])) {
-			$data['carat_from'] = $this->request->post['carat_from'];
+		if (isset($this->request->post['total'])) {
+			$data['total'] = $this->request->post['total'];
 		} elseif (!empty($stone_mapping_info)) {
-			$data['carat_from'] = $stone_mapping_info['carat_from'];
+			$data['total'] = $stone_mapping_info['total'];
 		} else {
-			$data['carat_from'] = '';
+			$data['total'] = '';
 		}
 
-		if (isset($this->request->post['carat_to'])) {
-			$data['carat_to'] = $this->request->post['carat_to'];
+		if (isset($this->request->post['markup_percent'])) {
+			$data['markup_percent'] = $this->request->post['markup_percent'];
 		} elseif (!empty($stone_mapping_info)) {
-			$data['carat_to'] = $stone_mapping_info['carat_to'];
+			$data['markup_percent'] = $stone_mapping_info['markup_percent'];
 		} else {
-			$data['carat_to'] = '';
+			$data['markup_percent'] = '';
 		}
 
-		if (isset($this->request->post['clarity'])) {
-			$data['clarity'] = $this->request->post['clarity'];
+		if (isset($this->request->post['markup_fixed'])) {
+			$data['markup_fixed'] = $this->request->post['markup_fixed'];
 		} elseif (!empty($stone_mapping_info)) {
-			$data['clarity'] = $stone_mapping_info['clarity'];
+			$data['markup_fixed'] = $stone_mapping_info['markup_fixed'];
 		} else {
-			$data['clarity'] = '';
+			$data['markup_fixed'] = '';
 		}
 
-		if (isset($this->request->post['color'])) {
-			$data['color'] = $this->request->post['color'];
-		} elseif (!empty($stone_mapping_info)) {
-			$data['color'] = $stone_mapping_info['color'];
-		} else {
-			$data['color'] = '';
+		
+
+		if (isset($this->request->get['stone_type_mapping_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+			$option_info = $this->model_masters_stone_mapping->getOptionValueMapping($this->request->get['stone_type_mapping_id']);
+					
 		}
 
-		if (isset($this->request->post['lab'])) {
-			$data['lab'] = $this->request->post['lab'];
-		} elseif (!empty($stone_mapping_info)) {
-			$data['lab'] = $stone_mapping_info['lab'];
-		} else {
-			$data['lab'] = '';
-		}
 
-		if (isset($this->request->post['cut'])) {
-			$data['cut'] = $this->request->post['cut'];
-		} elseif (!empty($stone_mapping_info)) {
-			$data['cut'] = $stone_mapping_info['cut'];
-		} else {
-			$data['cut'] = '';
-		}
+		$data['user_token'] = $this->session->data['user_token'];
 
-		if (isset($this->request->post['price'])) {
-			$data['price'] = $this->request->post['price'];
-		} elseif (!empty($stone_mapping_info)) {
-			$data['price'] = $stone_mapping_info['price'];
-		} else {
-			$data['price'] = '';
-		}
+		
+		// Product Setting
+		$this->load->model('catalog/option');
 
-		if (isset($this->request->post['status'])) {
-			$data['status'] = $this->request->post['status'];
-		} elseif (!empty($stone_mapping_info)) {
-			$data['status'] = $stone_mapping_info['status'];
+		
+		$data['options'] = $this->model_catalog_option->getOptions();
+
+		if (isset($this->request->post['option_id'])) {
+			$data['option_id'] = $this->request->post['option_id'];
+		} elseif (!empty($option_info)) {
+			$data['option_id'] = $option_info['option_id'];
 		} else {
-			$data['status'] = true;
-		}
+			$data['option_id'] = '';
+		}	
+
+		if (isset($this->request->post['option_value_id'])) {
+			$data['option_value_id'] = $this->request->post['option_value_id'];
+		} elseif (!empty($option_info)) {
+			$data['option_value_id'] = $option_info['option_value_id'];
+		} else {
+			$data['option_value_id'] = '';
+		}	
+		
+		if (isset($this->request->post['option_value'])) {
+			
+			$data['option_value'] = $this->request->post['option_value'];
+			$data['option_values'] = $this->model_masters_stone_mapping->getOptionValues($option_info['option_id']);
+
+		} elseif (!empty($option_info)) {
+			
+			$data['option_value'] = $option_info['option_value_id'];//explode(',' , $option_info['option_value_id']);
+			$data['option_values'] = $this->model_masters_stone_mapping->getOptionValues($option_info['option_id']);
+			
+		} else {
+			
+			$data['option_value'] = '';
+			$data['option_values'] = array();
+		}	
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

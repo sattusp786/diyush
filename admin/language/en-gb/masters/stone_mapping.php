@@ -7,6 +7,7 @@ $_['text_success']        = 'Success: You have modified stone mapping!';
 $_['text_list']           = 'Stone Mapping List';
 $_['text_add']            = 'Add Stone Mapping';
 $_['text_edit']           = 'Edit Stone Mapping';
+$_['text_option_values']  = 'Option Values';
 
 // Column
 $_['column_name']  		   = 'Name';

@@ -30,98 +30,68 @@
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
               <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-diamond-type">{{ entry_diamond_type }}</label>
+                <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="diamond_type" value="{{ diamond_type }}" placeholder="{{ entry_diamond_type }}" id="input-diamond-type" class="form-control" />
-                  {% if error_diamond_type %}
-                  <div class="text-danger">{{ error_diamond_type }}</div>
+                  <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                  {% if error_name %}
+                  <div class="text-danger">{{ error_name }}</div>
                   {% endif %} </div>
               </div>
               <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-shape">{{ entry_shape }}</label>
+                <label class="col-sm-2 control-label" for="input-certificate">{{ entry_certificate }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="shape" value="{{ shape }}" placeholder="{{ entry_shape }}" id="input-shape" class="form-control" />
-                  {% if error_shape %}
-                  <div class="text-danger">{{ error_shape }}</div>
+                  <input type="text" name="certificate" value="{{ certificate }}" placeholder="{{ entry_certificate }}" id="input-certificate" class="form-control" />
+                  {% if error_certificate %}
+                  <div class="text-danger">{{ error_certificate }}</div>
                   {% endif %} </div>
               </div>
               <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-carat-from">{{ entry_carat_from }}</label>
+                <label class="col-sm-2 control-label" for="input-total">{{ entry_total }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="carat_from" value="{{ carat_from }}" placeholder="{{ entry_carat_from }}" id="input-carat-from" class="form-control" />
-                  {% if error_carat_from %}
-                  <div class="text-danger">{{ error_carat_from }}</div>
+                  <input type="text" name="total" value="{{ total }}" placeholder="{{ entry_total }}" id="input-total" class="form-control" />
+                  {% if error_total %}
+                  <div class="text-danger">{{ error_total }}</div>
                   {% endif %} </div>
               </div>
               <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-carat-to">{{ entry_carat_to }}</label>
+                <label class="col-sm-2 control-label" for="input-markup-percent">{{ entry_markup_percent }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="carat_to" value="{{ carat_to }}" placeholder="{{ entry_carat_to }}" id="input-carat-to" class="form-control" />
-                  {% if error_carat_to %}
-                  <div class="text-danger">{{ error_carat_to }}</div>
+                  <input type="text" name="markup_percent" value="{{ markup_percent }}" placeholder="{{ entry_markup_percent }}" id="input-markup-percent" class="form-control" />
+                  {% if error_markup_percent %}
+                  <div class="text-danger">{{ error_markup_percent }}</div>
                   {% endif %} </div>
               </div>
               <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-clairty">{{ entry_clarity }}</label>
+                <label class="col-sm-2 control-label" for="input-markup-fixed">{{ entry_markup_fixed }}</label>
                 <div class="col-sm-10">
-                  <input type="text" name="clarity" value="{{ clarity }}" placeholder="{{ entry_clarity }}" id="input-clairty" class="form-control" />
-                  {% if error_clarity %}
-                  <div class="text-danger">{{ error_clarity }}</div>
+                  <input type="text" name="markup_fixed" value="{{ markup_fixed }}" placeholder="{{ entry_markup_fixed }}" id="input-markup-fixed" class="form-control" />
+                  {% if error_markup_fixed %}
+                  <div class="text-danger">{{ error_markup_fixed }}</div>
                   {% endif %} </div>
               </div>
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-color">{{ entry_color }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="color" value="{{ color }}" placeholder="{{ entry_color }}" id="input-color" class="form-control" />
-                  {% if error_color %}
-                  <div class="text-danger">{{ error_color }}</div>
-                  {% endif %} </div>
+              <div>
+              <hr/>
+                {{ text_option_values }}
               </div>
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-lab">{{ entry_lab }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="lab" value="{{ lab }}" placeholder="{{ entry_lab }}" id="input-lab" class="form-control" />
-                  {% if error_lab %}
-                  <div class="text-danger">{{ error_lab }}</div>
-                  {% endif %} </div>
-              </div>
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-cut">{{ entry_cut }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="cut" value="{{ cut }}" placeholder="{{ entry_cut }}" id="input-cut" class="form-control" />
-                  {% if error_cut %}
-                  <div class="text-danger">{{ error_cut }}</div>
-                  {% endif %} </div>
-              </div>
-              <div class="form-group required">
-                <label class="col-sm-2 control-label" for="input-price">{{ entry_price }}</label>
-                <div class="col-sm-10">
-                  <input type="text" name="price" value="{{ price }}" placeholder="{{ entry_price }}" id="input-price" class="form-control" />
-                  {% if error_price %}
-                  <div class="text-danger">{{ error_price }}</div>
-                  {% endif %} 
-                </div>
-              </div>
+
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-                <div class="col-sm-10">
-                  <select name="status" id="input-status" class="form-control">
-                    
-                    {% if status %}
-                    
-                    <option value="1" selected="selected">{{ text_enabled }}</option>
-                    <option value="0">{{ text_disabled }}</option>
-                    
+              {% if option_values %}
+                {% for option_val in option_values %}
+
+                <span style="display:inline-block; margin:0 3px;">
+                 {% set optval = option_value|split(',') %}
+                  {% if option_val['option_value_id'] in optval %}
+                    <input type="checkbox" name="option_value[]" value="{{ option_val['option_value_id'] }}@{{ option_val['name'] }}" checked="checked" />
+                    {{ option_val['name'] }}
                     {% else %}
-                    
-                    <option value="1">{{ text_enabled }}</option>
-                    <option value="0" selected="selected">{{ text_disabled }}</option>
-                    
+                    <input type="checkbox" name="option_value[]" value="{{ option_val['option_value_id'] }}@{{ option_val['name'] }}" />
+                    {{ option_val['name'] }}
                     {% endif %}
-                  
-                  </select>
-                </div>
+                    {% endfor %}
+                  </span>
+                  {% endif %}
               </div>
+      
             </div>
           </div>
         </form>
@@ -129,4 +99,50 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+function optionValue(element) {
+
+var a = $("select[name=option_id] option:selected").val();
+
+  if (element.value != '') {
+    $.ajax({
+      url: 'index.php?route=catalog/option_search_mapping/autocomplete&user_token={{ user_token }}&option_id=' + a,
+      
+      dataType: 'json',
+          
+      success: function(json) {       
+        
+        var options = '';
+        var option_val = '{{ option_value }}';    
+        
+        if(json['option'].length){
+
+          for (var i = 0; i < json['option'].length; i++) {
+
+           if(option_val==json['option'][i].name)
+          {
+            options += '<span style="display:inline-block; margin:0 7px;"><input type="checkbox" name="option_value[]" value="'+json['option'][i].option_value_id+'@'+json['option'][i].name+'" checked="checked" />'+json['option'][i].name+'</span>';
+          }
+           else
+          {
+            options += '<span style="display:inline-block; margin:0 7px;"><input type="checkbox" name="option_value[]" value="'+json['option'][i].option_value_id+'@'+json['option'][i].name+'" />'+json['option'][i].name+'</span>';
+          }
+          }
+
+          $("#option_value").html(options);
+         
+        } else {
+           $("#option_value").html(options);
+        }   
+      },
+      error: function(xhr, ajaxOptions, thrownError) {
+        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+      }
+    });
+  }
+}
+
+
+
+//--></script> 
 {{ footer }}
