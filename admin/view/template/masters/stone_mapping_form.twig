@@ -24,11 +24,10 @@
       </div>
       <div class="panel-body">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-stone_mapping" class="form-horizontal">
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="tab-general">
+          
+          <div class="tab-pane active" id="tab-general">
+          <fieldset id="stone-mapping">
+          	<legend>Stone Mapping</legend>
               <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
                 <div class="col-sm-10">
@@ -69,80 +68,69 @@
                   <div class="text-danger">{{ error_markup_fixed }}</div>
                   {% endif %} </div>
               </div>
-              <div>
+              </fieldset>
+              
               <hr/>
-                {{ text_option_values }}
-              </div>
 
-              <div class="form-group">
-              {% if option_values %}
-                {% for option_val in option_values %}
-
-                <span style="display:inline-block; margin:0 3px;">
-                 {% set optval = option_value|split(',') %}
-                  {% if option_val['option_value_id'] in optval %}
-                    <input type="checkbox" name="option_value[]" value="{{ option_val['option_value_id'] }}@{{ option_val['name'] }}" checked="checked" />
-                    {{ option_val['name'] }}
-                    {% else %}
-                    <input type="checkbox" name="option_value[]" value="{{ option_val['option_value_id'] }}@{{ option_val['name'] }}" />
-                    {{ option_val['name'] }}
-                    {% endif %}
-                    {% endfor %}
-                  </span>
-                  {% endif %}
-              </div>
-      
+              <fieldset id="option-value">
+            <legend>{{ text_value }}</legend>
+            <table id="option_value" class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td class="text-left required">{{ text_option_value }}</td>
+                  <td class="text-right">{{ text_option_value_mapping }}</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+              
+              {% set option_row = 0 %}
+              {% for option_value in option_values %}
+              <tr id="option_value-row{{ option_row }}">
+                <td class="text-left">
+                  <input type="text" name="option_value[{{ option_row }}][option_value]" value="{{ option_value.option_value }}" />
+                </td>
+                <td class="text-left">
+                	<input type="text" name="option_value[{{ option_row }}][option_value_mapping]" value="{{ option_value.option_value_mapping }}" style="width:500px;" />
+                </td>
+                <td class="text-left"><button type="button" onclick="$('#option_value-row{{ option_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+              </tr>
+              {% set option_row = option_row + 1 %}
+              {% endfor %}
+                </tbody>
+              
+              <tfoot>
+                <tr>
+                  <td colspan="2"></td>
+                  <td class="text-right"><button type="button" onclick="addAttributeValue();" data-toggle="tooltip" title="{{ button_option_value_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                </tr>
+              </tfoot>
+            </table>
+          </fieldset>
             </div>
-          </div>
+          
         </form>
       </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-function optionValue(element) {
 
-var a = $("select[name=option_id] option:selected").val();
+var option_row = {{ option_row }};
 
-  if (element.value != '') {
-    $.ajax({
-      url: 'index.php?route=catalog/option_search_mapping/autocomplete&user_token={{ user_token }}&option_id=' + a,
-      
-      dataType: 'json',
-          
-      success: function(json) {       
-        
-        var options = '';
-        var option_val = '{{ option_value }}';    
-        
-        if(json['option'].length){
-
-          for (var i = 0; i < json['option'].length; i++) {
-
-           if(option_val==json['option'][i].name)
-          {
-            options += '<span style="display:inline-block; margin:0 7px;"><input type="checkbox" name="option_value[]" value="'+json['option'][i].option_value_id+'@'+json['option'][i].name+'" checked="checked" />'+json['option'][i].name+'</span>';
-          }
-           else
-          {
-            options += '<span style="display:inline-block; margin:0 7px;"><input type="checkbox" name="option_value[]" value="'+json['option'][i].option_value_id+'@'+json['option'][i].name+'" />'+json['option'][i].name+'</span>';
-          }
-          }
-
-          $("#option_value").html(options);
-         
-        } else {
-           $("#option_value").html(options);
-        }   
-      },
-      error: function(xhr, ajaxOptions, thrownError) {
-        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-      }
-    });
-  }
+function addAttributeValue() {
+	html  = '<tbody id="option-row' + option_row + '">';
+	html += '  <tr>';
+    
+	html += '    <td class="text-left"><input type="text" name="option_value[' + option_row + '][option_value]" value="" /></td>';
+	html += '    <td class="text-left"><input type="text" name="option_value[' + option_row + '][option_value_mapping]" value="" style="width:500px;" /></td>';   
+	html += '    <td class="text-left"><a onclick="$(\'#option-row' + option_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-remove"></i></a></td>';
+	html += '  </tr>';	
+    html += '</tbody>';
+	
+	$('#option-value tfoot').before(html);
+	
+	option_row++;
 }
-
-
-
-//--></script> 
+</script> 
 {{ footer }}

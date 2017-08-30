@@ -160,6 +160,7 @@ class ControllerMastersStoneMapping extends Controller {
 		
 		$data['add'] = $this->url->link('masters/stone_mapping/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
 		$data['delete'] = $this->url->link('masters/stone_mapping/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
+		$data['copy'] = $this->url->link('masters/stone_mapping/copy', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
 		$data['user_token'] = $this->session->data['user_token'];
 		
@@ -339,9 +340,11 @@ class ControllerMastersStoneMapping extends Controller {
 
 		$data['cancel'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
-		if (isset($this->request->get['stone_mapping_id']) && (!$this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$stone_mapping_info = $this->model_masters_stone_mapping->getStoneMapping($this->request->get['stone_mapping_id']);
-		}
+		$data['user_token'] = $this->session->data['user_token'];
+
+		if (isset($this->request->get['stone_mapping_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
+      		$stone_mapping_info = $this->model_masters_stone_mapping->getStoneMappingValues($this->request->get['stone_mapping_id']);
+    	}
 
 		if (isset($this->request->post['name'])) {
 			$data['name'] = $this->request->post['name'];
@@ -384,53 +387,25 @@ class ControllerMastersStoneMapping extends Controller {
 		}
 
 		
-
-		if (isset($this->request->get['stone_type_mapping_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
-			$option_info = $this->model_masters_stone_mapping->getOptionValueMapping($this->request->get['stone_type_mapping_id']);
-					
-		}
-
-
-		$data['user_token'] = $this->session->data['user_token'];
-
-		
-		// Product Setting
-		$this->load->model('catalog/option');
-
-		
-		$data['options'] = $this->model_catalog_option->getOptions();
-
-		if (isset($this->request->post['option_id'])) {
-			$data['option_id'] = $this->request->post['option_id'];
-		} elseif (!empty($option_info)) {
-			$data['option_id'] = $option_info['option_id'];
-		} else {
-			$data['option_id'] = '';
-		}	
-
-		if (isset($this->request->post['option_value_id'])) {
-			$data['option_value_id'] = $this->request->post['option_value_id'];
-		} elseif (!empty($option_info)) {
-			$data['option_value_id'] = $option_info['option_value_id'];
-		} else {
-			$data['option_value_id'] = '';
-		}	
-		
 		if (isset($this->request->post['option_value'])) {
-			
-			$data['option_value'] = $this->request->post['option_value'];
-			$data['option_values'] = $this->model_masters_stone_mapping->getOptionValues($option_info['option_id']);
-
-		} elseif (!empty($option_info)) {
-			
-			$data['option_value'] = $option_info['option_value_id'];//explode(',' , $option_info['option_value_id']);
-			$data['option_values'] = $this->model_masters_stone_mapping->getOptionValues($option_info['option_id']);
-			
+			$option_values = $this->request->post['option_value'];
+		} elseif (isset($this->request->get['stone_mapping_id'])) {
+			$option_values = $this->model_masters_stone_mapping->getStoneMappingValueDescriptions($this->request->get['stone_mapping_id']);
 		} else {
+			$option_values = array();
+		}
+		
+		$data['option_values'] = array();
+		// echo"<pre>";print_r($option_values);echo"</pre>";
+		foreach ($option_values as $option_value) {
 			
-			$data['option_value'] = '';
-			$data['option_values'] = array();
-		}	
+			$data['option_values'][] = array(
+				'stone_mapping_value_id'    => $option_value['stone_mapping_value_id'],
+				'stone_mapping_id'					=> $option_value['stone_mapping_id'],
+				'option_value'					    => $option_value['option_value'],
+				'option_value_mapping'				=> $option_value['option_value_mapping']				
+			);
+		}
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -439,132 +414,75 @@ class ControllerMastersStoneMapping extends Controller {
 		$this->response->setOutput($this->load->view('masters/stone_mapping_form', $data));
 	}
 
-	protected function validateForm() {
+	public function copy() {
+	
+		$this->language->load('masters/stone_mapping');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('masters/stone_mapping');
+		
+		if (isset($this->request->post['selected']) && $this->validateCopy()) {
+			foreach ($this->request->post['selected'] as $stone_mapping_id) {
+			$this->model_masters_stone_mapping->copyStoneMapping($stone_mapping_id);
+			}
+
+			$this->session->data['success'] = $this->language->get('text_success');
+
+			$url = '';	   
+
+			if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+			}
+
+			if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->response->redirect($this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . $url, true));
+		}
+
+		$this->getList();
+    }
+
+	 protected function validateCopy() {
 		if (!$this->user->hasPermission('modify', 'masters/stone_mapping')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((utf8_strlen($this->request->post['diamond_type']) < 2) || (utf8_strlen($this->request->post['diamond_type']) > 20)) {
-			$this->error['diamond_type'] = $this->language->get('error_diamond_type');
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
 		}
-
-		if ((utf8_strlen($this->request->post['shape']) < 2) || (utf8_strlen($this->request->post['shape']) > 20)) {
-			$this->error['shape'] = $this->language->get('error_shape');
+    }
+	protected function validateForm() {
+		if (!$this->user->hasPermission('modify', 'masters/stone_mapping')) {
+			$this->error['warning'] = $this->language->get('error_permission');
 		}
+		
 
-		if ((utf8_strlen($this->request->post['carat_from']) < 2) || (utf8_strlen($this->request->post['carat_from']) > 20)) {
-			$this->error['carat_from'] = $this->language->get('error_carat_from');
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
 		}
-
-		if ((utf8_strlen($this->request->post['carat_to']) < 2) || (utf8_strlen($this->request->post['carat_to']) > 20)) {
-			$this->error['carat_to'] = $this->language->get('error_carat_to');
-		}
-
-		if ((utf8_strlen($this->request->post['clarity']) < 2) || (utf8_strlen($this->request->post['clarity']) > 20)) {
-			$this->error['clarity'] = $this->language->get('error_clarity');
-		}
-
-		if ((utf8_strlen($this->request->post['color']) < 1) || (utf8_strlen($this->request->post['color']) > 20)) {
-			$this->error['color'] = $this->language->get('error_color');
-		}
-
-		if ((utf8_strlen($this->request->post['lab']) < 2) || (utf8_strlen($this->request->post['lab']) > 20)) {
-			$this->error['lab'] = $this->language->get('error_lab');
-		}
-
-		if ((utf8_strlen($this->request->post['cut']) < 2) || (utf8_strlen($this->request->post['cut']) > 20)) {
-			$this->error['cut'] = $this->language->get('error_cut');
-		}
-
-		if ((utf8_strlen($this->request->post['price']) < 1) || (utf8_strlen($this->request->post['price']) > 20)) {
-			$this->error['price'] = $this->language->get('error_price');
-		}
-
-		return !$this->error;
 	}
 
 	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'masters/stone_mapping')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
-
-		return !$this->error;
-	}
-	
-	public function import() {
-
-		$this->load->language('masters/stone_mapping');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		$this->load->model('masters/stone_mapping');
-
-		//&& $this->validateImport()
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') ) {
-
-			$this->model_masters_stone_mapping->importStoneMapping($this->request->files);
-			
-			$this->session->data['success'] = $this->language->get('text_success');
-			
-			$url = '';
-			
-			/*
-			if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' .$this->request->get['filter_model'];
-			}
-			if (isset($this->request->get['filter_title'])) {
-				$url .= '&filter_title=' .$this->request->get['filter_title'];
-			}
-			
-			if (isset($this->request->get['filter_category'])) {
-				$url .= '&filter_category=' .$this->request->get['filter_category'];
-			}
-			*/
-			if (isset($this->request->get['sort'])) {
-				$url .= '&sort=' . $this->request->get['sort'];
-			}
-
-			if (isset($this->request->get['order'])) {
-				$url .= '&order=' . $this->request->get['order'];
-			}
-
-			if (isset($this->request->get['page'])) {
-				$url .= '&page=' . $this->request->get['page'];
-			}
-
-			$this->response->redirect($this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . $url, true));
-		}
-
-		if (isset($this->error['import_file'])) {
-			$this->error['warning'] = $this->error['import_file'];
-		}
-
-		$this->getList();
-	}
-	
-	public function export()
-    {
-        $this->load->model('masters/stone_mapping');
-        
-        $data = array(
-            'sort' => 'code',
-            'order' => 'ASC'
-        );
-        
-        $stone_mapping = "Stone Price ID,Diamond Type,Shape,Carat From,Carat To,Clarity,Color,Lab,Cut,Price,Status\n";
-        $results     = $this->model_masters_stone_mapping->getStoneMappingExport($data);		
 		
-			if($results){
-				foreach ($results as $result) {
-					
-					$stone_mapping .= $this->db->escape($result['stone_mapping_id']) . "," . $this->db->escape($result['diamond_type']) . "," . $this->db->escape($result['shape']) . "," . $this->db->escape($result['carat_from']) . "," . $this->db->escape($result['carat_to']) . "," . $this->db->escape($result['clarity']) . "," . $this->db->escape($result['color']) . "," . $this->db->escape($result['lab']) . "," . $this->db->escape($result['cut']) . "," . $this->db->escape($result['price']) . "," . $this->db->escape($result['status']) . "\n";
-				}
-			}
-			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-			header("Content-Length: " . strlen($stone_mapping));
-			header("Content-type: text/x-csv");
-			header("Content-Disposition: attachment; filename=stone_mapping.csv");
-			echo $stone_mapping;
-			exit;
-    }
+
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}
+	}	
 }

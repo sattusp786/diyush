@@ -1,36 +1,49 @@
 <?php
 class ModelMastersStoneMapping extends Model {
 	public function addStoneMapping($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "stone_mapping SET diamond_type = '" . $this->db->escape($data['diamond_type']) . "', shape = '" . $this->db->escape($data['shape']) . "', carat_from = '" . $this->db->escape($data['carat_from']) . "', carat_to = '" . $this->db->escape($data['carat_to']) . "', clarity = '" . $this->db->escape($data['clarity']) . "', color = '" . $this->db->escape($data['color']) . "', lab = '" . $this->db->escape($data['lab']) . "', cut = '" . $this->db->escape($data['cut']) . "', price = '" . (float)$data['price'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
 
+
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "stone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', total = '" . (int)$data['total'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "'");
+		
 		$stone_mapping_id = $this->db->getLastId();
-
-		return $stone_mapping_id;
+		if(isset($data['option_value'])) {
+			foreach ($data['option_value'] as $language_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "stone_mapping_value SET stone_mapping_id='".(int)$stone_mapping_id."', option_value = '" . $value['option_value'] . "', option_value_mapping = '" . $value['option_value_mapping'] . "'");
+			}
+		}
 	}
-
+	
 	public function editStoneMapping($stone_mapping_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "stone_mapping SET diamond_type = '" . $this->db->escape($data['diamond_type']) . "', shape = '" . $this->db->escape($data['shape']) . "', carat_from = '" . $this->db->escape($data['carat_from']) . "', carat_to = '" . $this->db->escape($data['carat_to']) . "', clarity = '" . $this->db->escape($data['clarity']) . "', color = '" . $this->db->escape($data['color']) . "', lab = '" . $this->db->escape($data['lab']) . "', cut = '" . $this->db->escape($data['cut']) . "', price = '" . (float)$data['price'] . "', status = '" . (int)$data['status'] . "' WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
+		
+		$this->db->query("UPDATE `" . DB_PREFIX . "stone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', total = '" . (int)$data['total'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "' WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
 
+		
+			$this->db->query("DELETE FROM " . DB_PREFIX . "stone_mapping_value WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
+
+			if(isset($data['option_value'])) {
+				foreach ($data['option_value'] as $language_id => $value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "stone_mapping_value SET stone_mapping_id='".(int)$stone_mapping_id."', option_value = '" . $value['option_value'] . "', option_value_mapping = '" . $value['option_value_mapping'] . "'");
+			}
+		}
 	}
+	
+	
 
 	public function deleteStoneMapping($stone_mapping_id) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "stone_mapping WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
+		
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "stone_mapping` WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "stone_mapping_value WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");	
+		
 	}
-
-	public function getStoneMapping($stone_mapping_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "stone_mapping WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
-
-		return $query->row;
-	}
-
-	public function getStoneMappingByCode($code) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "stone_mapping WHERE code = '" . $this->db->escape($code) . "'");
-
-		return $query->row;
-	}
-
+	
+	
+		
 	public function getStoneMappings($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "stone_mapping";
+		$sql = "SELECT * FROM `" . DB_PREFIX . "stone_mapping`  ";
+		
+		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
+			$sql .= " AND od.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		}
 
 		$sort_data = array(
 			'name',
@@ -38,150 +51,93 @@ class ModelMastersStoneMapping extends Model {
 			'total',
 			'markup_percent',
 			'markup_fixed'
-		);
-
+		);	
+		
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];
+			$sql .= " ORDER BY " . $data['sort'];	
 		} else {
-			$sql .= " ORDER BY name";
+			$sql .= " ORDER BY name";	
 		}
-
+		
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
 			$sql .= " DESC";
 		} else {
 			$sql .= " ASC";
 		}
-
+		
 		if (isset($data['start']) || isset($data['limit'])) {
 			if ($data['start'] < 0) {
 				$data['start'] = 0;
-			}
+			}					
 
 			if ($data['limit'] < 1) {
 				$data['limit'] = 20;
-			}
-
+			}	
+		
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-		}
-
+		}	
+		
 		$query = $this->db->query($sql);
 
 		return $query->rows;
 	}
+	
+
 
 	public function getTotalStoneMappings() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "stone_mapping");
-
+      	$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "stone_mapping`"); 
+		
 		return $query->row['total'];
-	}
+	}	
 	
-	public function importStoneMapping($import_file) {
-	
-		$truncate = $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "stone_mapping ");
-
-		$row = 0;
-		if (($handle = fopen($import_file['import_file']['tmp_name'], "r")) !== FALSE) {
-
-			while (($data = fgetcsv($handle, 0, ',', '"')) !== FALSE) {
-
-				$fields = array();
-				if ($row == 0 || empty($data[0])) {
-					$row++;
-					continue;
-				}
-				
-				$data['diamond_type'] 		= $data[1];
-				$data['shape'] 				= $data[2];
-				$data['carat_from'] 		= $data[3];
-				$data['carat_to'] 			= $data[4];
-				$data['clarity'] 			= $data[5];
-				$data['color'] 				= $data[6];
-				$data['lab'] 				= $data[7];
-				$data['cut'] 				= $data[8];
-				$data['price'] 				= $data[9];
-				$data['status'] 			= $data[10];
+	public function getStoneMappingValues($stone_mapping_id) {
 		
-				$this->addStoneMapping($data);
-				
-				$row++;
-			}
-		}
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stone_mapping WHERE stone_mapping_id='".(int)$stone_mapping_id."' ");
 
-		fclose($handle);
-	}
-	
-	public function getStoneMappingExport($data = array(),$mode=null) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "stone_mapping WHERE 1 ";
-
-		$sort_data = array(
-			'stone_mapping_id',
-			'diamond_type',
-			'shape',
-			'carat_from',
-			'carat_to',
-			'clarity',
-			'color',
-			'lab',
-			'cut',
-			'price'
-		);
-		
-		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];
-		} else {
-			$sql .= " ORDER BY diamond_type";
-		}
-
-		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC";
-		} else {
-			$sql .= " ASC";
-		}
-
-		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
-				$data['start'] = 0;
-			}
-
-			if ($data['limit'] < 1) {
-				$data['limit'] = 20;
-			}
-
-			$sql .= " LIMIT " . (int) $data['start'] . "," . (int) $data['limit'];
-		}
-		$query = $this->db->query($sql);
-
-		return $query->rows;
-	}
-
-	public function getOptionValueMapping($option_id) {    
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stone_type_mapping  WHERE stone_type_mapping_id = '" . (int)$option_id . "'");
-		
-		return $query->row;
-	}
-	public function getOptionValueMappings($stone_mapping_id) {  	
-		
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stone_type_mapping  WHERE stone_type_mapping_id = '" . (int)$stone_mapping_id . "'");
 		
 		return $query->row;
 	}
 
-	public function getOptionValues($option_id) {
-		$option_value_data = array();		
-		$option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "option_value ov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE ov.option_id = '" . (int)$option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY ov.sort_order ASC");
+
+	public function getStoneMappingValueDescriptions($stone_mapping_id) {
+		$option_value_data = array();
+		
+		$option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stone_mapping_value WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "' ORDER BY option_value ASC ");
 				
 		foreach ($option_value_query->rows as $option_value) {
+			$option_value_description_data = array();
+			
+			$qur = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "stone_mapping_value WHERE stone_mapping_id=".$option_value['stone_mapping_id']);
+			
+			$product_option_count=($qur->row['total']>0?$qur->row['total']:'');
+			
 			$option_value_data[] = array(
-				'option_value_id' => $option_value['option_value_id'],
-				'name'            => $option_value['name'],
-				'code'            => $option_value['code'],
-				'default'         => $option_value['default'],
-				'image'           => $option_value['image'],
-				'sort_order'      => $option_value['sort_order']
+				'stone_mapping_value_id'    => $option_value['stone_mapping_value_id'],
+				'stone_mapping_id'					=> $option_value['stone_mapping_id'],
+				'option_value'					    => $option_value['option_value'],
+				'option_value_mapping'				=> $option_value['option_value_mapping'],
+				'stone_mapping_count'				=> $product_option_count
+				
 			);
 		}
 		
 		return $option_value_data;
+	}
+	
+	public function copyStoneMapping($stone_mapping_id) {
+	
+
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "stone_mapping os  WHERE os.stone_mapping_id = '" . (int)$stone_mapping_id . "' ");
+		
+		if ($query->num_rows) {
+			$data = array();
+			
+			$data = $query->row;			
+						
+			$data = array_merge($data, array('option_value' => $this->getStoneMappingValueDescriptions($stone_mapping_id)));
+			//echo"<pre>";print_r($data);echo"</pre>";exit;
+			
+			$this->addStoneMapping($data);
+		}
 	}
 }

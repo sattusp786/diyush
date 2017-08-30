@@ -8,6 +8,8 @@ $_['text_list']           = 'Stone Mapping List';
 $_['text_add']            = 'Add Stone Mapping';
 $_['text_edit']           = 'Edit Stone Mapping';
 $_['text_option_values']  = 'Option Values';
+$_['text_option_value']  = 'Option Value';
+$_['text_option_value_mapping']  = 'Option Value Mapping';
 
 // Column
 $_['column_name']  		   = 'Name';
@@ -27,6 +29,7 @@ $_['entry_markup_fixed']      = 'Markup Fixed';
 //Buttons
 $_['button_import']        = 'Import';
 $_['button_export']        = 'Export';
+$_['button_copy']          = 'Copy';
 
 // Help
 $_['help_code']           = 'The code the customer enters to get the discount.';
