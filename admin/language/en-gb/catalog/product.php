@@ -82,6 +82,7 @@ $_['entry_tag']              = 'Product Tags';
 $_['entry_reward']           = 'Reward Points';
 $_['entry_layout']           = 'Layout Override';
 $_['entry_recurring']        = 'Recurring Profile';
+$_['entry_default']        	 = 'Default';
 
 // Help
 $_['help_sku']               = 'Stock Keeping Unit';

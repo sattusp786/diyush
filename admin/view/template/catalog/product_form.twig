@@ -595,6 +595,7 @@
                           <thead>
                             <tr>
                               <td class="text-left">{{ entry_option_value }}</td>
+                              <td class="text-right">{{ entry_default }}</td>
                               <td class="text-right">{{ entry_quantity }}</td>
                               <td class="text-left">{{ entry_subtract }}</td>
                               <td class="text-right">{{ entry_price }}</td>
@@ -633,6 +634,7 @@
                               
                               </select>
                               <input type="hidden" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][product_option_value_id]" value="{{ product_option_value.product_option_value_id }}" /></td>
+                            <td class="text-center"><input type="checkbox" rel="default" id="chekopt-{{ option_row }}-{{ option_value_row }}" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][default]" value="1" {% if product_option_value.default == '1' %} CHECKED {% endif %} placeholder="{{ entry_default }}" class="chekopt" /></td>
                             <td class="text-right"><input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][quantity]" value="{{ product_option_value.quantity }}" placeholder="{{ entry_quantity }}" class="form-control" /></td>
                             <td class="text-left"><select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][subtract]" class="form-control">
                                 
@@ -1420,6 +1422,7 @@ $('input[name=\'option\']').autocomplete({
 			html += '  	 <thead>';
 			html += '      <tr>';
 			html += '        <td class="text-left">{{ entry_option_value }}</td>';
+			html += '        <td class="text-right">{{ entry_default }}</td>';
 			html += '        <td class="text-right">{{ entry_quantity }}</td>';
 			html += '        <td class="text-left">{{ entry_subtract }}</td>';
 			html += '        <td class="text-right">{{ entry_price }}</td>';
@@ -1488,6 +1491,7 @@ function addOptionValue(option_row) {
 	html += '  <td class="text-left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_value_id]" class="form-control">';
 	html += $('#option-values' + option_row).html();
 	html += '  </select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="" /></td>';
+	html += '  <td class="text-center"><input rel="default" id="chekopt-' + option_row + '-' + option_value_row + '" type="checkbox" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][default]" value="1" placeholder="{{ entry_default }}" class="chekopt" /></td>';
 	html += '  <td class="text-right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="form-control" /></td>';
 	html += '  <td class="text-left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="form-control">';
 	html += '    <option value="1">{{ text_yes }}</option>';
@@ -1631,7 +1635,15 @@ $('.datetime').datetimepicker({
 	pickDate: true,
 	pickTime: true
 });
-//--></script> 
+//--></script>
+<script type="text/javascript"><!--
+$('.chekopt').click(function(){
+	var optid=$(this).attr('id');
+	var res = optid.split("-");
+	$('#option-value' + res[1]).find('input[type=checkbox][rel=default]:checked').removeAttr('checked');
+	$(this).prop('checked',true);
+});
+//--></script>
   <script type="text/javascript"><!--
 $('#language a:first').tab('show');
 $('#option a:first').tab('show');
