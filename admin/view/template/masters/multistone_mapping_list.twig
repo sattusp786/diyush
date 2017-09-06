@@ -1,0 +1,122 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+      <a onclick="$('#form-multistone_mapping').attr('action', '{{ copy }}'); $('#form-multistone_mapping').submit();" data-toggle="tooltip" title="{{ button_copy }}" class="btn btn-default"><i class="fa fa-copy"></i></a>
+        <a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-multistone_mapping').submit() : false;"><i class="fa fa-trash-o"></i></button>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-multistone_mapping">
+			<!--<div class="box">
+				<input type="file" name="import_file" id="import_file" class="col-sm-4">
+				<a onclick="importmultistoneprice();" data-toggle="tooltip" title="{{ button_import }}" class="btn btn-primary"><i class="fa fa-upload"></i> </a> 
+				<a href="{{ export }}" data-toggle="tooltip" title="{{ button_export }}" class="btn btn-primary"><i class="fa fa-download"></i> </a>
+				<br/><br/>
+			</div>-->
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td class="text-left">{% if sort == 'name' %}
+                    <a href="{{ sort_name }}" class="{{ order|lower }}">{{ column_name }}</a>
+                    {% else %}
+                    <a href="{{ sort_name }}">{{ column_name }}</a>
+                    {% endif %}</td>
+                  <td class="text-left">{% if sort == 'certificate' %}
+                    <a href="{{ sort_certificate }}" class="{{ order|lower }}">{{ column_certificate }}</a>
+                    {% else %}
+                    <a href="{{ sort_certificate }}">{{ column_certificate }}</a>
+                    {% endif %}</td>
+                  <td class="text-left">{% if sort == 'total' %}
+                    <a href="{{ sort_total }}" class="{{ order|lower }}">{{ column_total }}</a>
+                    {% else %}
+                    <a href="{{ sort_total }}">{{ column_total }}</a>
+                    {% endif %}</td>
+                  <td class="text-left">{% if sort == 'markup_percent' %}
+                    <a href="{{ sort_markup_percent }}" class="{{ order|lower }}">{{ column_markup_percent }}</a>
+                    {% else %}
+                    <a href="{{ sort_markup_percent }}">{{ column_markup_percent }}</a>
+                    {% endif %}</td>
+                  <td class="text-left">{% if sort == 'markup_fixed' %}
+                    <a href="{{ sort_markup_fixed }}" class="{{ order|lower }}">{{ column_markup_fixed }}</a>
+                    {% else %}
+                    <a href="{{ sort_markup_fixed }}">{{ column_markup_fixed }}</a>
+                    {% endif %}</td>
+                  <td class="text-right">{{ column_action }}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% if multistone_mappings %}
+                {% for multistone_mapping in multistone_mappings %}
+                <tr>
+                  <td class="text-center">{% if multistone_mapping.multistone_mapping_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ multistone_mapping.multistone_mapping_id }}" checked="checked" />
+                    {% else %}
+                    <input type="checkbox" name="selected[]" value="{{ multistone_mapping.multistone_mapping_id }}" />
+                    {% endif %}</td>
+                  <td class="text-left">{{ multistone_mapping.name }}</td>
+                  <td class="text-left">{{ multistone_mapping.certificate }}</td>
+                  <td class="text-left">{{ multistone_mapping.total }}</td>
+                  <td class="text-left">{{ multistone_mapping.markup_percent }}</td>
+                  <td class="text-left">{{ multistone_mapping.markup_fixed }}</td>
+                  <td class="text-right"><a href="{{ multistone_mapping.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td class="text-center" colspan="7">{{ text_no_results }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-sm-6 text-left">{{ pagination }}</div>
+          <div class="col-sm-6 text-right">{{ results }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+/*
+function importmultistoneprice() {
+    var impurl = 'index.php?route=masters/multistone_mapping/import&user_token={{ user_token }}';
+    if($("#import_file").val() != ''){
+	var didConfirm = confirm("Remove all previous data. Are you sure about this action ?");
+	if (didConfirm == true) {
+	$('#form-multistone_mapping').attr('action', impurl); 
+	$('#form-multistone_mapping').submit();
+	}    
+     }else{  alert("Please select valid file or file format (.csv)!") }
+}
+*/
+</script>
+{{ footer }}
