@@ -1,5 +1,6 @@
 <?php
 // Text
+$_['text_amazon_connector']     = 'Amazon Connector';
 $_['text_api']                  = 'API';
 $_['text_attribute']            = 'Attributes';
 $_['text_attribute_group']      = 'Attribute Groups';

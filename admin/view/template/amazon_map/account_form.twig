@@ -1,0 +1,234 @@
+{{ header }} {{ column_left }} 
+<div id="content">
+<link href="view/stylesheet/csspin.css" rel="stylesheet" type="text/css"/>
+<link href="view/stylesheet/style.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto Condensed" rel="stylesheet" type="text/css">
+<style type="text/css">
+  .block_div{
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    display: none;
+  }
+  .block_spinner {
+    left: 50%;
+    position: relative;
+    top: 35%;
+  }
+  .tabs-left > .li-format{
+    margin:12px 0;
+    margin-right: -18px;
+    border-left: 3px solid #1978ab;
+    float: none;
+  }
+  .tabs-left > .li-format > a{
+    border-radius: 0;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .tabs-left > li.active{
+    border-left: 3px solid #E22C5C;
+  }
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    border-bottom: 1px solid #e8e8e8;
+    border-right: none;
+  }
+</style>
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-amazon-account" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i> {{ button_save }}</button>
+
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+       <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		{% endfor %}  
+         
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    {% if success %} 
+    <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_add }}</h3>
+      </div>
+      <div class="panel-body">
+
+          <div class="col-sm-3" id="amazon_left_link">
+              <div class="panel-group panel-primary" id="accordion_amazon" role="tablist" aria-multiselectable="true">
+              <div class="panel">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <center><b><a role="button" data-toggle="collapse" data-parent="#accordion_amazon" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      {{ entry_amazon_account_info|upper }} 
+                    </a></b></center>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs tabs-left"><!-- 'tabs-right' for right tabs -->
+                    <li class="active li-format"><a href="#add-amazon-account" data-toggle="tab">{{ text_account_tab }}</a></li>
+                    {% if account_id %} 
+                      <li class="li-format"><a href="#account_product_map" data-toggle="tab">{{ text_product_tab }}</a></li>
+                      <li class="li-format"><a href="#account_order_map" data-toggle="tab">{{ text_order_tab }}</a></li>
+                      <li class="li-format"><a href="#account_customer_map" data-toggle="tab">{{ text_customer_tab }}</a></li>
+                    {% endif %} 
+                  </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!--Col-sm-3-->
+
+          <div class="col-sm-9">
+            <!-- Tab panes -->
+              <div class="tab-content" id="amazon_right_link">
+                <div class="tab-pane active" id="add-amazon-account">
+                  <h3>{{ text_amazon_account }}  </h3>
+                  <hr>
+
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-amazon-account" class="form-horizontal">
+
+                    <input type="hidden" name="account_id" value="{{ account_id }}" />
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-store-name"><span data-toggle="tooltip" title="{{ help_amazon_store_name }}">{{ entry_amazon_store_name }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" name="wk_amazon_connector_store_name" class="form-control" id="input-store-name" value="{% if wk_amazon_connector_store_name %} {{ wk_amazon_connector_store_name }} {% endif %} " {% if account_id %} {% if not error_wk_amazon_connector_store_name %} {{ 'readonly = 1' }}  {% endif %}  />
+
+                        {% if error_wk_amazon_connector_store_name %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_store_name }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-attribute-group"><span data-toggle="tooltip" title="{{ help_amazon_attribute_group }}">{{ entry_amazon_attribute_group }}</span></label>
+                      <div class="col-sm-9">
+                        <select name="wk_amazon_connector_attribute_group" id="input-attribute-group" class="form-control">
+                          <option value="">{{ text_select }}</option>
+                          {% for key, attribute_group in attribute_groups %}  
+                            <option value="{{ attribute_group.attribute_group_id }}" {% if wk_amazon_connector_attribute_group == attribute_group.attribute_group_id %} {{ 'selected' }} {% endif %} >{{ attribute_group.name }}</option>
+                          {% endfor %} 
+                        </select>
+                        {% if error_wk_amazon_connector_attribute_group %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_attribute_group }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-marketplace-id"><span data-toggle="tooltip" title="{{ help_amazon_marketplace_id }}">{{ entry_amazon_marketplace_id }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="wk_amazon_connector_marketplace_id" id="input-marketplace-id" value="{% if wk_amazon_connector_marketplace_id %} {{ wk_amazon_connector_marketplace_id }} {% endif %} " placeholder="{{ placeholder_marketplace_id }}" />
+                        {% if error_wk_amazon_connector_marketplace_id %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_marketplace_id }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-seller-id"><span data-toggle="tooltip" title="{{ help_amazon_seller_id }}">{{ entry_amazon_seller_id }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="wk_amazon_connector_seller_id" id="input-seller-id" value="{% if wk_amazon_connector_seller_id %} {{ wk_amazon_connector_seller_id }} {% endif %} " placeholder="{{ placeholder_seller_id }}" />
+                        {% if error_wk_amazon_connector_seller_id %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_seller_id }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-access-key"><span data-toggle="tooltip" title="{{ help_amazon_access_id }}">{{ entry_amazon_access_id }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="wk_amazon_connector_access_key_id" id="input-access-key" value="{% if wk_amazon_connector_access_key_id %} {{ wk_amazon_connector_access_key_id }} {% endif %} " placeholder="{{ placeholder_access_key_id }}" />
+                        {% if error_wk_amazon_connector_access_key_id %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_access_key_id }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-secret-key"><span data-toggle="tooltip" title="{{ help_amazon_secret_key }}">{{ entry_amazon_secret_key }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="wk_amazon_connector_secret_key" id="input-secret-key" value="{% if wk_amazon_connector_secret_key %} {{ wk_amazon_connector_secret_key }} {% endif %} " placeholder="{{ placeholder_secret_key }}" />
+                        {% if error_wk_amazon_connector_secret_key %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_secret_key }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-country"><span data-toggle="tooltip" title="{{ help_amazon_country }}">{{ entry_amazon_country }}</span></label>
+                      <div class="col-sm-9">
+                        <select name="wk_amazon_connector_country" id="input-country" class="form-control">
+                          {% for key, country in countries %}  
+                            <option value="{{ country.iso_code_2 }}" {% if wk_amazon_connector_country == country.iso_code_2 %} {{ 'selected' }} {% endif %} >{{ country.name }}</option>
+                           {% endfor %}
+                        </select>
+                        {% if error_wk_amazon_connector_country %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_country }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+                    <div class="form-group required">
+                      <label class="col-sm-3 control-label" for="input-currency-rate"><span data-toggle="tooltip" title="{{ help_amazon_currency_rate }}">{{ entry_amazon_currency_rate }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="wk_amazon_connector_currency_rate" id="input-currency-rate" value="{% if wk_amazon_connector_currency_rate %} {{ wk_amazon_connector_currency_rate }} {% endif %} " placeholder="{{ placeholder_currency_rate }}" />
+                        <div class="alert alert-info">{{ help_amazon_currency_rate }}</div>
+                        {% if error_wk_amazon_connector_currency_rate %} 
+                          <div class="text-danger">{{ error_wk_amazon_connector_currency_rate }}</div>
+                        {% endif %} 
+                      </div>
+                    </div>
+
+                  </form>
+                </div><!--add-amazon-account-->
+
+                <div class="tab-pane" id="account_product_map">
+                  {{ product_map }} 
+                </div><!--account_product_map-->
+
+                <div class="tab-pane" id="account_order_map">
+                  {{ order_map }} 
+                </div><!--account_order_map-->
+
+                <div class="tab-pane" id="account_customer_map">
+                  {{ customer_map }} 
+                </div><!--account_customer_map-->
+
+              </div><!--tab-content-col-sm-9-->
+          </div><!--Col-sm-9-->
+
+
+      </div>
+    </div>
+  </div>
+  <div class="block_div">
+    <div class="block_spinner">
+      <div class="cp-spinner cp-flip"></div>
+    </div>
+  </div>
+</div>
+
+{{ footer }} 

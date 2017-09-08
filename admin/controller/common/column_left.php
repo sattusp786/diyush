@@ -16,6 +16,15 @@ class ControllerCommonColumnLeft extends Controller {
 				'children' => array()
 			);
 			
+			//Amazon Connector
+			$data['menus'][] = array(
+				'id'       => 'menu-amazon',
+				'icon'	   => 'fa-plug',
+				'name'	   => $this->language->get('text_amazon_connector'),
+				'href'     => $this->url->link('amazon_map/account', 'user_token=' . $this->session->data['user_token'], true),
+				'children' => array()
+			);
+			
 			// Catalog
 			$catalog = array();
 			

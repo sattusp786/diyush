@@ -1,0 +1,679 @@
+<div id="content">
+<link href="view/stylesheet/csspin.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+  .cp-round::before, .cp-round::after{
+    width: 35px;
+    left:8px;
+    height: 35px;
+    /*top: 25px;*/
+    margin-top: 25px;
+  }
+  .btn-success{
+    background-color:#6ABD6A;
+    color:#FFF;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #6ABD6A;
+    border-bottom-width: 3px;
+  }
+  .btn-success:hover{
+    background-color:#e6e6e6;
+    color:#333;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #adadad;
+    border-bottom-width: 3px;
+  }
+  .product_import_section, #profiler_product, #profiler_product_export, #combination_section, #selected_export{
+    display: none;
+  }
+</style>
+  <div class="page-header">
+    <div class="container-fluid">
+      {% if tab == 'import_product' %} 
+        <h3>{{ heading_title_import }}</h3>
+      {% endif %} {% else %}  {% if tab == 'export_product' %} 
+        <h3>{{ heading_title_export }}</h3>
+      {% else %}  
+          <h3>{{ heading_title }}</h3>
+      {% endif %} 
+      <hr>
+    </div>
+  </div>
+
+
+    <div class="page-header container-fluid">
+      <div class="pull-right">
+        {% if not tab %} 
+          <a href="{{ import_product_tab }}" id="import-product-tab" type="button" data-toggle="tooltip" title="{{ button_import_amazon_product }}" class="btn btn-info" ><i class="fa fa-download col-sm-12" aria-hidden="true"></i> <span class="col-sm-12">{{ button_import }}</span></a>
+          <a href="{{ export_product_tab }}" id="export-product-tab" type="button" data-toggle="tooltip" title="{{ button_export }}" class="btn btn-info" ><i class="fa fa-upload col-sm-12" aria-hidden="true"></i> <span class="col-sm-12">{{ button_export }}</span></a>
+          <button class="btn btn-danger" type="button" data-toggle="tooltip" title="{{ button_delete_product_info }}" onclick="confirm('{{ text_confirm }} ') ? $('#form-product-delete').submit() : paul();"><i class="fa fa-trash-o col-sm-12" aria-hidden="true"></i> <span class="col-sm-12">{{ button_delete_product }}</span></button>
+          {% if product_delete_result %} 
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target=".product_delete_result" id="product_delete"><i class="fa fa-info col-sm-12" aria-hidden="true"></i>  <span class="col-sm-12">{{ "Result" }}</span></button>
+          {% endif %} 
+        {% else %}  
+          <a href="{{ button_back_link }}" type="button" data-toggle="tooltip" title="{{ button_back }}" class="btn btn-default" ><i class="fa fa-reply" aria-hidden="true"></i></a>
+        {% endif %} 
+      </div>
+    </div>
+    <div class="modal fade product_delete_result" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel"><strong>{{ "Product Result" }}</strong></h4>
+          </div>
+          <div class="modal-body">
+            {% if product_delete_result %} 
+            {% for p_key, result in product_delete_result %} 
+              {% if result.status %} 
+                <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ result.message }} 
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+              {% else %}  
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ result.message }} 
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+              {% endif %} 
+              {% endfor %} 
+            {% endif %} 
+             
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{ button_close }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="container-fluid">
+
+    {% if tab == 'import_product' %} 
+      <div id="product_import_list_section">
+        {% if error_warning %} 
+        <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        {% endif %} 
+
+        <div class="panel panel-primary">
+          <div class="panel-heading"  style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-info-circle" aria-hidden="true"></i> {{ info_about_import_tab }}</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li> {{ text_tab_info1 }}</li>
+              <!-- <li> {{ text_tab_info2 }}</li> -->
+              <li> {{ text_tab_info3 }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-refresh" aria-hidden="true"></i> {{ sync_product_tab }}</h3>
+          </div>
+          <div class="panel-body" id="generate-report-section">
+            <div class="alert alert-warning"> <i class="fa fa-info-circle" aria-hidden="true"></i> {{ info_report_id }}</div>
+
+            <div class="panel-heading">
+              <button type="button" class="btn btn-info" id="generate_report_id"><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ button_report_id }}</button>
+
+              <div class="form-group product_import_section">
+                <input type="hidden" class="form-control" value="" name="report_id" />
+                <button type="button" class="btn btn-warning" id="import_update_product"><i class="fa fa-refresh" aria-hidden="true"></i>  {{ button_import_product }}</button>
+
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".asin_model" id="import_update_one_by_one"><i class="fa fa-check-square-o" aria-hidden="true"></i>  {{ button_import_product_by_asin }}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade asin_model" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="gridSystemModalLabel"><strong>{{ button_import_product_by_asin }}</strong></h4>
+              </div>
+              <div class="modal-body">
+                <div class="form-horizontal">
+                  <div class="form-group required">
+                    <label class="control-label" style="margin-bottom: 10px;">{{ text_product_asin }}</label>
+                    <div class="col-sm-12">
+                        <input type="text" name="amazon_product_asin" value="" placeholder="{{ entry_product_asin }}" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="alert alert-info" id="info_asin">{{ info_product_asin_sync }}</div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <span class="demo-spin" style="color: #1e91cf;position: relative;top: 6px;"><i class="fa  fa-spin fa-2x fa-fw"></i></span>
+                <button type="button" id="import_by_asin" class="btn btn-primary">{{ button_import }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ button_close }}</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="panel panel-default" id="profiler_product">
+          <div class="panel-heading"  style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-list"></i> {{ entry_product_response }}</h3>
+          </div>
+          <div class="panel-body profiler_product_body">
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ error_not_referesh }}</div>
+
+          </div>
+        </div>
+
+      </div><!-- product-import -->
+    {% endif %} 
+
+    {% if tab == 'export_product' %} 
+      <div id="product_export_list_section">
+        <div class="panel panel-primary">
+          <div class="panel-heading"  style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-info-circle" aria-hidden="true"></i> {{ info_about_export_tab }}</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <li> {{ text_export_tab_info1 }}</li>
+              <li> {{ text_export_tab_info2 }}</li>
+              <li> {{ text_export_tab_info3 }}</li>
+              <li> {{ text_export_tab_info4 }}</li>
+              <li> {{ text_export_tab_info5 }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ export_product_action }}</h3>
+          </div>
+          <div class="panel-body">
+
+              <form id="export_options" class="form-horizontal" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" style="margin-bottom: 10px;">{{ entry_select_product_option }}</label>
+                  <div class="col-sm-6">
+                      <select class="form-control" name="product_export_option">
+                        <option value="">{{ text_select_action }}</option>
+                        <option value="all">{{ text_action_all_products }}</option>
+                        <option value="selected">{{ text_action_combination }}</option>
+                      </select>
+                  </div>
+                </div>
+
+                <div class="form-group" id="combination_section">
+                  <label class="alert control-label "><span data-toggle="tooltip"  title="{{ help_select_combination }}">{{ entry_select_combination }}</span></label>
+                  <div class="col-sm-12">
+                    {% if productCombinations %}
+                      check_com = 'false'; 
+                    <div class="well well-sm" style="height: 250px; overflow: auto;">
+                        {% for product in productCombinations %}
+                          {% if product.combinations %}
+                            check_com = 'true'; 
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" name="product_combitaion[]" value="{{ product.product_id }}" />
+                                {{ product.name }} 
+                              </label>
+                              <div class="dropdown pull-right">
+                                <button class="btn btn-info dropdown-toggle" type="button" id="export_dropdownMenuVariation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                  {{ "Combination List" }} 
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="export_dropdownMenuVariation">
+                                  {% for option_id, combinations in product %} 
+                                    {% for option__value_id, combination in combinations %} 
+                                    <li style="padding:5px 15px; cursor:pointer;">{{ combination.name~' - ('~combination.id_value~')' }}</li>
+                                  {% endfor %} 
+                                  {% endfor %} 
+                                </ul>
+                              </div>
+                            </div>
+                            <hr style="border-color:#888F99;margin-bottom:0px;">
+                            {% endif %} 
+                            {% endfor %} 
+                       
+                      {% if not check_com %} 
+                        <div class="alert alert-warning">{{ error_no_product_found }}</div>
+                      {% endif %} 
+                    </div>
+                      {% endif %} 
+                  </div>
+                </div>
+
+              </form>
+            <div class="panel-heading pull-right">
+              <button type="button" class="btn btn-warning" id="export_start" data-toggle="tooltip" title="{{ info_button_export_start }}" ><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ button_export_start }}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-danger">
+          <div class="panel-heading" style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{ update_delete_export }}</h3>
+          </div>
+          <div class="panel-body">
+
+              <form id="update_export_opt" class="form-horizontal" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label" style="margin-bottom: 10px;">{{ entry_select_product_option }}</label>
+                  <div class="col-sm-6">
+                      <select class="form-control" name="product_update_delete_option">
+                        <option value="">{{ text_select_action }}</option>
+                        <option value="all">{{ text_all_exported_products }}</option>
+                        <option value="selected">{{ text_selected_exported_product }}</option>
+                      </select>
+                  </div>
+                </div>
+
+                <div class="form-group" id="selected_export">
+                  <label class="alert control-label "><span data-toggle="tooltip"  title="{{ help_select_combination }}">{{ entry_select_exported }}</span></label>
+                  <div class="col-sm-12">
+                    {% if updateproductData %}
+                      check_export = 'false'; 
+                    <div class="well well-sm" style="height: 250px; overflow: auto;">
+                        {% for product in updateproductData %}
+                            <div class="checkbox">
+                              <label>
+                                <input type="checkbox" name="product_selected_export[]" value="{{ product.oc_product_id }}" />
+                                {{ product.product_name }} 
+                              </label>
+                              {% if product.combinations %}
+                                check_export = 'true'; 
+                                  <div class="dropdown pull-right">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="export_dropdownMenuVariation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      {{ "Combination List" }} 
+                                      <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="export_dropdownMenuVariation">
+                                      {% for option_id, combinations in product %} 
+                                        <li style="padding:5px 15px; cursor:pointer;">{{ combinations.name~' - ('~combinations.id_value~')' }}</li>
+                                      {% endfor %} 
+                                    </ul>
+                                  </div>
+                                {% endif %} 
+                            </div>
+							{% endfor %}
+                            <hr style="border-color:#888F99;margin-bottom:0px;">
+                    </div>
+					{% endif %}
+                  </div>
+                </div>
+
+              </form>
+            <div class="panel-heading pull-right">
+              <button type="button" class="btn btn-primary update_export_start" id="update" data-toggle="tooltip" title="{{ info_button_update_export }}" ><i class="fa fa-pencil-square" aria-hidden="true"></i> {{ button_update_export }}</button>
+              <button type="button" class="btn btn-danger update_export_start" id="delete" data-toggle="tooltip" title="{{ info_button_delete_export }}" ><i class="fa fa-trash-o" aria-hidden="true"></i> {{ button_delete_export }}</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default" id="profiler_product_export">
+          <div class="panel-heading"  style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-list"></i> {{ entry_product_response }}</h3>
+          </div>
+          <div class="panel-body profiler_product_export_body">
+            <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ error_not_referesh }}</div>
+
+          </div>
+        </div>
+      </div>
+      <!--export Product-->
+
+    {% if not tab %}
+      <div class="panel panel-default" id="imported_list">
+        <div class="panel-heading"  style="display:inline-block;width:100%;">
+          <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_product_list }}</h3>
+        </div>
+        <div class="panel-body">
+          <form action = "{{ action_product }}" method="post" enctype="multipart/form-data" id="form-product-delete">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                    <td class="text-left">{% if sort == 'apm.id' %} 
+                      <a href="{{ sort_map_id }}" class="{{ order|lower }}">{{ column_map_id }}</a>
+                       {% else %}   
+                      <a href="{{ sort_map_id }}">{{ column_map_id }}</a>
+                      {% endif %} </td>
+                    <td class="text-left">{% if sort == 'apm.oc_product_id' %} 
+                        <a href="{{ sort_oc_product_id }}" class="{{ order|lower }}">{{ column_oc_product_id }}</a>
+                         {% else %}   
+                        <a href="{{ sort_oc_product_id }}">{{ column_oc_product_id }}</a>
+                        {% endif %} </td>
+                    <td class="text-left">{% if sort == 'product_name' %} 
+                        <a href="{{ sort_oc_name }}" class="{{ order|lower }}">{{ column_product_name }}</a>
+                         {% else %}   
+                        <a href="{{ sort_oc_name }}">{{ column_product_name }}</a>
+                        {% endif %} </td>
+                    <td class="text-left">{{ column_amazon_product_asin }}</td>
+                    <td class="text-left">{{ column_sync_source }}</td>
+                    <td class="text-left">{% if sort == 'p.price' %} 
+                        <a href="{{ sort_oc_price }}" class="{{ order|lower }}">{{ column_price }}</a>
+                         {% else %}   
+                        <a href="{{ sort_oc_price }}">{{ column_price }}</a>
+                        {% endif %} </td>
+                    <td class="text-left">{% if sort == 'p.quantity' %} 
+                        <a href="{{ sort_oc_quantity }}" class="{{ order|lower }}">{{ column_quantity }}</a>
+                         {% else %}   
+                        <a href="{{ sort_oc_quantity }}">{{ column_quantity }}</a>
+                        {% endif %} </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if import_products %} 
+                  {% for amazon_product in import_products %} 
+                  <tr>
+                    <td class="text-center">{% if selected in amazon_product.map_id %}
+                      <input type="checkbox" name="selected[]" value="{{ amazon_product.map_id}}" checked="checked" />
+                       {% else %}   
+                      <input type="checkbox" name="selected[]" value="{{ amazon_product.map_id }}" />
+                      {% endif %} </td>
+
+                    <td class="text-left">{{ amazon_product.map_id }}</td>
+                    <td class="text-left">{{ amazon_product.oc_product_id }}</td>
+                    <td class="text-left">
+                      <div class="col-sm-12">{{ amazon_product.product_name }}</div>
+                      {% if amazon_product.option_values %}
+                        <div class="dropdown pull-right">
+                          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuVariation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{ text_variation_list }} 
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuVariation">
+                            {% for opt_variation in amazon_product %}  
+                              <li style="padding:5px 15px; cursor:pointer;">{{ opt_variation.name~' - ('~opt_variation.asin~')' }}</li>
+                            {% endfor %} 
+                          </ul>
+                        </div>
+                      {% endif %} 
+                    </td>
+                    <td class="text-left text-info">{{ amazon_product.amazon_product_asin }}</td>
+                    <td class="text-left"><button class="btn btn-{% if amazon_product.source == 'Amazon Item' %} {{ 'warning' }} {% else %}  {{ 'info' }} {% endif %} " type="button"> {{ amazon_product.source }}</button></td>
+                    <td class="text-left">{{ amazon_product.price }}</td>
+                    <td class="text-left">{{ amazon_product.quantity }}</td>
+
+                  </tr>
+                  {% endfor %} 
+                   {% else %}   
+                  <tr>
+                    <td class="text-center" colspan="8">{{ text_no_results }}</td>
+                  </tr>
+                   {% endif %} 
+                </tbody>
+              </table>
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-sm-6 text-left">{{ pagination }}</div>
+            <div class="col-sm-6 text-right">{{ results }}</div>
+          </div>
+        </div>
+      </div><!--imported_list-->
+		{% endif %}
+
+  </div><!-- container-fluid -->
+</div><!-- content -->
+<script type="text/javascript">
+    $('#generate_report_id').on('click',function(){
+        $.ajax({
+          url: 'index.php?route=amazon_map/product/generate_report_id&user_token={{ user_token }}&account_id={{ account_id }}',
+          dataType:'json',
+          type:'POST',
+          cache: false,
+          beforeSend: function() {
+            $('.block_div').css('display','block');
+          },
+          complete: function() {
+            $('.block_div').css('display','none');
+          },
+          success: function(json) {
+            if (json['error']) {
+              html = '<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>  '+ json['error']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+              $('#generate-report-section').prepend(html);
+            }
+            if (json['success']){
+              $('#generate-report-section .alert').remove();
+              html = '<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i>  '+ json['success']['message']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+              $('#generate-report-section').prepend(html);
+              $('.product_import_section').find('input').attr('value', json['success']['report_id']);
+              $('#generate_report_id').css('display','none');
+              $('.product_import_section').css('display','block');
+            }
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+          }
+        });
+    });
+
+
+  $(document).on('click','#import_update_product',function(){
+
+    var getProductReportId =  $(this).parent().find('input').val();
+        $.ajax({
+          url: 'index.php?route=amazon_map/product/import_amazon_product&user_token={{ user_token }}&account_id={{ account_id }}&report_id='+getProductReportId,
+          dataType:'json',
+          type:'POST',
+          cache: false,
+          beforeSend: function() {
+            $('#generate-report-section .alert').remove();
+            $('.block_div, #profiler_product').css('display','block');
+          },
+          complete: function() {
+            $('.block_div').css('display','none');
+          },
+          success: function(json) {
+            $('.profiler_product_body .alert').remove();
+            if (json.error) {
+              for (i in json.error) {
+                var html = '';
+                  html = '<div class="alert alert-danger"><i class="fa fa-times" aria-hidden="true"></i>   '+json.error[i]['message']+'</div>';
+                  $('.profiler_product_body').append(html);
+              }
+            }
+            if (json.success) {
+              for (i in json.success) {
+                html1 = '';
+                html1 = '<div class="alert alert-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i>  '+json.success[i]['message']+'</div>';
+                $('.profiler_product_body').append(html1);
+              }
+            }
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+          }
+        });
+    });
+
+    $( ".asin_model input[name='amazon_product_asin']" ).keyup(function() {
+      $(".asin_model input[name='amazon_product_asin']").parent().removeClass('has-error');
+      $(".asin_model").find('.text-danger').remove();
+      var getASIN = $(this).val();
+      var regex = new RegExp("^[A-Z0-9]+$");
+
+      if(getASIN.length == 0 || (getASIN.length > 0 && getASIN.length < 10 && regex.test(getASIN))){
+        $(".asin_model input[name='amazon_product_asin']").parent().removeClass('has-error');
+        $(".asin_model input[name='amazon_product_asin']").parent().removeClass('has-success');
+        $(".asin_model").find('.text-danger').remove();
+      }else if(getASIN.length == 10 && regex.test(getASIN)){
+        $(".asin_model input[name='amazon_product_asin']").parent().addClass('has-success');
+      }else if (!regex.test(getASIN)) {
+        $(".asin_model input[name='amazon_product_asin']").parent().addClass('has-error');
+        $(".asin_model input[name='amazon_product_asin']").parent().parent().append('<div class="text-danger">{{ error_wrong_asinformat }}</div>');
+      }
+    });
+
+    $('#import_by_asin').on('click',  function(){
+      $(".asin_model input[name='amazon_product_asin']").parent().removeClass('.has-error');
+      $(".asin_model").find('.text-danger').remove();
+      var getASIN = $(".asin_model input[name='amazon_product_asin']").val();
+      if((getASIN.length == 10) && getASIN.match(/((^[A-Z]+)|(^[0-9]+)|(^[0-9]+[A-Z]+)|(^[A-Z]+[0-9]+))+[0-9A-Z]+$/)){
+        $.ajax({
+          url: 'index.php?route=amazon_map/product/import_amazon_product&user_token={{ user_token; ?>&account_id={{ account_id }}&product_asin='+getASIN,
+          dataType:'json',
+          type:'POST',
+          cache: false,
+          beforeSend: function() {
+            $("input[name='amazon_product_asin'] ").parent().parent().find('.alert').remove();
+            $('.block_div').css('display','block');
+            $(".asin_model").find('.alert-danger').remove();
+            $(".demo-spin > .fa").addClass('fa-cog');
+          },
+          complete: function() {
+            $('.block_div').css('display','none');
+            $(".asin_model input[name='amazon_product_asin']").val('');
+            $(".demo-spin > .fa").removeClass('fa-cog');
+          },
+          success: function(json) {
+            if (json.error) {
+              for (i in json.error) {
+                var html = '';
+                  html = '<div class="alert alert-danger"><i class="fa fa-times" aria-hidden="true"></i>   '+json.error[i]['message']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                  $('#info_asin').parent().append(html);
+              }
+            }
+            if (json.success) {
+              for (i in json.success) {
+                html1 = '';
+                html1 = '<div class="alert alert-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i>  '+json.success[i]['message']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                $('#info_asin').parent().append(html1);
+              }
+            }
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + " " + xhr.statusText + " " + xhr.responseText);
+          }
+        });
+      }else {
+        $(".asin_model input[name='amazon_product_asin']").parent().addClass('.has-error');
+        $(".asin_model input[name='amazon_product_asin']").parent().parent().append('<div class="text-danger">{{ error_wrong_asinformat }}</div>');
+        $(".asin_model").find('.alert-danger').remove();
+      }
+    })
+
+    $("select[name='product_export_option']").on("change", function(){
+      var export_option = $(this).val();
+      $(this).parent().find('.text-danger').remove();
+      if(export_option.length != 0 && export_option == 'selected'){
+        $("#combination_section").css("display", "block");
+      }else{
+        $("#combination_section").css("display", "none");
+      }
+      // export_options
+    })
+
+    $("#export_start").on("click", function(){
+      var getExportOption = $('select[name="product_export_option"]').val();
+      $('select[name="product_export_option"]').parent().find('.text-danger').remove();
+        if(getExportOption.length != 0){
+          var formData = new FormData($('#export_options')[0]);
+          jQuery.ajax({
+              url: 'index.php?route=amazon_map/product/export_product&user_token={{ user_token }}&account_id={{ account_id }}',
+              data: formData,
+              dataType:'json',
+              type:'POST',
+              cache: false,
+              contentType: false,
+              processData: false,
+              beforeSend: function() {
+                $('.block_div, #profiler_product_export').css('display','block');
+                // $('.profiler_product_export_body .alert').remove();
+              },
+              complete: function() {
+                $('.block_div').css('display','none');
+              },
+              success: function(json) {
+                $('.profiler_product_export_body .alert').remove();
+                if (json.success) {
+                  for (i in json.success) {
+                    html1 = '';
+                    html1 = '<div class="alert alert-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i>  '+json.success[i]+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                    $('.profiler_product_export_body').append(html1);
+                  }
+                }
+                if (json.error) {
+                  for (i in json.error) {
+                    var html = '';
+                      html = '<div class="alert alert-danger"><i class="fa fa-times" aria-hidden="true"></i>   '+json.error[i]+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                      $('.profiler_product_export_body').append(html);
+                  }
+                }
+              },
+              error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+              }
+          });
+        }else{
+          $('select[name="product_export_option"]').parent().append('<div class="text-danger">{{ error_export_option }}</div>');
+        }
+    })
+
+    $("select[name='product_update_delete_option']").on("change", function(){
+      var update_option = $(this).val();
+      $(this).parent().find('.text-danger').remove();
+      if(update_option.length != 0 && update_option == 'selected'){
+        $("#selected_export").css("display", "block");
+      }else{
+        $("#selected_export").css("display", "none");
+      }
+    })
+
+    $(".update_export_start").on("click", function(){
+      var getUpdateDeleteOption = $('select[name="product_update_delete_option"]').val();
+      $('select[name="product_update_delete_option"]').parent().find('.text-danger').remove();
+        if(getUpdateDeleteOption.length != 0){
+          var getExportOption = $(this).attr('id');
+          var formData1 = new FormData($('#update_export_opt')[0]);
+          formData1.append('export_option', getExportOption);
+
+          jQuery.ajax({
+              url: 'index.php?route=amazon_map/product/opration_export_product&user_token={{ user_token }}&account_id={{ account_id }}',
+              data: formData1,
+              dataType:'json',
+              type:'POST',
+              cache: false,
+              contentType: false,
+              processData: false,
+              beforeSend: function() {
+                $('.block_div, #profiler_product_export').css('display','block');
+                // $('.profiler_product_export_body .alert').remove();
+              },
+              complete: function() {
+                $('.block_div').css('display','none');
+              },
+              success: function(json) {
+                $('.profiler_product_export_body .alert').remove();
+                if (json.success) {
+                  for (i in json.success) {
+                    html1 = '';
+                    html1 = '<div class="alert alert-success"><i class="fa fa-check-circle-o" aria-hidden="true"></i>  '+json.success[i]+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                    $('.profiler_product_export_body').append(html1);
+                  }
+                }
+                if (json.error) {
+                  for (i in json.error) {
+                    var html = '';
+                      html = '<div class="alert alert-danger"><i class="fa fa-times" aria-hidden="true"></i>   '+json.error[i]+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                      $('.profiler_product_export_body').append(html);
+                  }
+                }
+              },
+              error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+              }
+          });
+        }else{
+          $('select[name="product_update_delete_option"]').parent().append('<div class="text-danger">{{ error_update_delete_export }}</div>');
+        }
+    })
+</script>

@@ -1,0 +1,251 @@
+{{ header }} {{ column_left }} 
+<div id="content">
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<link href="view/stylesheet/csspin.css" rel="stylesheet" type="text/css"/>
+<link href="view/stylesheet/style.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto Condensed" rel="stylesheet" type="text/css">
+<style type="text/css">
+  .block_div{
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    display: none;
+  }
+  .block_spinner {
+    left: 50%;
+    position: relative;
+    top: 35%;
+  }
+</style>
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-account" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+       <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+		{% endfor %}  
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %} 
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %} 
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-account" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-9">
+              <select name="wk_amazon_connector_status" id="input-status" class="form-control">
+                {% if wk_amazon_connector_status %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                 {% else %}   
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %} 
+              </select>
+            </div>
+          </div>
+
+          <div id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-primary">
+              <div class="panel-heading collapsed" id="heading_general" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_general" aria-expanded="false" aria-controls="collapse_general">
+                <h4 class="panel-title">
+                  <i class="text-danger fa fa-cogs" aria-hidden="true"></i> {{ panel_general_options }} 
+                </h4>
+              </div>
+              <div id="collapse_general" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_general">
+                <div class="panel-body">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label" for="input-default-category"><span data-toggle="tooltip" title="{{ help_default_category }}">{{ entry_default_category }}</span></label>
+                      <div class="col-sm-9">
+                        <select id="input-default-category" name="wk_amazon_connector_default_category" class="form-control">
+                         {% for key, value in getOcParentCategory %} 
+                            {% if wk_amazon_connector_default_category == value.category_id%} 
+                              <option value="{{ value.category_id }}" selected="selected">{{ value.name }}</option>
+                            {% else %}  
+                              <option value="{{ value.category_id }}" >{{ value.name }}</option>
+                            {% endif %} 
+                           {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label" for="input-default-quantity"><span data-toggle="tooltip" title="{{ help_default_quantity }}">{{ entry_default_quantity }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" name="wk_amazon_connector_default_quantity" class="form-control" id="input-default-quantity" placeholder="{{ placeholder_quantity }}" value="{% if wk_amazon_connector_default_quantity %} {{ wk_amazon_connector_default_quantity }} {% endif %} " />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label" for="input-default-weight"><span data-toggle="tooltip" title="{{ help_default_weight }}">{{ entry_default_weight }}</span></label>
+                      <div class="col-sm-9">
+                        <input type="text" name="wk_amazon_connector_default_weight" class="form-control" id="input-default-weight" placeholder="{{ placeholder_weight }}" value="{% if  wk_amazon_connector_default_weight %} {{ wk_amazon_connector_default_weight }} {% endif %} " />
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="panel panel-primary">
+              <div class="panel-heading collapsed" id="heading_order" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_order" aria-expanded="false" aria-controls="collapse_order">
+                <h4 class="panel-title">
+                  <i class="text-success fa fa-gift" aria-hidden="true"></i> {{ panel_order_options }} 
+                </h4>
+              </div>
+              <div id="collapse_order" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_order">
+                <div class="panel-body">
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="input-default-store"><span data-toggle="tooltip" title="{{ help_default_store }}">{{ entry_default_store }}</span></label>
+                    <div class="col-sm-9">
+                      <select id="input-default-store" name="wk_amazon_connector_default_store" class="form-control">
+                       <option value="0">{{ text_default }}</option>
+                        {% if stores %} 
+                          {% for key, store in stores %} 
+                            {% if wk_amazon_connector_default_store == store.store_id%} 
+                              <option value="{{ store.store_id }}" selected="selected">{{ store.name }}</option>
+                            {% else %}  
+                              <option value="{{ store.store_id }}" >{{ store.name }}</option>
+                            {% endif %} 
+                            {% endfor %} 
+                          {% endif %} 
+                         
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="input-order-status"><span data-toggle="tooltip" title="{{ help_order_status }}">{{ entry_order_status }}</span></label>
+                    <div class="col-sm-9">
+                      <select id="input-order-status" name="wk_amazon_connector_order_status" class="form-control">
+                       {% for key, value in order_status %} 
+                          {% if wk_amazon_connector_order_status == value.order_status_id%} 
+                            <option value="{{ value.order_status_id }}" selected="selected">{{ value.name }}</option>
+                          {% else %}  
+                            <option value="{{ value.order_status_id }}" >{{ value.name }}</option>
+                          {% endif %} 
+                          {% endfor %} 
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading collapsed" id="heading_product"  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_product" aria-expanded="false" aria-controls="collapse_product">
+                <h4 class="panel-title">
+                  <i class="text-warning fa fa-picture-o" aria-hidden="true"></i> {{ panel_product_options }} 
+                </h4>
+              </div>
+              <div id="collapse_product" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_product">
+                <div class="panel-body">
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="input-default-store"><span data-toggle="tooltip" title="{{ help_default_product_store }}">{{ entry_default_product_store }}</span></label>
+                    <div class="col-sm-9">
+                      <select id="input-default-store" name="wk_amazon_connector_default_product_store" class="form-control">
+                       <option value="0">{{ text_default }}</option>
+                        {% if stores %} 
+                          {% for key, store in stores %} 
+                            {% if wk_amazon_connector_default_product_store == store.store_id %}
+                              <option value="{{ store.store_id }}" selected="selected">{{ store.name }}</option>
+                            {% else %}  
+                              <option value="{{ store.store_id }}" >{{ store.name }}</option>
+                            {% endif %} 
+                          {% endfor %} 
+                          {% endif %} 
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="input-variation-option"><span data-toggle="tooltip" title="{{ help_variation_options }}">{{ entry_variation_options }}</span></label>
+                    <div class="col-sm-9">
+                      <label class="col-sm-12 radio-inline">
+                        {% if wk_amazon_connector_variation == 1 %} 
+                          <input type="radio" name="wk_amazon_connector_variation" value="1" checked = "checked" />
+                        {% else %}  
+                          <input type="radio" name="wk_amazon_connector_variation" value="1" />
+                        {% endif %} 
+                        {{ text_option1 }} 
+                      </label>
+                      <label class="col-sm-12 radio-inline" style="margin-left: 0;">
+                        {% if wk_amazon_connector_variation == 2 %} 
+                          <input type="radio" name="wk_amazon_connector_variation" value="2" checked = "checked" />
+                        {% else %}  
+                          <input type="radio" name="wk_amazon_connector_variation" value="2" />
+                        {% endif %} 
+                        {{ text_option2 }} 
+                      </label>
+                      <br><br>
+                      <div class="col-sm-12 alert alert-info" style="margin-top: 12px;">{{ info_option }}</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-primary">
+              <div class="panel-heading collapsed" id="heading_real_time" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_update" aria-expanded="false" aria-controls="collapse_update">
+                <h4 class="panel-title">
+                  <i class="text-info fa fa-cog fa-spin fa-3x fa-fw"></i> {{ panel_real_time_setting }} 
+                </h4>
+              </div>
+              <div id="collapse_update" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_real_time">
+                <div class="panel-body">
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="input-update-imported"><span data-toggle="tooltip" title="{{ help_update_imported }}">{{ entry_update_imported }}</span></label>
+                    <div class="col-sm-9">
+                      <input type="checkbox"  data-toggle="toggle" data-width="75"  {% if wk_amazon_connector_import_update == 'on' %} {{ "checked" }} {% endif %}   data-onstyle="success" data-offstyle="danger" name="wk_amazon_connector_import_update">
+                      <div class="text-warning"><i>{{ info_update_imported }}</i></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label" for="input-update-exported"><span data-toggle="tooltip" title="{{ help_update_exported }}">{{ entry_update_exported }}</span></label>
+                    <div class="col-sm-9 text-left">
+                        <input type="checkbox"  data-toggle="toggle" data-width="75"  {% if wk_amazon_connector_export_update == 'on' %} {{ "checked" }} {% endif %}   data-onstyle="success" data-offstyle="danger" name="wk_amazon_connector_export_update">
+                        <div class="text-warning"><i>{{ info_update_exported }}</i></div>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="block_div">
+    <div class="block_spinner">
+      <div class="cp-spinner cp-balls"></div>
+    </div>
+  </div>
+</div>
+{{ footer }}

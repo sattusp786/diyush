@@ -1,0 +1,116 @@
+<div id="content">
+    <link href="view/stylesheet/csspin.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+      .cp-round::before, .cp-round::after{
+        width: 35px;
+        left:8px;
+        height: 35px;
+        /*top: 25px;*/
+        margin-top: 25px;
+      }
+      .btn-success{
+        background-color:#6ABD6A;
+        color:#FFF;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #6ABD6A;
+        border-bottom-width: 3px;
+      }
+      .btn-success:hover{
+        background-color:#e6e6e6;
+        color:#333;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #adadad;
+        border-bottom-width: 3px;
+      }
+      .order_import_section, #profiler_order, #amazonOrderList, #start_import_all_order{
+        display: none;
+      }
+    </style>
+      <div class="page-header">
+        <div class="container-fluid">
+          <h3>{{ heading_title }}</h3>
+          <hr style="margin-bottom:0px;">
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="panel panel-default" id="imported_order_list">
+          <div class="panel-heading"  style="display:inline-block;width:100%;">
+            <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_order_list }}</h3>
+          </div>
+          <div class="panel-body">
+            <form action="{{ action_delete }}" method="post" enctype="multipart/form-data" id="form-order-delete">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{% if sort is same as ('apm.map_id') %}
+                        <a href="{{ sort_map_id }}" class="{{ order }}">{{ column_map_id }}</a>
+                        {% else %}
+                        <a href="{{ sort_map_id }}">{{ column_map_id }}</a>
+                        {% endif %}
+                        </td>
+                      <td class="text-left">{% if sort is same as ('acm.oc_customer_id') %}
+                          <a href="{{ sort_oc_customer_id }}" class="{{ order }}">{{ column_oc_customer_id }}</a>
+                          {% else %}
+                          <a href="{{ sort_oc_customer_id }}">{{ column_oc_customer_id }}</a>
+                           {% endif %}</td>
+                      <td class="text-left">{% if sort is same as ('customer_name') %}
+                          <a href="{{ sort_customer_name }}" class="{{ order }}">{{ column_buyer_name }}</a>
+                          {% else %}
+                          <a href="{{ sort_customer_name }}">{{ column_buyer_name }}</a>
+                          {% endif %}</td>
+                      <td class="text-left">{% if sort is same as ('c.email') %}
+                          <a href="{{ sort_customer_email }}" class="{{ order }}">{{ column_buyer_email }}</a>
+                          {% else %}
+                          <a href="{{ sort_customer_email }}">{{ column_buyer_email }}</a>
+                          {% endif %}</td>
+                      <td class="text-left">{% if sort is same as ('aom.city') %}
+                          <a href="{{ sort_city }}" class="{{ order }}">{{ column_city }}</a>
+                          {% else %}
+                          <a href="{{ sort_city }}">{{ column_city }}</a>
+                          {% endif %}</td>
+                      <td class="text-left">{% if sort is same as ('aom.country') %}
+                          <a href="{{ sort_country }}" class="{{ order }}">{{ column_country }}</a>
+                          {% else %}
+                          <a href="{{ sort_country }}">{{ column_country }}</a>
+                          {% endif %}</td>
+                      <td class="text-left">{{ column_action }}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if amazon_customers %}
+                    {% for amazon_customer in amazon_customers %}
+                    <tr>
+                      <td class="text-left">{{ amazon_customer.map_id }}</td>
+                      <td class="text-left">{{ amazon_customer.oc_order_id }}</td>
+                      <td class="text-left">{{ amazon_customer.customer_name }}</td>
+                      <td class="text-left">{{ amazon_customer.customer_email }}</td>
+                      <td class="text-left">{{ amazon_customer.city }}</td>
+                      <td class="text-left">{{ amazon_customer.country }}</td>
+                      <td class="text-left">
+                        <a href="{{ amazon_customer.view }}" target="_blank" class="btn btn-warning" data-toggle="tooltip" title="{{ button_view_info }}" >
+                          <i class="fa fa-eye" aria-hidden="true"></i>  {{ button_view }}
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                      <td class="text-center" colspan="8">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-sm-6 text-left">{{ pagination }}</div>
+              <div class="col-sm-6 text-right">{{ results }}</div>
+            </div>
+          </div>
+        </div><!--imported_list-->
+
+      </div><!--container-fluid-->
+</div><!--content-->

@@ -1,0 +1,525 @@
+<div id="content">
+    <link href="view/stylesheet/csspin.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+      .cp-round::before, .cp-round::after{
+        width: 35px;
+        left:8px;
+        height: 35px;
+        /*top: 25px;*/
+        margin-top: 25px;
+      }
+      .btn-success{
+        background-color:#6ABD6A;
+        color:#FFF;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #6ABD6A;
+        border-bottom-width: 3px;
+      }
+      .btn-success:hover{
+        background-color:#e6e6e6;
+        color:#333;
+        border-style: solid;
+        border-width: 1px;
+        border-color: #adadad;
+        border-bottom-width: 3px;
+      }
+      .order_import_section, #profiler_order, #amazonOrderList, #start_import_all_order{
+        display: none;
+      }
+    </style>
+      <div class="page-header">
+        <div class="container-fluid">
+          {% if panel == 'import_order'%} 
+            <h3>{{ heading_title_import }}</h3>
+          {% else %}  
+              <h3>{{ heading_title }}</h3>
+          {% endif %} 
+          <hr style="margin-bottom:0px;">
+        </div>
+      </div>
+
+
+      <div class="page-header container-fluid">
+        <div class="pull-right">
+          {% if not panel%} 
+            <a href="{{ import_order_tab }}" id="import-order-tab" type="button" data-toggle="tooltip" title="{{ button_import_order }}" class="btn btn-info" ><i class="fa fa-download col-sm-12" aria-hidden="true"></i> <span class="col-sm-12">{{ button_import }}</span></a>
+            <button class="btn btn-danger" type="button" data-toggle="tooltip" title="{{ button_delete_info }}" onclick="confirm('{{ text_confirm }} ') ? $('#form-order-delete').submit() : false;"><i class="fa fa-trash-o col-sm-12" aria-hidden="true"></i> <span class="col-sm-12">{{ button_delete }}</span></button>
+            {% if order_delete_result%} 
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target=".order_delete_result" id="order_delete"><i class="fa fa-info col-sm-12" aria-hidden="true"></i>  <span class="col-sm-12">{{ "Result" }}</span></button>
+            {% endif %} 
+          {% else %}  
+            <a href="{{ button_back_link }}" type="button" data-toggle="tooltip" title="{{ button_back }}" class="btn btn-default" ><i class="fa fa-reply" aria-hidden="true"></i></a>
+          {% endif %} 
+        </div>
+      </div>
+
+      <div class="modal fade order_delete_result" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="gridSystemModalLabel"><strong>{{ "Order Result" }}</strong></h4>
+            </div>
+            <div class="modal-body">
+              {% if order_delete_result %} 
+              {% for p_key, result in order_delete_result %} 
+                {% if result.status %} 
+                  <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ result.message }} 
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  </div>
+                {% else %}  
+                  <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ result.message }} 
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  </div>
+                {% endif %} 
+				{% endfor %} 
+              {% endif %} 
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{ button_close }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+
+        {% if panel == 'import_order' %} 
+          <div id="order_import_list_section">
+            {% if error_warning %} 
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} 
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            {% endif %} 
+
+            <div class="panel panel-primary">
+              <div class="panel-heading"  style="display:inline-block;width:100%;">
+                <h3 class="panel-title"><i class="fa fa-info-circle" aria-hidden="true"></i> {{ info_about_import_tab }}</h3>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <li> {{ text_tab_info1 }}</li>
+                  <li> {{ text_tab_info2 }}</li>
+                  <li> {{ text_tab_info3 }}</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading" style="display:inline-block;width:100%;">
+                <h3 class="panel-title"><i class="fa fa-refresh" aria-hidden="true"></i> {{ sync_order_tab }}</h3>
+              </div>
+              <div class="panel-body" id="generate-report-order">
+                <div class="alert alert-warning"> <i class="fa fa-info-circle" aria-hidden="true"></i> {{ info_report_id }}</div>
+
+                <div class="panel-heading">
+                  <button type="button" class="btn btn-info" id="generate_order_report_id"><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ button_report_id }}</button>
+
+                  <div class="form-group order_import_section">
+                    <input type="hidden" class="form-control" value="" name="order_report_id" />
+                    <button type="button" class="btn btn-warning" id="import_amazon_order" data-toggle="modal" data-target=".order_details_model"><i class="fa fa-refresh" aria-hidden="true"></i>  {{ button_import_order }}</button>
+
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".order_id_model" id="import_order_one_by_one"><i class="fa fa-check-square-o" aria-hidden="true"></i>  {{ button_import_order_by_id }}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade order_details_model" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel"><strong>{{ entry_order_details }}</strong></h4>
+                  </div>
+                  <div class="modal-body">
+                    <form id="importOrderList" class="form-horizontal" method="post" enctype="multipart/form-data">
+                        <div class="form-group required">
+                          <label class="control-label" style="margin-bottom: 10px;">{{ entry_order_from }}</label>
+                          <div class="col-sm-12">
+                            <div class="input-group date">
+                              <input type="text" name="amazon_order_from" value="" placeholder="{{ placeholder_order_from }}" class="form-control" data-date-format="YYYY-MM-DD" />
+                              <span class="input-group-btn">
+                              <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group required">
+                          <label class="control-label" style="margin-bottom: 10px;">{{ entry_order_to }}</label>
+                          <div class="col-sm-12">
+                            <div class="input-group date">
+                              <input type="text" name="amazon_order_to" value="" placeholder="{{ placeholder_order_to }}" class="form-control" data-date-format="YYYY-MM-DD" />
+                              <span class="input-group-btn">
+                              <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label class="control-label" style="margin-bottom: 10px;">{{ entry_order_maximum }}</label>
+                          <div class="col-sm-12">
+                              <input type="text" name="amazon_order_maximum" value="" class="form-control" />
+                          </div>
+                        </div>
+                    </form>
+
+                    <form id="amazonOrderList" class="form-horizontal" method="post" enctype="multipart/form-data">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <td class="text-center">{{ entry_s_no }}</td>
+                              <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                              <td class="text-center">{{ entry_amazon_order_id }}</td>
+                              <td class="text-center">{{ entry_order_status }}</td>
+                              <td class="text-center">{{ entry_buy_date }}</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <span class="demo-spin" style="color: #1e91cf;position: relative;top: 6px;"><i class="fa  fa-spin fa-2x fa-fw"></i></span>
+                    <button type="button" id="import_all_order" class="btn btn-primary">{{ button_import }}</button>
+                    <button type="button" id="start_import_all_order" class="btn btn-primary">{{ button_import }}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ button_close }}</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade order_id_model" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel"><strong>{{ heading_import_order }}</strong></h4>
+                  </div>
+                  <div class="modal-body">
+                  <form id="amazonOrderOneByOne" class="form-horizontal" method="post" enctype="multipart/form-data">
+                    <div class="form-horizontal">
+                      <div class="form-group required">
+                        <label class="control-label" style="margin-bottom: 10px;">{{ text_order_id }}</label>
+                        <div class="col-sm-12">
+                            <input type="text" name="selected[]" value="" placeholder="{{ entry_order_id }}" class="form-control" />
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  </div>
+                  <div class="modal-footer">
+                    <span class="demo-spin" style="color: #1e91cf;position: relative;top: 6px;"><i class="fa  fa-spin fa-2x fa-fw"></i></span>
+                    <button type="button" id="import_by_orderId" class="btn btn-primary">{{ button_import }}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ button_close }}</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-default" id="profiler_order">
+              <div class="panel-heading"  style="display:inline-block;width:100%;">
+                <h3 class="panel-title"><i class="fa fa-list"></i> {{ entry_order_response }}</h3>
+              </div>
+              <div class="panel-body profiler_order_body">
+                <div class="alert alert-danger"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ error_not_referesh }}</div>
+
+              </div>
+            </div>
+
+          </div><!-- product-import -->
+        {% endif %} 
+
+        {% if not panel %} 
+          <div class="panel panel-default" id="imported_order_list">
+            <div class="panel-heading"  style="display:inline-block;width:100%;">
+              <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_order_list }}</h3>
+            </div>
+            <div class="panel-body">
+              <form action="{{ action_delete }}" method="post" enctype="multipart/form-data" id="form-order-delete">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                        <td class="text-left">{% if sort == 'apm.id' %} 
+                          <a href="{{ sort_map_id }}" class="{{ order|lower }}">{{ column_map_id }}</a>
+                           {% else %}   
+                          <a href="{{ sort_map_id }}">{{ column_map_id }}</a>
+                          {% endif %} </td>
+                        <td class="text-left">{% if sort == 'apm.oc_product_id' %} 
+                            <a href="{{ sort_oc_product_id }}" class="{{ order|lower }}">{{ column_oc_order_id }}</a>
+                             {% else %}   
+                            <a href="{{ sort_oc_product_id }}">{{ column_oc_order_id }}</a>
+                            {% endif %} </td>
+                        <td class="text-left">{% if sort == 'product_name' %} 
+                            <a href="{{ sort_oc_name }}" class="{{ order|lower }}">{{ column_amazon_id }}</a>
+                             {% else %}   
+                            <a href="{{ sort_oc_name }}">{{ column_amazon_id }}</a>
+                            {% endif %} </td>
+                        <td class="text-left">{{ column_buyer_name }}</td>
+                        <td class="text-left">{{ column_buyer_email }}</td>
+                        <td class="text-left">{% if sort == 'p.quantity' %} 
+                            <a href="{{ sort_oc_quantity }}" class="{{ order|lower }}">{{ column_amazon_order_status }}</a>
+                             {% else %}   
+                            <a href="{{ sort_oc_quantity }}">{{ column_amazon_order_status }}</a>
+                            {% endif %} </td>
+                        <td class="text-left">{% if sort == 'p.price' %} 
+                            <a href="{{ sort_oc_price }}" class="{{ order|lower }}">{{ column_order_total }}</a>
+                             {% else %}   
+                            <a href="{{ sort_oc_price }}">{{ column_order_total }}</a>
+                            {% endif %} </td>
+                        <td class="text-left">{{ column_action }}</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if import_orders %} 
+                      {% for amazon_order in import_orders %} 
+                      <tr>
+                        <td class="text-center">{% if selected in amazon_order.map_id %}
+                          <input type="checkbox" name="selected[]" value="{{ amazon_order.map_id}}" checked="checked" />
+                           {% else %}   
+                          <input type="checkbox" name="selected[]" value="{{ amazon_order.map_id }}" />
+                          {% endif %} </td>
+
+                        <td class="text-left">{{ amazon_order.map_id }}</td>
+                        <td class="text-left">{{ amazon_order.oc_order_id }}</td>
+                        <td class="text-left">{{ amazon_order.amazon_order_id }}</td>
+                        <td class="text-left">{{ amazon_order.customer_name }}</td>
+                        <td class="text-left">{{ amazon_order.customer_email }}</td>
+                        <td class="text-left">
+                          <button class="btn btn-success" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{ amazon_order.amazon_order_status }} 
+                          </button>
+                          </td>
+                        <td class="text-left">{{ amazon_order.total }}</td>
+                        <td class="text-left">
+                          <a href="{{ amazon_order.view }}" target="_blank" class="btn btn-warning" data-toggle="tooltip" title="{{ button_view_info }}" >
+                            <i class="fa fa-eye" aria-hidden="true"></i>  {{ button_view }} 
+                          </a>
+                        </td>
+                      </tr>
+                      {% endfor %} 
+                       {% else %}   
+                      <tr>
+                        <td class="text-center" colspan="9">{{ text_no_results }}</td>
+                      </tr>
+                      {% endif %} 
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+              <div class="row">
+                <div class="col-sm-6 text-left">{{ pagination }}</div>
+                <div class="col-sm-6 text-right">{{ results }}</div>
+              </div>
+            </div>
+          </div><!--imported_list-->
+         
+
+      </div><!--container-fluid-->
+  </div><!--content-->
+
+  <script type="text/javascript">
+      $('#generate_order_report_id').on('click',function(){
+          $.ajax({
+            url: 'index.php?route=amazon_map/product/generate_report_id&user_token={{ user_token }}&account_id={{ account_id }},&status=order',
+            dataType:'json',
+            type:'POST',
+            cache: false,
+            beforeSend: function() {
+              $('.block_div').css('display','block');
+            },
+            complete: function() {
+              $('.block_div').css('display','none');
+            },
+            success: function(json) {
+              if (json['error']) {
+                html = '<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>  '+ json['error']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                $('#generate-report-order').prepend(html);
+              }
+              if (json['success']){
+                $('#generate-report-order .alert').remove();
+                html = '<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i>  '+ json['success']['message']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                $('#generate-report-order').prepend(html);
+                $('.order_import_section').find('input').attr('value', json['success']['report_id']);
+                $('#generate_order_report_id').css('display','none');
+                $('.order_import_section').css('display','block');
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+          });
+      });
+
+      $('.date').datetimepicker({
+  			pickTime: false
+  		});
+
+      $("#import_all_order").on("click", function(){
+        $("#importOrderList").find('.text-danger').remove();
+        $("#importOrderList").find('.alert').remove();
+        var getDateFrom = $('input[name="amazon_order_from"]').val();
+        var getDateTo   = $('input[name="amazon_order_to"]').val();
+          if(getDateFrom.length == 0){
+            $('input[name="amazon_order_from"]').parent().parent().append('<div class="text-danger">{{ error_fill_from_date }}</div>');
+          }
+          if(getDateTo.length == 0){
+            $('input[name="amazon_order_to"]').parent().parent().append('<div class="text-danger">{{ error_fill_from_to }}</div>');
+          }
+          if(getDateFrom.length != 0 && getDateTo.length != 0){
+            var formData = new FormData($('#importOrderList')[0]);
+            jQuery.ajax({
+                url: 'index.php?route=amazon_map/order/getOrderList&user_token={{ user_token }}&account_id={{ account_id }}',
+                data: formData,
+                dataType:'json',
+                type:'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                  $('.block_div').css('display','block');
+                },
+                complete: function() {
+                  $('.block_div').css('display','none');
+                },
+                success: function(json) {
+                  if (json.success) {
+                    $("#importOrderList").css("display", "none");
+                    $("#import_all_order").css("display", "none");
+
+                    $("#amazonOrderList").css("display", "block");
+                    $("#start_import_all_order").css("display", "inline");
+                    var count = 0;
+                    for (i in json.success) {
+                      count++;
+                      html1 = '';
+                      html1 += '<tr><td class="text-left">'+count+'</td>';
+                      html1 += '<td class="text-center"><input type="checkbox" name="selected[]" value="'+json.success[i]['AmazonOrderId']+'" /></td>';
+                      html1 += '<td class="text-center">'+json.success[i]['AmazonOrderId']+'</td>';
+                      html1 += '<td class="text-center">'+json.success[i]['OrderStatus']+'</td>';
+                      html1 += '<td class="text-center">'+json.success[i]['PurchaseDate']+'</td></tr>';
+                      $('#amazonOrderList tbody').append(html1);
+                    }
+                  }
+
+                  if (json.error) {
+                    for (i in json.error) {
+                      var html = '';
+                        html = '<div class="alert alert-danger"><i class="fa fa-times" aria-hidden="true"></i>   '+json.error[i]+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                        $('#importOrderList').append(html);
+                    }
+                  }
+
+                  if (json.warning) {
+                    if(json.warning['error_date_from']){
+                        $('#importOrderList').find('input[name="amazon_order_from"]').parent().parent().append('<div class="text-danger"> '+json.warning['error_date_from']+'</div>');
+                    }
+                    if(json.warning['error_date_to']){
+                        $('#importOrderList').find('input[name="amazon_order_to"]').parent().parent().append('<div class="text-danger"> '+json.warning['error_date_to']+'</div>');
+                    }
+                    if(json.warning['error_maximum_record']){
+                        $('#importOrderList').find('input[name="amazon_order_maximum"]').parent().append('<div class="text-danger"> '+json.warning['error_maximum_record']+'</div>');
+                    }
+                  }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                  alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+          }
+      })
+
+      $("#start_import_all_order, #import_by_orderId").on("click", function(){
+        $('#amazonOrderOneByOne').find('.text-danger').remove();
+        $('#amazonOrderOneByOne').find('.alert').remove();
+        $('#amazonOrderList').find('.alert').remove();
+        
+        var check_status = false;
+        var getButtonIdentity = 'all';
+        var get_Id = $(this).attr('id');
+        if(get_Id == 'start_import_all_order'){
+            var formData = new FormData($('#amazonOrderList')[0]);
+            check_status = true;
+        }else{
+            var formData = new FormData($('#amazonOrderOneByOne')[0]);
+            var getOrderId = $('#amazonOrderOneByOne').find('input').val();
+            if(getOrderId.length > 10 && getOrderId.length < 25){
+                check_status = true;
+            }
+            getButtonIdentity = 'one';
+        }
+        if(check_status){
+            jQuery.ajax({
+                url: 'index.php?route=amazon_map/order/importOrder&user_token={{ user_token }}&account_id={{ account_id }}',
+                data: formData,
+                dataType:'json',
+                type:'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                  $('.block_div, #profiler_order').css('display','block');
+                },
+                complete: function() {
+                  $('.block_div').css('display','none');
+                },
+                success: function(json) {
+                  $('.profiler_order_body .alert').remove();
+                  if (json.success) {
+                      for (i in json.success) {
+                          html1 = '';
+                          html1 = '<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i>  '+ json.success[i]['message']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                          if(getButtonIdentity == 'one'){
+                              $('#amazonOrderOneByOne').append(html1);
+                          }else{
+                              $('#amazonOrderList').append(html);
+                              $('#profiler_order .profiler_order_body').append(html1);
+                          }
+                      }
+                  }
+
+                  if (json.error) {
+                      for (i in json.error) {
+                          var html = '';
+                            html = '<div class="alert alert-danger"><i class="fa fa-times" aria-hidden="true"></i>   '+json.error[i]['message']+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                            if(getButtonIdentity == 'one'){
+                                $('#amazonOrderOneByOne').append(html);
+                            }else{
+                                $('#amazonOrderList').append(html);
+                                $('#profiler_order .profiler_order_body').append(html);
+                            }
+                      }
+                  }
+
+                  if (json.warning) {
+                      for (i in json.warning) {
+                          var html2 = '';
+                            html2 = '<div class="alert alert-danger"><i class="fa fa-times" aria-hidden="true"></i>   '+json.warning[i]+'<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                            if(getButtonIdentity == 'one'){
+                                $('#amazonOrderOneByOne').append(html2);
+                            }else{
+                                $('#amazonOrderList').append(html);
+                                $('#profiler_order .profiler_order_body').append(html2);
+                            }
+                      }
+                  }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                  alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+          }else{
+              $('#amazonOrderOneByOne').find('input').parent().append('<div class="text-danger">Warning: Provide valid Amazon order Id!</div>');
+          }
+      })
+</script>
