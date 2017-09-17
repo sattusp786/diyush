@@ -1,170 +1,199 @@
 {{ header }}
-<div id="product-category" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
-      <h2>{{ heading_title }}</h2>
-      {% if thumb or description %}
-      <div class="row"> {% if thumb %}
-        <div class="col-sm-2"><img src="{{ thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" class="img-thumbnail" /></div>
-        {% endif %}
-        {% if description %}
-        <div class="col-sm-10">{{ description }}</div>
-        {% endif %}</div>
-      <hr>
-      {% endif %}
-      {% if categories %}
-      <h3>{{ text_refine }}</h3>
-      {% if categories|length <= 5 %}
-      <div class="row">
-        <div class="col-sm-3">
-          <ul>
-            {% for category in categories %}
-            <li><a href="{{ category.href }}">{{ category.name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-      {% else %}
-      <div class="row">{% for category in categories|batch((categories|length / 4)|round(1, 'ceil')) %}
-        <div class="col-sm-3">
-          <ul>
-            {% for child in category %}
-            <li><a href="{{ child.href }}">{{ child.name }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endfor %}</div>
-      <br />
-      {% endif %}
-      {% endif %}
-      {% if products %}
-      <div class="row">
-        <div class="col-md-2 col-sm-6 hidden-xs">
-          <div class="btn-group btn-group-sm">
-            <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="{{ button_list }}"><i class="fa fa-th-list"></i></button>
-            <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="{{ button_grid }}"><i class="fa fa-th"></i></button>
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-          <div class="form-group"><a href="{{ compare }}" id="compare-total" class="btn btn-link">{{ text_compare }}</a></div>
-        </div>
-        <div class="col-md-4 col-xs-6">
-          <div class="form-group input-group input-group-sm">
-            <label class="input-group-addon" for="input-sort">{{ text_sort }}</label>
-            <select id="input-sort" class="form-control" onchange="location = this.value;">
-              
-              
-              
-              {% for sorts in sorts %}
-              {% if sorts.value == '%s-%s'|format(sort, order) %}
-              
-              
-              
-              <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
-              
-              
-              
-              {% else %}
-              
-              
-              
-              <option value="{{ sorts.href }}">{{ sorts.text }}</option>
-              
-              
-              
-              {% endif %}
-              {% endfor %}
-            
-            
-            
-            </select>
-          </div>
-        </div>
-        <div class="col-md-3 col-xs-6">
-          <div class="form-group input-group input-group-sm">
-            <label class="input-group-addon" for="input-limit">{{ text_limit }}</label>
-            <select id="input-limit" class="form-control" onchange="location = this.value;">
-              
-              
-              
-              {% for limits in limits %}
-              {% if limits.value == limit %}
-              
-              
-              
-              <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
-              
-              
-              
-              {% else %}
-              
-              
-              
-              <option value="{{ limits.href }}">{{ limits.text }}</option>
-              
-              
-              
-              {% endif %}
-              {% endfor %}
-            
-            
-            
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="row"> {% for product in products %}
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
-            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
-            <div>
-              <div class="caption">
-                <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-                <p>{{ product.description }}</p>
-                {% if product.price %}
-                <p class="price"> {% if not product.special %}
-                  {{ product.price }}
-                  {% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
-                  {% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} </p>
-                {% endif %}
-                {% if product.rating %}
-                <div class="rating"> {% for i in 1..5 %}
-                  {% if product.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>{% endif %}
-                  {% endfor %} </div>
-                {% endif %} </div>
-              <div class="button-group">
-                <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
-                <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
-              </div>
+<!-- head section -->
+        <section class="page-title parallax3 parallax-fix page-title-large page-title-shop">
+            <div class="opacity-light bg-dark-gray"></div>
+            {% if thumb %}
+				<img class="parallax-background-img" src="{{ thumb }}" alt="{{ heading_title }}" title="{{ heading_title }}" />
+			{% endif %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 wow fadeIn">
+                        <!-- page title tagline -->
+                        {% if description %}
+						<span class="text-uppercase white-text">{{ description }}</span>
+						{% endif %}
+                        <!-- end title tagline -->
+                        <!-- page title -->
+                        <h1 class="white-text">{{ heading_title }}</h1>
+                        <!-- end page title -->
+                    </div>
+                    <div class="col-md-12 col-sm-12 breadcrumb text-uppercase margin-three no-margin-bottom wow fadeIn">
+                        <!-- breadcrumb -->
+                        <ul>
+							{% for breadcrumb in breadcrumbs %}
+                            <li><a class="white-text" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+							{% endfor %}
+                        </ul>
+                        <!-- end breadcrumb -->
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        {% endfor %} </div>
-      <div class="row">
-        <div class="col-sm-6 text-left">{{ pagination }}</div>
-        <div class="col-sm-6 text-right">{{ results }}</div>
-      </div>
-      {% endif %}
-      {% if not categories and not products %}
-      <p>{{ text_empty }}</p>
-      <div class="buttons">
-        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
-      </div>
-      {% endif %}
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
-</div>
+        </section>
+        <!-- end head section -->
+
+        <!-- content section -->
+        <section>
+            <div class="container">
+                <div class="row">
+                    <!-- sidebar  -->
+                    <div class="col-md-2 col-sm-4 sidebar">
+					{% if categories %}
+                        <!-- widget  -->
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Categories</h5>
+                            <div class="thin-separator-line bg-dark-gray no-margin-lr margin-ten"></div>
+                            <div class="widget-body">
+                                <ul class="category-list">
+								{% for category in categories %}
+                                    <li><a href="{{ category.href }}">{{ category.name }}<!--<span>48</span>--></a></li>
+								{% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end widget  -->
+					{% endif %}
+                        <!-- widget  -->
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Shop by Colors</h5>
+                            <div class="thin-separator-line bg-dark-gray no-margin-lr margin-ten"></div>
+                            <div class="widget-body">
+                                <ul class="colors clearfix">
+                                    <li class="active"><a href="#" style="background:#f16b4e"></a></li>
+                                    <li><a href="#" style="background:#f69679"></a></li>
+                                    <li><a href="#" style="background:#fca95e"></a></li>
+                                    <li><a href="#" style="background:#7bbc72"></a></li>
+                                    <li><a href="#" style="background:#4fb2ac"></a></li>
+                                    <li><a href="#" style="background:#5280c5"></a></li>
+                                    <li><a href="#" style="background:#eb432d"></a></li>
+                                    <li><a href="#" style="background:#f98a37"></a></li>
+                                    <li><a href="#" style="background:#51a84c"></a></li>
+                                    <li><a href="#" style="background:#008273"></a></li>
+                                    <li><a href="#" style="background:#009fec"></a></li>
+                                    <li><a href="#" style="background:#f3690f"></a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end widget  -->
+                        <!-- widget  -->
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Shop By Size</h5>
+                            <div class="thin-separator-line bg-dark-gray no-margin-lr margin-ten"></div>
+                            <div class="widget-body">
+                                <ul class="size clearfix">
+                                    <li class="active"><a href="#">XS</a></li>
+                                    <li><a href="#">S</a></li>
+                                    <li><a href="#">M</a></li>
+                                    <li><a href="#">L</a></li>
+                                    <li><a href="#">XL</a></li>
+                                    <li><a href="#">XXL</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end widget  -->
+                        <!-- widget  -->
+                        <div class="widget">
+                            <h5 class="widget-title font-alt">Shop By Price</h5>
+                            <div class="thin-separator-line bg-dark-gray no-margin-lr margin-ten"></div>
+                            <div class="widget-body">
+                                <ul class="category-list shop-price">
+                                    <li class="active"><a href="#">$20.00 - $29.99</a></li>
+                                    <li><a href="#">$30.00 - $39.99</a></li>
+                                    <li><a href="#">$40.00 - $49.99</a></li>
+                                    <li><a href="#">$50.00 - $59.99</a></li>
+                                    <li><a href="#">$60.00 and above</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end widget  -->
+                        <!-- widget  -->
+                        <div class="widget no-margin-bottom">
+                            <h5 class="widget-title font-alt">Shop By Brand</h5>
+                            <div class="thin-separator-line bg-dark-gray no-margin-lr margin-ten"></div>
+                            <div class="widget-body">
+                                <ul class="category-list">
+                                    <li class="active"><a href="#">Amuse Society<span>48</span></a></li>
+                                    <li><a href="#">Asilio<span>25</span></a></li>
+                                    <li><a href="#">Band of Gypsies<span>32</span></a></li>
+                                    <li><a href="#">BB Dakota<span>38</span></a></li>
+                                    <li><a href="#">Blue Life Fit<span>40</span></a></li>
+                                    <li><a href="#">Cameo<span>28</span></a></li>
+                                    <li><a href="#">Cheap Monday<span>38</span></a></li>
+                                    <li><a href="#">Cooperative<span>40</span></a></li>
+                                    <li><a href="#">Ecote<span>28</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end widget  -->
+                    </div>
+                    <!-- end sidebar  -->
+                    <div class="col-md-9 col-sm-8 col-md-offset-1">
+                        <div class="shorting clearfix xs-margin-top-three">
+                            <div class="col-md-8 col-sm-7 grid-nav">
+                                <a href="shop-with-sidebar-list.html"><i class="fa fa-bars"></i></a>
+                                <a href="shop-with-sidebar.html"><i class="fa fa-th"></i></a>
+                                <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
+                            </div>
+                            <div class="col-md-3 col-sm-5 pull-right">
+                                <div class="select-style input-round med-input shop-shorting no-border">
+                                    <select id="input-sort" class="form-control" onchange="location = this.value;">
+									  {% for sorts in sorts %}
+										  {% if sorts.value == '%s-%s'|format(sort, order) %}
+											  <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+											  {% else %}
+											  <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+										  {% endif %}
+									  {% endfor %}
+									</select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-listing margin-three">
+						{% if products %}
+							{% for product in products %}
+                            <!-- shop item -->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="home-product text-center position-relative overflow-hidden margin-ten no-margin-top">
+                                    <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
+                                    <span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
+                                    {% if product.price %}
+									<span class="price black-text">
+									{% if not product.special %}
+									  {{ product.price }}
+									  {% else %}
+									  <del>{{ product.price }}</del>{{ product.special }}
+									  {% endif %}
+									  <!--{% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %}-->
+									</span>
+									{% endif %}
+                                    <div class="quick-buy">
+                                        <div class="product-share">
+                                            <a href="javascript:void(0);" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" onclick="wishlist.add('{{ product.product_id }}');" title="{{ button_wishlist }}"><i class="fa fa-heart-o"></i></a>
+                                            <a href="javascript:void(0);" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" onclick="compare.add('{{ product.product_id }}');" title="{{ button_compare }}"><i class="fa fa-refresh"></i></a>
+                                            <a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_cart }}"><i class="fa fa-shopping-cart"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end shop item -->
+							{% endfor %}
+						{% endif %}
+                        </div>
+                        <!-- pagination -->
+						{{ pagination }}
+                        <!--<div class="pagination margin-ten no-margin-bottom">
+                            <a href="#"><img src="catalog/view/theme/default/image/arrow-pre-small.png" alt=""/></a>
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#" class="active">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#"><img src="catalog/view/theme/default/image/arrow-next-small.png" alt=""/></a>
+                        </div>-->
+                        <!-- end pagination -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end content section -->
 {{ footer }} 

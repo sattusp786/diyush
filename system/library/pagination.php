@@ -46,15 +46,15 @@ class Pagination {
 
 		$this->url = str_replace('%7Bpage%7D', '{page}', $this->url);
 
-		$output = '<ul class="pagination">';
+		$output = '<div class="pagination margin-ten no-margin-bottom">';
 
 		if ($page > 1) {
-			$output .= '<li><a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '">' . $this->text_first . '</a></li>';
+			$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '"><img src="catalog/view/theme/default/image/arrow-pre-small.png" alt=""/></a>';
 			
 			if ($page - 1 === 1) {
-				$output .= '<li><a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '">' . $this->text_prev . '</a></li>';
+				$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '">' . $this->text_prev . '</a>';
 			} else {
-				$output .= '<li><a href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a></li>';
+				$output .= '<a href="' . str_replace('{page}', $page - 1, $this->url) . '">' . $this->text_prev . '</a>';
 			}
 		}
 
@@ -79,23 +79,23 @@ class Pagination {
 
 			for ($i = $start; $i <= $end; $i++) {
 				if ($page == $i) {
-					$output .= '<li class="active"><span>' . $i . '</span></li>';
+					$output .= '<a href="javascript:void(0);" class="active">'.$i.'</a>';
 				} else {
 					if ($i === 1) {
-						$output .= '<li><a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '">' . $i . '</a></li>';
+						$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '">' . $i . '</a>';
 					} else {
-						$output .= '<li><a href="' . str_replace('{page}', $i, $this->url) . '">' . $i . '</a></li>';
+						$output .= '<a href="' . str_replace('{page}', $i, $this->url) . '">' . $i . '</a>';
 					}
 				}
 			}
 		}
 
 		if ($page < $num_pages) {
-			$output .= '<li><a href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a></li>';
-			$output .= '<li><a href="' . str_replace('{page}', $num_pages, $this->url) . '">' . $this->text_last . '</a></li>';
+			$output .= '<a href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a>';
+			$output .= '<a href="' . str_replace('{page}', $num_pages, $this->url) . '"><img src="catalog/view/theme/default/image/arrow-next-small.png" alt=""/></a>';
 		}
 
-		$output .= '</ul>';
+		$output .= '</div>';
 
 		if ($num_pages > 1) {
 			return $output;
