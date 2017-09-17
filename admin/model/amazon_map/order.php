@@ -141,7 +141,7 @@ class ModelAmazonMapOrder extends Model {
 						}
 						$data['telephone'] = '1234567890';
 
-						$this->db->query("INSERT INTO ".DB_PREFIX."customer SET customer_group_id = '" . (int)$data['customer_group_id'] . "', language_id = '".(int)$this->config->get('config_language_id')."', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '".$this->db->escape($data['BuyerEmail'])."', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '', custom_field = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "', newsletter = '0', salt = '" . $this->db->escape($salt = token(9)) . "', password = '".$this->db->escape(sha1($salt . sha1($salt . sha1($data['lastname'].'_'.$data['firstname']))))."', status = '1', approved = '1', safe = '0', date_added = NOW()");
+						$this->db->query("INSERT INTO ".DB_PREFIX."customer SET customer_group_id = '" . (int)$data['customer_group_id'] . "', language_id = '".(int)$this->config->get('config_language_id')."', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '".$this->db->escape($data['BuyerEmail'])."', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '', custom_field = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "', newsletter = '0', salt = '" . $this->db->escape($salt = token(9)) . "', password = '".$this->db->escape(sha1($salt . sha1($salt . sha1($data['lastname'].'_'.$data['firstname']))))."', status = '1', safe = '0', date_added = NOW()");
 
 						$customer_id = $this->db->getLastId();
 
@@ -583,7 +583,7 @@ class ModelAmazonMapOrder extends Model {
 		/************************************** Customer Section ******************************/
 
 		public function getAmazonCustomerList($data = array()){
-				$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS customer_name FROM ".DB_PREFIX."amazon_customer_map acm LEFT JOIN ".DB_PREFIX."customer c ON((acm.oc_customer_id = c.customer_id) AND (acm.customer_group_id = c.customer_group_id))  WHERE c.status = '1' AND c.approved = '1' ";
+				$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS customer_name FROM ".DB_PREFIX."amazon_customer_map acm LEFT JOIN ".DB_PREFIX."customer c ON((acm.oc_customer_id = c.customer_id) AND (acm.customer_group_id = c.customer_group_id))  WHERE c.status = '1' ";
 
 				$implode = array();
 
@@ -646,7 +646,7 @@ class ModelAmazonMapOrder extends Model {
 		 * @return [type]              [description]
 		 */
 		public function getTotalAmazonCustomerList($data = array()){
-				$sql = "SELECT DISTINCT acm.* FROM ".DB_PREFIX."amazon_customer_map acm LEFT JOIN ".DB_PREFIX."customer c ON((acm.oc_customer_id = c.customer_id) AND (acm.customer_group_id = c.customer_group_id))  WHERE c.status = '1' AND c.approved = '1' ";
+				$sql = "SELECT DISTINCT acm.* FROM ".DB_PREFIX."amazon_customer_map acm LEFT JOIN ".DB_PREFIX."customer c ON((acm.oc_customer_id = c.customer_id) AND (acm.customer_group_id = c.customer_group_id))  WHERE c.status = '1' ";
 
 				$implode = array();
 

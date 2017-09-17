@@ -221,7 +221,7 @@ class ControllerAmazonMapProduct extends Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
-
+		
 		return $this->load->view('amazon_map/product', $data);
 	}
 

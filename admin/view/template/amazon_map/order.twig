@@ -323,12 +323,12 @@
               </div>
             </div>
           </div><!--imported_list-->
-         
+         {% endif %}
 
       </div><!--container-fluid-->
   </div><!--content-->
 
-  <script type="text/javascript">
+<script type="text/javascript"><!--
       $('#generate_order_report_id').on('click',function(){
           $.ajax({
             url: 'index.php?route=amazon_map/product/generate_report_id&user_token={{ user_token }}&account_id={{ account_id }},&status=order',
@@ -522,4 +522,4 @@
               $('#amazonOrderOneByOne').find('input').parent().append('<div class="text-danger">Warning: Provide valid Amazon order Id!</div>');
           }
       })
-</script>
+//--></script>

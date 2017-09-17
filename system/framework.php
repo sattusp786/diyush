@@ -126,6 +126,9 @@ $registry->set('openbay', new Openbay($registry));
 // Document
 $registry->set('document', new Document());
 
+//Amazon Connector
+$registry->set('Amazonconnector', new Amazonconnector($registry));
+
 // Config Autoload
 if ($config->has('config_autoload')) {
 	foreach ($config->get('config_autoload') as $value) {

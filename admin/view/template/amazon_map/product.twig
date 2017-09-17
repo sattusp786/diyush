@@ -32,7 +32,7 @@
     <div class="container-fluid">
       {% if tab == 'import_product' %} 
         <h3>{{ heading_title_import }}</h3>
-      {% endif %} {% else %}  {% if tab == 'export_product' %} 
+      {% elseif tab == 'export_product' %} 
         <h3>{{ heading_title_export }}</h3>
       {% else %}  
           <h3>{{ heading_title }}</h3>
@@ -327,7 +327,8 @@
         </div>
       </div>
       <!--export Product-->
-
+	{% endif %}
+	  
     {% if not tab %}
       <div class="panel panel-default" id="imported_list">
         <div class="panel-heading"  style="display:inline-block;width:100%;">
@@ -423,7 +424,7 @@
 
   </div><!-- container-fluid -->
 </div><!-- content -->
-<script type="text/javascript">
+<script type="text/javascript"><!--
     $('#generate_report_id').on('click',function(){
         $.ajax({
           url: 'index.php?route=amazon_map/product/generate_report_id&user_token={{ user_token }}&account_id={{ account_id }}',
@@ -519,7 +520,7 @@
       var getASIN = $(".asin_model input[name='amazon_product_asin']").val();
       if((getASIN.length == 10) && getASIN.match(/((^[A-Z]+)|(^[0-9]+)|(^[0-9]+[A-Z]+)|(^[A-Z]+[0-9]+))+[0-9A-Z]+$/)){
         $.ajax({
-          url: 'index.php?route=amazon_map/product/import_amazon_product&user_token={{ user_token; ?>&account_id={{ account_id }}&product_asin='+getASIN,
+          url: 'index.php?route=amazon_map/product/import_amazon_product&user_token={{ user_token }}&account_id={{ account_id }}&product_asin='+getASIN,
           dataType:'json',
           type:'POST',
           cache: false,
@@ -676,4 +677,4 @@
           $('select[name="product_update_delete_option"]').parent().append('<div class="text-danger">{{ error_update_delete_export }}</div>');
         }
     })
-</script>
+//--></script>
