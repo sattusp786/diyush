@@ -29,24 +29,22 @@ class ControllerCommonFooter extends Controller {
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 
-		$data['about_company']		= $this->url->link('#', '', true);
-		$data['what_we_do']			= $this->url->link('#', '', true);
-		$data['what_we_think']		= $this->url->link('#', '', true);
-		$data['careers']			= $this->url->link('#', '', true);
-		$data['web_development']	= $this->url->link('#', '', true);
-		$data['graphic_design']		= $this->url->link('#', '', true);
-		$data['copywriting']		= $this->url->link('#', '', true);
-		$data['online_marketing']	= $this->url->link('#', '', true);
+		$data['about_company']		= HTTP_SERVER.'about_company';
+		$data['what_we_do']			= HTTP_SERVER.'what_we_do';
+		$data['what_we_think']		= HTTP_SERVER.'what_we_think';
+		$data['careers']			= HTTP_SERVER.'careers';
+		$data['web_development']	= HTTP_SERVER.'web_development';
+		$data['graphic_design']		= HTTP_SERVER.'graphic_design';
+		$data['copywriting']		= HTTP_SERVER.'copywriting';
+		$data['online_marketing']	= HTTP_SERVER.'online_marketing';
 		$data['team_members']		= $this->url->link('#', '', true);
 		$data['testimonials']		= $this->url->link('#', '', true);
 		$data['our_clients']		= $this->url->link('#', '', true);
-		$data['careers_with_us']	= $this->url->link('#', '', true);
-		$data['about']				= $this->url->link('#', '', true);
+		$data['careers_with_us']	= HTTP_SERVER.'careers_with_us';
+		$data['about']				= HTTP_SERVER.'about_us';
 		$data['blog']				= $this->url->link('#', '', true);
 		$data['testimonials']		= $this->url->link('#', '', true);
-		$data['contact']			= $this->url->link('#', '', true);
-		
-
+				
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 
 		// Whos Online
