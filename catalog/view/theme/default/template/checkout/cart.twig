@@ -5,14 +5,15 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-7 col-sm-12 wow fadeInUp" data-wow-duration="300ms">
                         <!-- page title -->
-                        <h1 class="black-text">Shopping Cart</h1>
+                        <h1 class="black-text">{{ heading_title }}</h1>
                         <!-- end page title -->
                     </div>
                     <div class="col-lg-4 col-md-5 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none" data-wow-duration="600ms">
                         <!-- breadcrumb -->
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li>Shopping Cart</li>
+							{% for breadcrumb in breadcrumbs %}
+							<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+							{% endfor %}
                         </ul>
                         <!-- end breadcrumb -->
                     </div>
@@ -26,88 +27,68 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 shop-cart-table">
+						<form action="{{ action }}" method="post" enctype="multipart/form-data">
                         <table class="table shop-cart text-center">
                             <thead>
                                 <tr>
                                     <th class="first"></th>
-                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Product</th>
-                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Price</th>
-                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Quantity</th>
-                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Sub Total</th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">{{ column_name }}</th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">{{ column_price }}</th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">{{ column_quantity }}</th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">{{ column_total }}</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+								{% for product in products %}
                                 <tr>
                                     <td class="product-thumbnail text-left">
-                                        <a href="shop-single-product.html"><img src="http://placehold.it/120x120" alt="" ></a>
+                                        {% if product.thumb %}<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" /></a>{% endif %}
                                     </td>
                                     <td class="text-left">
-                                        <a href="shop-single-product.html">Chasse Wells Italian Genuine Leather Incroyable Tote</a>
-                                        <span class="text-uppercase display-block text-small margin-two">SKU: 290397</span>
-                                        <a href="shop-single-product.html" class="text-small"><i class="fa fa-edit black-text"></i> Edit</a>
+                                        <a href="{{ product.href }}">{{ product.name }}</a>
+										{% if product.option %}
+										{% for option in product.option %} <br />
+										<small>{{ option.name }}: {{ option.value }}</small> {% endfor %}
+										{% endif %}
+                                        <!--<span class="text-uppercase display-block text-small margin-two">SKU: 290397</span>-->
+                                        <a href="{{ product.href }}" class="text-small"><i class="fa fa-edit black-text"></i> Edit</a>
                                     </td>
                                     <td class="text-left">
-                                        $450
+                                        {{ product.price }}
                                     </td>
                                     <td class="product-quantity">
-                                        <div class="select-style med-input shop-shorting shop-shorting-cart no-border-round">
-                                            <select>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                            </select>
-                                        </div>
+                                        <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="1" class="form-control" />
+										  <span class="input-group-btn">
+										  <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
+										  </span></div>
                                     </td>
-                                    <td class="product-subtotal text-left">$450</td>
+                                    <td class="product-subtotal text-left">{{ product.total }}</td>
                                     <td class="product-remove text-center">
-                                        <a href="javascript:void(0)"><i class="fa fa-times"></i></a>
+                                        <a href="javascript:void(0);" onclick="cart.remove('{{ product.cart_id }}');"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="product-thumbnail text-left">
-                                        <a href="shop-single-product.html"><img src="http://placehold.it/120x120" alt="" ></a>
-                                    </td>
-                                    <td class="text-left">
-                                        <a href="shop-single-product.html">Tundra perforated suede boots</a>
-                                        <span class="text-uppercase display-block text-small margin-two">SKU: 450365</span>
-                                        <a href="shop-single-product.html" class="text-small"><i class="fa fa-edit black-text"></i> Edit</a>
-                                    </td>
-                                    <td class="text-left">
-                                        $350
-                                    </td>
-                                    <td class="product-quantity">
-                                        <div class="select-style med-input shop-shorting shop-shorting-cart no-border-round">
-                                            <select>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal text-left">$350</td>
-                                    <td class="product-remove text-center">
-                                        <a href="javascript:void(0)"><i class="fa fa-times"></i></a>
-                                    </td>
-                                </tr>
+								{% endfor %}
                             </tbody>
                         </table>
+						</form>
                     </div>
-                    <div class="col-sm-12 cupon padding-five border-top border-bottom">
+                    <!--<div class="col-sm-12 cupon padding-five border-top border-bottom">
                         <button class="highlight-button btn btn-very-small no-margin pull-left">Empty Cart</button>
                         <button class="highlight-button btn btn-very-small no-margin pull-right continue-shopping">Continue Shopping</button>
                         <button class="highlight-button btn btn-very-small no-margin pull-right">Update Shopping Cart</button>
-                    </div>
+                    </div>-->
                     <div class="col-sm-12 padding-five no-padding-bottom">
                         <div class="col-md-5 col-sm-5 calculate no-padding-left xs-margin-bottom-ten xs-no-padding">
                             <div class="panel panel-default border margin-five no-margin-top">
-                                <div class="panel-heading no-padding" id="headingOne" role="tablist">
+								{% if modules %}
+								  <h2>{{ text_next }}</h2>
+								  <p>{{ text_next_choice }}</p>
+								  <div class="panel-group" id="accordion"> {% for module in modules %}
+									{{ module }}
+									{% endfor %} </div>
+								  {% endif %}
+                                <!--<div class="panel-heading no-padding" id="headingOne" role="tablist">
                                     <a href="#collapse-two-link1" data-parent="#collapse-two" data-toggle="collapse" class="collapsed">
                                         <h4 class="panel-title no-border black-text font-weight-600 letter-spacing-2">Coupon Code <span class="pull-right"><i class="fa fa-plus"></i></span></h4>
                                     </a>
@@ -123,9 +104,9 @@
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
-                            <div class="panel panel-default border">
+                            <!--<div class="panel panel-default border">
                                 <div class="panel-heading no-padding" id="headingTwo" role="tablist">
                                     <a href="#collapse-two-link2" data-parent="#collapse-two" data-toggle="collapse" class="collapsed">
                                         <h4 class="panel-title no-border black-text font-weight-600 letter-spacing-2">Calculate Shipping <span class="pull-right"><i class="fa fa-plus"></i></span></h4>
@@ -145,36 +126,20 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="col-md-6 col-sm-7 col-md-offset-1 no-padding-right xs-no-padding">
                             <table class="table cart-total">
                                 <tbody>
+									 {% for total in totals %}
                                     <tr>
-                                        <th class="padding-two text-right no-padding-right text-uppercase font-weight-600 letter-spacing-2 text-small xs-no-padding">Cart Subtotal</th>
-                                        <td class="padding-two text-uppercase text-right no-padding-right font-weight-600 black-text xs-no-padding">$800</td>
+                                        <th class="padding-two text-right no-padding-right text-uppercase font-weight-600 letter-spacing-2 text-small xs-no-padding">{{ total.title }}</th>
+                                        <td class="padding-two text-uppercase text-right no-padding-right font-weight-600 black-text xs-no-padding">{{ total.text }}</td>
                                     </tr>
-                                    <tr>
-                                        <th class="padding-two text-right no-padding-right text-uppercase font-weight-600 letter-spacing-2 text-small xs-no-padding">Shipping and Handling</th>
-                                        <td class="padding-two text-uppercase text-right no-padding-right font-weight-600 black-text text-small xs-no-padding">Free</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="padding-one no-padding-right xs-no-padding" colspan="2">
-                                            <hr>
-                                        </td>
-                                    </tr>
-                                    <tr class="total">
-                                        <th class="padding-two text-uppercase text-right no-padding-right font-weight-600 text-large xs-no-padding">Order Total</th>
-                                        <td class="padding-two text-uppercase text-right no-padding-right font-weight-600 black-text text-large no-letter-spacing xs-no-padding">$800</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="padding-one no-padding-right xs-no-padding" colspan="2">
-                                            <hr class="no-margin-bottom">
-                                        </td>
-                                    </tr>
+									{% endfor %}
                                 </tbody>
                             </table>
-                            <a class="highlight-button-black-background btn no-margin pull-right checkout-btn" href="shop-checkout.html">Proceed to Checkout</a>
+                            <a class="highlight-button-black-background btn no-margin pull-right checkout-btn" href="{{ checkout }}">{{ button_checkout }}</a>
                         </div>
                     </div>
                 </div>
