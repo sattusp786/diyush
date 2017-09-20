@@ -126,33 +126,49 @@
 							{% if option.type == 'select' %}
 							<div class="form-group{% if option.required %} required {% endif %}">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+							  {% if option.option_id in square_box %}
+							  <ul class="size clearfix size-details">
+								{% set o = 1 %}
+								{% set default_val = '0' %}
+								{% for option_value in option.product_option_value %}
+								{% if option_value.default == 1 %} {% set default_val = option_value.product_option_value_id %} {% endif %}
+								<li {% if option_value.default == 1 %} class="active" {% endif %} ><a class="option_square input-option{{ option.product_option_id }}" href="javascript:void(0);" alt="{{ option_value.product_option_value_id }}">{{ option_value.name }}</a></li>
+								{% set o = o + 1 %}
+								{% endfor %}
+                                <!--<li class="size-chart"><a href="#">Size Chart</a></li>-->
+							</ul>
+							<input type="hidden" name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" value="{{ default_val }}" />
+							  {% else %}
 							  <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control product-option">
 								<option value="">{{ text_select }}</option>
 								{% set o = 1 %}
 								{% for option_value in option.product_option_value %}
-								<option value="{{ option_value.product_option_value_id }}" {% if o == 1 %} SELECTED {% endif %}>{{ option_value.name }}
+								<option value="{{ option_value.product_option_value_id }}" {% if option_value.default == 1 %} SELECTED {% endif %}>{{ option_value.name }}
 								{% if option_value.price %}
 								({{ option_value.price_prefix }}{{ option_value.price }})
 								{% endif %} </option>
 								{% set o = o + 1 %}
 								{% endfor %}
 							  </select>
+							  {% endif %}
 							</div>
 							{% endif %}
 							{% if option.type == 'radio' %}
 							<div class="form-group{% if option.required %} required {% endif %}">
-							  <label class="control-label">{{ option.name }}</label>
+							  <label class="control-label">{{ option.name }}</label><br/><br/>
 							  <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
-								<div class="radio">
-								  <label>
-									<input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
-									{% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}                  
-									{{ option_value.name }}
+								<div class="radio" style="float:left;width:65px;margin-top:0;">
+								  <label style="padding-left:0;">
+									<input style="display:none;" type="radio" {% if option_value.default == 1 %} SELECTED {% endif %} name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+									{% if option_value.image %} <img {% if option_value.default == 1 %} style="border:1px solid #ddd;" {% else %} style="border:0;" {% endif %} src="{{ option_value.image }}" alt="input-option{{ option.product_option_id }}" class="img-thumbnail option_image input-option{{ option.product_option_id }}" /> {% endif %}                  
+									<!--{{ option_value.name }}
 									{% if option_value.price %}
 									({{ option_value.price_prefix }}{{ option_value.price }})
-									{% endif %} </label>
+									{% endif %}-->
+									</label>
 								</div>
 								{% endfor %} </div>
+								<div class="clear" style="clear:both;"></div>
 							</div>
 							{% endif %}
 							{% if option.type == 'checkbox' %}
@@ -629,6 +645,27 @@ $('.product-option').on('change', function() {
 });
 
 $(document).ready(function() {
+
+	$(".option_square").click(function(){
+		var idname = $(this).attr('class').replace('option_square','').trim();
+		var valuename = $(this).attr('alt');
+		$("."+idname).each(function(){
+			$(this).parent('li').removeClass('active');
+		});
+		$(this).parent('li').addClass('active');
+		$("#"+idname).val(valuename);
+	});
+	
+	$(".option_image").click(function(){
+		var idname = $(this).attr('alt');
+		//var valuename = $(this).attr('alt');
+		$("."+idname).each(function(){
+			$(this).css('border','0');
+		});
+		$(this).css('border','1px solid #ddd');
+		//$("#"+idname).val(valuename);
+	});
+
 	$('.thumbnails').magnificPopup({
 		type:'image',
 		delegate: 'a',

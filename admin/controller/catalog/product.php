@@ -957,7 +957,7 @@ class ControllerCatalogProduct extends Controller {
 					$product_option_value_data[] = array(
 						'product_option_value_id' => $product_option_value['product_option_value_id'],
 						'option_value_id'         => $product_option_value['option_value_id'],
-						'default'                 => $product_option_value['default'],
+						'default'                 => isset($product_option_value['default']) ? $product_option_value['default'] : '0',
 						'quantity'                => $product_option_value['quantity'],
 						'subtract'                => $product_option_value['subtract'],
 						'price'                   => $product_option_value['price'],

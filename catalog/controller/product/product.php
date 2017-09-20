@@ -322,6 +322,7 @@ class ControllerProductProduct extends Controller {
 							'product_option_value_id' => $option_value['product_option_value_id'],
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
+							'default'                 => $option_value['default'],
 							'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
 							'price'                   => $price,
 							'price_prefix'            => $option_value['price_prefix']
@@ -370,6 +371,8 @@ class ControllerProductProduct extends Controller {
 				$data['captcha'] = '';
 			}
 
+			$data['square_box'] = array(5,6,10,11,12,13,15,17,20,21,23);
+			
 			$data['share'] = $this->url->link('product/product', 'product_id=' . (int)$this->request->get['product_id']);
 
 			$data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);

@@ -21,13 +21,27 @@
             </div>
         </section>
         <!-- end head section -->
-
+		{% if attention %}
+		  <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ attention }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  </div>
+		  {% endif %}
+		  {% if success %}
+		  <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  </div>
+		  {% endif %}
+		  {% if error_warning %}
+		  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		  </div>
+		  {% endif %}
         <!-- content section -->
         <section class="content-section">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 shop-cart-table">
-						<form action="{{ action }}" method="post" enctype="multipart/form-data">
+						<form id="cart_form" name="cart_form" action="{{ action }}" method="post" enctype="multipart/form-data">
                         <table class="table shop-cart text-center">
                             <thead>
                                 <tr>
@@ -57,11 +71,16 @@
                                     <td class="text-left">
                                         {{ product.price }}
                                     </td>
-                                    <td class="product-quantity">
-                                        <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="1" class="form-control" />
-										  <span class="input-group-btn">
-										  <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary"><i class="fa fa-refresh"></i></button>
-										  </span></div>
+									<td class="product-quantity">
+                                        <div class="select-style med-input shop-shorting shop-shorting-cart no-border-round">
+                                            <select name="quantity[{{ product.cart_id }}]">
+                                                <option value="1" {% if product.quantity == '1' %} SELECTED {% endif %}>1</option>
+                                                <option value="2" {% if product.quantity == '2' %} SELECTED {% endif %}>2</option>
+                                                <option value="3" {% if product.quantity == '3' %} SELECTED {% endif %}>3</option>
+                                                <option value="4" {% if product.quantity == '4' %} SELECTED {% endif %}>4</option>
+                                                <option value="5" {% if product.quantity == '5' %} SELECTED {% endif %}>5</option>
+                                            </select>
+                                        </div>
                                     </td>
                                     <td class="product-subtotal text-left">{{ product.total }}</td>
                                     <td class="product-remove text-center">
@@ -73,17 +92,17 @@
                         </table>
 						</form>
                     </div>
-                    <!--<div class="col-sm-12 cupon padding-five border-top border-bottom">
-                        <button class="highlight-button btn btn-very-small no-margin pull-left">Empty Cart</button>
-                        <button class="highlight-button btn btn-very-small no-margin pull-right continue-shopping">Continue Shopping</button>
-                        <button class="highlight-button btn btn-very-small no-margin pull-right">Update Shopping Cart</button>
-                    </div>-->
+                    <div class="col-sm-12 cupon padding-five border-top border-bottom">
+                        <!--<button class="highlight-button btn btn-very-small no-margin pull-left">Empty Cart</button>-->
+                        <button class="highlight-button btn btn-very-small no-margin pull-right continue-shopping" onclick="javascript:location.href='{{ continue }}'">{{ button_shopping }}</button>
+                        <button class="highlight-button btn btn-very-small no-margin pull-right" onclick="$('#cart_form').submit();">Update Shopping Cart</button>
+                    </div>
                     <div class="col-sm-12 padding-five no-padding-bottom">
                         <div class="col-md-5 col-sm-5 calculate no-padding-left xs-margin-bottom-ten xs-no-padding">
                             <div class="panel panel-default border margin-five no-margin-top">
 								{% if modules %}
-								  <h2>{{ text_next }}</h2>
-								  <p>{{ text_next_choice }}</p>
+								  <!--<h2>{{ text_next }}</h2>
+								  <p>{{ text_next_choice }}</p>-->
 								  <div class="panel-group" id="accordion"> {% for module in modules %}
 									{{ module }}
 									{% endfor %} </div>
