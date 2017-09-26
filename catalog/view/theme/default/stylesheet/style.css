@@ -215,6 +215,8 @@ i { color: #9a9a9a; margin: 0 3px}
 .bg-deep-red { background:#e75e50 !important}
 .bg-deep-pink { background:#e53878 !important}
 .bg-light-pink { background:#dc378e !important}
+.bg-light-pink-2 { background:#ffeeec !important}
+.bg-light-pink-3 { background:#fee4c9 !important}
 .bg-fast-pink { background:#ff1a56 !important}
 .bg-magenta { background:#d94378 !important }
 .bg-light-yellow {background:#f8f7f5 !important}
@@ -628,10 +630,12 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 
 /* features section */
 .features-section { margin-bottom:80px; float:left}
+.homefeatures .features-section { margin-bottom:40px;}
 .features-section .col-xs-3 { width:20%}
 .features-section .col-xs-9 { width:75%}
 .features-section p { margin: 0 0 15px}
 .features-section .separator-line{ margin-left:0; margin-right:0}
+.homefeatures .features-section .separator-line{ margin:5% auto;}
 
 /* services section */
 .services-main{ padding: 7%; background-color: rgba(255,255,255,0.7)}
@@ -768,6 +772,7 @@ footer ul.list-inline li:first-child {padding-left: 6px}
 /* half slider */
 .owl-half-slider .owl-title { width: 50%; line-height: 40px; font-size: 25px;}
 .owl-half-slider .item { min-height: 710px}
+.owl-half-slider.homeslider .item { min-height: 600px}
 .owl-half-slider .container { min-height: 710px}
 .owl-small-slider .item {min-height: 430px}
 .owl-small-slider .container {min-height: 400px}
@@ -1036,6 +1041,7 @@ footer ul.list-inline li:first-child {padding-left: 6px}
 .blog-date a { color: #898989;}
 .blog-date a:hover { color: #000;}
 .blog-title a { color: #000; display: block; font-size: 14px; letter-spacing: 2px; margin: 5px 0 20px; text-transform: uppercase; }
+.homeblogs .blog-title a { font-size:16px; margin:10px 0;}
 .blog-title a:hover {color: #575757;}
 .blog-short-description{ width: 80%}
 .blog-like i, .blog-share i, .comment i { margin-right: 6px; font-size: 11px; }
