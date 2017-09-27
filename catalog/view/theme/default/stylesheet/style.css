@@ -611,6 +611,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .breadcrumb ul li a { color: #575757}
 .breadcrumb ul > li+li:before {  color: #898989; content: "|"; font-size: 8px; padding: 0 10px; position: relative; top: -1px;}
 .page-title-large { min-height: 450px; padding: 240px 0 0}
+.page-title-shop.page-title-large { min-height: 350px; padding: 120px 0 0}
 .page-title-large h1 { font-size: 25px !important; margin-bottom: 15px !important;}
 .page-title .breadcrumb { margin-top: 36px}
 .page-title .separator-line { -webkit-transition: all 100ms ease-in-out; -moz-transition: all 100ms ease-in-out; -o-transition: all 100ms ease-in-out; -ms-transition: all 100ms ease-in-out; transition: all 100ms ease-in-out;}
