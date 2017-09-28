@@ -3,9 +3,9 @@
 				<div class="navbar-collapse collapse">
 					<ul id="accordion" class="nav navbar-nav navbar-right panel-group">
 						<!-- menu item -->
-						<li class="dropdown panel"><a href="#collapse1" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Home <i class="fa fa-angle-down"></i></a>                      
+						<li class="dropdown panel"><a href="#collapse0" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Home <i class="fa fa-angle-down"></i></a>                      
 							<!-- sub menu -->
-							<ul id="collapse1" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
+							<ul id="collapse0" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-3">
 									<!-- sub menu item  -->
@@ -96,9 +96,9 @@
 						{% if categories %}
 						{% for category in categories %}
 							{% if category.children %}
-								<li class="dropdown panel"><a href="{{ category.href }}" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
+								<li class="dropdown panel"><a href="#collapse{{ category.category_id }}" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
 									<!-- sub menu -->
-									<ul id="collapse4" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
+									<ul id="collapse{{ category.category_id }}" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 										<!-- sub menu column  -->
 										<li class="mega-menu-column col-sm-4">
 											<!-- sub menu item  -->
