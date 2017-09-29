@@ -1812,12 +1812,12 @@ ul.list-line li span {min-width:130px; display:inline-block}
 .header-nav a:last-child { padding-right:0}
 .header-nav .border-right { border-color:#c6c6c6}
 .header-nav i { color:#575757; font-size: 14px; margin:0 8px}
-.products-thumb img { width:25%; margin-right:20px}
+.products-thumb img { width:15%; margin-right:20px}
 .product-name-details { font-size:20px;}
 .rating i { font-size:13px; margin-right:5px;}
 .rating-text { margin-left:10px; font-size:10px; letter-spacing:3px; position:relative; top:-2px;}
 .size-details { margin-top: 10px;}
-.size-details li { width:33px}
+.size-details li { /*width:33px*/ width:auto; padding:0 10px;}
 .size-chart { border: medium none !important; text-decoration: underline; text-transform: uppercase; width: 90px !important; }
 .shop-shorting-details  { background: #fff url("../image/select-arrow.png") no-repeat 81% 50%; margin:0 !important; width: 100% !important }
 .product-share-deails i { margin: 7px 0 0 10px; font-size:14px; vertical-align: middle;}

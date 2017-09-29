@@ -1,9 +1,9 @@
 {{ header }}
 <!-- head section -->
-        <section class="content-top-margin page-title page-title-small border-bottom-light border-top-light">
-            <div class="container">
+        <section class="content-top-margin page-title page-title-small border-bottom-light border-top-light padding-one">
+            <div class="container width-100">
                 <div class="row">
-                    <div class="col-md-8 col-sm-7 breadcrumb text-uppercase wow fadeInUp xs-display-none" data-wow-duration="600ms">
+                    <div class="col-md-9 col-sm-8 breadcrumb text-uppercase wow fadeInUp xs-display-none" data-wow-duration="600ms">
                         <!-- breadcrumb -->
                         <ul>
                            {% for breadcrumb in breadcrumbs %}
@@ -12,7 +12,7 @@
                         </ul>
                         <!-- end breadcrumb -->
                     </div>
-                    <div class="col-md-4 col-sm-5 wow fadeInUp header-nav text-right sm-margin-top-two" data-wow-duration="300ms">
+                    <div class="col-md-3 col-sm-4 wow fadeInUp header-nav text-right sm-margin-top-two" data-wow-duration="300ms">
                         <!-- next/previous -->
                         <a href="#" class="border-right"><i class="fa fa-angle-left"></i> Previous</a>
                         <a href="#">Next<i class="fa fa-angle-right"></i></a>
@@ -24,14 +24,15 @@
         <!-- end head section -->
 
         <!-- content section -->
-        <section>
-            <div class="container">
+        <section class="padding-two">
+            <div class="container width-100">
                 <div class="row">
 					{% if thumb or images %}
                     <!-- product images -->
-                    <div class="col-md-6 col-sm-12 zoom-gallery sm-margin-bottom-ten">
+                    <div class="col-md-5 col-sm-12  sm-margin-bottom-ten">
+                    <div class="zoom-gallery margin-six-bottom text-center">
 						{% if thumb %}
-							<a href="{{ popup }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a>
+							<a href="{{ popup }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" class="width-100" /></a>
 						{% endif %}
 						{% if images %}
 						<div class="products-thumb text-center">
@@ -40,10 +41,95 @@
 						{% endfor %}
 						</div>
 						{% endif %}
+                        </div>
+                        <div class="panel-group accordion-style1" id="accordion-one">
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading active-accordion">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link1"><h4 class="panel-title">Details<span class="pull-right"><i class="fa fa-minus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link2"><h4 class="panel-title">Washing Instructions<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                      <div class="col-md-12 col-sm-12">
+                                            <ul class="instructions">
+                                                <li><strong>Type:</strong> Shift Dresses</li>
+                                                <li><strong>Fabric:</strong> Georgette</li>
+                                                <li><strong>Sleeves:</strong> Half Sleeve</li>                                                
+                                                <li><strong>Neck:</strong> V Neck</li>
+                                                <li><strong>Fit:</strong> Regular</li>
+                                                <li><strong>Length:</strong> Mini</li>
+                                            </ul>
+                                        </div>                                        
+                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link3"><h4 class="panel-title">Sizing<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-12 col-sm-12">
+                                            <ul class="instructions">
+                                                <li><strong>Weight:</strong> 7.25 Kg</li>
+                                                <li><strong>Dimensions:</strong> 90x60x90 Cm</li>
+                                                <li><strong>Size:</strong> One Size Fits All</li>
+                                                <li><strong>Color:</strong> White</li>
+                                                <li><strong>Guarantee:</strong> 5 Years</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link4"><h4 class="panel-title">Reviews (10)<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link4" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {% if review_status %}
+									  <div class="rating">
+										<p>{% for i in 1..5 %}
+										  {% if rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>{% else %}<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>{% endif %}
+										  {% endfor %} <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ text_write }}</a></p>
+										<hr>
+										<!-- AddThis Button BEGIN -->
+										<div class="addthis_toolbox addthis_default_style" data-url="{{ share }}"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
+										<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script> 
+										<!-- AddThis Button END --> 
+									  </div>
+									  {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                        </div>
                     </div>
                     <!-- end product images -->
 					{% endif %}
-                    <div class="col-md-5 col-sm-12 col-md-offset-1">
+                    <div class="col-md-6 col-sm-12 col-md-offset-1">
                         <!-- product rating -->
                         <div class="rating margin-five no-margin-top">
                             <i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star-o black-text"></i><span class="rating-text text-uppercase">5 Reviews</span><span class="rating-text text-uppercase pull-right">SKU: <span class="black-text">290397</span></span>
@@ -124,10 +210,13 @@
 							<h3>{{ text_option }}</h3>
 							{% for option in options %}
 							{% if option.type == 'select' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
+                            <div class="col-md-2 col-sm-12">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+                              </div>
+                              <div class="col-md-10 col-sm-12">
 							  {% if option.option_id in square_box %}
-							  <ul class="size clearfix size-details">
+							  <ul class="size clearfix size-details no-margin">
 								{% set o = 1 %}
 								{% set default_val = '0' %}
 								{% for option_value in option.product_option_value %}
@@ -151,10 +240,11 @@
 								{% endfor %}
 							  </select>
 							  {% endif %}
+                              </div>
 							</div>
 							{% endif %}
 							{% if option.type == 'radio' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <label class="control-label">{{ option.name }}</label><br/><br/>
 							  <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
 								<div class="radio" style="float:left;width:65px;margin-top:0;">
@@ -172,7 +262,7 @@
 							</div>
 							{% endif %}
 							{% if option.type == 'checkbox' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <label class="control-label">{{ option.name }}</label>
 							  <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
 								<div class="checkbox">
@@ -188,26 +278,26 @@
 							</div>
 							{% endif %}
 							{% if option.type == 'text' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
 							  <input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control" />
 							</div>
 							{% endif %}
 							{% if option.type == 'textarea' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
 							  <textarea name="option[{{ option.product_option_id }}]" rows="5" placeholder="{{ option.name }}" id="input-option{{ option.product_option_id }}" class="form-control">{{ option.value }}</textarea>
 							</div>
 							{% endif %}
 							{% if option.type == 'file' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <label class="control-label">{{ option.name }}</label>
 							  <button type="button" id="button-upload{{ option.product_option_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default btn-block"><i class="fa fa-upload"></i> {{ button_upload }}</button>
 							  <input type="hidden" name="option[{{ option.product_option_id }}]" value="" id="input-option{{ option.product_option_id }}" />
 							</div>
 							{% endif %}
 							{% if option.type == 'date' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
 							  <div class="input-group date">
 								<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD" id="input-option{{ option.product_option_id }}" class="form-control" />
@@ -217,7 +307,7 @@
 							</div>
 							{% endif %}
 							{% if option.type == 'datetime' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
 							  <div class="input-group datetime">
 								<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="YYYY-MM-DD HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
@@ -227,13 +317,13 @@
 							</div>
 							{% endif %}
 							{% if option.type == 'time' %}
-							<div class="form-group{% if option.required %} required {% endif %}">
-							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
-							  <div class="input-group time">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
+							  <div class="col-md-2 col-sm-12"><label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label></div>
+							  <div class="col-md-10 col-sm-12"><div class="input-group time">
 								<input type="text" name="option[{{ option.product_option_id }}]" value="{{ option.value }}" data-date-format="HH:mm" id="input-option{{ option.product_option_id }}" class="form-control" />
 								<span class="input-group-btn">
 								<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-								</span></div>
+								</span></div></div>
 							</div>
 							{% endif %}
 							{% endfor %}
@@ -241,7 +331,7 @@
 							{% if recurrings %}
 							<hr>
 							<h3>{{ text_payment_recurring }}</h3>
-							<div class="form-group required">
+							<div class="form-group required margin-one width-100 f-left no-margin-bottom">
 							  <select name="recurring_id" class="form-control">
 								<option value="">{{ text_select }}</option>
 								{% for recurring in recurrings %}
@@ -251,12 +341,13 @@
 							  <div class="help-block" id="recurring-description"></div>
 							</div>
 							{% endif %}
-							<div class="form-group">
-							  <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
-							  <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
-							  <input type="hidden" name="product_id" value="{{ product_id }}" />
+							<div class="form-group margin-one width-100 f-left">
+							  <div class="col-md-2 col-sm-12"><label class="control-label" for="input-quantity">{{ entry_qty }}</label></div>
+							  <div class="col-md-10 col-sm-12"><input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
+							  <input type="hidden" name="product_id" value="{{ product_id }}" /></div>
 							  <br />
-							  <a class="highlight-button-dark btn btn-medium button" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><i class="icon-basket"></i> {{ button_cart }}</a>
+                              <div class="text-center">
+							  <a class="highlight-button-dark btn btn-medium button" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><i class="icon-basket"></i> {{ button_cart }}</a></div>
 							</div>
 							{% if minimum > 1 %}
 							<div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
@@ -281,105 +372,118 @@
             </div>
         </section>
 
-        <section class="border-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12">
-                        <!-- tab -->
-                        <div class="tab-style1">
-                            <div class="col-md-12 col-sm-12 no-padding">
-                                <!-- tab navigation -->
-                                <ul class="nav nav-tabs nav-tabs-light text-left">
-                                    <li class="active"><a href="#tab_sec1" data-toggle="tab">Details</a></li>
-                                    <li><a href="#tab_sec2" data-toggle="tab">Washing Instructions</a></li>
-                                    <li><a href="#tab_sec3" data-toggle="tab">Sizing</a></li>
-                                    <li><a href="#tab_sec4" data-toggle="tab">Reviews (10)</a></li>
-                                </ul>
-                                <!-- tab end navigation -->
-                            </div>
-                            <!-- tab content section -->
-                            <div class="tab-content">
-                                <!-- tab content -->
-                                <div class="tab-pane med-text fade in active" id="tab_sec1">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end tab content -->
-                                <!-- tab content -->
-                                <div class="tab-pane fade in" id="tab_sec2">
-                                    <div class="row">
-                                        <div class="col-md-3 col-sm-6">
-                                            <ul class="instructions">
-                                                <li><strong>Type:</strong> Shift Dresses</li>
-                                                <li><strong>Fabric:</strong> Georgette</li>
-                                                <li><strong>Sleeves:</strong> Half Sleeve</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-3 col-sm-6">
-                                            <ul class="instructions">
-                                                <li><strong>Neck:</strong> V Neck</li>
-                                                <li><strong>Fit:</strong> Regular</li>
-                                                <li><strong>Length:</strong> Mini</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12 sm-margin-top-seven">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end tab content -->
-                                <!-- tab content -->
-                                <div class="tab-pane fade in" id="tab_sec3">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <ul class="instructions">
-                                                <li><strong>Weight:</strong> 7.25 Kg</li>
-                                                <li><strong>Dimensions:</strong> 90x60x90 Cm</li>
-                                                <li><strong>Size:</strong> One Size Fits All</li>
-                                                <li><strong>Color:</strong> White</li>
-                                                <li><strong>Guarantee:</strong> 5 Years</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12 sm-margin-top-seven">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end tab content -->
-                                <!-- tab content -->
-                                <div class="tab-pane fade in" id="tab_sec4">
-                                    <div class="row">
-                                        {% if review_status %}
-									  <div class="rating">
-										<p>{% for i in 1..5 %}
-										  {% if rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>{% else %}<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>{% endif %}
-										  {% endfor %} <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ text_write }}</a></p>
-										<hr>
-										<!-- AddThis Button BEGIN -->
-										<div class="addthis_toolbox addthis_default_style" data-url="{{ share }}"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
-										<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script> 
-										<!-- AddThis Button END --> 
-									  </div>
-									  {% endif %}
-                                    </div>
-                                </div>
-                                <!-- end tab content -->
-                            </div>
-                            <!-- end tab content section -->
-                        </div>
-                        <!-- end tab -->
-                    </div>
-                </div>
-            </div>
-        </section>
+        
+		<section class="padding-two">
+	<div class="container width-100">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2 class="padding-three no-padding-top">You may also like</h2>
+			</div>
+		</div>
+		<div class="row">
+			<!-- featured products slider -->
+			<div id="shop-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">
+				<!-- shop item -->
+				<div class="item">
+					<div class="home-product text-center position-relative overflow-hidden">
+						<a href="shop-single-product.html"><img src="image/catalog/product/1.png" alt=""/></a>
+						<span class="product-name text-uppercase"><a href="shop-single-product.html">Richard Nicoll</a></span>
+						<span class="price black-text">$680</span>
+						<div class="quick-buy">
+							<div class="product-share">
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end shop item -->
+				<!-- shop item -->
+				<div class="item">
+					<div class="home-product text-center position-relative overflow-hidden">
+						<a href="shop-single-product.html"><img src="image/catalog/product/2.png" alt=""/></a>
+						<span class="product-name text-uppercase"><a href="shop-single-product.html">Roland Mouret</a></span>
+						<span class="price black-text">$980</span>
+						<div class="quick-buy">
+							<div class="product-share">
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end shop item -->
+				<!-- shop item -->
+				<div class="item">
+					<div class="home-product text-center position-relative overflow-hidden">
+						<a href="shop-single-product.html"><img src="image/catalog/product/3.png" alt=""/></a>
+						<span class="product-name text-uppercase"><a href="shop-single-product.html">Preen Line</a></span>
+						<span class="price black-text">$750</span>
+						<div class="quick-buy">
+							<div class="product-share">
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end shop item -->
+				<!-- shop item -->
+				<div class="item">
+					<div class="home-product text-center position-relative overflow-hidden">
+						<a href="shop-single-product.html"><img src="image/catalog/product/4.png" alt=""/></a>
+						<span class="product-name text-uppercase"><a href="shop-single-product.html">Balmain</a></span>
+						<span class="price black-text">$350</span>
+						<div class="quick-buy">
+							<div class="product-share">
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end shop item -->
+				<!-- shop item -->
+				<div class="item">
+					<div class="home-product text-center position-relative overflow-hidden">
+						<a href="shop-single-product.html"><img src="image/catalog/product/5.png" alt=""/></a>
+						<span class="product-name text-uppercase"><a href="shop-single-product.html">Dolce & Gabbana</a></span>
+						<span class="price black-text">$700</span>
+						<div class="quick-buy">
+							<div class="product-share">
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end shop item -->
+				<!-- shop item -->
+				<div class="item">
+					<div class="home-product text-center position-relative overflow-hidden">
+						<a href="shop-single-product.html"><img src="image/catalog/product/6.png" alt=""/></a>
+						<span class="product-name text-uppercase"><a href="shop-single-product.html">Valentino</a></span>
+						<span class="price black-text">$370</span>
+						<div class="quick-buy">
+							<div class="product-share">
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end shop item -->
+			</div>
+			<!-- end featured products slider -->
+		</div>
+	</div>
+</section>
 
 		{% if products %}
         <section class="border-top">
