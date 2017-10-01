@@ -210,7 +210,7 @@
 							<h3>{{ text_option }}</h3>
 							{% for option in options %}
 							{% if option.type == 'select' %}
-							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom" {% if option.name|lower == 'stone type' %} style="display:none;" {% endif %} >
                             <div class="col-md-2 col-sm-12">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
                               </div>
@@ -342,8 +342,8 @@
 							</div>
 							{% endif %}
 							<div class="form-group margin-one width-100 f-left">
-							  <div class="col-md-2 col-sm-12"><label class="control-label" for="input-quantity">{{ entry_qty }}</label></div>
-							  <div class="col-md-10 col-sm-12"><input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
+							  <div class="col-md-2 col-sm-12" style="display:none;"><label class="control-label" for="input-quantity">{{ entry_qty }}</label></div>
+							  <div class="col-md-10 col-sm-12" style="display:none;"><input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
 							  <input type="hidden" name="product_id" value="{{ product_id }}" /></div>
 							  <br />
                               <div class="text-center">
