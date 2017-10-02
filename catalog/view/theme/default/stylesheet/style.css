@@ -2200,3 +2200,9 @@ thead th.first { padding-left: 0 !important; }
 #information-information{
   margin-top:50px !important;
 }
+
+@media (min-width: 992px){
+.navbar-right .dropdown-menu {
+    right: -210px;
+}
+}
