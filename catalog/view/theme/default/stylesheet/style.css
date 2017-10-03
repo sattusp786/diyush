@@ -609,7 +609,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .page-title span {letter-spacing: 1px; font-weight: 400; font-size: 14px;}
 .breadcrumb ul li { display: inline-block; letter-spacing: 3px; font-size: 11px; font-weight: 400; color: #575757}
 .breadcrumb ul li a { color: #575757}
-.breadcrumb ul > li+li:before {  color: #898989; content: "|"; font-size: 8px; padding: 0 10px; position: relative; top: -1px;}
+.breadcrumb ul > li+li:before {  color: #898989; content: ">"; font-size: 10px; padding: 0 5px; position: relative; top: -1px;}
 .page-title-large { min-height: 450px; padding: 240px 0 0}
 .page-title-shop.page-title-large { min-height: 350px; padding: 120px 0 0}
 .page-title-large h1 { font-size: 25px !important; margin-bottom: 15px !important;}
@@ -2209,6 +2209,19 @@ thead th.first { padding-left: 0 !important; }
 .catfilters li { display:inline; padding:0 10px;}
 .catfilters li:before { display:none;}
 .catfilters li label { padding-left:0;}
-.catfilters li label input, .catfilters li label i { display:none;}
+.catfilters li label input { display:none;}
+.catfilters li label i{font-style: normal;  font-size: 10px;  display: block;  letter-spacing: 0px;}
 .catfilters li label span { min-width:50px; height:30px; display:inline-block; border:1px solid #fff;}
+.catfilters li:hover label span {border:1px solid #575757;}
+.catfilters li label span .img-black { display:block;}
+.catfilters li label span .img-color { display:none;}
+.catfilters li:hover label span .img-black, .catfilters li label input:checked + span .img-black { display:none;}
+.catfilters li:hover label span .img-color, .catfilters li label input:checked + span .img-color{ display:block;}
 .catfilters li label input:checked + span { border:1px solid #575757;}
+
+@media only screen and ( max-width: 1920px ) {
+.navbar-right .dropdown-menu { right: -280px!important;}
+}
+@media only screen and ( max-width: 1600px ) {
+.navbar-right .dropdown-menu { right: -210px!important;}
+}
