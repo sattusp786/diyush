@@ -2206,3 +2206,9 @@ thead th.first { padding-left: 0 !important; }
     right: -210px;
 }
 }
+.catfilters li { display:inline; padding:0 10px;}
+.catfilters li:before { display:none;}
+.catfilters li label { padding-left:0;}
+.catfilters li label input, .catfilters li label i { display:none;}
+.catfilters li label span { min-width:50px; height:30px; display:inline-block; border:1px solid #fff;}
+.catfilters li label input:checked + span { border:1px solid #575757;}
