@@ -8,11 +8,11 @@
       <ul id="filter-group{{ filter_group.filter_group_id }}" class="catfilters margin-two-bottom">{% for filter in filter_group.filter %}
         <li class="checkbox">
           <label>{% if filter.filter_id in filter_category %}
-            <input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" checked="checked" />           
+            <input class="filtering" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" checked="checked" />           
             <span><img class="img-black" src="catalog/view/theme/default/image/dummy-icon-black.png" alt=""><img class="img-color" src="catalog/view/theme/default/image/dummy-icon-color.png" alt=""></span>
              <i>{{ filter.name }}</i>
             {% else %}
-            <input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" />           
+            <input class="filtering" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" />           
             <span><img class="img-black" src="catalog/view/theme/default/image/dummy-icon-black.png" alt=""><img class="img-color" src="catalog/view/theme/default/image/dummy-icon-color.png" alt=""></span>
              <i>{{ filter.name }}</i>
             {% endif %}</label>
@@ -32,7 +32,7 @@
 </div>
 </div>
 <script type="text/javascript"><!--
-$('#button-filter').on('click', function() {
+$('.filtering').on('click', function() {
 	filter = [];
 
 	$('input[name^=\'filter\']:checked').each(function(element) {
