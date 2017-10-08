@@ -1191,17 +1191,19 @@ $(document).ready(function () {
         });
         return error;
     }
-    $("form.search-form, form.search-form-result").submit(function (event) {
+    
+	$("form.search-form, form.search-form-result").submit(function (event) {
         var error = validationSearchForm();
         if (error) {
             var action = $(this).attr('action');
-            action = action == '#' || action == '' ? 'blog-grid-3columns.html' : action;
-            action = action + '?' + $(this).serialize();
+            action = action == '#' || action == '' ? 'index.php?route=product/search' : action;
+            action = action + '&' + $(this).serialize();
             window.location = action;
         }
 
         event.preventDefault();
     });
+	
     $('.navbar .navbar-collapse a.dropdown-toggle, .accordion-style1 .panel-heading a, .accordion-style2 .panel-heading a, .accordion-style3 .panel-heading a, .toggles .panel-heading a, .toggles-style2 .panel-heading a, .toggles-style3 .panel-heading a, a.carousel-control, .nav-tabs a[data-toggle="tab"], a.shopping-cart').click(function (e) {
         e.preventDefault();
     });
