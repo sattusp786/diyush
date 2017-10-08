@@ -150,6 +150,7 @@
                         <!-- end product name -->
                         <!-- product stock -->
                         <p class="text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by 10th Oct 2017</p>
+						<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>
                         <!-- end product stock -->
                         <div class="separator-line bg-black no-margin-lr margin-five"></div>
                         <!-- product short description -->
@@ -240,7 +241,7 @@
 							  <div class="col-md-10 col-sm-12 option-img"><div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
 								<div class="radio" style="float:left;width:45px;margin-top:0;">
 								  <label style="padding-left:0;">
-									<input style="display:none;" type="radio" {% if option_value.default == 1 %} SELECTED {% endif %} name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+									<input style="display:none;" class="imager" type="radio" {% if option_value.default == 1 %} CHECKED {% endif %} name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
 									{% if option_value.image %} <img {% if option_value.default == 1 %} style="border:1px solid #ddd;" {% else %} style="border:0;" {% endif %} src="{{ option_value.image }}" alt="input-option{{ option.product_option_id }}" class="img-thumbnail option_image input-option{{ option.product_option_id }}" /> {% endif %}                  
 									<!--{{ option_value.name }}
 									{% if option_value.price %}
@@ -926,8 +927,20 @@ $(document).ready(function() {
 		});
 		$(this).parent('li').addClass('active');
 		$("#"+idname).val(valuename);
+		
+		$(".product-option").change();
 	});
 	
+	$(".imager").click(function(){
+		var idname = $(this).siblings('.option_image').attr('alt');
+		$("."+idname).each(function(){
+			$(this).css('border','0');
+		});
+		$(this).siblings('.option_image').css('border','1px solid #ddd');
+		$(".product-option").change();
+	});
+	
+	/*
 	$(".option_image").click(function(){
 		var idname = $(this).attr('alt');
 		//var valuename = $(this).attr('alt');
@@ -936,8 +949,10 @@ $(document).ready(function() {
 		});
 		$(this).css('border','1px solid #ddd');
 		//$("#"+idname).val(valuename);
+		$(".product-option").change();
 	});
-
+*/
+	
 	$('.thumbnails').magnificPopup({
 		type:'image',
 		delegate: 'a',

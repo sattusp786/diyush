@@ -697,7 +697,7 @@ class ControllerProductProduct extends Controller {
 			if (isset($this->session->data['cart'])) {
 				$hold = $this->session->data['cart'];
 			}
-
+			
 			$this->cart->clear();
 			$this->cart->add($product_id, $quantity, $option);
 
