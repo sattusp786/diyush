@@ -2238,6 +2238,7 @@ select#input-option5868 { width:auto;}
 .mobileview { display:none;}
 h2.final_price span {font-size: 13px; color: #626262; line-height: 23px; letter-spacing: 0.02em; padding:0 2px;}
 h2.final_price span.rrp { text-decoration:line-through;}
+.my-mfp-zoom-in.mfp-ready.mfp-bg { background:#000; opacity: 0.5;}
 
 
 @media only screen and ( max-width: 1920px ) {

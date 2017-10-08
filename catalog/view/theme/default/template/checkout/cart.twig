@@ -1,6 +1,6 @@
 {{ header }}
 <!-- head section -->
-        <section class="content-top-margin page-title page-title-small bg-gray">
+        <section class="content-top-margin page-title page-title-small bg-gray padding-one">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-7 col-sm-12 wow fadeInUp" data-wow-duration="300ms">
@@ -8,7 +8,7 @@
                         <h1 class="black-text">{{ heading_title }}</h1>
                         <!-- end page title -->
                     </div>
-                    <div class="col-lg-4 col-md-5 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none" data-wow-duration="600ms">
+                    <div class="col-lg-4 col-md-5 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none text-right" data-wow-duration="600ms">
                         <!-- breadcrumb -->
                         <ul>
 							{% for breadcrumb in breadcrumbs %}
@@ -37,7 +37,7 @@
 		  </div>
 		  {% endif %}
         <!-- content section -->
-        <section class="content-section">
+        <section class="content-section padding-two">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 shop-cart-table">
@@ -92,12 +92,12 @@
                         </table>
 						</form>
                     </div>
-                    <div class="col-sm-12 cupon padding-five border-top border-bottom">
+                    <div class="col-sm-12 cupon border-top border-bottom padding-two">
                         <!--<button class="highlight-button btn btn-very-small no-margin pull-left">Empty Cart</button>-->
                         <button class="highlight-button btn btn-very-small no-margin pull-right continue-shopping" onclick="javascript:location.href='{{ continue }}'">{{ button_shopping }}</button>
                         <button class="highlight-button btn btn-very-small no-margin pull-right" onclick="$('#cart_form').submit();">Update Shopping Cart</button>
                     </div>
-                    <div class="col-sm-12 padding-five no-padding-bottom">
+                    <div class="col-sm-12 no-padding-bottom padding-two">
                         <div class="col-md-5 col-sm-5 calculate no-padding-left xs-margin-bottom-ten xs-no-padding">
                             <div class="panel panel-default border margin-five no-margin-top">
 								{% if modules %}
