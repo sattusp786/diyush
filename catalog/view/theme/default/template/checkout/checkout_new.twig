@@ -1,0 +1,1004 @@
+{{ header }}
+<!-- head section -->
+        <section class="content-top-margin page-title page-title-small bg-gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-12 wow fadeInUp" data-wow-duration="300ms">
+                        <!-- page title -->
+                        <h1 class="black-text">Checkout</h1>
+                        <!-- end page title -->
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none" data-wow-duration="600ms">
+                        <!-- breadcrumb -->
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Shopping Cart</a></li>
+                            <li>Checkout</li>
+                        </ul>
+                        <!-- end breadcrumb -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end head section -->
+
+        <section>
+            <div class="container clearfix">
+                <div class="row margin-seven no-margin-top">
+                    <div class="col-md-5 col-xs-12 alert-style4 pull-left">
+                        <div class="alert alert-warning border text-uppercase black-text letter-spacing-1 text-small">Returning customer? <a href="#" class="font-weight-600 text-decoration-underline">Click here to login</a></div>
+                    </div>
+                    <div class="col-md-5 col-xs-12 alert-style4 pull-right">
+                        <div class="alert alert-warning border text-uppercase black-text letter-spacing-1 text-small" role="alert">Have a coupon? <a href="#" class="font-weight-600 text-decoration-underline">Click here to enter your code</a></div>
+                    </div>
+                </div>
+                <div class="row margin-five no-margin-top">
+                    <div class="col-md-5 col-sm-12 pull-left sm-margin-bottom-seven">
+                        <p class="black-text font-weight-600 text-uppercase text-large">Billing Address</p>
+                        <form id="billing-form" method="post" action="javascript:void(0)" name="billing-form">
+                            <div class="col-md-6 no-padding-left sm-no-padding">
+                                <label>* First Name:</label>
+                                <input type="text" name="Name">
+                            </div>
+                            <div class="col-md-6 no-padding-right sm-no-padding">
+                                <label>* Last Name:</label>
+                                <input type="text" name="Last Name">
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>Company Name:</label>
+                                <input type="text" name="Company Name">
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>* Address:</label>
+                                <input type="text" name="Address1">
+                                <input type="text" name="Address2">
+                            </div>
+                            <div class="col-md-6 no-padding-left sm-no-padding">
+                                <label>* City / Town:</label>
+                                <input type="text" name="city">
+                            </div>
+                            <div class="col-md-6 no-padding-right sm-no-padding">
+                                <label>* Postcode:</label>
+                                <input type="text" name="zip">
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>* Country:</label>
+                                <div class="select-style">
+                                    <select style="padding-top:11px; padding-bottom:11px">
+                                        <option value="" selected="selected">Select a country</option><option value="AF" >Afghanistan</option><option value="AL" >Albania</option><option value="DZ" >Algeria</option><option value="AD" >Andorra</option><option value="AO" >Angola</option><option value="AI" >Anguilla</option><option value="AQ" >Antarctica</option><option value="AG" >Antigua and Barbuda</option><option value="AR" >Argentina</option><option value="AM" >Armenia</option><option value="AW" >Aruba</option><option value="AU" >Australia</option><option value="AT" >Austria</option><option value="AZ" >Azerbaijan</option><option value="BS" >Bahamas</option><option value="BH" >Bahrain</option><option value="BD" >Bangladesh</option><option value="BB" >Barbados</option><option value="BY" >Belarus</option><option value="PW" >Belau</option><option value="BE" >Belgium</option><option value="BZ" >Belize</option><option value="BJ" >Benin</option><option value="BM" >Bermuda</option><option value="BT" >Bhutan</option><option value="BO" >Bolivia</option><option value="BQ" >Bonaire, Saint Eustatius and Saba</option><option value="BA" >Bosnia and Herzegovina</option><option value="BW" >Botswana</option><option value="BV" >Bouvet Island</option><option value="BR" >Brazil</option><option value="IO" >British Indian Ocean Territory</option><option value="VG" >British Virgin Islands</option><option value="BN" >Brunei</option><option value="BG" >Bulgaria</option><option value="BF" >Burkina Faso</option><option value="BI" >Burundi</option><option value="KH" >Cambodia</option><option value="CM" >Cameroon</option><option value="CA" >Canada</option><option value="CV" >Cape Verde</option><option value="KY" >Cayman Islands</option><option value="CF" >Central African Republic</option><option value="TD" >Chad</option><option value="CL" >Chile</option><option value="CN" >China</option><option value="CX" >Christmas Island</option><option value="CC" >Cocos (Keeling) Islands</option><option value="CO" >Colombia</option><option value="KM" >Comoros</option><option value="CG" >Congo (Brazzaville)</option><option value="CD" >Congo (Kinshasa)</option><option value="CK" >Cook Islands</option><option value="CR" >Costa Rica</option><option value="HR" >Croatia</option><option value="CU" >Cuba</option><option value="CW" >Cura&Ccedil;ao</option><option value="CY" >Cyprus</option><option value="CZ" >Czech Republic</option><option value="DK" >Denmark</option><option value="DJ" >Djibouti</option><option value="DM" >Dominica</option><option value="DO" >Dominican Republic</option><option value="EC" >Ecuador</option><option value="EG" >Egypt</option><option value="SV" >El Salvador</option><option value="GQ" >Equatorial Guinea</option><option value="ER" >Eritrea</option><option value="EE" >Estonia</option><option value="ET" >Ethiopia</option><option value="FK" >Falkland Islands</option><option value="FO" >Faroe Islands</option><option value="FJ" >Fiji</option><option value="FI" >Finland</option><option value="FR" >France</option><option value="GF" >French Guiana</option><option value="PF" >French Polynesia</option><option value="TF" >French Southern Territories</option><option value="GA" >Gabon</option><option value="GM" >Gambia</option><option value="GE" >Georgia</option><option value="DE" >Germany</option><option value="GH" >Ghana</option><option value="GI" >Gibraltar</option><option value="GR" >Greece</option><option value="GL" >Greenland</option><option value="GD" >Grenada</option><option value="GP" >Guadeloupe</option><option value="GT" >Guatemala</option><option value="GG" >Guernsey</option><option value="GN" >Guinea</option><option value="GW" >Guinea-Bissau</option><option value="GY" >Guyana</option><option value="HT" >Haiti</option><option value="HM" >Heard Island and McDonald Islands</option><option value="HN" >Honduras</option><option value="HK" >Hong Kong</option><option value="HU" >Hungary</option><option value="IS" >Iceland</option><option value="IN" >India</option><option value="ID" >Indonesia</option><option value="IR" >Iran</option><option value="IQ" >Iraq</option><option value="IM" >Isle of Man</option><option value="IL" >Israel</option><option value="IT" >Italy</option><option value="CI" >Ivory Coast</option><option value="JM" >Jamaica</option><option value="JP" >Japan</option><option value="JE" >Jersey</option><option value="JO" >Jordan</option><option value="KZ" >Kazakhstan</option><option value="KE" >Kenya</option><option value="KI" >Kiribati</option><option value="KW" >Kuwait</option><option value="KG" >Kyrgyzstan</option><option value="LA" >Laos</option><option value="LV" >Latvia</option><option value="LB" >Lebanon</option><option value="LS" >Lesotho</option><option value="LR" >Liberia</option><option value="LY" >Libya</option><option value="LI" >Liechtenstein</option><option value="LT" >Lithuania</option><option value="LU" >Luxembourg</option><option value="MO" >Macao S.A.R., China</option><option value="MK" >Macedonia</option><option value="MG" >Madagascar</option><option value="MW" >Malawi</option><option value="MY" >Malaysia</option><option value="MV" >Maldives</option><option value="ML" >Mali</option><option value="MT" >Malta</option><option value="MH" >Marshall Islands</option><option value="MQ" >Martinique</option><option value="MR" >Mauritania</option><option value="MU" >Mauritius</option><option value="YT" >Mayotte</option><option value="MX" >Mexico</option><option value="FM" >Micronesia</option><option value="MD" >Moldova</option><option value="MC" >Monaco</option><option value="MN" >Mongolia</option><option value="ME" >Montenegro</option><option value="MS" >Montserrat</option><option value="MA" >Morocco</option><option value="MZ" >Mozambique</option><option value="MM" >Myanmar</option><option value="NA" >Namibia</option><option value="NR" >Nauru</option><option value="NP" >Nepal</option><option value="NL" >Netherlands</option><option value="AN" >Netherlands Antilles</option><option value="NC" >New Caledonia</option><option value="NZ" >New Zealand</option><option value="NI" >Nicaragua</option><option value="NE" >Niger</option><option value="NG" >Nigeria</option><option value="NU" >Niue</option><option value="NF" >Norfolk Island</option><option value="KP" >North Korea</option><option value="NO" >Norway</option><option value="OM" >Oman</option><option value="PK" >Pakistan</option><option value="PS" >Palestinian Territory</option><option value="PA" >Panama</option><option value="PG" >Papua New Guinea</option><option value="PY" >Paraguay</option><option value="PE" >Peru</option><option value="PH" >Philippines</option><option value="PN" >Pitcairn</option><option value="PL" >Poland</option><option value="PT" >Portugal</option><option value="QA" >Qatar</option><option value="IE" >Republic of Ireland</option><option value="RE" >Reunion</option><option value="RO" >Romania</option><option value="RU" >Russia</option><option value="RW" >Rwanda</option><option value="ST" >S&atilde;o Tom&eacute; and Pr&iacute;ncipe</option><option value="BL" >Saint Barth&eacute;lemy</option><option value="SH" >Saint Helena</option><option value="KN" >Saint Kitts and Nevis</option><option value="LC" >Saint Lucia</option><option value="SX" >Saint Martin (Dutch part)</option><option value="MF" >Saint Martin (French part)</option><option value="PM" >Saint Pierre and Miquelon</option><option value="VC" >Saint Vincent and the Grenadines</option><option value="SM" >San Marino</option><option value="SA" >Saudi Arabia</option><option value="SN" >Senegal</option><option value="RS" >Serbia</option><option value="SC" >Seychelles</option><option value="SL" >Sierra Leone</option><option value="SG" >Singapore</option><option value="SK" >Slovakia</option><option value="SI" >Slovenia</option><option value="SB" >Solomon Islands</option><option value="SO" >Somalia</option><option value="ZA" >South Africa</option><option value="GS" >South Georgia/Sandwich Islands</option><option value="KR" >South Korea</option><option value="SS" >South Sudan</option><option value="ES" >Spain</option><option value="LK" >Sri Lanka</option><option value="SD" >Sudan</option><option value="SR" >Suriname</option><option value="SJ" >Svalbard and Jan Mayen</option><option value="SZ" >Swaziland</option><option value="SE" >Sweden</option><option value="CH" >Switzerland</option><option value="SY" >Syria</option><option value="TW" >Taiwan</option><option value="TJ" >Tajikistan</option><option value="TZ" >Tanzania</option><option value="TH" >Thailand</option><option value="TL" >Timor-Leste</option><option value="TG" >Togo</option><option value="TK" >Tokelau</option><option value="TO" >Tonga</option><option value="TT" >Trinidad and Tobago</option><option value="TN" >Tunisia</option><option value="TR" >Turkey</option><option value="TM" >Turkmenistan</option><option value="TC" >Turks and Caicos Islands</option><option value="TV" >Tuvalu</option><option value="UG" >Uganda</option><option value="UA" >Ukraine</option><option value="AE" >United Arab Emirates</option><option value="GB">United Kingdom (UK)</option><option value="US" >United States (US)</option><option value="UY" >Uruguay</option><option value="UZ" >Uzbekistan</option><option value="VU" >Vanuatu</option><option value="VA" >Vatican</option><option value="VE" >Venezuela</option><option value="VN" >Vietnam</option><option value="WF" >Wallis and Futuna</option><option value="EH" >Western Sahara</option><option value="WS" >Western Samoa</option><option value="YE" >Yemen</option><option value="ZM" >Zambia</option><option value="ZW" >Zimbabwe</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 no-padding-left sm-no-padding">
+                                <label>* Email Address:</label>
+                                <input type="text" name="Email Address">
+                            </div>
+                            <div class="col-md-6 no-padding-right sm-no-padding">
+                                <label>* Phone:</label>
+                                <input type="text" name="Phone">
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>* Account Password:</label>
+                                <input type="password" name="password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-5 col-sm-12 col-xs-12 pull-right">
+                        <p class="black-text font-weight-600 text-uppercase text-large"><input id="ship-to-different-address-checkbox" class="margin-left-right-one no-margin-left" checked="checked" type="checkbox" name="ship_to_different_address" value="1">Ship to a different address?</p>
+                        <form id="shipping-address" method="post" action="javascript:void(0)" name="shipping-address">
+                            <div class="col-md-6 no-padding-left sm-no-padding">
+                                <label>* First Name:</label>
+                                <input type="text" name="Name">
+                            </div>
+                            <div class="col-md-6 no-padding-right sm-no-padding">
+                                <label>* Last Name:</label>
+                                <input type="text" name="Last Name">
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>Company Name:</label>
+                                <input type="text" name="Company Name">
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>* Address:</label>
+                                <input type="text" name="Address1">
+                                <input type="text" name="Address2">
+                            </div>
+                            <div class="col-md-6 no-padding-left sm-no-padding">
+                                <label>* City / Town:</label>
+                                <input type="text" name="city">
+                            </div>
+                            <div class="col-md-6 no-padding-right sm-no-padding">
+                                <label>* Postcode:</label>
+                                <input type="text" name="zip">
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>* Country:</label>
+                                <div class="select-style">
+                                    <select style="padding-top:11px; padding-bottom:11px">
+                                        <option value="" selected="selected">Select a country</option><option value="AF" >Afghanistan</option><option value="AL" >Albania</option><option value="DZ" >Algeria</option><option value="AD" >Andorra</option><option value="AO" >Angola</option><option value="AI" >Anguilla</option><option value="AQ" >Antarctica</option><option value="AG" >Antigua and Barbuda</option><option value="AR" >Argentina</option><option value="AM" >Armenia</option><option value="AW" >Aruba</option><option value="AU" >Australia</option><option value="AT" >Austria</option><option value="AZ" >Azerbaijan</option><option value="BS" >Bahamas</option><option value="BH" >Bahrain</option><option value="BD" >Bangladesh</option><option value="BB" >Barbados</option><option value="BY" >Belarus</option><option value="PW" >Belau</option><option value="BE" >Belgium</option><option value="BZ" >Belize</option><option value="BJ" >Benin</option><option value="BM" >Bermuda</option><option value="BT" >Bhutan</option><option value="BO" >Bolivia</option><option value="BQ" >Bonaire, Saint Eustatius and Saba</option><option value="BA" >Bosnia and Herzegovina</option><option value="BW" >Botswana</option><option value="BV" >Bouvet Island</option><option value="BR" >Brazil</option><option value="IO" >British Indian Ocean Territory</option><option value="VG" >British Virgin Islands</option><option value="BN" >Brunei</option><option value="BG" >Bulgaria</option><option value="BF" >Burkina Faso</option><option value="BI" >Burundi</option><option value="KH" >Cambodia</option><option value="CM" >Cameroon</option><option value="CA" >Canada</option><option value="CV" >Cape Verde</option><option value="KY" >Cayman Islands</option><option value="CF" >Central African Republic</option><option value="TD" >Chad</option><option value="CL" >Chile</option><option value="CN" >China</option><option value="CX" >Christmas Island</option><option value="CC" >Cocos (Keeling) Islands</option><option value="CO" >Colombia</option><option value="KM" >Comoros</option><option value="CG" >Congo (Brazzaville)</option><option value="CD" >Congo (Kinshasa)</option><option value="CK" >Cook Islands</option><option value="CR" >Costa Rica</option><option value="HR" >Croatia</option><option value="CU" >Cuba</option><option value="CW" >Cura&Ccedil;ao</option><option value="CY" >Cyprus</option><option value="CZ" >Czech Republic</option><option value="DK" >Denmark</option><option value="DJ" >Djibouti</option><option value="DM" >Dominica</option><option value="DO" >Dominican Republic</option><option value="EC" >Ecuador</option><option value="EG" >Egypt</option><option value="SV" >El Salvador</option><option value="GQ" >Equatorial Guinea</option><option value="ER" >Eritrea</option><option value="EE" >Estonia</option><option value="ET" >Ethiopia</option><option value="FK" >Falkland Islands</option><option value="FO" >Faroe Islands</option><option value="FJ" >Fiji</option><option value="FI" >Finland</option><option value="FR" >France</option><option value="GF" >French Guiana</option><option value="PF" >French Polynesia</option><option value="TF" >French Southern Territories</option><option value="GA" >Gabon</option><option value="GM" >Gambia</option><option value="GE" >Georgia</option><option value="DE" >Germany</option><option value="GH" >Ghana</option><option value="GI" >Gibraltar</option><option value="GR" >Greece</option><option value="GL" >Greenland</option><option value="GD" >Grenada</option><option value="GP" >Guadeloupe</option><option value="GT" >Guatemala</option><option value="GG" >Guernsey</option><option value="GN" >Guinea</option><option value="GW" >Guinea-Bissau</option><option value="GY" >Guyana</option><option value="HT" >Haiti</option><option value="HM" >Heard Island and McDonald Islands</option><option value="HN" >Honduras</option><option value="HK" >Hong Kong</option><option value="HU" >Hungary</option><option value="IS" >Iceland</option><option value="IN" >India</option><option value="ID" >Indonesia</option><option value="IR" >Iran</option><option value="IQ" >Iraq</option><option value="IM" >Isle of Man</option><option value="IL" >Israel</option><option value="IT" >Italy</option><option value="CI" >Ivory Coast</option><option value="JM" >Jamaica</option><option value="JP" >Japan</option><option value="JE" >Jersey</option><option value="JO" >Jordan</option><option value="KZ" >Kazakhstan</option><option value="KE" >Kenya</option><option value="KI" >Kiribati</option><option value="KW" >Kuwait</option><option value="KG" >Kyrgyzstan</option><option value="LA" >Laos</option><option value="LV" >Latvia</option><option value="LB" >Lebanon</option><option value="LS" >Lesotho</option><option value="LR" >Liberia</option><option value="LY" >Libya</option><option value="LI" >Liechtenstein</option><option value="LT" >Lithuania</option><option value="LU" >Luxembourg</option><option value="MO" >Macao S.A.R., China</option><option value="MK" >Macedonia</option><option value="MG" >Madagascar</option><option value="MW" >Malawi</option><option value="MY" >Malaysia</option><option value="MV" >Maldives</option><option value="ML" >Mali</option><option value="MT" >Malta</option><option value="MH" >Marshall Islands</option><option value="MQ" >Martinique</option><option value="MR" >Mauritania</option><option value="MU" >Mauritius</option><option value="YT" >Mayotte</option><option value="MX" >Mexico</option><option value="FM" >Micronesia</option><option value="MD" >Moldova</option><option value="MC" >Monaco</option><option value="MN" >Mongolia</option><option value="ME" >Montenegro</option><option value="MS" >Montserrat</option><option value="MA" >Morocco</option><option value="MZ" >Mozambique</option><option value="MM" >Myanmar</option><option value="NA" >Namibia</option><option value="NR" >Nauru</option><option value="NP" >Nepal</option><option value="NL" >Netherlands</option><option value="AN" >Netherlands Antilles</option><option value="NC" >New Caledonia</option><option value="NZ" >New Zealand</option><option value="NI" >Nicaragua</option><option value="NE" >Niger</option><option value="NG" >Nigeria</option><option value="NU" >Niue</option><option value="NF" >Norfolk Island</option><option value="KP" >North Korea</option><option value="NO" >Norway</option><option value="OM" >Oman</option><option value="PK" >Pakistan</option><option value="PS" >Palestinian Territory</option><option value="PA" >Panama</option><option value="PG" >Papua New Guinea</option><option value="PY" >Paraguay</option><option value="PE" >Peru</option><option value="PH" >Philippines</option><option value="PN" >Pitcairn</option><option value="PL" >Poland</option><option value="PT" >Portugal</option><option value="QA" >Qatar</option><option value="IE" >Republic of Ireland</option><option value="RE" >Reunion</option><option value="RO" >Romania</option><option value="RU" >Russia</option><option value="RW" >Rwanda</option><option value="ST" >S&atilde;o Tom&eacute; and Pr&iacute;ncipe</option><option value="BL" >Saint Barth&eacute;lemy</option><option value="SH" >Saint Helena</option><option value="KN" >Saint Kitts and Nevis</option><option value="LC" >Saint Lucia</option><option value="SX" >Saint Martin (Dutch part)</option><option value="MF" >Saint Martin (French part)</option><option value="PM" >Saint Pierre and Miquelon</option><option value="VC" >Saint Vincent and the Grenadines</option><option value="SM" >San Marino</option><option value="SA" >Saudi Arabia</option><option value="SN" >Senegal</option><option value="RS" >Serbia</option><option value="SC" >Seychelles</option><option value="SL" >Sierra Leone</option><option value="SG" >Singapore</option><option value="SK" >Slovakia</option><option value="SI" >Slovenia</option><option value="SB" >Solomon Islands</option><option value="SO" >Somalia</option><option value="ZA" >South Africa</option><option value="GS" >South Georgia/Sandwich Islands</option><option value="KR" >South Korea</option><option value="SS" >South Sudan</option><option value="ES" >Spain</option><option value="LK" >Sri Lanka</option><option value="SD" >Sudan</option><option value="SR" >Suriname</option><option value="SJ" >Svalbard and Jan Mayen</option><option value="SZ" >Swaziland</option><option value="SE" >Sweden</option><option value="CH" >Switzerland</option><option value="SY" >Syria</option><option value="TW" >Taiwan</option><option value="TJ" >Tajikistan</option><option value="TZ" >Tanzania</option><option value="TH" >Thailand</option><option value="TL" >Timor-Leste</option><option value="TG" >Togo</option><option value="TK" >Tokelau</option><option value="TO" >Tonga</option><option value="TT" >Trinidad and Tobago</option><option value="TN" >Tunisia</option><option value="TR" >Turkey</option><option value="TM" >Turkmenistan</option><option value="TC" >Turks and Caicos Islands</option><option value="TV" >Tuvalu</option><option value="UG" >Uganda</option><option value="UA" >Ukraine</option><option value="AE" >United Arab Emirates</option><option value="GB">United Kingdom (UK)</option><option value="US" >United States (US)</option><option value="UY" >Uruguay</option><option value="UZ" >Uzbekistan</option><option value="VU" >Vanuatu</option><option value="VA" >Vatican</option><option value="VE" >Venezuela</option><option value="VN" >Vietnam</option><option value="WF" >Wallis and Futuna</option><option value="EH" >Western Sahara</option><option value="WS" >Western Samoa</option><option value="YE" >Yemen</option><option value="ZM" >Zambia</option><option value="ZW" >Zimbabwe</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 no-padding">
+                                <label>Order Notes:</label>
+                                <textarea name="comment" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row margin-five sm-margin-bottom-seven">
+                    <div class="col-sm-12 shop-cart-table">
+                        <table class="table shop-cart text-center">
+                            <thead>
+                                <tr>
+                                    <th class="first"></th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Product</th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Price</th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Quantity</th>
+                                    <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Sub Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="product-thumbnail text-left">
+                                        <a href="shop-single-product.html"><img src="http://placehold.it/120x120" alt="" ></a>
+                                    </td>
+                                    <td class="text-left">
+                                        <a href="shop-single-product.html">Chasse Wells Italian Genuine Leather Incroyable Tote</a>
+                                        <span class="text-uppercase display-block text-small margin-two">SKU: 290397</span>
+                                        <a href="shop-single-product.html" class="text-small"><i class="fa fa-edit black-text"></i> Edit</a>
+                                    </td>
+                                    <td class="text-left">
+                                        $450
+                                    </td>
+                                    <td class="product-quantity">
+                                        <div class="select-style med-input shop-shorting shop-shorting-cart no-border-round">
+                                            <select>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal text-left">$450</td>
+                                    <td class="product-remove text-center">
+                                        <a href="javascript:void(0)"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="product-thumbnail text-left">
+                                        <a href="shop-single-product.html"><img src="http://placehold.it/120x120" alt="" ></a>
+                                    </td>
+                                    <td class="text-left">
+                                        <a href="shop-single-product.html">Tundra perforated suede boots</a>
+                                        <span class="text-uppercase display-block text-small margin-two">SKU: 450365</span>
+                                        <a href="shop-single-product.html" class="text-small"><i class="fa fa-edit black-text"></i> Edit</a>
+                                    </td>
+                                    <td class="text-left">
+                                        $350
+                                    </td>
+                                    <td class="product-quantity">
+                                        <div class="select-style med-input shop-shorting shop-shorting-cart no-border-round">
+                                            <select>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="product-subtotal text-left">$350</td>
+                                    <td class="product-remove text-center">
+                                        <a href="javascript:void(0)"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="accordion-one" class="col-md-6 col-sm-12 panel-group accordion-style1 sm-margin-bottom-seven">
+                        <!-- accordion item -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a href="#accordion-one-link1" data-parent="#accordion-one" data-toggle="collapse" class="collapsed"><h4 class="panel-title">Direct Bank Transfer<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                            </div>
+                            <div class="panel-collapse collapse" id="accordion-one-link1" style="height: 0px;">
+                                <div class="panel-body">
+                                    Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus. Aenean lacinia bibendum nulla sed consectetur.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end accordion item -->
+                        <!-- accordion item -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a href="#accordion-one-link2" data-parent="#accordion-one" data-toggle="collapse" class="collapsed"><h4 class="panel-title">Cheque Payment<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                            </div>
+                            <div class="panel-collapse collapse" id="accordion-one-link2" style="height: 0px;">
+                                <div class="panel-body">
+                                    Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end accordion item -->
+                        <!-- accordion item -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading active-accordion">
+                                <a href="#accordion-one-link3" data-parent="#accordion-one" data-toggle="collapse" class=""><h4 class="panel-title">Paypal<span class="pull-right"><i class="fa fa-minus"></i></span></h4></a>
+                            </div>
+                            <div class="panel-collapse collapse in" id="accordion-one-link3" style="">
+                                <div class="panel-body">
+                                    Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end accordion item -->
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <table class="table cart-total">
+                            <tbody>
+                                <tr>
+                                    <th class="padding-two text-right no-padding-right text-uppercase font-weight-600 letter-spacing-2 text-small xs-no-padding">Cart Subtotal</th>
+                                    <td class="padding-two text-uppercase text-right no-padding-right font-weight-600 black-text xs-no-padding">$800</td>
+                                </tr>
+                                <tr>
+                                    <th class="padding-two text-right no-padding-right text-uppercase font-weight-600 letter-spacing-2 text-small xs-no-padding">Shipping and Handling</th>
+                                    <td class="padding-two text-uppercase text-right no-padding-right font-weight-600 black-text text-small xs-no-padding">Free</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="padding-one no-padding-right xs-no-padding">
+                                        <hr>
+                                    </td>
+                                </tr>
+                                <tr class="total">
+                                    <th class="padding-two text-uppercase text-right no-padding-right font-weight-600 text-large xs-no-padding">Order Total</th>
+                                    <td class="padding-two text-uppercase text-right no-padding-right font-weight-600 black-text text-large no-letter-spacing xs-no-padding">$800</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="padding-one no-padding-right xs-no-padding">
+                                        <hr class="no-margin-bottom">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="shop-checkout.html" class="highlight-button-black-background btn no-margin pull-right checkout-btn xs-width-100 xs-text-center">Place Order</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+<script type="text/javascript"><!--
+$(document).on('change', 'input[name=\'account\']', function() {
+	if ($('#collapse-payment-address').parent().find('.panel-heading .panel-title > *').is('a')) {
+		if (this.value == 'register') {
+			$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_account }} <i class="fa fa-caret-down"></i></a>');
+		} else {
+			$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_address }} <i class="fa fa-caret-down"></i></a>');
+		}
+	} else {
+		if (this.value == 'register') {
+			$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('{{ text_checkout_account }}');
+		} else {
+			$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_address }}');
+		}
+	}
+});
+
+{% if not logged %}
+$(document).ready(function() {
+    $.ajax({
+        url: 'index.php?route=checkout/login',
+        dataType: 'html',
+        success: function(html) {
+           $('#collapse-checkout-option .panel-body').html(html);
+
+			$('#collapse-checkout-option').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-option" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_option }} <i class="fa fa-caret-down"></i></a>');
+
+			$('a[href=\'#collapse-checkout-option\']').trigger('click');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+{% else %}
+$(document).ready(function() {
+    $.ajax({
+        url: 'index.php?route=checkout/payment_address',
+        dataType: 'html',
+        success: function(html) {
+            $('#collapse-payment-address .panel-body').html(html);
+
+			$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_address }} <i class="fa fa-caret-down"></i></a>');
+
+			$('a[href=\'#collapse-payment-address\']').trigger('click');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+{% endif %}
+
+// Checkout
+$(document).delegate('#button-account', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/' + $('input[name=\'account\']:checked').val(),
+        dataType: 'html',
+        beforeSend: function() {
+        	$('#button-account').button('loading');
+		},
+        complete: function() {
+			$('#button-account').button('reset');
+        },
+        success: function(html) {
+            $('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+            $('#collapse-payment-address .panel-body').html(html);
+
+			if ($('input[name=\'account\']:checked').val() == 'register') {
+				$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_account }} <i class="fa fa-caret-down"></i></a>');
+			} else {
+				$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_address }} <i class="fa fa-caret-down"></i></a>');
+			}
+
+			$('a[href=\'#collapse-payment-address\']').trigger('click');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Login
+$(document).delegate('#button-login', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/login/save',
+        type: 'post',
+        data: $('#collapse-checkout-option :input'),
+        dataType: 'json',
+        beforeSend: function() {
+        	$('#button-login').button('loading');
+		},
+        complete: function() {
+            $('#button-login').button('reset');
+        },
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+            $('.form-group').removeClass('has-error');
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                $('#collapse-checkout-option .panel-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+				// Highlight any found errors
+				$('input[name=\'email\']').parent().addClass('has-error');
+				$('input[name=\'password\']').parent().addClass('has-error');
+		   }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Register
+$(document).delegate('#button-register', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/register/save',
+        type: 'post',
+        data: $('#collapse-payment-address input[type=\'text\'], #collapse-payment-address input[type=\'date\'], #collapse-payment-address input[type=\'datetime-local\'], #collapse-payment-address input[type=\'time\'], #collapse-payment-address input[type=\'password\'], #collapse-payment-address input[type=\'hidden\'], #collapse-payment-address input[type=\'checkbox\']:checked, #collapse-payment-address input[type=\'radio\']:checked, #collapse-payment-address textarea, #collapse-payment-address select'),
+        dataType: 'json',
+        beforeSend: function() {
+			$('#button-register').button('loading');
+		},
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+            $('.form-group').removeClass('has-error');
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                $('#button-register').button('reset');
+
+                if (json['error']['warning']) {
+                    $('#collapse-payment-address .panel-body').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+
+				for (i in json['error']) {
+					var element = $('#input-payment-' + i.replace('_', '-'));
+
+					if ($(element).parent().hasClass('input-group')) {
+						$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+					} else {
+						$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+					}
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+            } else {
+                {% if shipping_required %}
+                var shipping_address = $('#payment-address input[name=\'shipping_address\']:checked').prop('value');
+
+                if (shipping_address) {
+                    $.ajax({
+                        url: 'index.php?route=checkout/shipping_method',
+                        dataType: 'html',
+                        success: function(html) {
+							// Add the shipping address
+                            $.ajax({
+                                url: 'index.php?route=checkout/shipping_address',
+                                dataType: 'html',
+                                success: function(html) {
+                                    $('#collapse-shipping-address .panel-body').html(html);
+
+									$('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_address }} <i class="fa fa-caret-down"></i></a>');
+                                },
+                                error: function(xhr, ajaxOptions, thrownError) {
+                                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                }
+                            });
+
+							$('#collapse-shipping-method .panel-body').html(html);
+
+							$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_method }} <i class="fa fa-caret-down"></i></a>');
+
+   							$('a[href=\'#collapse-shipping-method\']').trigger('click');
+
+							$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_shipping_method }}');
+							$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
+							$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: 'index.php?route=checkout/shipping_address',
+                        dataType: 'html',
+                        success: function(html) {
+                            $('#collapse-shipping-address .panel-body').html(html);
+
+							$('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_address }} <i class="fa fa-caret-down"></i></a>');
+
+							$('a[href=\'#collapse-shipping-address\']').trigger('click');
+
+							$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_shipping_method }}');
+							$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
+							$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+                }
+                {% else %}
+                $.ajax({
+                    url: 'index.php?route=checkout/payment_method',
+                    dataType: 'html',
+                    success: function(html) {
+                        $('#collapse-payment-method .panel-body').html(html);
+
+						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_method }} <i class="fa fa-caret-down"></i></a>');
+
+						$('a[href=\'#collapse-payment-method\']').trigger('click');
+
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+                {% endif %}
+
+                $.ajax({
+                    url: 'index.php?route=checkout/payment_address',
+                    dataType: 'html',
+                    complete: function() {
+                        $('#button-register').button('reset');
+                    },
+                    success: function(html) {
+                        $('#collapse-payment-address .panel-body').html(html);
+
+						$('#collapse-payment-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_address }} <i class="fa fa-caret-down"></i></a>');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Payment Address
+$(document).delegate('#button-payment-address', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/payment_address/save',
+        type: 'post',
+        data: $('#collapse-payment-address input[type=\'text\'], #collapse-payment-address input[type=\'date\'], #collapse-payment-address input[type=\'datetime-local\'], #collapse-payment-address input[type=\'time\'], #collapse-payment-address input[type=\'password\'], #collapse-payment-address input[type=\'checkbox\']:checked, #collapse-payment-address input[type=\'radio\']:checked, #collapse-payment-address input[type=\'hidden\'], #collapse-payment-address textarea, #collapse-payment-address select'),
+        dataType: 'json',
+        beforeSend: function() {
+        	$('#button-payment-address').button('loading');
+		},
+        complete: function() {
+			$('#button-payment-address').button('reset');
+        },
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                if (json['error']['warning']) {
+                    $('#collapse-payment-address .panel-body').prepend('<div class="alert alert-warning alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+
+				for (i in json['error']) {
+					var element = $('#input-payment-' + i.replace('_', '-'));
+
+					if ($(element).parent().hasClass('input-group')) {
+						$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+					} else {
+						$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+					}
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().parent().addClass('has-error');
+            } else {
+                {% if shipping_required %}
+                $.ajax({
+                    url: 'index.php?route=checkout/shipping_address',
+                    dataType: 'html',
+                    success: function(html) {
+                        $('#collapse-shipping-address .panel-body').html(html);
+
+						$('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_address }} <i class="fa fa-caret-down"></i></a>');
+
+						$('a[href=\'#collapse-shipping-address\']').trigger('click');
+
+						$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_shipping_method }}');
+						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                }).done(function() {
+					$.ajax({
+						url: 'index.php?route=checkout/payment_address',
+						dataType: 'html',
+						success: function(html) {
+							$('#collapse-payment-address .panel-body').html(html);
+						},
+						error: function(xhr, ajaxOptions, thrownError) {
+							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+						}
+					});
+				});
+                {% else %}
+                $.ajax({
+                    url: 'index.php?route=checkout/payment_method',
+                    dataType: 'html',
+                    success: function(html) {
+                        $('#collapse-payment-method .panel-body').html(html);
+
+						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_method }} <i class="fa fa-caret-down"></i></a>');
+
+						$('a[href=\'#collapse-payment-method\']').trigger('click');
+
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                }).done(function() {
+					$.ajax({
+						url: 'index.php?route=checkout/payment_address',
+						dataType: 'html',
+						success: function(html) {
+							$('#collapse-payment-address .panel-body').html(html);
+						},
+						error: function(xhr, ajaxOptions, thrownError) {
+							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+						}
+					});				
+				});
+                {% endif %}
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Shipping Address
+$(document).delegate('#button-shipping-address', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/shipping_address/save',
+        type: 'post',
+        data: $('#collapse-shipping-address input[type=\'text\'], #collapse-shipping-address input[type=\'date\'], #collapse-shipping-address input[type=\'datetime-local\'], #collapse-shipping-address input[type=\'time\'], #collapse-shipping-address input[type=\'password\'], #collapse-shipping-address input[type=\'checkbox\']:checked, #collapse-shipping-address input[type=\'radio\']:checked, #collapse-shipping-address textarea, #collapse-shipping-address select'),
+        dataType: 'json',
+        beforeSend: function() {
+			$('#button-shipping-address').button('loading');
+	    },
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                $('#button-shipping-address').button('reset');
+
+                if (json['error']['warning']) {
+                    $('#collapse-shipping-address .panel-body').prepend('<div class="alert alert-warning alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+
+				for (i in json['error']) {
+					var element = $('#input-shipping-' + i.replace('_', '-'));
+
+					if ($(element).parent().hasClass('input-group')) {
+						$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+					} else {
+						$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+					}
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().parent().addClass('has-error');
+            } else {
+                $.ajax({
+                    url: 'index.php?route=checkout/shipping_method',
+                    dataType: 'html',
+                    complete: function() {
+                        $('#button-shipping-address').button('reset');
+                    },
+                    success: function(html) {
+                        $('#collapse-shipping-method .panel-body').html(html);
+
+						$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_method }} <i class="fa fa-caret-down"></i></a>');
+
+						$('a[href=\'#collapse-shipping-method\']').trigger('click');
+
+						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+						
+                        $.ajax({
+                            url: 'index.php?route=checkout/shipping_address',
+                            dataType: 'html',
+                            success: function(html) {
+                                $('#collapse-shipping-address .panel-body').html(html);
+                            },
+                            error: function(xhr, ajaxOptions, thrownError) {
+                                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                            }
+                        });
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                }).done(function() {
+					$.ajax({
+						url: 'index.php?route=checkout/payment_address',
+						dataType: 'html',
+						success: function(html) {
+							$('#collapse-payment-address .panel-body').html(html);
+						},
+						error: function(xhr, ajaxOptions, thrownError) {
+							alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+						}
+					});
+				});
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Guest
+$(document).delegate('#button-guest', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/guest/save',
+        type: 'post',
+        data: $('#collapse-payment-address input[type=\'text\'], #collapse-payment-address input[type=\'date\'], #collapse-payment-address input[type=\'datetime-local\'], #collapse-payment-address input[type=\'time\'], #collapse-payment-address input[type=\'checkbox\']:checked, #collapse-payment-address input[type=\'radio\']:checked, #collapse-payment-address input[type=\'hidden\'], #collapse-payment-address textarea, #collapse-payment-address select'),
+        dataType: 'json',
+        beforeSend: function() {
+       		$('#button-guest').button('loading');
+	    },
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                $('#button-guest').button('reset');
+
+                if (json['error']['warning']) {
+                    $('#collapse-payment-address .panel-body').prepend('<div class="alert alert-warning alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+
+				for (i in json['error']) {
+					var element = $('#input-payment-' + i.replace('_', '-'));
+
+					if ($(element).parent().hasClass('input-group')) {
+						$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+					} else {
+						$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+					}
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+            } else {
+                {% if shipping_required %}
+                var shipping_address = $('#collapse-payment-address input[name=\'shipping_address\']:checked').prop('value');
+
+                if (shipping_address) {
+                    $.ajax({
+                        url: 'index.php?route=checkout/shipping_method',
+                        dataType: 'html',
+                        complete: function() {
+                            $('#button-guest').button('reset');
+                        },
+                        success: function(html) {
+							// Add the shipping address
+                            $.ajax({
+                                url: 'index.php?route=checkout/guest_shipping',
+                                dataType: 'html',
+                                success: function(html) {
+                                    $('#collapse-shipping-address .panel-body').html(html);
+
+									$('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_address }} <i class="fa fa-caret-down"></i></a>');
+                                },
+                                error: function(xhr, ajaxOptions, thrownError) {
+                                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                                }
+                            });
+
+						    $('#collapse-shipping-method .panel-body').html(html);
+
+							$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_method }} <i class="fa fa-caret-down"></i></a>');
+
+							$('a[href=\'#collapse-shipping-method\']').trigger('click');
+
+							$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
+							$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        url: 'index.php?route=checkout/guest_shipping',
+                        dataType: 'html',
+                        complete: function() {
+                            $('#button-guest').button('reset');
+                        },
+                        success: function(html) {
+                            $('#collapse-shipping-address .panel-body').html(html);
+
+							$('#collapse-shipping-address').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-address" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_address }} <i class="fa fa-caret-down"></i></a>');
+
+							$('a[href=\'#collapse-shipping-address\']').trigger('click');
+
+							$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_shipping_method }}');
+							$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
+							$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+                }
+                {% else %}
+                $.ajax({
+                    url: 'index.php?route=checkout/payment_method',
+                    dataType: 'html',
+                    complete: function() {
+                        $('#button-guest').button('reset');
+                    },
+                    success: function(html) {
+                        $('#collapse-payment-method .panel-body').html(html);
+
+						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_method }} <i class="fa fa-caret-down"></i></a>');
+
+						$('a[href=\'#collapse-payment-method\']').trigger('click');
+
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+                {% endif %}
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Guest Shipping
+$(document).delegate('#button-guest-shipping', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/guest_shipping/save',
+        type: 'post',
+        data: $('#collapse-shipping-address input[type=\'text\'], #collapse-shipping-address input[type=\'date\'], #collapse-shipping-address input[type=\'datetime-local\'], #collapse-shipping-address input[type=\'time\'], #collapse-shipping-address input[type=\'password\'], #collapse-shipping-address input[type=\'checkbox\']:checked, #collapse-shipping-address input[type=\'radio\']:checked, #collapse-shipping-address textarea, #collapse-shipping-address select'),
+        dataType: 'json',
+        beforeSend: function() {
+        	$('#button-guest-shipping').button('loading');
+		},
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+			$('.form-group').removeClass('has-error');
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                $('#button-guest-shipping').button('reset');
+
+                if (json['error']['warning']) {
+                    $('#collapse-shipping-address .panel-body').prepend('<div class="alert alert-danger alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+
+				for (i in json['error']) {
+					var element = $('#input-shipping-' + i.replace('_', '-'));
+
+					if ($(element).parent().hasClass('input-group')) {
+						$(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+					} else {
+						$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+					}
+				}
+
+				// Highlight any found errors
+				$('.text-danger').parent().addClass('has-error');
+            } else {
+                $.ajax({
+                    url: 'index.php?route=checkout/shipping_method',
+                    dataType: 'html',
+                    complete: function() {
+                        $('#button-guest-shipping').button('reset');
+                    },
+                    success: function(html) {
+                        $('#collapse-shipping-method .panel-body').html(html);
+
+						$('#collapse-shipping-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-shipping-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_shipping_method }} <i class="fa fa-caret-down"></i>');
+
+						$('a[href=\'#collapse-shipping-method\']').trigger('click');
+
+						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('{{ text_checkout_payment_method }}');
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+$(document).delegate('#button-shipping-method', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/shipping_method/save',
+        type: 'post',
+        data: $('#collapse-shipping-method input[type=\'radio\']:checked, #collapse-shipping-method textarea'),
+        dataType: 'json',
+        beforeSend: function() {
+        	$('#button-shipping-method').button('loading');
+		},
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                $('#button-shipping-method').button('reset');
+
+                if (json['error']['warning']) {
+                    $('#collapse-shipping-method .panel-body').prepend('<div class="alert alert-danger alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+            } else {
+                $.ajax({
+                    url: 'index.php?route=checkout/payment_method',
+                    dataType: 'html',
+                    complete: function() {
+                        $('#button-shipping-method').button('reset');
+                    },
+                    success: function(html) {
+                        $('#collapse-payment-method .panel-body').html(html);
+
+						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_method }} <i class="fa fa-caret-down"></i></a>');
+
+						$('a[href=\'#collapse-payment-method\']').trigger('click');
+
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+$(document).delegate('#button-payment-method', 'click', function() {
+    $.ajax({
+        url: 'index.php?route=checkout/payment_method/save',
+        type: 'post',
+        data: $('#collapse-payment-method input[type=\'radio\']:checked, #collapse-payment-method input[type=\'checkbox\']:checked, #collapse-payment-method textarea'),
+        dataType: 'json',
+        beforeSend: function() {
+         	$('#button-payment-method').button('loading');
+		},
+        success: function(json) {
+            $('.alert-dismissible, .text-danger').remove();
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            } else if (json['error']) {
+                $('#button-payment-method').button('reset');
+                
+                if (json['error']['warning']) {
+                    $('#collapse-payment-method .panel-body').prepend('<div class="alert alert-danger alert-dismissible">' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+            } else {
+                $.ajax({
+                    url: 'index.php?route=checkout/confirm',
+                    dataType: 'html',
+                    complete: function() {
+                        $('#button-payment-method').button('reset');
+                    },
+                    success: function(html) {
+                        $('#collapse-checkout-confirm .panel-body').html(html);
+
+						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-confirm" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_confirm }} <i class="fa fa-caret-down"></i></a>');
+
+						$('a[href=\'#collapse-checkout-confirm\']').trigger('click');
+					},
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    }
+                });
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+//--></script>
+{{ footer }}
