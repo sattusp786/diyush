@@ -21,7 +21,7 @@
     </div>
     {% endif %}
     <p>{{ text_register_account }}</p>
-    <input type="button" value="{{ button_continue }}" id="button-account" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+    <input type="button" value="{{ button_continue }}" id="button-account" data-loading-text="{{ text_loading }}" class="highlight-button btn btn-small no-margin-right no-margin-bottom width-auto" />
   </div>
   <div class="col-sm-6">
     <h2>{{ text_returning_customer }}</h2>
@@ -34,6 +34,6 @@
       <label class="control-label" for="input-password">{{ entry_password }}</label>
       <input type="password" name="password" value="" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
       <a href="{{ forgotten }}">{{ text_forgotten }}</a></div>
-    <input type="button" value="{{ button_login }}" id="button-login" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
+    <input type="button" value="{{ button_login }}" id="button-login" data-loading-text="{{ text_loading }}" class="highlight-button btn btn-small no-margin-right no-margin-bottom width-auto" />
   </div>
 </div>
