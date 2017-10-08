@@ -272,6 +272,7 @@ i { color: #9a9a9a; margin: 0 3px}
 .margin-right-ten{margin-right:10% !important}
 .margin-top-section { margin-top:96px;}
 .margin-left-right-one { margin-right:6% !important; margin-left:6% !important}
+.margin-left-right-two { margin-right:2% !important; margin-left:2% !important}
 .margin-two-bottom { margin-bottom: 2% !important; }
 .margin-three-bottom { margin-bottom: 3% !important; }
 .margin-four-bottom { margin-bottom: 4% !important; }
@@ -2238,6 +2239,7 @@ select#input-option5868 { width:auto;}
 h2.final_price span {font-size: 13px; color: #626262; line-height: 23px; letter-spacing: 0.02em; padding:0 2px;}
 h2.final_price span.rrp { text-decoration:line-through;}
 
+
 @media only screen and ( max-width: 1920px ) {
 .navbar-right .dropdown-menu { right: -280px!important;}
 }
@@ -2255,4 +2257,6 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .comewith_blockwrap .comewith_block {width: 48.6%;}
 .pro-delivered-text div { width:50%; float:left; padding:0;} 
 .pro-delivered-text span { font-size:10px;}
+.products-thumb a { background: #d4d4d4;  border-radius: 50%; width: 24px; height: 24px; display: inline-block; margin:0 5px;}
+.products-thumb a img { display:none;}
 }
