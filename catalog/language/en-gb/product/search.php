@@ -28,6 +28,8 @@ $_['text_rating_desc']  = 'Rating (Highest)';
 $_['text_model_asc']    = 'Model (A - Z)';
 $_['text_model_desc']   = 'Model (Z - A)';
 $_['text_limit']        = 'Show:';
+$_['text_no_product']   = 'No Products Found!';
+$_['text_view_all']     = 'View All';
 
 // Entry
 $_['entry_search']      = 'Search Criteria';
