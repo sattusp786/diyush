@@ -32,13 +32,13 @@
     <h3 class="text-center bg-gray padding-four margin-three-bottom">FILTER:</h3>
     {% for filter_group in filter_groups %}
     
-    <div class="panel-group accordion-style1" id="accordion-one">
+    <div class="panel-group accordion-style{{ filter_group.filter_group_id }}" id="accordion-{{ filter_group.filter_group_id }}">
     
         	<div class="panel panel-default">
             	<div class="panel-heading active-accordion">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link1"><h4 class="panel-title">{{ filter_group.name }}<span class="pull-right"><i class="fa fa-minus"></i></span></h4></a>
+                                    <a data-toggle="collapse" data-parent="#accordion-{{ filter_group.filter_group_id }}" href="#accordion-{{ filter_group.filter_group_id }}-link{{ filter_group.filter_group_id }}"><h4 class="panel-title">{{ filter_group.name }}<span class="pull-right"><i class="fa fa-minus"></i></span></h4></a>
                                 </div>
-                <div id="accordion-one-link1" class="panel-collapse collapse in">
+                <div id="accordion-{{ filter_group.filter_group_id }}-link{{ filter_group.filter_group_id }}" class="panel-collapse collapse in">
                                     <div class="panel-body text-center">
                                      <ul class="catfilters">{% for filter in filter_group.filter %}<li class="checkbox">
           <label>{% if filter.filter_id in filter_category %}
