@@ -456,7 +456,9 @@ class ControllerProductSearch extends Controller {
 	}
 	
 	public function livesearch() { 
-	
+		
+		$this->load->language('product/search');
+		
 		$this->load->model('catalog/product');
 
 		if(!empty($this->request->get['search'])){
