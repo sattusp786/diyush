@@ -74,6 +74,8 @@ class ControllerCommonFooter extends Controller {
 
 		$data['scripts'] = $this->document->getScripts('footer');
 		
+		$data['live_chat'] = $this->load->controller('extension/module/zopim');
+		
 		return $this->load->view('common/footer', $data);
 	}
 }
