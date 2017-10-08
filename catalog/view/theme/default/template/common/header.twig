@@ -127,41 +127,14 @@
 					<!-- end nav search -->
 				</div>
 				<!-- search input-->
-				<form id="search-header" method="post" action="#" name="search-header" class="mfp-hide search-form-result">
+				<form id="search-header" method="post" action="#" onsubmit="return false;" name="search-header" class="mfp-hide search-form-result">
 					<div class="search-form position-relative">
 						<button type="submit" class="fa fa-search close-search search-button"></button>
-						<input type="text" name="search" class="search-input" placeholder="Enter your keywords..." autocomplete="off">
+						<input type="text" name="search" id="searcher" autocomplete="off" class="search-input" placeholder="Enter your keywords..." />
 					</div>
 				</form>
 				<!-- end search input -->
-				<div class="top-cart">
-					<!-- nav shopping bag -->
-					<a href="#" class="shopping-cart">
-						<i class="fa fa-shopping-cart"></i>
-						<div class="subtitle">(1) Items</div>
-					</a>
-					<!-- end nav shopping bag -->
-					<!-- shopping bag content -->
-					<div class="cart-content">
-						<ul class="cart-list">
-							<li>
-								<a title="Remove item" class="remove" href="#">×</a>
-								<a href="#">
-
-									<img width="90" height="90" alt="" src="http://placehold.it/90x90">Leather Craft
-								</a>
-								<span class="quantity">1 × <span class="amount">$160</span></span>
-								<a href="#">Edit</a>
-							</li>
-						</ul>
-						<p class="total">Subtotal: <span class="amount">$160</span></p>
-						<p class="buttons">
-							<a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}" class="btn btn-very-small-white no-margin-bottom margin-seven pull-left no-margin-lr">{{ text_shopping_cart }}</a>
-							<a href="{{ checkout }}" title="{{ text_checkout }}"  class="btn btn-very-small-white no-margin-bottom margin-seven no-margin-right pull-right">{{ text_checkout }}</a>
-						</p>
-					</div>
-					<!-- end shopping bag content -->
-				</div>
+				{{ cart }}
 			</div>
 			<!-- end search and cart  -->
 			<!-- toggle navigation -->
@@ -174,3 +147,124 @@
 	</div>
 </nav>
 <!-- end navigation panel -->
+<style type="text/css">
+[name=search] {  outline: none;}
+#livesearch /*#livesearch **/ {  margin: 0;  padding: 0;  list-style: none; width:600px;}
+#livesearch {  position: absolute;  width: 100% !important; max-width:420px;  top: 0px;  background: #ffffff;  z-index: 100000;  box-shadow: 0px 10px 30px rgba(0,0,0,.5); margin-top:20px; }
+#livesearch li {  border-top: 1px solid #eeeeee;}
+#livesearch a {  display: block;  clear: both;  overflow: hidden;  /*line-height: 20px;  padding: 10px;*/  text-decoration: none;color: #333141;}
+/*#livesearch a:hover, #livesearch li.active a { background: #F0EEED;  color:#000;}*/
+#livesearch a:hover p { color:#000;}
+#livesearch img {float: left;  /*width: auto;  height: 50px;  margin-right: 10px;margin-bottom:20px;*/}
+#livesearch img[src=''] {  display: none;}
+.more {  text-align: center;}
+#livesearch a em {  display: block;  color: #333141;  font-style: normal; }
+#livesearch a:hover em, #livesearch li.active a em {  color: #333141;}
+#livesearch strike {color: #aaaaaa;}
+#livesearch a:hover strike {  color: lightblue;}
+#livesearch small {display: block; }
+</style>
+<script type="text/javascript">
+$(function(){
+
+	var delay = (function(){
+	  var timer = 0;
+	  return function(callback, ms){
+	    clearTimeout (timer);
+	    timer = setTimeout(callback, ms);
+	  };
+	})();
+	
+/* Desktop Search */
+var a = (!!$("#livesearch").length ? $("#livesearch") : $("<ul id='livesearch' class='searchresult-listing'></ul>") ), b = $("#searcher");
+function repositionLivesearch() {
+	var winwidth = $(window).width();
+	if(winwidth < 768){
+		a.css({ top: (b.offset().top+b.outerHeight()), left:0, width: winwidth }); 
+	} else {
+		a.css({ top: (b.offset().top+b.outerHeight()), left:b.offset().left, width: b.outerWidth() }); 
+	}
+}
+$(window).resize(function(){ repositionLivesearch(); });
+b.keyup(function(e){
+	console.log('yess');
+  switch (e.keyCode) {
+	case 13:
+			$.ajax({
+					url: 'index.php?route=product/search/saveSearch',
+					type: 'post',
+					dataType: 'html',
+					data: 'search=' + b.val(),
+					beforeSend: function() {
+						
+					},
+					complete: function() {
+						
+					},
+					success: function(response) {
+					
+					}
+
+				});
+		$(".active", a).length && (window.location = $(".active a", a).attr("href"));
+		return false;
+		break;
+	case 40:
+		($(".active", a).length ? $(".active", a).removeClass("active").next().addClass("active") : $("li:first", a).addClass("active"))
+		return false;
+		break;
+	case 38:
+		($(".active", a).length ? $(".active", a).removeClass("active").prev().addClass("active") : $("li:last", a).addClass("active"))
+		return false;
+		break;
+	default:
+		var query = b.val();
+		if (query.length > 2) {
+			delay(function(){
+				$.getJSON(
+					$('base').attr('href') + "index.php?route=product/search/livesearch&search=" + query,
+					function(data) {
+					console.log('hello');
+						a.empty();
+						$.each(data, function( k, v ) {
+							a.append("<li>"+(k == 5 ? "<div class='btnwrap'><span><a class='btn blackbtn' href='"+v.href+"'><span>"+v.name+"</span></a></span><span><input type='button' onclick='$(\"#livesearch\").hide();' name='close' id='close' class='btn blackbtn' value='Close' /></span></div>" : "<a href='"+v.href+"'>"+(v.thumb ? "<div class='proimg'><img src='"+v.thumb+"' alt='"+v.name+"'></div>" : '')+"<div class='proinfo' "+(v.thumb ? '' : "style='float:left;width:100%;'" )+"><h4>"+v.name+(v.sku ? "<small>"+v.sku+"</small>" : '')+"</h4><p>"+(v.price ? v.price : '')+"</p></div></a>")+"</li>");
+						});
+						a.remove(); $("body").prepend(a); repositionLivesearch();
+						
+						$("ul#livesearch li a").click(function(){
+							b.val($(this).text());
+							$(".searchMeme-button-icon").click();
+						});
+
+						delay(function(){
+							$.ajax({
+									url: 'index.php?route=product/search/saveSearch',
+									type: 'post',
+									dataType: 'html',
+									data: 'search=' + query,
+									beforeSend: function() {
+										
+									},
+									complete: function() {
+										
+									},
+									success: function(response) {
+									
+									}
+
+								});
+							}, 500 );
+
+					}
+				);
+			}, 500 );
+
+			
+		} else {
+			a.empty();
+		}
+	}
+
+}).blur(function(){ setTimeout(function(){  },500); }).focus(function(){ repositionLivesearch(); a.show(); });
+});
+</script>

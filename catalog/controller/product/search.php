@@ -454,4 +454,95 @@ class ControllerProductSearch extends Controller {
 
 		$this->response->setOutput($this->load->view('product/search', $data));
 	}
+	
+	public function livesearch() { 
+	
+		$this->load->model('catalog/product');
+
+		if(!empty($this->request->get['search'])){
+			$search = $this->request->get['search'];
+		}else{
+			$search = '';
+		}		
+
+		$filter_data = array(
+				'filter_name'         => $search,
+				'filter_tag'          => $search,
+				'sort'                => 'name',
+				'order'               => 'ASC',
+				'start'               => 0,
+				'limit'               => 5
+			);
+
+		$this->load->model('tool/image');
+		
+		$products = array();
+		$results = array();
+		
+		$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+
+		$results = $this->model_catalog_product->getProducts($filter_data);
+		
+		if(!empty($results)){
+			foreach ($results as $result) {
+				
+				if ($result['image']) {
+					$image = $this->model_tool_image->resize($result['image'], 100, 100);
+				} else {
+					$image = $this->model_tool_image->resize('placeholder.png', 100, 100);
+				}
+				
+				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
+					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				} else {
+					$price = false;
+				}
+				
+				$products[]	= array(
+					'product_id'  => $result['product_id'],
+					'thumb'       => $image,
+					'name'        => $result['name'],
+					'sku'         => $result['sku'],
+					'price'       => $price,
+					'description' => utf8_substr(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')) . '..',
+					'href' => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+				);
+			}
+		}
+
+		if (empty($products)) {
+			$products[] = array(
+				"name" => '<p class="more">' . $this->language->get('text_empty') . '</p>',
+				"href" => 'javascript:void(0)'
+			);
+		}  else {
+			if (count($products) >= 5) {
+				$products[] = array(
+					"name" => '<p class="more">'. $this->language->get('text_view_all').'</p>',
+					"href" => $this->url->link('product/search', 'description=1&search=' . $search)
+				);
+			}
+		}
+		
+		$this->response->setOutput(json_encode($products));	
+
+	}
+
+	public function saveSearch() { 
+
+		$this->load->model('catalog/category');
+
+		if(!empty($this->request->post['search'])){
+			$search = $this->request->post['search'];
+		}else{
+			$search = '';
+		}		
+		
+		if($search != ''){
+			$insert = $this->model_catalog_category->saveSearch($search);
+		}
+		
+		echo '1';
+
+	}
 }
