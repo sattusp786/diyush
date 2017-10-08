@@ -43,7 +43,7 @@
                         </ul>
                         <!-- end breadcrumb -->
                         </div>
-                        <div class="col-md-6 col-sm-6 text-right">
+                        <div class="col-md-6 col-sm-6 text-right cathelpbox">
                         	<span class="black-text">Need Help</span> 
                             <span><i class="icon-phone extra-small-icon black-text"></i></span>
                             <span><i class="icon-envelope extra-small-icon black-text"></i></span>
@@ -68,12 +68,33 @@
                     
                     <div class="col-md-12 col-sm-12">
                         <div class="shorting clearfix xs-margin-top-three">
-                            <div class="col-md-8 col-sm-7 grid-nav">
+                            <div class="desktopview">
+                                <div class="col-md-8 col-sm-7 grid-nav">
+                                    <a href="shop-with-sidebar-list.html"><i class="fa fa-bars"></i></a>
+                                    <a href="shop-with-sidebar.html"><i class="fa fa-th"></i></a>
+                                    <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
+                                </div>
+                                <div class="col-md-3 col-sm-5 pull-right">
+                                    <div class="select-style input-round med-input shop-shorting no-border">
+                                        <select id="input-sort" class="form-control" onchange="location = this.value;">
+                                          {% for sorts in sorts %}
+                                              {% if sorts.value == '%s-%s'|format(sort, order) %}
+                                                  <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                                                  {% else %}
+                                                  <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                                              {% endif %}
+                                          {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mobileview">
+                            	<div class="f-left">
                                 <a href="shop-with-sidebar-list.html"><i class="fa fa-bars"></i></a>
                                 <a href="shop-with-sidebar.html"><i class="fa fa-th"></i></a>
                                 <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
                             </div>
-                            <div class="col-md-3 col-sm-5 pull-right">
+                             	<div class="f-right">
                                 <div class="select-style input-round med-input shop-shorting no-border">
                                     <select id="input-sort" class="form-control" onchange="location = this.value;">
 									  {% for sorts in sorts %}
@@ -85,6 +106,7 @@
 									  {% endfor %}
 									</select>
                                 </div>
+                            </div>
                             </div>
                         </div>
                         <div class="product-listing margin-three">

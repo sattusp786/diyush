@@ -42,7 +42,7 @@
 						</div>
 						{% endif %}
                         </div>
-                        <div class="panel-group accordion-style1" id="accordion-one">
+                        <div class="panel-group accordion-style1 desktopview" id="accordion-one">
                             <!-- accordion item -->
                             <div class="panel panel-default">
                                 <div class="panel-heading active-accordion">
@@ -245,9 +245,9 @@
 							{% endif %}
 							{% if option.type == 'radio' %}
 							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
-							  <label class="control-label">{{ option.name }}</label><br/><br/>
-							  <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
-								<div class="radio" style="float:left;width:65px;margin-top:0;">
+							  <div class="col-md-2 col-sm-12"><label class="control-label">{{ option.name }}</label></div>
+							  <div class="col-md-10 col-sm-12 option-img"><div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+								<div class="radio" style="float:left;width:45px;margin-top:0;">
 								  <label style="padding-left:0;">
 									<input style="display:none;" type="radio" {% if option_value.default == 1 %} SELECTED {% endif %} name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
 									{% if option_value.image %} <img {% if option_value.default == 1 %} style="border:1px solid #ddd;" {% else %} style="border:0;" {% endif %} src="{{ option_value.image }}" alt="input-option{{ option.product_option_id }}" class="img-thumbnail option_image input-option{{ option.product_option_id }}" /> {% endif %}                  
@@ -257,7 +257,7 @@
 									{% endif %}-->
 									</label>
 								</div>
-								{% endfor %} </div>
+								{% endfor %} </div></div>
 								<div class="clear" style="clear:both;"></div>
 							</div>
 							{% endif %}
@@ -341,31 +341,208 @@
 							  <div class="help-block" id="recurring-description"></div>
 							</div>
 							{% endif %}
-							<div class="form-group margin-one width-100 f-left">
+                            <div class="form-group margin-two width-100 pro-delivered-text f-left">
+                            	<div class="col-md-6 text-center"><span>Delivered by: Thesday, 10/10</span></div>
+                                <div class="col-md-6 text-center"><span>0% Finanace - Click to Calculation</span></div>
+                            </div>
+							<div class="form-group margin-one width-100 text-center">
 							  <div class="col-md-2 col-sm-12" style="display:none;"><label class="control-label" for="input-quantity">{{ entry_qty }}</label></div>
 							  <div class="col-md-10 col-sm-12" style="display:none;"><input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
 							  <input type="hidden" name="product_id" value="{{ product_id }}" /></div>
 							  <br />
                               <div class="text-center">
-							  <a class="highlight-button-dark btn btn-medium button" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><i class="icon-basket"></i> {{ button_cart }}</a></div>
+							  <a class="highlight-button-dark btn btn-medium button width-60" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><!--<i class="icon-basket"></i>--> {{ button_cart }}</a></div>
 							</div>
+                            <div class="form-group margin-two width-100 f-left">
+                            	<div class="col-md-6 text-center"><a href="#" class="highlight-button btn btn-small button xs-margin-bottom-five">Visit Showroom</a></div>
+                                <div class="col-md-6 text-center"><a href="#" class="highlight-button btn btn-small button xs-margin-bottom-five">Order Free Sample</a></div>
+                            </div>
 							{% if minimum > 1 %}
 							<div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
 							{% endif %}</div>
-						</form>
-                        <div class="col-lg-4 col-md-5 col-sm-3 no-padding-left">
+						</form> 
+                        <div class="desktopview"> 
+                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left"></div>                       
+                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
                             <!-- add to wishlist link -->
-                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> {{ button_wishlist }}</a>
+                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-user black-text"></i> <!--{{ button_wishlist }}--> Contact Us</a>
+                            <!-- end add to wishlist link -->
+                            </div>
+                             <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
+                             <!-- add to wishlist link -->
+                            <a title="Contact Us" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> <!--{{ button_wishlist }}--> Save</a>
                             <!-- end add to wishlist link -->
                         </div>
-                        <div class="col-md-8 col-sm-9 product-details-social no-padding">
+                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
+                             <!-- add to wishlist link -->
+                            <a title="Print" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> <!--{{ button_wishlist }}--> Print</a>
+                            <!-- end add to wishlist link -->
+                        </div>
+                        <div class="col-md-5 col-sm-9 product-details-social no-padding">
                             <!-- social media sharing -->
-                            <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five">Share on</span>
+                            <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five"> <i class="fa fa-share-alt black-text no-margin"></i> Share on</span>
                             <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
                             <a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a>
                             <a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a>
                             <!-- end social media sharing -->
+                        </div>
+                        </div>
+                        <div class="mobileview">                     
+                        <div class="width-100 text-center margin-three-bottom">
+                            <!-- add to wishlist link -->
+                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-user black-text"></i> <!--{{ button_wishlist }}--> Contact Us</a>
+                            <!-- end add to wishlist link -->                           
+                             &nbsp;&nbsp;&nbsp;
+                             <!-- add to wishlist link -->
+                            <a title="Contact Us" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> <!--{{ button_wishlist }}--> Save</a>
+                            <!-- end add to wishlist link -->
+                        &nbsp;&nbsp;&nbsp;
+                             <!-- add to wishlist link -->
+                            <a title="Print" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> <!--{{ button_wishlist }}--> Print</a>
+                            <!-- end add to wishlist link -->
+                        </div>
+                        <div class="width-100 text-center margin-three-bottom">
+                            <!-- social media sharing -->
+                            <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five"> <i class="fa fa-share-alt black-text no-margin"></i> Share on</span>
+                            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a>
+                            <a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            <!-- end social media sharing -->
+                        </div>
+                        </div>
+                        
+                        <div class="panel-group accordion-style1 mobileview margin-four" id="accordion-two">
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading active-accordion">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link1"><h4 class="panel-title">Details<span class="pull-right"><i class="fa fa-minus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link2"><h4 class="panel-title">Washing Instructions<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                      <div class="col-md-12 col-sm-12">
+                                            <ul class="instructions">
+                                                <li><strong>Type:</strong> Shift Dresses</li>
+                                                <li><strong>Fabric:</strong> Georgette</li>
+                                                <li><strong>Sleeves:</strong> Half Sleeve</li>                                                
+                                                <li><strong>Neck:</strong> V Neck</li>
+                                                <li><strong>Fit:</strong> Regular</li>
+                                                <li><strong>Length:</strong> Mini</li>
+                                            </ul>
+                                        </div>                                        
+                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link3"><h4 class="panel-title">Sizing<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-12 col-sm-12">
+                                            <ul class="instructions">
+                                                <li><strong>Weight:</strong> 7.25 Kg</li>
+                                                <li><strong>Dimensions:</strong> 90x60x90 Cm</li>
+                                                <li><strong>Size:</strong> One Size Fits All</li>
+                                                <li><strong>Color:</strong> White</li>
+                                                <li><strong>Guarantee:</strong> 5 Years</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link4"><h4 class="panel-title">Reviews (10)<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link4" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        {% if review_status %}
+									  <div class="rating">
+										<p>{% for i in 1..5 %}
+										  {% if rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>{% else %}<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>{% endif %}
+										  {% endfor %} <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ text_write }}</a></p>
+										<hr>
+										<!-- AddThis Button BEGIN -->
+										<div class="addthis_toolbox addthis_default_style" data-url="{{ share }}"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
+										<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script> 
+										<!-- AddThis Button END --> 
+									  </div>
+									  {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                        </div>
+                        <div class="col-md-12 col-sm-12 comewith_blockwrap padding-two margin-two">
+                        	<h2>Comes With</h2>
+                            <div class="comes-with">
+                            	<div class="comewith_block">
+                            	<a href="#">
+                                	<span class="icon icon-1"></span>
+                                    <span class="text">Free Delivery</span>
+                                </a>
+                            	</div>
+                                <div class="comewith_block">
+                            	<a href="#">
+                                	<span class="icon icon-2"></span>
+                                    <span class="text">30 Day Returns</span>
+                                </a>
+                            	</div>
+                                <div class="comewith_block">
+                            	<a href="#">
+                                	<span class="icon icon-3"></span>
+                                    <span class="text">Diamond Certificate</span>
+                                </a>
+                            	</div>
+                                <div class="comewith_block">
+                            	<a href="#">
+                                	<span class="icon icon-4"></span>
+                                    <span class="text">Valuation Report</span>
+                                </a>
+                            	</div>
+                                <div class="comewith_block">
+                            	<a href="#">
+                                	<span class="icon icon-5"></span>
+                                    <span class="text">Attractive Packaging</span>
+                                </a>
+                            	</div>
+                                <div class="comewith_block">
+                            	<a href="#">
+                                	<span class="icon icon-6"></span>
+                                    <span class="text">One Free Resize</span>
+                                </a>
+                            	</div>
+                                <div class="comewith_block">
+                            	<a href="#">
+                                	<span class="icon icon-7"></span>
+                                    <span class="text">Lifetime Warranty</span>
+                                </a>
+                            	</div>
+                            </div>
                         </div>
                     </div>
                 </div>

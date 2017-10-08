@@ -62,7 +62,7 @@ a:hover{ color: #575757; }
 img { -webkit-backface-visibility: hidden; max-width:100%; height:auto; }
 video { background-size: cover; display: table-cell; vertical-align: middle; width: 100%; }
 ul{ margin: 0px; padding:0px; }
-input, textarea, select{ border: 1px solid #dfdfdf; letter-spacing: 1px; font-size: 11px;  padding: 8px 15px; width: 100%; margin: 0 0 20px 0; text-transform: uppercase; max-width: 100%; resize: none;}
+input, textarea, select{ border: 1px solid #dfdfdf; letter-spacing: 1px; font-size: 11px;  padding: 2px 10px; width: 100%; margin: 0 0 20px 0; text-transform: uppercase; max-width: 100%; resize: none;}
 input[type="submit"] { width: auto}
 input[type="button"], input[type="text"], input[type="email"], input[type="search"], input[type="password"], textarea, input[type="submit"] { -webkit-appearance: none;  border-radius: 0; }
 input:focus, textarea:focus{ border: 1px solid #989898; }
@@ -1822,7 +1822,7 @@ ul.list-line li span {min-width:130px; display:inline-block}
 .shop-shorting-details  { background: #fff url("../image/select-arrow.png") no-repeat 81% 50%; margin:0 !important; width: 100% !important }
 .product-share-deails i { margin: 7px 0 0 10px; font-size:14px; vertical-align: middle;}
 .shop-shorting-details select { line-height:15px; padding: 13px 15px 14px !important}
-.product-details-social i { font-size:14px; margin-right:20px; color:#000; vertical-align: middle;}
+.product-details-social i { font-size:14px; margin-right:10px; color:#000; vertical-align: middle;}
 .product-details-highlight-text { padding:35px;}
 .instructions li {padding:5px 0; border-bottom:1px solid rgba(0,0,0,.1)}
 .review-name { margin-bottom:5px;}
@@ -2218,10 +2218,37 @@ thead th.first { padding-left: 0 !important; }
 .catfilters li:hover label span .img-black, .catfilters li label input:checked + span .img-black { display:none;}
 .catfilters li:hover label span .img-color, .catfilters li label input:checked + span .img-color{ display:block;}
 .catfilters li label input:checked + span { border:1px solid #575757;}
+.comewith_blockwrap { text-align:center; background:#DFDFDF;}
+.comewith_blockwrap h2 { text-align:center; color:#fff; font-size:16px; line-height:26px; font-weight:400; text-transform:capitalize; margin-bottom:20px;}
+.comewith_blockwrap .comewith_block { width:20.6%; display:inline-block; margin-bottom:20px;}
+.comewith_blockwrap .comewith_block .icon {background: url(../image/product_page_sprite.png) no-repeat; width: 60px; height: 60px; display:inline-block; }
+.comewith_blockwrap .comewith_block .text { color: #6d6d6d; font-size: 12px; display: block;}
+.comewith_blockwrap .comewith_block .icon-1 {background-position: 4px 1px;}
+.comewith_blockwrap .comewith_block .icon-2 {background-position: -51px 1px;}
+.comewith_blockwrap .comewith_block .icon-3 {background-position: -107px 1px;}
+.comewith_blockwrap .comewith_block .icon-4 {background-position: -159px 1px;}
+.comewith_blockwrap .comewith_block .icon-5 {background-position: -213px 1px;}
+.comewith_blockwrap .comewith_block .icon-6 {background-position: 1px -62px; width:64px;}
+.comewith_blockwrap .comewith_block .icon-7 {background-position: -77px -66px;}
+.pro-delivered-text { font-style:italic; font-weight:bold; text-decoration:underline;} 
+.pro-delivered-text span {display: inline-block; border-bottom: 1px solid; padding: 0 5px;}
+.option-img img { width:100%; max-width:40px;}
+select#input-option5868 { width:auto;}
+.mobileview { display:none;}
 
 @media only screen and ( max-width: 1920px ) {
 .navbar-right .dropdown-menu { right: -280px!important;}
 }
 @media only screen and ( max-width: 1600px ) {
 .navbar-right .dropdown-menu { right: -210px!important;}
+}
+@media only screen and ( max-width: 768px ) {
+.desktopview { display:none;}
+.mobileview { display:block;}
+.homepinksection .box-left{ padding-left:15px !important;}
+.homepinksection .box-right {padding-right:15px !important;}
+.homepinksection .box-right .f-right { float: none!important;}
+.owl-half-slider .item {  min-height: 820px !important;}
+.cathelpbox { text-align:center !important; padding:10px;}
+.comewith_blockwrap .comewith_block {width: 48.6%;}
 }
