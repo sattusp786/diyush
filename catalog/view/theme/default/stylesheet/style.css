@@ -2235,6 +2235,8 @@ thead th.first { padding-left: 0 !important; }
 .option-img img { width:100%; max-width:40px;}
 select#input-option5868 { width:auto;}
 .mobileview { display:none;}
+h2.final_price span {font-size: 13px; color: #626262; line-height: 23px; letter-spacing: 0.02em; padding:0 2px;}
+h2.final_price span.rrp { text-decoration:line-through;}
 
 @media only screen and ( max-width: 1920px ) {
 .navbar-right .dropdown-menu { right: -280px!important;}
@@ -2251,4 +2253,6 @@ select#input-option5868 { width:auto;}
 .owl-half-slider .item {  min-height: 820px !important;}
 .cathelpbox { text-align:center !important; padding:10px;}
 .comewith_blockwrap .comewith_block {width: 48.6%;}
+.pro-delivered-text div { width:50%; float:left; padding:0;} 
+.pro-delivered-text span { font-size:10px;}
 }

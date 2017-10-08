@@ -1,6 +1,8 @@
 {{ header }}
+
 <!-- head section -->
         <section class="content-top-margin page-title page-title-small border-bottom-light border-top-light padding-one">
+        <div class="bookapnt mobileview" ><a href="#" class="highlight-button-dark btn btn-medium button  text-right width-100"> <i class="fa fa-map-marker white-text" ></i> Book Appointment</a></div>
             <div class="container width-100">
                 <div class="row">
                     <div class="col-md-9 col-sm-8 breadcrumb text-uppercase wow fadeInUp xs-display-none" data-wow-duration="600ms">
@@ -14,8 +16,16 @@
                     </div>
                     <div class="col-md-3 col-sm-4 wow fadeInUp header-nav text-right sm-margin-top-two" data-wow-duration="300ms">
                         <!-- next/previous -->
+                        <div class="desktopview">
                         <a href="#" class="border-right"><i class="fa fa-angle-left"></i> Previous</a>
                         <a href="#">Next<i class="fa fa-angle-right"></i></a>
+                        </div>
+                         <div class="mobileview">
+                        <a href="#" class="f-left no-padding text-left" style="width:25%;"><i class="fa fa-angle-left"></i> Previous</a>
+                        <span class="f-left border-right border-left text-left" style="width:55%; padding:0 2.5%; border-width:1px;">{{ heading_title }}</span>
+                        <a href="#" class="f-rgiht no-padding text-right" style="width:20%;">Next<i class="fa fa-angle-right"></i></a>
+                        <span class="clearfix"></span>
+                        </div>
                         <!-- end next/previous -->
                     </div>
                 </div>
@@ -139,71 +149,52 @@
                         <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
                         <!-- end product name -->
                         <!-- product stock -->
-                        <p class="text-uppercase letter-spacing-2 margin-two">In Stock / Shipping Available</p>
+                        <p class="text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by 10th Oct 2017</p>
                         <!-- end product stock -->
                         <div class="separator-line bg-black no-margin-lr margin-five"></div>
                         <!-- product short description -->
                         <p>{{ description }}</p>
                         <!-- end product short description -->
+                        <div class="pricewrap width-100">
+                        <div class="col-md-6 no-padding-left">
                         {% if price %}
 						  <ul class="list-unstyled">
 							{% if not special %}
 							<li>
-							  <h2 class="final_price">{{ price }}</h2>
+							  <h2 class="final_price">{{ price }} <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
 							</li>
 							{% else %}
 							<li><span style="text-decoration: line-through;">{{ price }}</span></li>
 							<li>
-							  <h2 class="final_price">{{ special }}</h2>
+							  <h2 class="final_price">{{ special }} <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
 							</li>
 							{% endif %}
-							{% if tax %}
+                             <li>(Inc. VAT, Postage and Packaging)</li>
+							<!--{% if tax %}                           
 							<li>{{ text_tax }} {{ tax }}</li>
 							{% endif %}
 							{% if points %}
 							<li>{{ text_points }} {{ points }}</li>
 							{% endif %}
 							{% if discounts %}
-							<li>
-							  <hr>
-							</li>
+							<li>							 
+							
 							{% for discount in discounts %}
 							<li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
 							{% endfor %}
-							{% endif %}
+							{% endif %}-->
 						  </ul>
 						  {% endif %}
-						<!--<span class="price black-text title-small"><del>$750</del>$450</span>-->
-						<!--<div>
-                            <ul class="colors clearfix">
-                                <li class="active"><a style="background:#f16b4e" href="#"></a></li>
-                                <li><a style="background:#f69679" href="#"></a></li>
-                                <li><a style="background:#fca95e" href="#"></a></li>
-                                <li><a style="background:#7bbc72" href="#"></a></li>
-                                <li><a style="background:#4fb2ac" href="#"></a></li>
+                          </div>
+                          <div class="col-md-4 padding-two border border-gray">
+                          	<ul>
+                            	<li><i class="fa fa-certificate black-text"></i> Life Time Warranty ></li>
+                                <li><i class="fa black-text">O%</i>Finanace Available ></li>
                             </ul>
-                            <ul class="size clearfix size-details">
-                                <li class="active"><a href="#">XS</a></li>
-                                <li><a href="#">S</a></li>
-                                <li><a href="#">M</a></li>
-                                <li><a href="#">L</a></li>
-                                <li><a href="#">XL</a></li>
-                                <li><a href="#">XXL</a></li>
-                                <li class="size-chart"><a href="#">Size Chart</a></li>
-                            </ul>
-                        </div>-->
-                        <!--<div class="col-md-3 col-sm-3 no-padding-left margin-five">
-                            <div class="select-style med-input xs-med-input shop-shorting-details no-border-round">
-                                <select name="quantity">
-                                    <option value="">QTY</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                    <option value="">5</option>
-                                </select>
-                            </div>
-                        </div>-->
+                          </div>
+                          <div class="clearfix"></div>
+                         </div>
+						
 						<form name="product-option-form" id="product-option-form" onsubmit="return false" action="" method="post">
 						  <div id="product"> {% if options %}
 							<hr>
