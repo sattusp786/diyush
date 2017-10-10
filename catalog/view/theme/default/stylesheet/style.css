@@ -570,7 +570,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 /* search and cart */
 .search-cart-header { padding-top: 14px; float: right; letter-spacing: 1px}
 #top-search { float: right; margin: 1px 0 0 18px; position: relative; padding-bottom: 17px;}
-.search-form {width:45%; margin: 0 auto; top:40%}
+.search-form {width:45%; margin: 0 auto; /*top:40%*/ top:5%}
 .search-form .search-input { border:none; border-bottom:2px solid #000; font-size:30px; font-weight:100; padding:20px 2px; text-transform:capitalize; background: transparent; line-height:40px; }
 .search-form .search-input:focus{outline: none}
 .search-input ::-moz-placeholder, .search-input [placeholder] { color: #ff0000 !important; }
@@ -2240,6 +2240,37 @@ h2.final_price span {font-size: 13px; color: #626262; line-height: 23px; letter-
 h2.final_price span.rrp { text-decoration:line-through;}
 .my-mfp-zoom-in.mfp-ready.mfp-bg { background:#000; opacity: 0.5;}
 .mfp-close-btn-in, .mfp-auto-cursor .mfp-content { cursor:default;}
+
+/* SMART SEARCH CODE */
+#livesearch /*#livesearch **/ {  margin: 0;  padding: 0;  list-style: none; width:600px;}
+#livesearch {  position: absolute;  width: 100% !important; max-width:420px;  top: 0px;  background: #ffffff;  z-index: 100000;  box-shadow: 0px 10px 30px rgba(0,0,0,.5); margin-top:20px; height:100%; max-height:380px; overflow-y:scroll;}
+#livesearch li {  border-top: 1px solid #eeeeee; float: left;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;}
+#livesearch a {  display: block;  clear: both;  overflow: hidden;  /*line-height: 20px;  padding: 10px;*/  text-decoration: none;color: #333141;}
+/*#livesearch a:hover, #livesearch li.active a { background: #F0EEED;  color:#000;}*/
+#livesearch a:hover p { color:#000;}
+#livesearch img {float: left;  /*width: auto;  height: 50px;  margin-right: 10px;margin-bottom:20px;*/}
+#livesearch img[src=''] {  display: none;}
+.more {  text-align: center;}
+#livesearch a em {  display: block;  color: #333141;  font-style: normal; }
+#livesearch a:hover em, #livesearch li.active a em {  color: #333141;}
+#livesearch strike {color: #aaaaaa;}
+#livesearch a:hover strike {  color: lightblue;}
+#livesearch small {display: block; }
+.searchresult-listing li .proimg {  width: 25%; float: left;}
+.searchresult-listing li .proimg img {  width: 100%;}
+.searchresult-listing li .proinfo {  width: 70%;  float: right;}
+.searchresult-listing li .proinfo h4 {  margin-bottom: 15px;}
+.searchresult-listing li .proinfo p {  margin-bottom: 0;}
+#livesearch small { display: block;}
+.searchresult-listing li .btnwrap span {  width: 45%;  float: left;}
+.searchresult-listing li .btnwrap span:last-child { float: right;}
+.searchresult-listing li .btnwrap .more { color:#fff; margin:0;}
+/* SMART SEARCH END*/	
 
 @media only screen and ( max-width: 1920px ) {
 .navbar-right .dropdown-menu { right: -280px!important;}

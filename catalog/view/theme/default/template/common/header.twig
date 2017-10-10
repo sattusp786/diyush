@@ -227,7 +227,7 @@ b.keyup(function(e){
 					console.log('hello');
 						a.empty();
 						$.each(data, function( k, v ) {
-							a.append("<li>"+(k == 5 ? "<div class='btnwrap'><span><a class='btn blackbtn' href='"+v.href+"'><span>"+v.name+"</span></a></span><span><input type='button' onclick='$(\"#livesearch\").hide();' name='close' id='close' class='btn blackbtn' value='Close' /></span></div>" : "<a href='"+v.href+"'>"+(v.thumb ? "<div class='proimg'><img src='"+v.thumb+"' alt='"+v.name+"'></div>" : '')+"<div class='proinfo' "+(v.thumb ? '' : "style='float:left;width:100%;'" )+"><h4>"+v.name+(v.sku ? "<small>"+v.sku+"</small>" : '')+"</h4><p>"+(v.price ? v.price : '')+"</p></div></a>")+"</li>");
+							a.append("<li>"+(k == 5 ? "<div class='btnwrap'><span><a class='highlight-button-dark btn btn-very-small button no-margin' href='"+v.href+"'>"+v.name+"</a></span><span><input type='button' onclick='$(\"#livesearch\").hide();' name='close' id='close' class='highlight-button-dark btn btn-very-small button no-margin' value='Close' /></span></div>" : "<a href='"+v.href+"'>"+(v.thumb ? "<div class='proimg'><img src='"+v.thumb+"' alt='"+v.name+"'></div>" : '')+"<div class='proinfo' "+(v.thumb ? '' : "style='float:left;width:100%;'" )+"><h4>"+v.name+(v.sku ? "<small>"+v.sku+"</small>" : '')+"</h4><p>"+(v.price ? v.price : '')+"</p></div></a>")+"</li>");
 						});
 						a.remove(); $("body").prepend(a); repositionLivesearch();
 						
