@@ -229,6 +229,7 @@ i { color: #9a9a9a; margin: 0 3px}
 .parallax-gray-bg{ background: rgba(246,246,246,1)}
 .bg-light-orange { background-color: #ef824c !important;}
 .bg-inherit { background-color: inherit !important;}
+.bg-slider {background:#e5e1c9 !important;}
 
 /* opacity */
 .opacity-light{ position: absolute; height: 100%; width: 100%; opacity: 0.5; z-index: 1; top:0; left: 0 }
@@ -2270,6 +2271,9 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .searchresult-listing li .btnwrap span {  width: 45%;  float: left;}
 .searchresult-listing li .btnwrap span:last-child { float: right;}
 .searchresult-listing li .btnwrap .more { color:#fff; margin:0;}
+
+#topbar a { color:#fff; padding:0 5px;}
+#topbar .topbar-mid a{ padding:0 10px; text-transform:uppercase;}
 /* SMART SEARCH END*/	
 
 @media only screen and ( max-width: 1920px ) {

@@ -113,8 +113,34 @@
 </head>
 <body>
 <!-- navigation panel -->
-<nav class="navbar navbar-default navbar-fixed-top nav-transparent overlay-nav sticky-nav nav-border-bottom bg-white shop-nav" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top nav-transparent overlay-nav sticky-nav nav-border-bottom bg-white shop-nav" role="navigation">    
+  
 	<div class="container width-100">
+    <div id="topbar" class="desktopview">    	
+            <div class="row">
+            <div class="width-100 bg-black">
+               	<div class="col-md-12">
+                	<div class="col-md-3 text-left no-padding">
+                    	<a href="#"><i class="fa fa-user white-text extra-small-icon"> </i> Login</a>
+                        <a href="#"><i class="fa fa-heart-o white-text extra-small-icon"> </i> Wishlist</a>
+                    </div>
+                    <div class="col-md-6 text-center topbar-mid">
+                    	<a href="#">Book Appointment</a>
+                        <a href="#">Life Time Warranty</a>
+                        <a href="#">Free Sample Services</a>
+                        <a href="#">Google Reviews</a>
+                    </div>
+                    <div class="col-md-3 text-right no-padding">
+                    	<a href="#"><i class="fa fa-phone white-text extra-small-icon"> </i> 0800 500 5000</a>
+                        <a href="#"><i class="fa fa-wechat white-text extra-small-icon"> </i></a>
+                        <a href="#"><i class="fa fa-envelope-o white-text extra-small-icon"> </i></a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            
+        </div>
+    </div>
 		<div class="row">
 			<!-- logo -->
 			<div class="col-md-2 pull-left"><a class="logo-light" href="index.php"><img alt="" src="catalog/view/theme/default/image/logo-light.png" class="logo" /></a><a class="logo-dark" href="index.php"><img alt="" src="catalog/view/theme/default/image/logo-light.png" class="logo" /></a></div>
@@ -144,7 +170,8 @@
 			<!-- toggle navigation end -->
 			{{ menu }}
 		</div>
-	</div>
+	
+    </div>
 </nav>
 <!-- end navigation panel -->
 <style type="text/css">
