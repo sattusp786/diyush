@@ -315,4 +315,32 @@ class ControllerAccountRegister extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+	
+	public function confirm() {
+
+		$this->load->language('account/register');
+		$this->load->model('account/customer');
+
+		$json = array();
+
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
+			$json['success'] =  true;
+
+			// Clear any previous login attempts for unregistered accounts.
+			$this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
+
+			$this->customer->login($this->request->post['email'], $this->request->post['password']);
+
+			unset($this->session->data['guest']);
+			$json['redirect'] = $this->url->link('account/success', '', 'SSL');
+			
+		}elseif(!empty($this->error['warning'])) {
+			$json['error'] =  $this->error['warning'];
+		}
+		
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));			
+
+	}
 }

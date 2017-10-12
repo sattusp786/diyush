@@ -182,4 +182,109 @@ class ControllerAccountLogin extends Controller {
 
 		return !$this->error;
 	}
+	
+	public function popup() {
+		$this->load->model('account/customer');
+		if ($this->customer->isLogged()) {
+			$this->response->redirect($this->url->link('account/account', '', 'SSL'));
+		}
+
+		if (isset($this->request->get['favorite'])) {
+			$data['favorite'] = 'yes';
+		} else {
+			$data['favorite'] = '';
+		}
+		
+		$this->load->language('account/login');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$data['heading_title'] = $this->language->get('heading_title');
+
+		$data['text_new_customer'] = $this->language->get('text_new_customer');
+		$data['text_register'] = $this->language->get('text_register');
+		$data['text_register_account'] = $this->language->get('text_register_account');
+		$data['text_returning_customer'] = $this->language->get('text_returning_customer');
+		$data['text_i_am_returning_customer'] = $this->language->get('text_i_am_returning_customer');
+		$data['text_forgotten'] = $this->language->get('text_forgotten');
+
+		$data['entry_email'] = $this->language->get('entry_email');
+		$data['entry_password'] = $this->language->get('entry_password');
+
+		$data['button_continue'] = $this->language->get('button_continue');
+		$data['button_login'] = $this->language->get('button_login');
+
+		if (isset($this->error['warning'])) {
+			$data['error_warning'] = $this->error['warning'];
+		} else {
+			$data['error_warning'] = '';
+		}
+
+		$data['action'] = $this->url->link('account/login', '', 'SSL');
+		$data['register'] = $this->url->link('account/register', '', 'SSL');
+		$data['forgotten'] = $this->url->link('account/forgotten', '', 'SSL');
+
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
+		}
+
+		if (isset($this->request->post['email'])) {
+			$data['email'] = $this->request->post['email'];
+		} else {
+			$data['email'] = '';
+		}
+
+		if (isset($this->request->post['password'])) {
+			$data['password'] = $this->request->post['password'];
+		} else {
+			$data['password'] = '';
+		}
+
+		$this->response->setOutput($this->load->view('account/login_popup', $data));		
+	}
+	
+	public function confirm() {
+
+		$this->load->language('account/login');
+		$this->load->model('account/customer');
+
+		$json = array();
+
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+
+			$json['success'] =  true;
+
+			// Trigger customer pre login event
+			$this->event->trigger('pre.customer.login');
+
+
+			// Add to activity log
+			$this->load->model('account/activity');
+
+			$activity_data = array(
+				'customer_id' => $this->customer->getId(),
+				'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
+			);
+
+			$this->model_account_activity->addActivity('login', $activity_data);
+
+			// Trigger customer post login event
+			$this->event->trigger('post.customer.login');
+
+			if($this->customer->isLogged()){
+				$json['redirect'] = $this->url->link('account/account', '', 'SSL');
+			}
+			
+		}elseif(!empty($this->error['warning'])) {
+			$json['error'] =  $this->error['warning'];
+		}
+		
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));			
+
+	}
 }
