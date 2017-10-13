@@ -1,32 +1,5 @@
-<style type="text/css">
-#modal-agree .modal-header { /*display:none;*/ border: 0;  padding: 0;}
-#modal-agree .modal-content {border-radius: 0;}
-#modal-agree .modal-body {background:#fafbfb; padding:0;}
-#modal-agree .modal-body .top { padding:25px 5% 0; background:#fff; border-bottom:1px solid #ebebeb;}
-#modal-agree h3.title {text-transform: uppercase;color: #000000;margin: 10px 0; text-align:center;}
-#modal-agree .modal-header .close { font-size:40px; margin-top:0; position: absolute; right: 10px; top: 0px; z-index: 9;}
-#modal-agree .modal-content .modal-title {font-size: 20px;line-height: 30px; text-transform: uppercase; color: #000000; font-weight: 400; display:none;}
-#modal-agree .nav-tabs {font-size: 16px;line-height: 24px; text-transform: uppercase; color: #000000; font-weight: 400; margin:0;}
-#modal-agree .col-xs-10 { width:100%;}
-#modal-agree .col-xs-10 input, #modal-agree .createaccounttext input {padding: 10px 4%; font-size: 16px;  line-height: 24px;  text-transform: uppercase;  margin: 8px 0; height:inherit; border-radius: 0;}
-#modal-agree .col-xs-10 input.form-control { height:inherit;}
-#modal-agree .checkoutlogintext { padding:5%!important;}
-#modal-agree .tab-content>.tab-pane { padding:20px 5%;}
-#modal-agree .tab-content>.tab-pane form { padding:0 10%;}
-#modal-agree .tab-content>.tab-pane form input { -webkit-box-shadow: 0;   box-shadow: 0;}
-#modal-agree .tab-content>.tab-pane form input:focus {outline: none;}
-#modal-agree .tab-content>.tab-pane p.texter, #modal-agree .tab-content>.tab-pane p{margin-bottom: 10px; text-align:center;}
-#modal-agree .formbtn { text-align:center;}
-#modal-agree .tab-content>.tab-pane p a.botline { border-bottom:1px solid #000; font-weight:500;}
-#modal-agree .createaccounttext .forgotpasswordform li { padding:0 12%;}
 
-@media (min-width: 800px) {
-	.modal-dialog {width: 750px;}
-	#modal-agree .tab-content>.tab-pane .formbtn .btn { width:50%;}
-	#modal-agree .createaccounttext .forgotpasswordform li.formbtn .btn { width:auto;}
-}
-</style>
-<div class="loginpop-wrap">
+<div class="loginpop-wrap modal-popup-main zoom-anim-dialog">
 <section class="top">
 	{% if favorite == 'yes' %}
 	<h3 class="title">Let's treasure your favorite jewels</h3>
@@ -56,7 +29,7 @@
             </div>
             <div class="form-group formbtn">
                 <div class="col-xs-10">
-                  <input type="button" name="button-login" id="button-login" tabindex="4" class="form-control btn blackbtn"  value="SIGN IN">
+                  <input type="button" name="button-login" id="button-login" tabindex="4" class="btn-black button"  value="SIGN IN">
                 </div>
             </div>
             <div class="form-group">
@@ -97,7 +70,7 @@
               </div>
               <div class="form-group formbtn">
                   <div class="col-xs-10">
-                    <input type="button" name="button-register" id="button-register" tabindex="4" class="form-control btn blackbtn" value="CREATE ACCOUNT">
+                    <input type="button" name="button-register" id="button-register" tabindex="4" class="btn-black button" value="CREATE ACCOUNT">
                   </div>
               </div>
               <div class="form-group">
@@ -117,20 +90,20 @@
 
 <div class="forgot-wrap hidden">	  
 	  <form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" id="form-forgot">
-	  <section id="forgotten-password">
-		<div class="container clearfix" id="forgot">
+	  <div id="forgotten-password">
+		<div class=" clearfix" id="forgot">
 		  <div class="forgotten-passwordtext createaccounttext checkoutlogintext">
 		  <p class="backlink"> <a href="javascript:void(0);" onclick="go_back();"><span><i class="fa fa-arrow-left" aria-hidden="true"></i></span> Back</a></p> 
 			<h3>Forgot Password</h3>
 			<p>Enter your email address and we'll send you instructions to reset your password.</p>
 			<ul class="createaccountform forgotpasswordform">
 				<li><input id="input-email" type="email" name="email" value="" placeholder="Email Address"></li>
-				<li class="formbtn"><input type="button" name="button-forgot" id="button-forgot" value="Send Reset Instructions" class="btn blackbtn desktopview"> <input type="button" name="button-forgot" id="button-forgot" value="Reset" class="btn blackbtn mobileview"></li>
+				<li class="formbtn"><input type="button" name="button-forgot" id="button-forgot" value="Send Reset Instructions" class="btn-black button desktopview"> <input type="button" name="button-forgot" id="button-forgot" value="Reset" class="btn-black button mobileview"></li>
 			</ul>
 			<div class="clear"></div>
 		  </div>
 		</div>
-		</section>
+		</div>
 		</form>    
 		
 </div>

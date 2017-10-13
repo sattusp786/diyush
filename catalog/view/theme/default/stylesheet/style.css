@@ -1681,6 +1681,7 @@ ul.list-line li span {min-width:130px; display:inline-block}
 
 /* model popup */
 .modal-popup-main {padding:35px;}
+#modal-agree .modal-popup-main {padding:0;}
 
 /* ===================================
     Pages
@@ -2274,6 +2275,49 @@ h2.final_price span.rrp { text-decoration:line-through;}
 
 #topbar a { color:#fff; padding:0 5px;}
 #topbar .topbar-mid a{ padding:0 10px; text-transform:uppercase;}
+
+#modal-agree .modal-header { /*display:none;*/ border: 0;  padding: 0;}
+#modal-agree .modal-content {border-radius: 0;}
+#modal-agree .modal-body {background:#fff; padding:0;}
+#modal-agree .modal-body .top { padding:25px 5% 0;}
+#modal-agree h3.title {text-transform: uppercase;color: #000000;margin: 10px 0; text-align:center;}
+#modal-agree .modal-header .close { width: 34px;
+    height: 34px;
+    line-height: 36px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    text-decoration: none;
+    text-align: center;
+    padding: 0;
+    font-style: normal;
+    background: #000 !important;
+    color: #fff !important;
+    font-size: 22px; z-index:99; text-align:center; margin:0; opacity:1;}
+#modal-agree .modal-content .modal-title {font-size: 20px;line-height: 30px; text-transform: uppercase; color: #000000; font-weight: 400; display:none;}
+#modal-agree .nav-tabs {font-size: 16px;line-height: 24px; text-transform: uppercase; color: #000000; font-weight: 400; margin:0;}
+#modal-agree .col-xs-10 { width:100%;}
+#modal-agree .col-xs-10 input, #modal-agree .createaccounttext input {padding: 10px 4%; font-size: 16px;  line-height: 24px;  text-transform: uppercase;  margin: 8px 0; height:inherit; border-radius: 0;}
+#modal-agree .col-xs-10 input.form-control { height:inherit;}
+#modal-agree .checkoutlogintext { padding:5%!important;}
+#modal-agree .tab-content>.tab-pane { padding:20px 5%;}
+#modal-agree .tab-content>.tab-pane form { padding:0 10%;}
+#modal-agree .tab-content>.tab-pane form input { -webkit-box-shadow: 0;   box-shadow: 0;}
+#modal-agree .tab-content>.tab-pane form input:focus {outline: none;}
+#modal-agree .tab-content>.tab-pane p.texter, #modal-agree .tab-content>.tab-pane p{margin-bottom: 10px; text-align:center;}
+#modal-agree .formbtn { text-align:center;}
+#modal-agree .tab-content>.tab-pane p a.botline { border-bottom:1px solid #000; font-weight:500;}
+#modal-agree .createaccounttext .forgotpasswordform li { padding:0 12%;}
+.nav-tabs.nav-justified > li {display: inline-block;  width: 48.8%;}
+.nav-tabs.nav-justified > li a { display: block;  float: none; border-bottom:1px solid #000;  border-radius: 0; padding: 15px; font-size: medium;}
+.nav-tabs.nav-justified > .active > a { background:#000; color:#fff;}
+
+@media (min-width: 800px) {
+	.modal-dialog {width: 750px;}
+	#modal-agree .tab-content>.tab-pane .formbtn .btn { width:50%;}
+	#modal-agree .createaccounttext .forgotpasswordform li.formbtn .btn { width:auto;}
+}
+
 /* SMART SEARCH END*/	
 
 @media only screen and ( max-width: 1920px ) {
