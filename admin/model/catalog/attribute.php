@@ -40,6 +40,11 @@ class ModelCatalogAttribute extends Model {
 			$sql .= " AND ad.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
+
+							if($this->config->get('module_wk_amazon_connector_status')){
+								$sql .= " AND a.attribute_id NOT IN (SELECT oc_attribute_id FROM ".DB_PREFIX."amazon_attribute_map) ";
+							}
+              
 		if (!empty($data['filter_attribute_group_id'])) {
 			$sql .= " AND a.attribute_group_id = '" . $this->db->escape($data['filter_attribute_group_id']) . "'";
 		}
@@ -92,7 +97,13 @@ class ModelCatalogAttribute extends Model {
 	}
 
 	public function getTotalAttributes() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "attribute");
+		
+							if($this->config->get('module_wk_amazon_connector_status')){
+                $query = $this->db->query("SELECT COUNT(*) AS total FROM ".DB_PREFIX."attribute a LEFT JOIN ".DB_PREFIX."attribute_group ag ON(a.attribute_group_id = ag.attribute_group_id) WHERE a.attribute_id NOT IN (SELECT oc_attribute_id FROM ".DB_PREFIX."amazon_attribute_map) ");
+              }else{
+                $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "attribute");
+              }
+              
 
 		return $query->row['total'];
 	}

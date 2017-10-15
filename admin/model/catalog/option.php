@@ -70,6 +70,11 @@ class ModelCatalogOption extends Model {
 	public function getOptions($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "option` o LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE od.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
+
+						 if($this->config->get('module_wk_amazon_connector_status')){
+							 $sql .= " AND o.option_id NOT IN (SELECT variation_id FROM ".DB_PREFIX."amazon_variation_map) ";
+						 }
+						 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND od.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
@@ -170,7 +175,13 @@ class ModelCatalogOption extends Model {
 	}
 
 	public function getTotalOptions() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "option`");
+		
+						 if($this->config->get('module_wk_amazon_connector_status')){
+								 $query = $this->db->query("SELECT COUNT(*) AS total FROM ".DB_PREFIX."option WHERE option_id NOT IN (SELECT variation_id FROM ".DB_PREFIX."amazon_variation_map) ");
+						 }else{
+								 $query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "option`");
+						 }
+						 
 
 		return $query->row['total'];
 	}

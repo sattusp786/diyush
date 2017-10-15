@@ -26,6 +26,30 @@ class ControllerCommonColumnLeft extends Controller {
 			);
 			
 			// Catalog
+
+              if($this->config->get('module_wk_amazon_connector_status')){
+                // opencart_amazon_connector
+                $opencart_amazon_connector = array();
+
+                if ($this->user->hasPermission('access', 'amazon_map/account')) {
+                  $opencart_amazon_connector[] = array(
+                    'name'     => $this->language->get('text_amazon_account'),
+                    'href'     => $this->url->link('amazon_map/account', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                  );
+                }
+
+                if ($opencart_amazon_connector) {
+                  $data['menus'][] = array(
+                    'id'       => 'menu-amazon-connector',
+                    'icon'     => 'fa-plug',
+                    'name'     => $this->language->get('text_opencart_amazon_connector'),
+                    'href'     => '',
+                    'children' => $opencart_amazon_connector
+                  );
+                }
+              }
+            
 			$catalog = array();
 			
 			if ($this->user->hasPermission('access', 'catalog/category')) {
@@ -653,6 +677,15 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 					
+
+			if ($this->user->hasPermission('access', 'extension/export_import')) {
+				$maintenance[] = array(
+					'name'	   => $this->language->get('text_export_import'),
+					'href'     => $this->url->link('extension/export_import', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
 			if ($this->user->hasPermission('access', 'tool/upload')) {
 				$maintenance[] = array(
 					'name'	   => $this->language->get('text_upload'),

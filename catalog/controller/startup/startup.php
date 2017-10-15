@@ -190,5 +190,10 @@ class ControllerStartupStartup extends Controller {
 		
 		// OpenBay Pro
 		$this->registry->set('openbay', new Openbay($this->registry));					
+
+                if($this->config->get('module_wk_amazon_connector_status')){
+                $this->registry->set('Amazonconnector', new Amazonconnector($this->registry));
+              }
+            
 	}
 }
