@@ -782,7 +782,7 @@ footer ul.list-inline li:first-child {padding-left: 6px}
 /* half slider */
 .owl-half-slider .owl-title { width: 50%; line-height: 40px; font-size: 25px;}
 .owl-half-slider .item { min-height: 710px}
-.owl-half-slider.homeslider .item { min-height: 600px}
+.owl-half-slider.homeslider .item { min-height: 550px}
 .owl-half-slider .container { min-height: 710px}
 .owl-small-slider .item {min-height: 430px}
 .owl-small-slider .container {min-height: 400px}
@@ -2311,6 +2311,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .nav-tabs.nav-justified > li {display: inline-block;  width: 48.8%;}
 .nav-tabs.nav-justified > li a { display: block;  float: none; border-bottom:1px solid #000;  border-radius: 0; padding: 15px; font-size: medium;}
 .nav-tabs.nav-justified > .active > a { background:#000; color:#fff;}
+.topbar-wrap { padding:2px 0;}
 
 @media (min-width: 800px) {
 	.modal-dialog {width: 750px;}

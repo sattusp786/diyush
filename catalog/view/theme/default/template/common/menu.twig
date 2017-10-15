@@ -14,7 +14,7 @@
 									<!-- sub menu -->
 									<ul id="collapse{{ category.category_id }}" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 										<!-- sub menu column  -->
-										<li class="mega-menu-column col-sm-4">
+										<li class="mega-menu-column col-sm-2">
 											<!-- sub menu item  -->
 											<ul>
 												{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
@@ -27,8 +27,18 @@
 											<!-- end sub menu item  -->
 										</li>
 										<!-- end sub menu column  -->
+                                        <li class="mega-menu-column col-sm-2">
+											<!-- sub menu item  -->
+										
+											<!-- end sub menu item  -->
+										</li>
+                                        <li class="mega-menu-column col-sm-2">
+											<!-- sub menu item  -->
+										
+											<!-- end sub menu item  -->
+										</li>
 										<!-- sub menu column  -->
-										<li class="mega-menu-column col-sm-4 banner">
+										<li class="mega-menu-column col-sm-3 banner">
 											<!-- banner image  -->
 											<ul>
 												<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
@@ -37,7 +47,7 @@
 										</li>
 										<!-- end sub menu column  -->
 										<!-- sub menu column  -->
-										<li class="mega-menu-column col-sm-4 banner">
+										<li class="mega-menu-column col-sm-3 banner">
 											<!-- banner image  -->
 											<ul>
 												<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
