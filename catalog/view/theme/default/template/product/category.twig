@@ -30,6 +30,8 @@
             </div>
         </section>
         <!-- end head section -->
+		
+		{% if filter_groups %}
 		<section class="padding-two position-relative parallax-fix row">
         	<div class="opacity-medium bg-dark-gray"></div>
             <div class="container width-100">
@@ -37,109 +39,27 @@
                     <div class="col-md-12 col-sm-12 wow fadeIn">
                         <h3 class="white-text text-center text-uppercase margin-two no-margin-top">Filter by our Lovely Engagement Ring Designs</h3>
                         <!-- featured products slider -->
-			<div id="filter-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple padding-left-right">
-				<!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-				<!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-                <!-- shop item -->
-				<div class="item">
-					<div class="filter-product text-center position-relative overflow-hidden">
-						<span class="proimg"><a href="#"><img src="image/catalog/product/1.png" alt=""/></a></span>
-						<span class="product-name text-center "><a href="shop-single-product.html">Levato</a></span>	
-					</div>
-				</div>
-				<!-- end shop item -->
-			</div>
-			<!-- end featured products slider -->
+						<div id="filter-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple padding-left-right">
+							{% for filter_group in filter_groups %}
+							{% for filter in filter_group.filter %}
+							<!-- shop item -->
+							<div class="item">
+								<div class="filter-product text-center position-relative overflow-hidden">
+									<span class="proimg"><a href="{{ category_href }}&filter={{ filter.filter_id }}"><img src="image/catalog/product/1.png" alt=""/></a></span>
+									<span class="product-name text-center "><a href="{{ category_href }}&filter={{ filter.filter_id }}">{{ filter.name }}</a></span>	
+								</div>
+							</div>
+							<!-- end shop item -->
+							{% endfor %}
+							{% endfor %}
+						</div>
+						<!-- end featured products slider -->
                     </div>
                  </div>
             </div>            
         </section>
+		{% endif %}
+		
             
         <!-- end head section -->
 		<section class="padding-two">
