@@ -13,6 +13,7 @@ if (!defined('DIR_APPLICATION')) {
 	exit;
 }
 
+ini_set('memory_limit','-1');
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');
 

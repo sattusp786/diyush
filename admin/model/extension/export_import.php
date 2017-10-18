@@ -2131,18 +2131,19 @@ class ModelToolExportImport extends Model {
 		$points_prefix = $product_option_value['points_prefix'];
 		$weight = $product_option_value['weight'];
 		$weight_prefix = $product_option_value['weight_prefix'];
+		$default = $product_option_value['default'];
 		$product_option_id = $product_option_value['product_option_id'];
 		if (isset($old_product_option_value_ids[$product_id][$option_id][$option_value_id])) {
 			$product_option_value_id = $old_product_option_value_ids[$product_id][$option_id][$option_value_id];
 			$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
-			$sql .= "(`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix` ) VALUES "; 
-			$sql .= "($product_option_value_id,$product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix')";
+			$sql .= "(`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`,`default` ) VALUES "; 
+			$sql .= "($product_option_value_id,$product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix',$default)";
 			$this->db->query($sql);
 			unset($old_product_option_value_ids[$product_id][$option_id][$option_value_id]);
 		} else {
 			$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
-			$sql .= "(`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix` ) VALUES "; 
-			$sql .= "($product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix')";
+			$sql .= "(`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`,`default` ) VALUES "; 
+			$sql .= "($product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix',$default)";
 			$this->db->query($sql);
 		}
 	}
@@ -2249,6 +2250,7 @@ class ModelToolExportImport extends Model {
 			$points_prefix = $this->getCell($data,$i,$j++,'+');
 			$weight = $this->getCell($data,$i,$j++,'0.00');
 			$weight_prefix = $this->getCell($data,$i,$j++,'+');
+			$default = $this->getCell($data,$i,$j++,'+');
 			if ($product_id != $previous_product_id) {
 				$product_option_ids = $this->getProductOptionIds( $product_id );
 			}
@@ -2264,6 +2266,7 @@ class ModelToolExportImport extends Model {
 			$product_option_value['points_prefix'] = $points_prefix;
 			$product_option_value['weight'] = $weight;
 			$product_option_value['weight_prefix'] = $weight_prefix;
+			$product_option_value['default'] = $default;
 			$product_option_value['product_option_id'] = isset($product_option_ids[$option_id]) ? $product_option_ids[$option_id] : 0;
 			if (($incremental) && ($product_id != $previous_product_id)) {
 				$old_product_option_value_ids = $this->deleteProductOptionValue( $product_id );
@@ -4102,15 +4105,15 @@ class ModelToolExportImport extends Model {
 		}
 		if ($this->config->get('export_import_settings_use_option_id')) {
 			if ($this->config->get('export_import_settings_use_option_value_id')) {
-				$expected_heading = array( "product_id", "option_id", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix" );
+				$expected_heading = array( "product_id", "option_id", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
 			} else {
-				$expected_heading = array( "product_id", "option_id", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix" );
+				$expected_heading = array( "product_id", "option_id", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
 			}
 		} else {
 			if ($this->config->get('export_import_settings_use_option_value_id')) {
-				$expected_heading = array( "product_id", "option", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix" );
+				$expected_heading = array( "product_id", "option", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
 			} else {
-				$expected_heading = array( "product_id", "option", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix" );
+				$expected_heading = array( "product_id", "option", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
 			}
 		}
 		$expected_multilingual = array();
@@ -7463,7 +7466,7 @@ class ModelToolExportImport extends Model {
 		$language_id = $this->getDefaultLanguageId();
 		$sql  = "SELECT ";
 		$sql .= "  p.product_id, pov.option_id, pov.option_value_id, pov.quantity, pov.subtract, od.name AS `option`, ovd.name AS option_value, ";
-		$sql .= "  pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix ";
+		$sql .= "  pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, pov.default ";
 		$sql .= "FROM ";
 		$sql .= "( SELECT product_id ";
 		$sql .= "  FROM `".DB_PREFIX."product` ";
@@ -7503,6 +7506,7 @@ class ModelToolExportImport extends Model {
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('points_prefix'),5)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('weight'),10)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('weight_prefix'),5)+1);
+		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('default'),10)+1);
 
 		// The heading row and column styles
 		$styles = array();
@@ -7532,6 +7536,7 @@ class ModelToolExportImport extends Model {
 		$styles[$j] = &$weight_format;
 		$data[$j++] = 'weight';
 		$data[$j++] = 'weight_prefix';
+		$data[$j++] = 'default';
 		$worksheet->getRowDimension($i)->setRowHeight(30);
 		$this->setCellRow( $worksheet, $i, $data, $box_format );
 
@@ -7561,6 +7566,7 @@ class ModelToolExportImport extends Model {
 			$data[$j++] = $row['points_prefix'];
 			$data[$j++] = $row['weight'];
 			$data[$j++] = $row['weight_prefix'];
+			$data[$j++] = $row['default'];
 			$this->setCellRow( $worksheet, $i, $data, $this->null_array, $styles );
 			$i += 1;
 			$j = 0;
