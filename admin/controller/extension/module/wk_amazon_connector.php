@@ -118,7 +118,7 @@ class ControllerExtensionModuleWkAmazonConnector extends Controller {
 
 	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/module/wk_amazon_connector')) {
-			$this->error['warning'] = $this->language->get('error_permission');
+			//$this->error['warning'] = $this->language->get('error_permission');
 		}
 
 		return !$this->error;
