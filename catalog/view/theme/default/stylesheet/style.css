@@ -475,7 +475,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 
 .dropdown-menu li a i { color: #c8c8c8 ; float: left; font-size: 14px; margin: 0 10px 0 0; padding: 0; position: relative; right: 0; top: 5px; }
 .dropdown-menu li a:hover i { color: #fff; }
-.sticky-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0)}
+.sticky-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0.1)}
 .shrink-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0.1)}
 .nav-border-bottom-fix {border-bottom: 1px solid rgba(0,0,0,0.1)}
 
@@ -605,7 +605,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 ====================================== */
 
 /* page titles */
-.content-top-margin { margin-top: 81px;}
+.content-top-margin { margin-top: 88px;}
 .page-title { padding: 80px 0}
 .page-title h1 { letter-spacing: 6px; font-weight: 600; font-size: 20px; margin-bottom: 5px}
 .page-title span {letter-spacing: 1px; font-weight: 400; font-size: 14px;}
@@ -2311,7 +2311,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .nav-tabs.nav-justified > li {display: inline-block;  width: 48.8%;}
 .nav-tabs.nav-justified > li a { display: block;  float: none; border-bottom:1px solid #000;  border-radius: 0; padding: 15px; font-size: medium;}
 .nav-tabs.nav-justified > .active > a { background:#000; color:#fff;}
-.topbar-wrap { padding:2px 0;}
+.topbar-wrap { padding:4px 0;}
 #filter-products .item span.proimg { display: block; padding: 0 15px; }
 #filter-products .item span.proimg a { display: block; background:#fff;}
 #filter-products .item span.product-name a { color:#fff;}
