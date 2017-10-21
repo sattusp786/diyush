@@ -254,6 +254,19 @@ class ControllerProductProduct extends Controller {
 			$this->load->model('tool/image');
 
 			if ($product_info['image']) {
+				$data['popup'] = HTTP_SERVER . 'image/' . $product_info['image'];
+			} else {
+				$data['popup'] = '';
+			}
+
+			if ($product_info['image']) {
+				$data['thumb'] = HTTP_SERVER . 'image/' . $product_info['image'];
+			} else {
+				$data['thumb'] = '';
+			}
+			
+			/*
+			if ($product_info['image']) {
 				$data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_popup_height'));
 			} else {
 				$data['popup'] = '';
@@ -264,7 +277,8 @@ class ControllerProductProduct extends Controller {
 			} else {
 				$data['thumb'] = '';
 			}
-
+			*/
+			
 			$data['images'] = array();
 
 			$results = $this->model_catalog_product->getProductImages($this->request->get['product_id']);
