@@ -2320,6 +2320,8 @@ h2.final_price span.rrp { text-decoration:line-through;}
 #filter-products.dark-pagination .owl-prev { left:35px;}
 #filter-products .owl-prev:before, #filter-products .owl-next:before { background-color:transparent;}
 #filter-products .owl-prev .fa, #filter-products .owl-next .fa { color:#fff;}
+.order-completion-table.table tr  th, .order-completion-table.table tr  td { padding:12px 10px;}
+.order-completion-table.table tr  th { color:#000000;}
 
 @media (min-width: 800px) {
 	.modal-dialog {width: 750px;}
