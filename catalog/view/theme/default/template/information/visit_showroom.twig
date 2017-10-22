@@ -19,31 +19,101 @@
                 </div>
             </div>
         </section>
-        <section class="content-section padding-two">
-<div id="information-contact" class="container">
- 
-  <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
-      <!--<h1>Visit Showroom</h1>-->
-      <h3>Visit our showroom</h3>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            Visit our showroom content comes here...
+        <section id="counter"  class="parallax8 parallax-fix" style="background: url('catalog/view/theme/default/image/homepage/office-img.jpg') 50% 93px;" >
+           
+            <div class="opacity-medium bg-black"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-sm-12 text-center center-col">
+                        <h1 class="white-text">Our Showroom</h1>
+                    </div>
+                </div>
           </div>
-        </div>
-      </div>
-     
-      
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
+        </section>
+        <section class="content-section padding-two">
+<div class="container">
+ 	<p>Visit our showroom at hatton Garden (London) for a one-toone consultation. We offer a totally no-pressure environment, so you choose the perfect diamond jewellery for you. Schedule and appointment to view our selection of diamond rings and fine jewellery today.</p>
+  <div class="col-md-6 no-padding">
+  <h3 class="margin-one no-margin-top">Our Showroom</h3>
+  	<p>Showroom visits are strictly by appointment only</p>
+    <h3 class="margin-one no-margin-top">Our address:</h3>
+    <p>77 Diamonds Ltd<br />
+2nd floor<br />
+3 hanover Square<br />
+london, W1S 1HD<br />
+United kingdom</p>
+<h3 class="margin-one no-margin-top">London Showroom Opening times</h3>
+<p>Monday - Thursday 10:00 - 19:30<br />
+Friday 10:00 - 18:30<br />
+Saturday 10:00 - 17:00<br />
+we are closed Sundays and UK bank holidays</p>
+  
+  </div>
+  <div class="col-md-6">
+  	<form>
+                            <div class="form-group">
+                                <!-- label  -->
+                                <label for="exampleInputEmail1">First Name <sup class="deep-red-text">*</sup></label>
+                                <!-- end label  -->
+                                <!-- input  -->
+                                <input type="text" class="form-control input-round big-input text-lowercase" id="firstname" placeholder="First Name">
+                                <!-- end input  -->
+                            </div>
+                             <div class="form-group">
+                                <!-- label  -->
+                                <label for="exampleInputEmail1">Last Name <sup class="deep-red-text">*</sup></label>
+                                <!-- end label  -->
+                                <!-- input  -->
+                                <input type="text" class="form-control input-round big-input text-lowercase" id="lastname" placeholder="Last Name">
+                                <!-- end input  -->
+                            </div>
+                             <div class="form-group">
+                                <!-- label  -->
+                                <label for="exampleInputEmail1">Email address <sup class="deep-red-text">*</sup></label>
+                                <!-- end label  -->
+                                <!-- input  -->
+                                <input type="email" class="form-control input-round big-input text-lowercase" id="email" placeholder="Email address">
+                                <!-- end input  -->
+                            </div>
+                            <div class="form-group">
+                                <!-- label  -->
+                                <label for="exampleInputEmail1">Phone <sup class="deep-red-text">*</sup></label>
+                                <!-- end label  -->
+                                <!-- input  -->
+                                <input type="text" class="form-control input-round big-input text-lowercase" id="phone" placeholder="Phone">
+                                <!-- end input  -->
+                            </div>
+                            <div class="form-group">
+                                <!-- label  -->
+                                <label for="exampleInputEmail1">Additional information</label>
+                                <!-- end label  -->
+                                <!-- input  -->
+                               <textarea name="enquiry" rows="5" id="input-enquiry" class="form-control"></textarea>
+                                <!-- end input  -->
+                            </div>
+                            
+                            
+                            <!-- button  -->
+                            <button class="highlight-button btn btn-medium no-margin" type="submit">Submit</button>
+                            <!-- end button  -->
+                        </form>
+  </div>
+  <div class="clearfix"></div>
+  
 </div>
+</section>
+<section class="content-section padding-one">
+<div class="col-md-12 no-padding">
+      	
+        	<div id="canvas1" class="col-md-12 col-sm-12 no-padding contact-map map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.013292368219!2d-73.99278428494233!3d40.71772387933131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259876bb14d79%3A0xd4cf7ac0f2cefee0!2s79+Orchard+St%2C+New+York%2C+NY+10002%2C+USA!5e0!3m2!1sen!2sin!4v1508652575971" width="600" height="450" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                    </div>
+     
+        
+      </div>
+      <div class="container">
+      		<div class="col-md-8"> <input type="text" class="form-control input-round big-input" id="" placeholder=""></div>
+            <div class="col-md-4"> <button class="highlight-button btn btn-medium no-margin bg-yellow" type="submit">Get Directions</button></div>
+      </div>
 </section>
 {{ footer }}
