@@ -431,6 +431,7 @@ $(document).delegate('#button-payment-address', 'click', function() {
 
 						$('#collapse-payment-method').parent().find('.panel-heading .panel-title').html('<a href="#collapse-payment-method" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_payment_method }} <i class="fa fa-caret-down"></i></a>');
 
+						$('a[href=\'#collapse-payment-address\']').trigger('click');
 						$('a[href=\'#collapse-payment-method\']').trigger('click');
 
 						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('{{ text_checkout_confirm }}');
@@ -815,6 +816,7 @@ $(document).delegate('#button-payment-method', 'click', function() {
 
 						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-confirm" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle">{{ text_checkout_confirm }} <i class="fa fa-caret-down"></i></a>');
 
+						$('a[href=\'#collapse-payment-method\']').trigger('click');
 						$('a[href=\'#collapse-checkout-confirm\']').trigger('click');
 					},
                     error: function(xhr, ajaxOptions, thrownError) {
