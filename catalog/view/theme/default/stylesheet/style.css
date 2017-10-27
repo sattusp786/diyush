@@ -452,7 +452,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .mega-menu-full { -webkit-transform: translateX(0); -moz-transform: translateX(0); -o-transform: translateX(0); transform: translateX(0); }
 .mega-menu-column { display: inline-block; margin-right: 35px; vertical-align: top; }
 .mega-menu-column:last-child { margin-right: 0; }
-.sticky-nav .navbar-nav > li > .dropdown-menu { top: 66px; }
+.sticky-nav .navbar-nav > li > .dropdown-menu { top: 55px; }
 .shrink-nav .navbar-nav > li > .dropdown-menu { top: 55px; }
 .shrink-nav .dropdown.simple-dropdown .dropdown-menu { top: 45px !important}
 .shrink-nav .cart-content { top: 44px; }
@@ -2201,7 +2201,7 @@ thead th.first { padding-left: 0 !important; }
 }
 /* Alok */
 #information-information{
-  margin-top:50px !important;
+  /*margin-top:50px !important;*/
 }
 
 @media (min-width: 992px){

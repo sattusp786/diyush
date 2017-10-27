@@ -1,7 +1,7 @@
 {{ header }}
  <section class="content-top-margin page-title page-title-small bg-gray padding-one">
 	<div class="container">
-		<div class="row">
+		<div class="row ">
 			<div class="col-lg-8 col-md-7 col-sm-12 wow fadeInUp" data-wow-duration="300ms">
 				<!-- page title -->
 				<h1 class="black-text">{{ heading_title }}</h1>
@@ -19,10 +19,10 @@
 		</div>
 	</div>
 </section>
-<section class="content-section padding-two">
-<div id="information-information" class="container">
+<section class="content-section no-padding">
+<div id="information-information">
 
-  <div class="row">{{ column_left }}
+  <div class="row no-margin">{{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
     {% elseif column_left or column_right %}
