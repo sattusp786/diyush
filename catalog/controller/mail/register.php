@@ -98,7 +98,8 @@ class ControllerMailRegister extends Controller {
 			}
 			
 			$data['email'] = $args[0]['email'];
-			$data['telephone'] = $args[0]['telephone'];
+			//$data['telephone'] = $args[0]['telephone'];
+			$data['telephone'] = '';
 
 			/*
 			$mail = new Mail($this->config->get('config_mail_engine'));
@@ -131,7 +132,7 @@ class ControllerMailRegister extends Controller {
 			$mail->FromName = "ABELINI";
 			$mail->AddAddress($this->config->get('config_email'), " ");
 			$mail->IsHTML(true); 
-			$mail->Subject = html_entity_decode($subject, ENT_QUOTES, 'UTF-8');
+			$mail->Subject = html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8');
 			$mail->Body = $this->load->view('mail/register_alert', $data);
 			//$mail->AltBody = $message;
 			//$mail->WordWrap = 50; 
