@@ -24,7 +24,7 @@ class ControllerAccountWishList extends Controller {
 			$this->response->redirect($this->url->link('account/wishlist'));
 		}
 
-		$this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle($this->language->get('heading_title_wish'));
 
 		$data['breadcrumbs'] = array();
 
@@ -39,7 +39,7 @@ class ControllerAccountWishList extends Controller {
 		);
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title'),
+			'text' => $this->language->get('heading_title_wish'),
 			'href' => $this->url->link('account/wishlist')
 		);
 
