@@ -27,8 +27,7 @@ class ControllerMailRegister extends Controller {
 			
 		$data['login'] = $this->url->link('account/login', '', true);		
 		$data['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
-
-		/*
+		
 		$mail = new Mail($this->config->get('config_mail_engine'));
 		$mail->parameter = $this->config->get('config_mail_parameter');
 		$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
@@ -43,27 +42,7 @@ class ControllerMailRegister extends Controller {
 		$mail->setSubject(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
 		$mail->setText($this->load->view('mail/register', $data));
 		$mail->send(); 
-		*/
 		
-		$mail = new PHPMailer();
-		$mail->IsSMTP();
-		$mail->Mailer = $this->config->get('config_mail_engine');
-		$mail->Host = $this->config->get('config_mail_smtp_hostname');
-		$mail->Port = $this->config->get('config_mail_smtp_port'); // 8025, 587 and 25 can also be used. Use Port 465 for SSL.
-		$mail->SMTPAuth = true;
-		$mail->SMTPSecure = 'ssl';
-		$mail->Username = $this->config->get('config_mail_smtp_username');
-		$mail->Password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-
-		$mail->From = $this->config->get('config_mail_smtp_username');
-		$mail->FromName = "ABELINI";
-		$mail->AddAddress($args[0]['email'], " ");
-		$mail->IsHTML(true); 
-		$mail->Subject = sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
-		$mail->Body = $this->load->view('mail/register', $data);
-		//$mail->AltBody = $text;
-		//$mail->WordWrap = 50; 
-		$mail->send();
 	}
 	
 	public function alert(&$route, &$args, &$output) {
@@ -100,8 +79,7 @@ class ControllerMailRegister extends Controller {
 			$data['email'] = $args[0]['email'];
 			//$data['telephone'] = $args[0]['telephone'];
 			$data['telephone'] = '';
-
-			/*
+			
 			$mail = new Mail($this->config->get('config_mail_engine'));
 			$mail->parameter = $this->config->get('config_mail_parameter');
 			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
@@ -116,27 +94,6 @@ class ControllerMailRegister extends Controller {
 			$mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
 			$mail->setText($this->load->view('mail/register_alert', $data));
 			$mail->send();
-			*/
-			
-			$mail = new PHPMailer();
-			$mail->IsSMTP();
-			$mail->Mailer = $this->config->get('config_mail_engine');
-			$mail->Host = $this->config->get('config_mail_smtp_hostname');
-			$mail->Port = $this->config->get('config_mail_smtp_port'); // 8025, 587 and 25 can also be used. Use Port 465 for SSL.
-			$mail->SMTPAuth = true;
-			$mail->SMTPSecure = 'ssl';
-			$mail->Username = $this->config->get('config_mail_smtp_username');
-			$mail->Password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-
-			$mail->From = $this->config->get('config_mail_smtp_username');
-			$mail->FromName = "ABELINI";
-			$mail->AddAddress($this->config->get('config_email'), " ");
-			$mail->IsHTML(true); 
-			$mail->Subject = html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8');
-			$mail->Body = $this->load->view('mail/register_alert', $data);
-			//$mail->AltBody = $message;
-			//$mail->WordWrap = 50; 
-			$mail->send();
 			
 			
 			// Send to additional alert emails if new account email is enabled
@@ -144,8 +101,7 @@ class ControllerMailRegister extends Controller {
 
 			foreach ($emails as $email) {
 				if (utf8_strlen($email) > 0 && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-					//$mail->setTo($email);
-					$mail->AddAddress($email, " ");
+					$mail->setTo($email);
 					$mail->send();
 				}
 			}
