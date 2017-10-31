@@ -710,7 +710,7 @@ footer { clear:both; background: #f4f4f4}
 footer .bg-mid-gray { background: #d5d5d5}
 footer .footer-top {border-top:1px solid #e5e5e5 }
 footer h5 { margin-bottom: 20px;}
-footer .footer-middle { padding-top:80px; padding-bottom: 45px;}
+footer .footer-middle { padding-top:40px; padding-bottom: 25px;}
 footer .onepage-footer-middle { padding-top:55px; padding-bottom: 45px;}
 footer ul li { padding: 1px 0}
 footer ul li a { color: #626262; font-size: 11px; text-transform: uppercase; letter-spacing: 1px}
