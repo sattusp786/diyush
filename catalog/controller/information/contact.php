@@ -184,6 +184,7 @@ class ControllerInformationContact extends Controller {
 		);
 
 		$data['continue'] = $this->url->link('common/home');
+		$data['text_message'] = $this->language->get('text_success');
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
