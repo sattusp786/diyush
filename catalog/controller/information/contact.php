@@ -248,8 +248,18 @@ class ControllerInformationContact extends Controller {
 			
 			$json['success'] =  'Your details submitted successfully!';
 			
-		}elseif(!empty($this->error['warning'])) {
-			$json['error'] =  $this->error['warning'];
+		}
+		
+		if (isset($this->error['name'])) {
+			$json['error'] = $this->error['name'];
+		}
+
+		if (isset($this->error['email'])) {
+			$json['error'] = $this->error['email'];
+		}
+
+		if (isset($this->error['enquiry'])) {
+			$json['error'] = $this->error['enquiry'];
 		}
 		
 		$this->response->addHeader('Content-Type: application/json');

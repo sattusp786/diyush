@@ -39,7 +39,7 @@ $('#button-contact').on('click', function() {
   $.ajax({
     url: 'index.php?route=information/contact/confirm',
     type: 'post',
-    dataType: 'html',
+    dataType: 'json',
     data: $("#form-contact").serialize(),
     beforeSend: function() {
       $('#button-contact').button('loading');
@@ -51,15 +51,15 @@ $('#button-contact').on('click', function() {
       $('.alert-success, .alert-danger').remove();
 
       if (json['error']) {
-        $('#contacter').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+        $('#contacter').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
       }
 
       if (json['success']) {
-        $('#contacter').after('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+        $('#contacter').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
         $('#contact-name').val('');
-        $('#contact-name').val('');
-        $('#contact-name').val('');
-        $(".close").trigger('click');
+        $('#contact-email').val('');
+        $('#contact-enquiry').val('');
+		setTimeout(function(){ $(".close").trigger('click'); }, 3000);
         
 		if(json['redirect']){
 			location.href= json['redirect'];
