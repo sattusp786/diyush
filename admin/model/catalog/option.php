@@ -75,6 +75,11 @@ class ModelCatalogOption extends Model {
 							 $sql .= " AND o.option_id NOT IN (SELECT variation_id FROM ".DB_PREFIX."amazon_variation_map) ";
 						 }
 						 
+
+						 if($this->config->get('module_wk_amazon_connector_status')){
+							 $sql .= " AND o.option_id NOT IN (SELECT variation_id FROM ".DB_PREFIX."amazon_variation_map) ";
+						 }
+						 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND od.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
@@ -179,7 +184,13 @@ class ModelCatalogOption extends Model {
 						 if($this->config->get('module_wk_amazon_connector_status')){
 								 $query = $this->db->query("SELECT COUNT(*) AS total FROM ".DB_PREFIX."option WHERE option_id NOT IN (SELECT variation_id FROM ".DB_PREFIX."amazon_variation_map) ");
 						 }else{
+								 
+						 if($this->config->get('module_wk_amazon_connector_status')){
+								 $query = $this->db->query("SELECT COUNT(*) AS total FROM ".DB_PREFIX."option WHERE option_id NOT IN (SELECT variation_id FROM ".DB_PREFIX."amazon_variation_map) ");
+						 }else{
 								 $query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "option`");
+						 }
+						 
 						 }
 						 
 

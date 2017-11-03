@@ -50,6 +50,30 @@ class ControllerCommonColumnLeft extends Controller {
                 }
               }
             
+
+              if($this->config->get('module_wk_amazon_connector_status')){
+                // opencart_amazon_connector
+                $opencart_amazon_connector = array();
+
+                if ($this->user->hasPermission('access', 'amazon_map/account')) {
+                  $opencart_amazon_connector[] = array(
+                    'name'     => $this->language->get('text_amazon_account'),
+                    'href'     => $this->url->link('amazon_map/account', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()
+                  );
+                }
+
+                if ($opencart_amazon_connector) {
+                  $data['menus'][] = array(
+                    'id'       => 'menu-amazon-connector',
+                    'icon'     => 'fa-plug',
+                    'name'     => $this->language->get('text_opencart_amazon_connector'),
+                    'href'     => '',
+                    'children' => $opencart_amazon_connector
+                  );
+                }
+              }
+            
 			$catalog = array();
 			
 			if ($this->user->hasPermission('access', 'catalog/category')) {
@@ -422,6 +446,37 @@ class ControllerCommonColumnLeft extends Controller {
 				);	
 			}
 			
+
+            $blog = array();
+			if ($this->user->hasPermission('access', 'extension/extension/blog/article')) {
+				$blog[] = array(
+					'name'	   => $this->language->get('text_blog_article'),
+					'href'     => $this->url->link('extension/extension/blog/article', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			if ($this->user->hasPermission('access', 'extension/extension/blog/setting')) {
+				$blog[] = array(
+					'name'	   => $this->language->get('text_blog_setting'),
+					'href'     => $this->url->link('extension/extension/blog/setting', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()
+				);
+			}
+			$blog[] = array (
+			        'name'      => 'More functions',
+			        'href'      => 'http://www.opencart.com/index.php?route=extension/extension/info&extension_id=23490',
+			        'children'  => array()
+			);
+			if ($blog) {
+				$data['menus'][] = array(
+					'id'       => 'menu-blog',
+					'icon'	   => 'fa-pencil-square-o',
+					'name'	   => $this->language->get('text_blog'),
+					'href'     => '',
+					'children' => $blog
+				);
+			}
+            
 			// Marketing
 			$marketing = array();
 			

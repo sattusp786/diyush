@@ -41,6 +41,11 @@ class ModelCatalogAttributeGroup extends Model {
 							}
               
 
+							if($this->config->get('module_wk_amazon_connector_status') && !isset($data['get_module_list'])){
+								$sql .= " AND ag.attribute_group_id NOT IN (SELECT account_group_id FROM ".DB_PREFIX."amazon_attribute_map) ";
+							}
+              
+
 		$sort_data = array(
 			'agd.name',
 			'ag.sort_order'
@@ -92,7 +97,13 @@ class ModelCatalogAttributeGroup extends Model {
               if($this->config->get('module_wk_amazon_connector_status')){
                 $query = $this->db->query("SELECT COUNT(*) AS total FROM ".DB_PREFIX."attribute_group WHERE attribute_group_id NOT IN (SELECT account_group_id FROM ".DB_PREFIX."amazon_attribute_map) ");
               }else{
+                
+              if($this->config->get('module_wk_amazon_connector_status')){
+                $query = $this->db->query("SELECT COUNT(*) AS total FROM ".DB_PREFIX."attribute_group WHERE attribute_group_id NOT IN (SELECT account_group_id FROM ".DB_PREFIX."amazon_attribute_map) ");
+              }else{
                 $query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "attribute_group");
+              }
+              
               }
               
 
