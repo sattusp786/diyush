@@ -351,6 +351,13 @@ class ModelCatalogProduct extends Model {
 									$this->db->query("DELETE FROM " . DB_PREFIX . "amazon_product_map WHERE oc_product_id = '" . (int)$product_id . "'");
               }
               
+
+              if($this->config->get('module_wk_amazon_connector_status')){
+									$this->db->query("DELETE FROM " . DB_PREFIX . "amazon_product_fields WHERE product_id = '" . (int)$product_id . "'");
+									$this->db->query("DELETE FROM " . DB_PREFIX . "amazon_product_variation_map WHERE product_id = '" . (int)$product_id . "'");
+									$this->db->query("DELETE FROM " . DB_PREFIX . "amazon_product_map WHERE oc_product_id = '" . (int)$product_id . "'");
+              }
+              
 		$this->db->query("DELETE FROM " . DB_PREFIX . "coupon_product WHERE product_id = '" . (int)$product_id . "'");
 
 		$this->cache->delete('product');
@@ -488,6 +495,14 @@ class ModelCatalogProduct extends Model {
                   }
               }
                
+
+              if($this->config->get('module_wk_amazon_connector_status')){
+                $getSpecificationEntry = $this->Amazonconnector->checkSpecificationEntry(array('attribute_id' => $product_attribute['attribute_id']));
+                  if(isset($getSpecificationEntry) && $getSpecificationEntry){
+                    continue;
+                  }
+              }
+               
 			$product_attribute_description_data = array();
 
 			$product_attribute_description_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "' AND attribute_id = '" . (int)$product_attribute['attribute_id'] . "'");
@@ -511,6 +526,14 @@ class ModelCatalogProduct extends Model {
 		$product_option_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "product_option` po LEFT JOIN `" . DB_PREFIX . "option` o ON (po.option_id = o.option_id) LEFT JOIN `" . DB_PREFIX . "option_description` od ON (o.option_id = od.option_id) WHERE po.product_id = '" . (int)$product_id . "' AND od.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 		foreach ($product_option_query->rows as $product_option) {
+
+              if($this->config->get('module_wk_amazon_connector_status')){
+                $getVariationEntry = $this->Amazonconnector->checkVariationEntry($product_option);
+                  if(isset($getVariationEntry) && $getVariationEntry){
+                    continue;
+                }
+              }
+               
 
               if($this->config->get('module_wk_amazon_connector_status')){
                 $getVariationEntry = $this->Amazonconnector->checkVariationEntry($product_option);

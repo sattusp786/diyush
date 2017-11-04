@@ -27,7 +27,7 @@ class ControllerMailRegister extends Controller {
 			
 		$data['login'] = $this->url->link('account/login', '', true);		
 		$data['store'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
-
+		
 		$mail = new Mail($this->config->get('config_mail_engine'));
 		$mail->parameter = $this->config->get('config_mail_parameter');
 		$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
@@ -42,6 +42,7 @@ class ControllerMailRegister extends Controller {
 		$mail->setSubject(sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8')));
 		$mail->setText($this->load->view('mail/register', $data));
 		$mail->send(); 
+		
 	}
 	
 	public function alert(&$route, &$args, &$output) {
@@ -76,8 +77,9 @@ class ControllerMailRegister extends Controller {
 			}
 			
 			$data['email'] = $args[0]['email'];
-			$data['telephone'] = $args[0]['telephone'];
-
+			//$data['telephone'] = $args[0]['telephone'];
+			$data['telephone'] = '';
+			
 			$mail = new Mail($this->config->get('config_mail_engine'));
 			$mail->parameter = $this->config->get('config_mail_parameter');
 			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
@@ -92,7 +94,8 @@ class ControllerMailRegister extends Controller {
 			$mail->setSubject(html_entity_decode($this->language->get('text_new_customer'), ENT_QUOTES, 'UTF-8'));
 			$mail->setText($this->load->view('mail/register_alert', $data));
 			$mail->send();
-
+			
+			
 			// Send to additional alert emails if new account email is enabled
 			$emails = explode(',', $this->config->get('config_mail_alert_email'));
 

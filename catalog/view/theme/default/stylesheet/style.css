@@ -431,7 +431,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .shrink-nav .container { height: 60px; }
 .shrink-nav { background-color:#FFF; }
 .sticky-nav{ position: fixed; top: 0px; display: inline-table;}
-.logo { max-width: 109px; }
+.logo { max-width: 160px; }
 .logo-style-2 { max-width: 177px; }
 .logo-style-3 { max-width: 210px; }
 .sticky-nav .logo-light { height: 55px; vertical-align: middle; display: table-cell;}
@@ -452,7 +452,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .mega-menu-full { -webkit-transform: translateX(0); -moz-transform: translateX(0); -o-transform: translateX(0); transform: translateX(0); }
 .mega-menu-column { display: inline-block; margin-right: 35px; vertical-align: top; }
 .mega-menu-column:last-child { margin-right: 0; }
-.sticky-nav .navbar-nav > li > .dropdown-menu { top: 66px; }
+.sticky-nav .navbar-nav > li > .dropdown-menu { top: 55px; }
 .shrink-nav .navbar-nav > li > .dropdown-menu { top: 55px; }
 .shrink-nav .dropdown.simple-dropdown .dropdown-menu { top: 45px !important}
 .shrink-nav .cart-content { top: 44px; }
@@ -475,7 +475,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 
 .dropdown-menu li a i { color: #c8c8c8 ; float: left; font-size: 14px; margin: 0 10px 0 0; padding: 0; position: relative; right: 0; top: 5px; }
 .dropdown-menu li a:hover i { color: #fff; }
-.sticky-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0)}
+.sticky-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0.1)}
 .shrink-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0.1)}
 .nav-border-bottom-fix {border-bottom: 1px solid rgba(0,0,0,0.1)}
 
@@ -605,7 +605,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 ====================================== */
 
 /* page titles */
-.content-top-margin { margin-top: 81px;}
+.content-top-margin { margin-top: 88px;}
 .page-title { padding: 80px 0}
 .page-title h1 { letter-spacing: 6px; font-weight: 600; font-size: 20px; margin-bottom: 5px}
 .page-title span {letter-spacing: 1px; font-weight: 400; font-size: 14px;}
@@ -710,7 +710,7 @@ footer { clear:both; background: #f4f4f4}
 footer .bg-mid-gray { background: #d5d5d5}
 footer .footer-top {border-top:1px solid #e5e5e5 }
 footer h5 { margin-bottom: 20px;}
-footer .footer-middle { padding-top:80px; padding-bottom: 45px;}
+footer .footer-middle { padding-top:40px; padding-bottom: 25px;}
 footer .onepage-footer-middle { padding-top:55px; padding-bottom: 45px;}
 footer ul li { padding: 1px 0}
 footer ul li a { color: #626262; font-size: 11px; text-transform: uppercase; letter-spacing: 1px}
@@ -2201,7 +2201,7 @@ thead th.first { padding-left: 0 !important; }
 }
 /* Alok */
 #information-information{
-  margin-top:50px !important;
+  /*margin-top:50px !important;*/
 }
 
 @media (min-width: 992px){
@@ -2311,7 +2311,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .nav-tabs.nav-justified > li {display: inline-block;  width: 48.8%;}
 .nav-tabs.nav-justified > li a { display: block;  float: none; border-bottom:1px solid #000;  border-radius: 0; padding: 15px; font-size: medium;}
 .nav-tabs.nav-justified > .active > a { background:#000; color:#fff;}
-.topbar-wrap { padding:2px 0;}
+.topbar-wrap { padding:4px 0;}
 #filter-products .item span.proimg { display: block; padding: 0 15px; }
 #filter-products .item span.proimg a { display: block; background:#fff;}
 #filter-products .item span.product-name a { color:#fff;}
@@ -2320,6 +2320,8 @@ h2.final_price span.rrp { text-decoration:line-through;}
 #filter-products.dark-pagination .owl-prev { left:35px;}
 #filter-products .owl-prev:before, #filter-products .owl-next:before { background-color:transparent;}
 #filter-products .owl-prev .fa, #filter-products .owl-next .fa { color:#fff;}
+.order-completion-table.table tr  th, .order-completion-table.table tr  td { padding:12px 10px;}
+.order-completion-table.table tr  th { color:#000000;}
 
 @media (min-width: 800px) {
 	.modal-dialog {width: 750px;}

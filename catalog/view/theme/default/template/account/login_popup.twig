@@ -173,7 +173,6 @@ $('#button-register').on('click', function() {
       }
 
       if (json['success']) {
-        fbq('track', 'CompleteRegistration');
         $('#register').after('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
 
         $('input[name=\'firstname\']').val('');

@@ -195,5 +195,10 @@ class ControllerStartupStartup extends Controller {
                 $this->registry->set('Amazonconnector', new Amazonconnector($this->registry));
               }
             
+
+                if($this->config->get('module_wk_amazon_connector_status')){
+                $this->registry->set('Amazonconnector', new Amazonconnector($this->registry));
+              }
+            
 	}
 }

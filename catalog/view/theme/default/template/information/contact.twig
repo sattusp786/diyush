@@ -1,10 +1,27 @@
 {{ header }}
-<div id="information-contact" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+ <section class="content-top-margin page-title page-title-small bg-gray padding-one">
+            <div class="container width-100">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-12 wow fadeInUp" data-wow-duration="300ms">
+                        <!-- page title -->
+                        <h1 class="black-text">{{ heading_title }}</h1>
+                        <!-- end page title -->
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none text-right" data-wow-duration="600ms">
+                        <!-- breadcrumb -->
+                        <ul>
+							{% for breadcrumb in breadcrumbs %}
+							<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+							{% endfor %}
+                        </ul>
+                        <!-- end breadcrumb -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content-section padding-two">
+<div id="information-contact" class="container width-100">
+ 
   <div class="row">{{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
@@ -14,131 +31,101 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
-      <h3>{{ text_location }}</h3>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            {% if image %}
-            <div class="col-sm-3"><img src="{{ image }}" alt="{{ store }}" title="{{ store }}" class="img-thumbnail" /></div>
-            {% endif %}
-            <div class="col-sm-3"><strong>{{ store }}</strong><br />
-              <address>
-              {{ address }}
-              </address>
-              {% if geocode %}
-              <a href="https://maps.google.com/maps?q={{ geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{ button_map }}</a>
-              {% endif %}
+      <!--<h1>{{ heading_title }}</h1>-->
+      <p>Our jewellery specialist is here to help you. No matter how big or small your question is</p>
+      <div class="col-md-12 no-padding">
+      	<div class="col-md-3 no-padding">
+        	<div class="col-md-3"><i class="fa fa-map-marker black-text medium-icon"> </i></div>
+            <div class="col-md-9">
+            	<h3>Visit Our Location</h3>
+                <p>79 Orchard St, New York,<br /> United States.</p>
             </div>
-            <div class="col-sm-3"><strong>{{ text_telephone }}</strong><br>
-              {{ telephone }}<br />
-              <br />
-              {% if fax %}
-              <strong>{{ text_fax }}</strong><br>
-              {{ fax }}
-              {% endif %}
-            </div>
-            <div class="col-sm-3">
-              {% if open %}
-              <strong>{{ text_open }}</strong><br />
-              {{ open }}<br />
-              <br />
-              {% endif %}
-              {% if comment %}
-              <strong>{{ text_comment }}</strong><br />
-              {{ comment }}
-              {% endif %}
-            </div>
-          </div>
         </div>
-      </div>
-      {% if locations %}
-      <h3>{{ text_store }}</h3>
-      <div class="panel-group" id="accordion">
-        {% for location in locations %}
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><a href="#collapse-location{{ location.location_id }}" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion">{{ location.name }} <i class="fa fa-caret-down"></i></a></h4>
-          </div>
-          <div class="panel-collapse collapse" id="collapse-location{{ location.location_id }}">
-            <div class="panel-body">
-              <div class="row">
-                {% if location.image %}
-                <div class="col-sm-3"><img src="{{ location.image }}" alt="{{ location.name }}" title="{{ location.name }}" class="img-thumbnail" /></div>
-                {% endif %}
-                <div class="col-sm-3"><strong>{{ location.name }}</strong><br />
-                  <address>
-                  {{ location.address }}
-                  </address>
-                  {% if location.geocode %}
-                  <a href="https://maps.google.com/maps?q={{ location.geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{ button_map }}</a>
-                  {% endif %}
-                </div>
-                <div class="col-sm-3"> <strong>{{ text_telephone }}</strong><br>
-                  {{ location.telephone }}<br />
-                  <br />
-                  {% if location.fax %}
-                  <strong>{{ text_fax }}</strong><br>
-                  {{ location.fax }}
-                  {% endif %}
-                </div>
-                <div class="col-sm-3">
-                  {% if location.open %}
-                  <strong>{{ text_open }}</strong><br />
-                  {{ location.open }}<br />
-                  <br />
-                  {% endif %}
-                  {% if location.comment %}
-                  <strong>{{ text_comment }}</strong><br />
-                  {{ location.comment }}
-                  {% endif %}
-                </div>
-              </div>
+        <div class="col-md-3 no-padding">
+        	<div class="col-md-3"><i class="fa fa-comments black-text medium-icon"> </i></div>
+            <div class="col-md-9">
+            	<h3>Let's have a Chat!</h3>
+                <p>Start <a href="#">Chat Now</a><br /> (We are available now)</p>
             </div>
-          </div>
         </div>
-        {% endfor %}
+        <div class="col-md-3 no-padding">
+        	<div class="col-md-3"><i class="fa fa-clock-o black-text medium-icon"> </i></div>
+            <div class="col-md-9">
+            	<h3>Working hours</h3>
+                <p>Mon - Fri: 8AM - 10PM<br /> Sat: 9AM - 8PM</p>
+            </div>
+        </div>
+        <div class="col-md-3 no-padding">
+        	<div class="col-md-3"><i class="fa fa-phone black-text medium-icon"> </i></div>
+            <div class="col-md-9">
+            	<h3>Call us</h3>
+                <p>T +(084) 888 - 6789<br /> F +44 (0) 212232322</p>
+            </div>
+        </div>
+        <div class="clear"></div>
       </div>
-      {% endif %}
-      <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+</div>
+    
+</div>
+</div>
+</section>
+<div class="container width-100">
+<div class="bg-gray col-md-12 no-padding">
+      	<div class="col-md-6 no-padding">
+        	<div id="canvas1" class="col-md-12 col-sm-12 no-padding contact-map map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.013292368219!2d-73.99278428494233!3d40.71772387933131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259876bb14d79%3A0xd4cf7ac0f2cefee0!2s79+Orchard+St%2C+New+York%2C+NY+10002%2C+USA!5e0!3m2!1sen!2sin!4v1508652575971" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+        </div>
+        <div class="col-md-6 padding-three padding-left-right"><form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
         <fieldset>
-          <legend>{{ text_contact }}</legend>
+        <div class="col-md-12">
+          <h3>Send Us A Message</h3>
+          <div class="separator-line bg-yellow no-margin-left margin-three"></div>
+          </div>
+          <div class="col-md-6">
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
-            <div class="col-sm-10">
+            <label class="col-sm-12 control-label text-left no-padding-top" for="input-name">{{ entry_name }}</label>
+            <div class="col-sm-12">
               <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control" />
               {% if error_name %}
               <div class="text-danger">{{ error_name }}</div>
               {% endif %}
             </div>
           </div>
+          </div>
+          <div class="col-md-6">
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
-            <div class="col-sm-10">
+            <label class="col-sm-12 control-label text-left no-padding-top" for="input-email">{{ entry_email }}</label>
+            <div class="col-sm-12">
               <input type="text" name="email" value="{{ email }}" id="input-email" class="form-control" />
               {% if error_email %}
               <div class="text-danger">{{ error_email }}</div>
               {% endif %}
             </div>
           </div>
+          </div>
+          <div class="col-md-12">
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-enquiry">{{ entry_enquiry }}</label>
-            <div class="col-sm-10">
-              <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control">{{ enquiry }}</textarea>
+            <label class="col-sm-12 control-label text-left no-padding-top" for="input-enquiry">{{ entry_enquiry }}</label>
+            <div class="col-sm-12">
+              <textarea name="enquiry" rows="5" id="input-enquiry" class="form-control">{{ enquiry }}</textarea>
               {% if error_enquiry %}
               <div class="text-danger">{{ error_enquiry }}</div>
               {% endif %}
             </div>
           </div>
+          </div>
           {{ captcha }}
         </fieldset>
+        <div class="col-md-12">
         <div class="buttons">
-          <div class="pull-right">
-            <input class="btn btn-primary" type="submit" value="{{ button_submit }}" />
+          <div class="pull-left">
+            <input class="highlight-button btn btn-medium no-margin" type="submit" value="Send Your Message" />
           </div>
         </div>
-      </form>
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
-</div>
+        </div>
+      </form></div>
+      </div>
+      </div>
 {{ footer }}

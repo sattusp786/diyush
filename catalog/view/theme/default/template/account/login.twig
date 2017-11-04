@@ -1,10 +1,31 @@
 {{ header }}
+ <section class="content-top-margin page-title page-title-small bg-gray padding-one">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-12 wow fadeInUp" data-wow-duration="300ms">
+                        <!-- page title -->
+                        <h1 class="black-text">{{ heading_title }}</h1>
+                        <!-- end page title -->
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none text-right" data-wow-duration="600ms">
+                        <!-- breadcrumb -->
+                        <ul>
+							{% for breadcrumb in breadcrumbs %}
+							<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+							{% endfor %}
+                        </ul>
+                        <!-- end breadcrumb -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content-section padding-two">
+
+
+
+</section>
 <div id="account-login" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+  
   {% if success %}
   <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
   {% endif %}
@@ -26,7 +47,7 @@
             <h2>{{ text_new_customer }}</h2>
             <p><strong>{{ text_register }}</strong></p>
             <p>{{ text_register_account }}</p>
-            <a href="{{ register }}" class="btn btn-primary">{{ button_continue }}</a></div>
+            <a href="{{ register }}" class="highlight-button btn btn-very-small no-margin">{{ button_continue }}</a></div>
         </div>
         <div class="col-sm-6">
           <div class="well">
@@ -41,7 +62,7 @@
                 <label class="control-label" for="input-password">{{ entry_password }}</label>
                 <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" />
                 <a href="{{ forgotten }}">{{ text_forgotten }}</a></div>
-              <input type="submit" value="{{ button_login }}" class="btn btn-primary" />
+              <input type="submit" value="{{ button_login }}" class="highlight-button btn btn-very-small no-margin " />
               {% if redirect %}
               <input type="hidden" name="redirect" value="{{ redirect }}" />
               {% endif %}
@@ -52,4 +73,5 @@
       {{ content_bottom }}</div>
     {{ column_right }}</div>
 </div>
+</section>
 {{ footer }}

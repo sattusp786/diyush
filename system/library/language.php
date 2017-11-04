@@ -64,13 +64,13 @@ class Language {
 			$file = DIR_LANGUAGE . $this->default . '/' . $filename . '.php';
 	
 			if (is_file($file)) {
-				require(modification($file));
+				require(modification(modification($file)));
 			}
 	
 			$file = DIR_LANGUAGE . $this->directory . '/' . $filename . '.php';
 			
 			if (is_file($file)) {
-				require(modification($file));
+				require(modification(modification($file)));
 			} 
 	
 			$this->data = array_merge($this->data, $_);

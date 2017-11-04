@@ -5,6 +5,12 @@ class ControllerCommonFooter extends Controller {
 
 		$this->load->model('catalog/information');
 
+
+				$data['blog'] = array(
+					'name' => $this->config->get('easy_blog_home_page_name'),
+					'href'  => $this->url->link('extension/extension/blog/blog')
+				);
+            
 		$data['informations'] = array();
 
 		foreach ($this->model_catalog_information->getInformations() as $result) {
