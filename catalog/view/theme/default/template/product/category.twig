@@ -32,14 +32,15 @@
         <!-- end head section -->
 		
 		{% if filter_groups %}
-		<section class="padding-two position-relative parallax-fix row">
+		<section class="padding-two position-relative parallax-fix ">
         	<div class="opacity-medium bg-dark-gray"></div>
             <div class="container width-100">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 wow fadeIn">
                         <h3 class="white-text text-center text-uppercase margin-two no-margin-top">Filter by our Lovely Engagement Ring Designs</h3>
                         <!-- featured products slider -->
-						<div id="filter-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple padding-left-right">
+                        <div class="padding-left-right">
+						<div id="filter-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple ">
 							{% for filter_group in filter_groups %}
 							{% for filter in filter_group.filter %}
 							<!-- shop item -->
@@ -53,6 +54,7 @@
 							{% endfor %}
 							{% endfor %}
 						</div>
+                        </div>
 						<!-- end featured products slider -->
                     </div>
                  </div>
@@ -77,10 +79,10 @@
                         </div>
                         <div class="col-md-6 col-sm-6 text-right cathelpbox">
                         	<span class="black-text">Need Help</span> 
-                            <span><i class="icon-phone extra-small-icon black-text"></i></span>
-                            <span><i class="icon-envelope extra-small-icon black-text"></i></span>
-                            <span><i class="icon-chat extra-small-icon black-text"></i></span>
-                            <span><i class="fa fa-question-circle extra-small-icon black-text" aria-hidden="true"></i></span>
+                            <span><a href="tel:0800 500 5000"><i class="icon-phone extra-small-icon black-text"></i></a></span>
+                            <span><a href="index.php?route=information/contact/popup" class="agree"><i class="icon-envelope extra-small-icon black-text"></i></a></span>
+                            <span><a href="javascript:$zopim.livechat.window.show();"><i class="icon-chat extra-small-icon black-text"></i></a></span>
+                            <span><a href="/faq"><i class="fa fa-question-circle extra-small-icon black-text" aria-hidden="true"></i></a></span>
                         </div>
                     </div>
                     </div></div>
@@ -99,7 +101,7 @@
                 <div class="row">
                     
                     <div class="col-md-12 col-sm-12">
-                        <div class="shorting clearfix xs-margin-top-three">
+                        <div class="shorting clearfix xs-margin-top-three border-top border-bottom">
                             <div class="desktopview">
                                 <div class="col-md-8 col-sm-7 grid-nav">
                                     <a href="shop-with-sidebar-list.html"><i class="fa fa-bars"></i></a>
@@ -107,7 +109,7 @@
                                     <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
                                 </div>
                                 <div class="col-md-3 col-sm-5 pull-right">
-                                    <div class="select-style input-round med-input shop-shorting no-border">
+                                    <div class="select-style input-round med-input shop-shorting ">
                                         <select id="input-sort" class="form-control" onchange="location = this.value;">
                                           {% for sorts in sorts %}
                                               {% if sorts.value == '%s-%s'|format(sort, order) %}

@@ -2312,6 +2312,11 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .nav-tabs.nav-justified > li a { display: block;  float: none; border-bottom:1px solid #000;  border-radius: 0; padding: 15px; font-size: medium;}
 .nav-tabs.nav-justified > .active > a { background:#000; color:#fff;}
 .topbar-wrap { padding:4px 0;}
+#filter-products .owl-wrapper-outer { text-align:center;}
+#filter-products .owl-wrapper { width:100% !important;}
+#filter-products .owl-item { float:none; display:inline-table;}
+#filter-products .owl-item .item .filter-product .proimg {border: 1px solid #676767; padding: 5px;}
+#filter-products .owl-item .item .filter-product.active .proimg {border: 1px solid #fff;}
 #filter-products .item span.proimg { display: block; padding: 0 15px; }
 #filter-products .item span.proimg a { display: block; background:#fff;}
 #filter-products .item span.product-name a { color:#fff;}
