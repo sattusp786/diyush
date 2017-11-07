@@ -1,11 +1,14 @@
-<div class="col-md-12 col-sm-12 breadcrumb text-uppercase  wow fadeIn">
+<div class="col-md-12 col-sm-12  text-uppercase  wow fadeIn">
 <div class="panel panel-default">
   <!--<div class="panel-heading">{{ heading_title }}</div>-->
   
   <div class="list-group desktopview">
-   {% for filter_group in filter_groups %} <div class="col-md-4 col-sm-4 text-center"><h3>{{ filter_group.name }}</h3>
+   {% for filter_group in filter_groups %} 
+   <!--<div class="col-md-4 col-sm-4 text-center"><h3>{{ filter_group.name }}</h3>
     
-      <ul id="filter-group{{ filter_group.filter_group_id }}" class="catfilters margin-two-bottom">{% for filter in filter_group.filter %}
+      <ul id="filter-group{{ filter_group.filter_group_id }}" class="catfilters margin-two-bottom">
+      
+      {% for filter in filter_group.filter %}
         <li class="checkbox">
           <label>{% if filter.filter_id in filter_category %}
             <input class="filtering" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" checked="checked" />           
@@ -18,11 +21,25 @@
             {% endif %}</label>
         </li>
         {% endfor %}</ul>
-        
+       
            
+    </div>-->
+    
+    <div class="col-md-3 col-sm-6 text-left">
+    <h3>{{ filter_group.name }}</h3>
+    <div id="dd" class="wrapper-dropdown-4">Select
+						<ul class="dropdown">
+							<li><input type="checkbox" id="el-1" name="el-1" value="Round"><label for="el-1">Round</label></li>
+							<li><input type="checkbox" id="el-2" name="el-2" value="Princess"><label for="el-2">Princess</label></li>
+							<li><input type="checkbox" id="el-3" name="el-3" value="Emerald"><label for="el-3">Emerald</label></li>
+                            <li><input type="checkbox" id="el-4" name="el-4" value="Oval"><label for="el-4">Oval</label></li>
+							<li><input type="checkbox" id="el-5" name="el-5" value="Heart"><label for="el-5">Heart</label></li>
+							<li><input type="checkbox" id="el-6" name="el-6" value="Marquise"><label for="el-6">Marquise</label></li>
+                            <li><input type="checkbox" id="el-7" name="el-7" value="Cushion"><label for="el-7">Cushion</label></li>
+						</ul>
+					</div>
     </div>
     {% endfor %}
-    
     
     
     <div class="clearfix"></div>
@@ -78,3 +95,51 @@ $('.filtering').on('click', function() {
 	location = '{{ action }}&filter=' + filter.join(',');
 });
 //--></script> 
+<script type="text/javascript">
+			
+			function DropDown(el) {
+				this.dd = el;
+				this.opts = this.dd.find('ul.dropdown > li');
+				this.val = [];
+				this.index = [];
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						event.stopPropagation();
+					});
+
+					obj.opts.children('label').on('click',function(event){
+						var opt = $(this).parent(),
+							chbox = opt.children('input'),
+							val = chbox.val(),
+							idx = opt.index();
+
+						($.inArray(val, obj.val) !== -1) ? obj.val.splice( $.inArray(val, obj.val), 1 ) : obj.val.push( val );
+						($.inArray(idx, obj.index) !== -1) ? obj.index.splice( $.inArray(idx, obj.index), 1 ) : obj.index.push( idx );
+					});
+				},
+				getValue : function() {
+					return this.val;
+				},
+				getIndex : function() {
+					return this.index;
+				}
+			}
+
+			$(function() {
+
+				var dd = new DropDown( $('#dd') );
+
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown-4').removeClass('active');
+				});
+
+			});
+
+		</script>
