@@ -45,13 +45,14 @@
 						{% if thumb %}
 							<a href="{{ popup }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" class="width-100" /></a>
 						{% endif %}
-						{% if images %}
 						<div class="products-thumb text-center">
+							<a href="{{ popup }}" title="{{ heading_title }}"> <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a>
+						{% if images %}
 						{% for image in images %}
 							<a href="{{ image.popup }}" title="{{ heading_title }}"> <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a>
 						{% endfor %}
-						</div>
 						{% endif %}
+						</div>
                         </div>
                         <div class="panel-group accordion-style1 desktopview" id="accordion-one">
                             <!-- accordion item -->
@@ -66,6 +67,8 @@
                                 </div>
                             </div>
                             <!-- end accordion item -->
+							
+							{% if review_status %}
                             <!-- accordion item -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -73,22 +76,54 @@
                                 </div>
                                 <div id="accordion-one-link2" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        {% if review_status %}
-									  <div class="rating">
-										<p>{% for i in 1..5 %}
-										  {% if rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>{% else %}<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>{% endif %}
-										  {% endfor %} <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ text_write }}</a></p>
-										<hr>
-										<!-- AddThis Button BEGIN -->
-										<div class="addthis_toolbox addthis_default_style" data-url="{{ share }}"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
-										<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script> 
-										<!-- AddThis Button END --> 
-									  </div>
-									  {% endif %}
+                                       <form class="form-horizontal" id="form-review">
+										<div id="review"></div>
+										<h2>{{ text_write }}</h2>
+										{% if review_guest %}
+										<div class="form-group required">
+										  <div class="col-sm-12">
+											<label class="control-label" for="input-name">{{ entry_name }}</label>
+											<input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
+										  </div>
+										</div>
+										<div class="form-group required">
+										  <div class="col-sm-12">
+											<label class="control-label" for="input-review">{{ entry_review }}</label>
+											<textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+											<div class="help-block">{{ text_note }}</div>
+										  </div>
+										</div>
+										<div class="form-group required">
+										  <div class="col-sm-12">
+											<label class="control-label">{{ entry_rating }}</label>
+											&nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
+											<input type="radio" name="rating" value="1" />
+											&nbsp;
+											<input type="radio" name="rating" value="2" />
+											&nbsp;
+											<input type="radio" name="rating" value="3" />
+											&nbsp;
+											<input type="radio" name="rating" value="4" />
+											&nbsp;
+											<input type="radio" name="rating" value="5" />
+											&nbsp;{{ entry_good }}</div>
+										</div>
+										{{ captcha }}
+										<div class="buttons clearfix">
+										  <div class="pull-right">
+											<button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
+										  </div>
+										</div>
+										{% else %}
+										{{ text_login }}
+										{% endif %}
+									  </form>
                                     </div>
                                 </div>
                             </div>
                             <!-- end accordion item -->
+							{% endif %}
+							
                             <!-- accordion item -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -152,7 +187,7 @@
                         <!-- end product name -->
                         <!-- product stock -->
                         <p class="text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by 10th Oct 2017</p>
-						<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>
+						<!--<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>-->
                         <!-- end product stock -->
                         <div class="separator-line bg-black no-margin-lr margin-five"></div>
                         <!-- product short description -->
@@ -467,6 +502,8 @@
                                 </div>
                             </div>
                             <!-- end accordion item -->
+							
+							{% if review_status %}
                             <!-- accordion item -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -474,21 +511,53 @@
                                 </div>
                                 <div id="accordion-one-link4" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                        {% if review_status %}
-									  <div class="rating">
-										<p>{% for i in 1..5 %}
-										  {% if rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>{% else %}<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>{% endif %}
-										  {% endfor %} <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ text_write }}</a></p>
-										<hr>
-										<!-- AddThis Button BEGIN -->
-										<div class="addthis_toolbox addthis_default_style" data-url="{{ share }}"><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a> <a class="addthis_button_tweet"></a> <a class="addthis_button_pinterest_pinit"></a> <a class="addthis_counter addthis_pill_style"></a></div>
-										<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-515eeaf54693130e"></script> 
-										<!-- AddThis Button END --> 
-									  </div>
-									  {% endif %}
+                                        <form class="form-horizontal" id="form-review">
+										<div id="review"></div>
+										<h2>{{ text_write }}</h2>
+										{% if review_guest %}
+										<div class="form-group required">
+										  <div class="col-sm-12">
+											<label class="control-label" for="input-name">{{ entry_name }}</label>
+											<input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
+										  </div>
+										</div>
+										<div class="form-group required">
+										  <div class="col-sm-12">
+											<label class="control-label" for="input-review">{{ entry_review }}</label>
+											<textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+											<div class="help-block">{{ text_note }}</div>
+										  </div>
+										</div>
+										<div class="form-group required">
+										  <div class="col-sm-12">
+											<label class="control-label">{{ entry_rating }}</label>
+											&nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
+											<input type="radio" name="rating" value="1" />
+											&nbsp;
+											<input type="radio" name="rating" value="2" />
+											&nbsp;
+											<input type="radio" name="rating" value="3" />
+											&nbsp;
+											<input type="radio" name="rating" value="4" />
+											&nbsp;
+											<input type="radio" name="rating" value="5" />
+											&nbsp;{{ entry_good }}</div>
+										</div>
+										{{ captcha }}
+										<div class="buttons clearfix">
+										  <div class="pull-right">
+											<button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
+										  </div>
+										</div>
+										{% else %}
+										{{ text_login }}
+										{% endif %}
+									  </form>
                                     </div>
                                 </div>
                             </div>
+							{% endif %}
+							
                             <!-- end accordion item -->
                         </div>
                         <div class="col-md-12 col-sm-12 comewith_blockwrap padding-two margin-two">
@@ -578,8 +647,8 @@
             </div>
         </section>
 
-        
-		<section class="padding-two">
+{% if products %}
+<section class="padding-two">
 	<div class="container width-100">
 		<div class="row">
 			<div class="col-md-12 text-center">
@@ -589,151 +658,77 @@
 		<div class="row">
 			<!-- featured products slider -->
 			<div id="shop-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">
+				{% set i = 0 %}
+				{% for product in products %}
 				<!-- shop item -->
 				<div class="item">
 					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="shop-single-product.html"><img src="image/catalog/product/1.png" alt=""/></a>
-						<span class="product-name text-uppercase"><a href="shop-single-product.html">Richard Nicoll</a></span>
-						<span class="price black-text">$680</span>
+						<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}"/></a>
+						<span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
+						{% if product.price %}
+						  <span class="price black-text"> {% if not product.special %}
+							{{ product.price }}
+							{% else %} {{ product.special }} <del>{{ product.price }}</del> {% endif %}
+							</span>
+						  {% endif %}
 						<div class="quick-buy">
 							<div class="product-share">
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+								<a href="javascript:void(0);" onclick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="javascript:void(0);" onclick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- end shop item -->
-				<!-- shop item -->
-				<div class="item">
-					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="shop-single-product.html"><img src="image/catalog/product/2.png" alt=""/></a>
-						<span class="product-name text-uppercase"><a href="shop-single-product.html">Roland Mouret</a></span>
-						<span class="price black-text">$980</span>
-						<div class="quick-buy">
-							<div class="product-share">
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end shop item -->
-				<!-- shop item -->
-				<div class="item">
-					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="shop-single-product.html"><img src="image/catalog/product/3.png" alt=""/></a>
-						<span class="product-name text-uppercase"><a href="shop-single-product.html">Preen Line</a></span>
-						<span class="price black-text">$750</span>
-						<div class="quick-buy">
-							<div class="product-share">
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end shop item -->
-				<!-- shop item -->
-				<div class="item">
-					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="shop-single-product.html"><img src="image/catalog/product/4.png" alt=""/></a>
-						<span class="product-name text-uppercase"><a href="shop-single-product.html">Balmain</a></span>
-						<span class="price black-text">$350</span>
-						<div class="quick-buy">
-							<div class="product-share">
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end shop item -->
-				<!-- shop item -->
-				<div class="item">
-					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="shop-single-product.html"><img src="image/catalog/product/5.png" alt=""/></a>
-						<span class="product-name text-uppercase"><a href="shop-single-product.html">Dolce & Gabbana</a></span>
-						<span class="price black-text">$700</span>
-						<div class="quick-buy">
-							<div class="product-share">
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end shop item -->
-				<!-- shop item -->
-				<div class="item">
-					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="shop-single-product.html"><img src="image/catalog/product/6.png" alt=""/></a>
-						<span class="product-name text-uppercase"><a href="shop-single-product.html">Valentino</a></span>
-						<span class="price black-text">$370</span>
-						<div class="quick-buy">
-							<div class="product-share">
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="#" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="shop-cart.html" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- end shop item -->
+				{% set i = i + 1 %}
+				{% endfor %}
 			</div>
 			<!-- end featured products slider -->
 		</div>
 	</div>
 </section>
+{% endif %}
 
-		{% if products %}
-        <section class="border-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h3 class="section-title">{{ text_related }}</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <!-- related products slider -->
-                    <div id="shop-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">
-                        {% set i = 0 %}
-						{% for product in products %}
-						<!-- shop item -->
-                        <div class="item">
-                            <div class="home-product text-center position-relative overflow-hidden">
-                                <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
-                                <span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
-                                {% if product.price %}
-								  <span class="price black-text"> {% if not product.special %}
-									{{ product.price }}
-									{% else %} {{ product.special }} <del>{{ product.price }}</del> {% endif %}
-									</span>
-								  {% endif %}
-                                <div class="quick-buy">
-                                    <div class="product-share">
-                                        <a href="javascript:void(0);" onclick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_wishlist }}"><i class="fa fa-heart-o"></i></a>
-                                        <a href="javascript:void(0);" onclick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_compare }}"><i class="fa fa-refresh"></i></a>
-                                        <a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_cart }}"><i class="fa fa-shopping-cart"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end shop item -->
-                        {% set i = i + 1 %}
-						{% endfor %}
-                    </div>
-                    <!-- end related products slider -->
-                </div>
-            </div>
-        </section>
-		<!-- end content section -->
-		{% endif %}
+
+{% if products %}
+<!--<section class="border-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h3 class="section-title">{{ text_related }}</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div id="shop-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">
+				{% set i = 0 %}
+				{% for product in products %}
+				<div class="item">
+					<div class="home-product text-center position-relative overflow-hidden">
+						<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
+						<span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
+						{% if product.price %}
+						  <span class="price black-text"> {% if not product.special %}
+							{{ product.price }}
+							{% else %} {{ product.special }} <del>{{ product.price }}</del> {% endif %}
+							</span>
+						  {% endif %}
+						<div class="quick-buy">
+							<div class="product-share">
+								<a href="javascript:void(0);" onclick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_wishlist }}"><i class="fa fa-heart-o"></i></a>
+								<a href="javascript:void(0);" onclick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_compare }}"><i class="fa fa-refresh"></i></a>
+								<a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_cart }}"><i class="fa fa-shopping-cart"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% set i = i + 1 %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</section>-->
+{% endif %}
 		
         
 <script type="text/javascript"><!--
