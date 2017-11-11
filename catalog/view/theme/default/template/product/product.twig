@@ -127,20 +127,11 @@
                             <!-- accordion item -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link3"><h4 class="panel-title">Question & Answers<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link3"><h4 class="panel-title">FAQ's<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
                                 </div>
                                 <div id="accordion-one-link3" class="panel-collapse collapse">
                                     <div class="panel-body">
-                                      <div class="col-md-12 col-sm-12">
-                                            <ul class="instructions">
-                                                <li><strong>Type:</strong> Shift Dresses</li>
-                                                <li><strong>Fabric:</strong> Georgette</li>
-                                                <li><strong>Sleeves:</strong> Half Sleeve</li>                                                
-                                                <li><strong>Neck:</strong> V Neck</li>
-                                                <li><strong>Fit:</strong> Regular</li>
-                                                <li><strong>Length:</strong> Mini</li>
-                                            </ul>
-                                        </div>                                        
+                                                                              
                                         <div class="col-md-12 col-sm-12 sm-margin-top-seven">
                                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
                                         </div>
@@ -179,7 +170,7 @@
                     <div class="col-md-6 col-sm-12 col-md-offset-1">
                         <!-- product rating -->
                         <div class="rating margin-five no-margin-top">
-                            <i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star-o black-text"></i><span class="rating-text text-uppercase">5 Reviews</span><span class="rating-text text-uppercase pull-right">SKU: <span class="black-text">{{ sku }}</span></span>
+                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star-o black-text"></i><span class="rating-text text-uppercase">5 Reviews</span></span>
                         </div>
                         <!-- end product rating -->
                         <!-- product name -->
@@ -226,9 +217,19 @@
                           </div>
                           <div class="col-md-4 padding-two border border-gray">
                           	<ul>
-                            	<li><i><img src="catalog/view/theme/default/image/certificate-img.png" style="width:20px;" /></i> Life Time Warranty</li>
-                                <li><i><img src="catalog/view/theme/default/image/finance-img.png" style="width:20px;" /></i>Finanace Available ></li>
+                            	<li><a class="popup-with-zoom-anim" href="#lifetimewarranty-popup"><i><img src="catalog/view/theme/default/image/certificate-img.png" style="width:20px;" /></i> Life Time Warranty</a></li>
+                                <li><a class="popup-with-zoom-anim" href="#finanaceavailable-popup"><i><img src="catalog/view/theme/default/image/finance-img.png" style="width:20px;" /></i>Finanace Available ></a></li>
                             </ul>
+                            <div id="lifetimewarranty-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Life Time Warranty</span>
+                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
+                            <div id="finanaceavailable-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Finanace Available</span>
+                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
                           </div>
                           <div class="clearfix"></div>
                          </div>
@@ -383,9 +384,22 @@
 							  <a class="highlight-button-dark btn btn-medium button width-60" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><!--<i class="icon-basket"></i>--> {{ button_cart }}</a></div>
 							</div>
                             <div class="form-group margin-two width-100 f-left text-center">
-                            	<a href="/book-appointment" class="highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
-                                <a href="/home-trial" class="highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Order Free Sample</a>
+                            
+                            	<a href="#visitshowroom-popup" class="popup-with-zoom-anim highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
+                                <a href="#freesample-popup" class="popup-with-zoom-anim highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Order Free Sample</a>
                             </div>
+                            <div id="visitshowroom-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Visit Showroom</span>
+                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
+                            
+                            <div id="freesample-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Order Free Sample</span>
+                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
+                            
 							{% if minimum > 1 %}
 							<div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
 							{% endif %}</div>
