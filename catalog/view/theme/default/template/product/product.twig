@@ -62,7 +62,9 @@
                                 </div>
                                 <div id="accordion-one-link1" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                        <!-- product short description -->
+										<p>{{ description }}</p>
+										<!-- end product short description -->
                                     </div>
                                 </div>
                             </div>
@@ -181,9 +183,6 @@
 						<!--<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>-->
                         <!-- end product stock -->
                         <div class="separator-line bg-black no-margin-lr margin-five"></div>
-                        <!-- product short description -->
-                        <p>{{ description }}</p>
-                        <!-- end product short description -->
                         <div class="pricewrap width-100">
                         <div class="col-md-6 no-padding-left">
                         {% if price %}
@@ -244,7 +243,7 @@
                             <div class="col-md-2 col-sm-12">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
                               </div>
-                              <div class="col-md-10 col-sm-12">
+                              <div class="col-md-3 col-sm-12">
 							  {% if option.option_id in square_box %}
 							  <ul class="size clearfix size-details no-margin">
 								{% set o = 1 %}
@@ -464,59 +463,13 @@
                                 </div>
                                 <div id="accordion-one-link1" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                            <!-- product short description -->
+											<p>{{ description }}</p>
+											<!-- end product short description -->
                                     </div>
                                 </div>
                             </div>
                             <!-- end accordion item -->
-                            <!-- accordion item -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link2"><h4 class="panel-title">Washing Instructions<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
-                                </div>
-                                <div id="accordion-one-link2" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                      <div class="col-md-12 col-sm-12">
-                                            <ul class="instructions">
-                                                <li><strong>Type:</strong> Shift Dresses</li>
-                                                <li><strong>Fabric:</strong> Georgette</li>
-                                                <li><strong>Sleeves:</strong> Half Sleeve</li>                                                
-                                                <li><strong>Neck:</strong> V Neck</li>
-                                                <li><strong>Fit:</strong> Regular</li>
-                                                <li><strong>Length:</strong> Mini</li>
-                                            </ul>
-                                        </div>                                        
-                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end accordion item -->
-                            <!-- accordion item -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link3"><h4 class="panel-title">Sizing<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
-                                </div>
-                                <div id="accordion-one-link3" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="col-md-12 col-sm-12">
-                                            <ul class="instructions">
-                                                <li><strong>Weight:</strong> 7.25 Kg</li>
-                                                <li><strong>Dimensions:</strong> 90x60x90 Cm</li>
-                                                <li><strong>Size:</strong> One Size Fits All</li>
-                                                <li><strong>Color:</strong> White</li>
-                                                <li><strong>Guarantee:</strong> 5 Years</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end accordion item -->
-							
 							{% if review_status %}
                             <!-- accordion item -->
                             <div class="panel panel-default">
@@ -571,8 +524,46 @@
                                 </div>
                             </div>
 							{% endif %}
-							
                             <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link2"><h4 class="panel-title">FAQ's<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link2" class="panel-collapse collapse">
+                                    <div class="panel-body">                                   
+                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- accordion item -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link3"><h4 class="panel-title">Size Guide<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                </div>
+                                <div id="accordion-one-link3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="col-md-12 col-sm-12">
+                                            <ul class="instructions">
+                                                <li><strong>Weight:</strong> 7.25 Kg</li>
+                                                <li><strong>Dimensions:</strong> 90x60x90 Cm</li>
+                                                <li><strong>Size:</strong> One Size Fits All</li>
+                                                <li><strong>Color:</strong> White</li>
+                                                <li><strong>Guarantee:</strong> 5 Years</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+							
+							
                         </div>
                         <div class="col-md-12 col-sm-12 comewith_blockwrap padding-two margin-two">
                         	<h2>Comes With</h2>
@@ -746,6 +737,15 @@
 		
         
 <script type="text/javascript"><!--
+$(document).ready(function(){
+	var windowwidth = $(window).width();
+	if(windowwidth < 768){
+		$(".desktopview").remove();
+	} else {
+		$(".mobileview").remove();
+	}
+});
+
 $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 	$.ajax({
 		url: 'index.php?route=product/product/getRecurringDescription',
