@@ -243,7 +243,7 @@
                             <div class="col-md-2 col-sm-12">
 							  <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
                               </div>
-                              <div class="col-md-3 col-sm-12">
+                              <div class="{% if option.name|lower == 'ring size' %} col-md-3 {% else %} col-md-10 {% endif %} col-sm-12">
 							  {% if option.option_id in square_box %}
 							  <ul class="size clearfix size-details no-margin">
 								{% set o = 1 %}
@@ -371,8 +371,8 @@
 							</div>
 							{% endif %}
                             <div class="form-group margin-two width-100 pro-delivered-text f-left text-center">
-                            	<span class="margin-left-right-two">Delivered by: Thesday, 10/10</span>
-                                <span class="margin-left-right-two">0% Finanace - Click to Calculation</span>
+                            	<span class="margin-left-right-two"><a href="javascript:void(0);">Delivered by: Thesday, 10/10</a></span>
+                                <span class="margin-left-right-two"><a href="#finance-calculation" class="popup-with-zoom-anim">0% Finanace - Click to Calculation</a></span>
                             </div>
 							<div class="form-group margin-one width-100 text-center">
 							  <div class="col-md-2 col-sm-12" style="display:none;"><label class="control-label" for="input-quantity">{{ entry_qty }}</label></div>
@@ -395,6 +395,12 @@
                             
                             <div id="freesample-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
                                 <span class="slider-subtitle5 black-text no-margin-bottom">Order Free Sample</span>
+                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
+							
+							<div id="finance-calculation" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Interest Free Finance</span>
                                 <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
