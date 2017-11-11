@@ -418,16 +418,16 @@
                         </div>
                         <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
                              <!-- add to wishlist link -->
-                            <a title="Print" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> <!--{{ button_wishlist }}--> Print</a>
+                            <a title="Print" href="javascript:void(0);" class="printbtn text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> <!--{{ button_wishlist }}--> Print</a>
                             <!-- end add to wishlist link -->
                         </div>
                         <div class="col-md-5 col-sm-9 product-details-social no-padding">
                             <!-- social media sharing -->
-                            <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five"> <i class="fa fa-share-alt black-text no-margin"></i> Share on</span>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five sharethis-wrap"> <!--<i class="fa fa-share-alt black-text no-margin"></i>-->  <span class="sharethis-inline-share-buttons"></span>Share on</span>
+                           <!-- <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
                             <a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a>
-                            <a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a>-->
                             <!-- end social media sharing -->
                         </div>
                         </div>
@@ -1010,4 +1010,11 @@ $(document).ready(function() {
 	$(".product-option").change();
 });
 //--></script> 
+<script>
+$(document).ready(function() {
+	$(".printbtn").click(function () {
+		print()
+	});
+});
+</script>
 {{ footer }} 

@@ -2508,3 +2508,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .no-pointerevents .wrapper-dropdown-4.active .dropdown {
     display: block;
 }
+
+.sharethis-wrap .sharethis-inline-share-buttons { display:inline !important; margin-right:5px;}
+.sharethis-wrap .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] {display: inline-block; background-color: #000; height: 22px;line-height: 14px; padding: 5px;}
+.sharethis-wrap .sharethis-inline-share-buttons#st-1 .st-btn > svg {  height: 14px; width: 14px;   top: 0;}
