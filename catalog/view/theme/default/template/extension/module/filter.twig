@@ -42,8 +42,8 @@
     </div>
     
     <div class="list-group mobileview">
-    <h3 class="text-center bg-gray padding-four margin-three-bottom">FILTER:</h3>
-    {% for filter_group in filter_groups %}
+    <h3 id="catfilter" class="text-center bg-gray padding-four margin-three-bottom">FILTER:</h3>
+    <!--{% for filter_group in filter_groups %}
     
     <div class="panel-group accordion-style{{ filter_group.filter_group_id }}" id="accordion-{{ filter_group.filter_group_id }}">
     
@@ -70,14 +70,15 @@
             </div>
              
         </div>
-        {% endfor %}
+        {% endfor %}-->
     </div>
-  <div class="text-center">
+    <div class="text-center desktopview">
     <!--<button type="button" id="button-filter" class="btn btn-primary no-margin">{{ button_filter }}</button>-->
     <a href="javascript:void(0);" style="display:none;" class="btn no-margin"><i class="fa fa-spinner" aria-hidden="true"></i>Load More</a>
     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <a href="{{ action }}" class="btn no-margin"><i class="fa fa-refresh" aria-hidden="true"></i>Clear All</a>
   </div>
+
 </div>
 </div>
 <script type="text/javascript"><!--

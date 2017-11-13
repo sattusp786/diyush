@@ -43,14 +43,13 @@
 						<div id="filter-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple ">
 							{% for filter_group in filter_groups %}
 							{% for filter in filter_group.filter %}
-							<!-- shop item -->
+							
 							<div class="item">
 								<div class="filter-product text-center position-relative overflow-hidden">
 									<span class="proimg"><a href="{{ category_href }}&filter={{ filter.filter_id }}"><img src="image/catalog/product/1.png" alt=""/></a></span>
 									<span class="product-name text-center "><a href="{{ category_href }}&filter={{ filter.filter_id }}">{{ filter.name }}</a></span>	
 								</div>
 							</div>
-							<!-- end shop item -->
 							{% endfor %}
 							{% endfor %}
 						</div>
@@ -250,4 +249,5 @@ jQuery(document).ready(function($) {
 	});
 });
  </script>   
+
 {{ footer }} 

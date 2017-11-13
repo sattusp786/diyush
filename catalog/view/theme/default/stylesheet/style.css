@@ -605,7 +605,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 ====================================== */
 
 /* page titles */
-.content-top-margin { margin-top: 88px;}
+.content-top-margin { margin-top: 80px;}
 .page-title { padding: 80px 0}
 .page-title h1 { letter-spacing: 6px; font-weight: 600; font-size: 20px; margin-bottom: 5px}
 .page-title span {letter-spacing: 1px; font-weight: 400; font-size: 14px;}
@@ -2313,8 +2313,8 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .nav-tabs.nav-justified > .active > a { background:#000; color:#fff;}
 .topbar-wrap { padding:4px 0;}
 #filter-products .owl-wrapper-outer { text-align:center;}
-#filter-products .owl-wrapper { width:100% !important;}
-#filter-products .owl-item { float:none; display:inline-table;}
+
+
 #filter-products .owl-item .item .filter-product .proimg {border: 1px solid #676767; padding: 5px; margin:0 10px;}
 #filter-products .owl-item .item .filter-product.active .proimg {border: 1px solid #fff;}
 #filter-products .item span.proimg { display: block; padding: 0 15px; }
@@ -2332,6 +2332,8 @@ h2.final_price span.rrp { text-decoration:line-through;}
 	.modal-dialog {width: 750px;}
 	#modal-agree .tab-content>.tab-pane .formbtn .btn { width:50%;}
 	#modal-agree .createaccounttext .forgotpasswordform li.formbtn .btn { width:auto;}
+	#filter-products .owl-wrapper { width:100% !important;}
+	#filter-products .owl-item { float:none; display:inline-table;}
 }
 
 /* SMART SEARCH END*/	
@@ -2355,8 +2357,8 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .pro-delivered-text span { font-size:10px;}
 .products-thumb a { background: #d4d4d4;  border-radius: 50%; width: 24px; height: 24px; display: inline-block; margin:0 5px;}
 .products-thumb a img { display:none;}
-#filter-products.dark-pagination .owl-next { right:10px;}
-#filter-products.dark-pagination .owl-prev { left:10px;}
+#filter-products.dark-pagination .owl-next { right:-10px;}
+#filter-products.dark-pagination .owl-prev { left:-10px;}
 }
 
 
@@ -2512,3 +2514,42 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .sharethis-wrap .sharethis-inline-share-buttons { display:inline !important; margin-right:5px;}
 .sharethis-wrap .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] {display: inline-block; background-color: #000; height: 22px;line-height: 14px; padding: 5px;}
 .sharethis-wrap .sharethis-inline-share-buttons#st-1 .st-btn > svg {  height: 14px; width: 14px;   top: 0;}
+
+#filterssearch, .childdiv{background: #FFFFFF; position: absolute; left: 0; top: 80px;  width: 100%; height:100%; z-index: 999; display:none; margin-top:0;}
+#filterssearch .filteroption, .childdiv .filteroption { max-width:100%; top:0; border:0;}
+.filteroption .filterbtns { padding:150px 10% 120px;}
+.filteroption .filtertop { background:#fafafa; border-bottom:2px solid #ebebeb; padding:3%; font-size:30px; line-height:40px; font-weight:600; color:#000000; }
+
+.filteroption .filtertop .closefilter{ float:right; width:20px; height:20px; cursor:pointer; margin-top:5px;}
+.filteroption .filtertop .closesearchresult { float:right; width:30px; height:30px; cursor:pointer; margin-top:10px;}
+.filteroption .filtertop .closefilter i, 
+.filteroption .filtertop .closesearchresult i { background: #000; height: 2px; position: relative;  margin: 6px 0 0; display:block;}
+.filteroption .filtertop .closefilter i:first-child, 
+.filteroption .filtertop .closesearchresult i:first-child {transform: rotate(45deg);  transform-origin: left center 0;  left: 3px;}
+.filteroption .filtertop .closefilter i:last-child{transform: rotate(-45deg);  transform-origin: left center 0;  left: 3px; top:6px;}
+.filteroption .filtertop .closesearchresult i:last-child {transform: rotate(-45deg);  transform-origin: left center 0;  left: 3px; top:13px;}
+.filteroption .filtertop .filtertitle { width:90%; float:none;}
+.filteroption .filtertop .filtertitle input { width:92%;}
+/*.filteroption .filtertop .closefilter { margin-top:0;}*/
+.filteroption ul li {padding:20px 5%; font-size:30px; line-height:40px;}
+.filteroption ul li .arrow .fa { font-size:40px; line-height:40px;}
+
+.filteroption ul li { background:#fff; border-bottom:2px solid #ebebeb; padding:3%; font-size:20px; line-height:30px; font-weight:300; color:#000000; position:relative;}
+.filteroption ul li .arrow-left { /*float:right;*/    position: absolute; width: 50%; height: 50%; top: 25%; right: 3%;  background: url(../image/mmenarrow.svg) no-repeat right center;}
+.filteroption ul li .arrow .fa { font-size:30px; line-height:30px; margin-right:5px;}
+.filteroption .filterbtns { padding:30px 5%; margin:0; float:left; width:100%; background:#fff;}
+.filteroption .filterbtns span.clearbtn {float:left; width:25%;}
+.filteroption .filterbtns span.seeprobtn {float:right; width:65%;}
+.filteroption .filterbtns .whitebtn{  border:2px solid #000;}
+.filteroption .filterbtns .blackbtn{  color:#FFFFFF; background:#000000;  border:2px solid #000;}
+.filterbtns .blackbtn, .filterbtns .whitebtn  { float:left; width:100%; text-align:center;}
+.filteroption .filterbtns .blackbtn:hover{ background:#fff; color:#000000;}
+#searchresult .errormsg {position: relative; text-align: center; padding: 150px 0 50px;}
+#searchresult .errormsg p {font-size:18px; line-height: 28px; font-weight:300; margin-bottom:20px; color:#FF0000;}
+
+.childdiv .filteroption ul li .arrow label input { display:none;}
+.childdiv .filteroption ul li .arrow .radiocheck { position: absolute; width: 50%; height: 50%; top: 25%; right: 4%;  background: url(../image/hometrial-without-tickmark.svg) no-repeat right center;}
+.childdiv .filteroption ul li .arrow label input:checked + span.radiocheck {/*content: "\f05d";*/ background: url(../image/hometrial-with-tickmark.svg) no-repeat right center;}
+
+.filteroption ul li.disabled  { color:#999999;}
+.bodyfixed { position:fixed;}
