@@ -136,8 +136,38 @@
     	<span class="filtertitle">Filters</span>
         <span class="closefilter"><i></i><i></i></span>
     </header>
-    <ul>
-		
+	<ul id="accordion">
+		<li class="dropdown parentli"><a href="#collapsea" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Shape <i class="fa fa-angle-down"></i></a>
+		<ul id="collapsea" class="collapse">
+			<li class="mega-menu-column col-sm-2">
+				<ul>
+					<li><a href="javascript:void(0);"><span class="filtername">Round (1)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="48" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">Princess (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="49" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">Emerald (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="50" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">Oval (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="52" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">Heart (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="54" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">Marquise (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="55" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">Cushion (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="56" /><span class="radiocheck"></span></label></span></a></li>
+				</ul>
+			</li>
+		</ul>
+		</li>
+		<li class="dropdown parentli"><a href="#collapseb" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Metal <i class="fa fa-angle-down"></i></a>
+		<ul id="collapseb" class="collapse">
+			<li class="mega-menu-column col-sm-2">
+				<ul>
+					<li><a href="javascript:void(0);"><span class="filtername">9K White Gold (1)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="1" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">9K Yellow Gold (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="2" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">9K Rose Gold (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="3" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">18K White Gold (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="5" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">18K Rose Gold (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="6" /><span class="radiocheck"></span></label></span></a></li>
+					<li><a href="javascript:void(0);"><span class="filtername">950 Platinum (0)</span><span style="float:right;" class="arrow"><label><input class="filtering" type="checkbox" name="filter[]" value="7" /><span class="radiocheck"></span></label></span></a></li>
+				</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+    <!--<ul>
     	<li class="parentli" id="child-shape">
         	<span class="filtername">Shape</span>
             <span class="arrow arrow-left"></span>
@@ -146,7 +176,7 @@
         	<span class="filtername">Metal</span>
             <span class="arrow arrow-left"></span>
         </li>
-    </ul>
+    </ul>-->
     <div class="clear"></div>
     <div class="filterbtns">
     	<span class="clearbtn"><a href="javascript:void(0);" class="highlight-button btn btn-small button width-100 text-center clear-btn"><b>Clear</b></a></span>
@@ -154,7 +184,7 @@
     </div>
     </div>
 </div>
-<div id="child-shape_type" class="childdiv">
+<!--<div id="child-shape_type" class="childdiv">
 <div class="filteroption">
 	<header class="filtertop back-parent">
     	<span class="filtertitle"><i class="fa fa-arrow-left" aria-hidden="true"></i> Shape</span>
@@ -164,7 +194,7 @@
     	<li>
 			<a href="javascript:void(0);">
 				<span class="filtername">Round 1</span>
-				<span class="arrow"><label><input type="checkbox" name="filter[]" value="" /><span class="radiocheck"><!--<i class="fa fa-circle-o" aria-hidden="true"></i>--> </span></label></span>
+				<span class="arrow"><label><input type="checkbox" name="filter[]" value="" /><span class="radiocheck"></span></label></span>
 			</a>
 		</li>  
 	
@@ -186,7 +216,7 @@
     	<li>
 			<a href="javascript:void(0);">
 				<span class="filtername">Round 1</span>
-				<span class="arrow"><label><input type="checkbox" name="filter[]" value="" /><span class="radiocheck"><!--<i class="fa fa-circle-o" aria-hidden="true"></i>--> </span></label></span>
+				<span class="arrow"><label><input type="checkbox" name="filter[]" value="" /><span class="radiocheck"></span></label></span>
 			</a>
 		</li>  
 	
@@ -197,7 +227,7 @@
         <span class="seeprobtn"><a href="javascript:void(0);" class="highlight-button-dark btn btn-small button width-100 text-center button-filter">See all products</a></span>
     </div>
     </div>
-</div>
+</div>-->
  <script>
 $("#catfilter").on('click', function() {
    $("#filterssearch").fadeIn();
