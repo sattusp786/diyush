@@ -2515,7 +2515,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .sharethis-wrap .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] {display: inline-block; background-color: #000; height: 22px;line-height: 14px; padding: 5px;}
 .sharethis-wrap .sharethis-inline-share-buttons#st-1 .st-btn > svg {  height: 14px; width: 14px;   top: 0;}
 
-#filterssearch, .childdiv{background: #FFFFFF; position: absolute; left: 0; top: 80px;  width: 100%; height:100%; z-index: 999; display:none; margin-top:0;}
+#filterssearch, .childdiv{background: #FFFFFF; position: fixed; left: 0; top: 80px;  width: 100%; height:100%; z-index: 999; display:none; margin-top:0;}
 #filterssearch .filteroption, .childdiv .filteroption { max-width:100%; top:0; border:0;}
 .filteroption .filterbtns { padding:150px 10% 120px;}
 .filteroption .filtertop { background:#fafafa; border-bottom:2px solid #ebebeb; padding:3%; font-size:30px; line-height:40px; font-weight:600; color:#000000; }
@@ -2535,6 +2535,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .filteroption ul li .arrow .fa { font-size:40px; line-height:40px;}
 
 .filteroption ul li { background:#fff; border-bottom:2px solid #ebebeb; padding:3%; font-size:20px; line-height:30px; font-weight:300; color:#000000; position:relative;}
+.filteroption ul li:last-child { border:0;}
 .filteroption ul li .arrow-left { /*float:right;*/    position: absolute; width: 50%; height: 50%; top: 25%; right: 3%;  background: url(../image/mmenarrow.svg) no-repeat right center;}
 .filteroption ul li .arrow .fa { font-size:30px; line-height:30px; margin-right:5px;}
 .filteroption .filterbtns { padding:30px 5%; margin:0; float:left; width:100%; background:#fff;}
@@ -2553,3 +2554,4 @@ h2.final_price span.rrp { text-decoration:line-through;}
 
 .filteroption ul li.disabled  { color:#999999;}
 .bodyfixed { position:fixed;}
+#filterssearch ul#accordion { height:400px; overflow-y:scroll;}

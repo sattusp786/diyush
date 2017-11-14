@@ -302,8 +302,8 @@ $(document).ready(function () {
         navigation: true,
         items: 7,
         itemsDesktop: [1200, 7],
-        itemsTablet: [800, 3],
-        itemsMobile: [700, 1],
+        itemsTablet: [800, 2],
+        itemsMobile: [700, 2],
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
     });
     $("#owl-demo-brand").owlCarousel({
