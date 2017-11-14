@@ -98,14 +98,27 @@
         <section class="padding-two position-relative">
             <div id="content" class="container width-100">
                 <div class="row">
-                    
+						
                     <div class="col-md-12 col-sm-12">
                         <div class="shorting clearfix xs-margin-top-three border-bottom margin-two-bottom">
                             <div class="desktopview">
-                                <div class="col-md-8 col-sm-7 grid-nav">                                   
+                                <div class="col-md-5 col-sm-7 grid-nav">                                   
                                     <!--<span id="grid-view"><a><i class="fa fa-th"></i></a></span>
                                      <span id="list-view"><a><i class="fa fa-bars"></i></a></span>-->
                                     <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
+                                </div>
+								<div class="col-md-3 col-sm-5 pull-right">
+                                    <div class="select-style input-round med-input shop-shorting ">
+                                        <select id="input-limit" class="form-control" onchange="location = this.value;">
+										  {% for limits in limits %}
+										  {% if limits.value == limit %}
+										  <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
+										  {% else %}
+										  <option value="{{ limits.href }}">{{ limits.text }}</option>
+										  {% endif %}
+										  {% endfor %}
+										</select>
+                                    </div>
                                 </div>
                                 <div class="col-md-3 col-sm-5 pull-right">
                                     <div class="select-style input-round med-input shop-shorting ">
@@ -127,8 +140,19 @@
                                 <a href="shop-with-sidebar.html"><i class="fa fa-th"></i></a>
                                 <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
                             </div>-->
-                             	<div class="f-right">
-                                <div class="select-style input-round med-input shop-shorting no-border">
+                             	<div class="mobileview f-right">	
+                                <div class="select-style input-round med-input shop-shorting no-border pull-left">
+                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
+									  {% for limits in limits %}
+									  {% if limits.value == limit %}
+									  <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
+									  {% else %}
+									  <option value="{{ limits.href }}">{{ limits.text }}</option>
+									  {% endif %}
+									  {% endfor %}
+									</select>
+                                </div>
+								<div class="select-style input-round med-input shop-shorting no-border pull-right">
                                     <select id="input-sort" class="form-control" onchange="location = this.value;">
 									  {% for sorts in sorts %}
 										  {% if sorts.value == '%s-%s'|format(sort, order) %}

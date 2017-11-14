@@ -171,7 +171,7 @@
 					{% endif %}
                     <div class="col-md-6 col-sm-12 col-md-offset-1">
                         <!-- product rating -->
-                        <div class="rating margin-five no-margin-top">
+                        <div class="rating margin-five no-margin-top" style="margin-right:100px;">
                             <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star-o black-text"></i><span class="rating-text text-uppercase">5 Reviews</span></span>
                         </div>
                         <!-- end product rating -->
@@ -384,7 +384,7 @@
 							</div>
                             <div class="form-group margin-two width-100 f-left text-center">
                             
-                            	<a href="#visitshowroom-popup" class="popup-with-zoom-anim highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
+                            	<a href="index.php?route=information/contact/popup" class="agree highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
                                 <a href="#freesample-popup" class="popup-with-zoom-anim highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Order Free Sample</a>
                             </div>
                             <div id="visitshowroom-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
@@ -412,19 +412,13 @@
                         <div class="desktopview"> 
                         <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left"></div>                       
                         <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
-                            <!-- add to wishlist link -->
-                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-user black-text"></i> <!--{{ button_wishlist }}--> Contact Us</a>
-                            <!-- end add to wishlist link -->
-                            </div>
-                             <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
-                             <!-- add to wishlist link -->
-                            <a title="Contact Us" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> <!--{{ button_wishlist }}--> Save</a>
-                            <!-- end add to wishlist link -->
+                            <a href="index.php?route=information/contact/popup" class="agree"><i class="fa fa-user black-text"></i> Contact Us</a>
                         </div>
                         <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
-                             <!-- add to wishlist link -->
-                            <a title="Print" href="javascript:void(0);" class="printbtn text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> <!--{{ button_wishlist }}--> Print</a>
-                            <!-- end add to wishlist link -->
+                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> Save</a>
+                        </div>
+                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
+                            <a title="Print" href="javascript:void(0);" class="printbtn text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> Print</a>
                         </div>
                         <div class="col-md-5 col-sm-9 product-details-social no-padding">
                             <!-- social media sharing -->
@@ -438,17 +432,11 @@
                         </div>
                         <div class="mobileview">                     
                         <div class="width-100 text-center margin-three-bottom">
-                            <!-- add to wishlist link -->
-                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-user black-text"></i> <!--{{ button_wishlist }}--> Contact Us</a>
-                            <!-- end add to wishlist link -->                           
+                            <a href="index.php?route=information/contact/popup" class="agree"><i class="fa fa-user black-text"></i> Contact Us</a>         
                              &nbsp;&nbsp;&nbsp;
-                             <!-- add to wishlist link -->
-                            <a title="Contact Us" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> <!--{{ button_wishlist }}--> Save</a>
-                            <!-- end add to wishlist link -->
-                        &nbsp;&nbsp;&nbsp;
-                             <!-- add to wishlist link -->
-                            <a title="Print" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> <!--{{ button_wishlist }}--> Print</a>
-                            <!-- end add to wishlist link -->
+                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> Save</a>
+							&nbsp;&nbsp;&nbsp;
+                            <a title="Print" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> Print</a>
                         </div>
                         <div class="width-100 text-center margin-three-bottom">
                             <!-- social media sharing -->
