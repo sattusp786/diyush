@@ -465,11 +465,25 @@ class ControllerProductSearch extends Controller {
 			$search = $this->request->get['search'];
 		}else{
 			$search = '';
-		}		
+		}
+		
+		if (isset($this->request->get['category_id'])) {
+			$category_id = $this->request->get['category_id'];
+		} else {
+			$category_id = 0;
+		}
+
+		if (isset($this->request->get['sub_category'])) {
+			$sub_category = $this->request->get['sub_category'];
+		} else {
+			$sub_category = '';
+		}
 
 		$filter_data = array(
 				'filter_name'         => $search,
 				'filter_tag'          => $search,
+				'filter_category_id'  => $category_id,
+				'filter_sub_category' => $sub_category,
 				'sort'                => 'name',
 				'order'               => 'ASC',
 				'start'               => 0,

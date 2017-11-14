@@ -162,6 +162,33 @@
 				<!-- search input-->
 				<form id="search-header" method="post" action="#" onsubmit="return false;" name="search-header" class="mfp-hide search-form-result">
 					<div class="search-form position-relative">
+					   <select name="category_id" class="form-control">
+						<option value="0">{{ text_category }}</option>
+						{% for category_1 in categories %}
+						{% if category_1.category_id == category_id %}
+						<option value="{{ category_1.category_id }}" selected="selected">{{ category_1.name }}</option>
+						{% else %}
+						<option value="{{ category_1.category_id }}">{{ category_1.name }}</option>
+						{% endif %}
+						{% for category_2 in category_1.children %}
+						{% if category_2.category_id == category_id %}
+						<option value="{{ category_2.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+						{% else %}
+						<option value="{{ category_2.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+						{% endif %}
+						{% for category_3 in category_2.children %}
+						{% if category_3.category_id == category_id %}
+						<option value="{{ category_3.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+						{% else %}
+						<option value="{{ category_3.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+						{% endfor %}
+					  </select>
+					  <input type="hidden" name="sub_category" value="true" />
+					</div>
+					<div class="search-form position-relative">
 						<button type="submit" class="fa fa-search close-search search-button"></button>
 						<input type="text" name="search" id="searcher" autocomplete="off" class="search-input" placeholder="Enter your keywords..." />
 					</div>
