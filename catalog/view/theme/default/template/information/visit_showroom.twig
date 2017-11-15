@@ -56,7 +56,7 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">First Name <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input text-lowercase" id="firstname" placeholder="First Name">
+                                <input type="text" class="form-control input-round big-input" id="firstname" placeholder="First Name">
                                 <!-- end input  -->
                             </div>
                              <div class="form-group">
@@ -64,15 +64,15 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Last Name <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input text-lowercase" id="lastname" placeholder="Last Name">
+                                <input type="text" class="form-control input-round big-input" id="lastname" placeholder="Last Name">
                                 <!-- end input  -->
                             </div>
                              <div class="form-group">
                                 <!-- label  -->
-                                <label for="exampleInputEmail1">Email address <sup class="deep-red-text">*</sup></label>
+                                <label for="exampleInputEmail1">Email Address <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="email" class="form-control input-round big-input text-lowercase" id="email" placeholder="Email address">
+                                <input type="email" class="form-control input-round big-input" id="email" placeholder="Email address">
                                 <!-- end input  -->
                             </div>
                             <div class="form-group">
@@ -80,7 +80,15 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Phone <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input text-lowercase" id="phone" placeholder="Phone">
+                                <input type="text" class="form-control input-round big-input" id="phone" placeholder="Phone">
+                                <!-- end input  -->
+                            </div>
+							<div class="form-group">
+                                <!-- label  -->
+                                <label for="exampleInputEmail1">Appointment Date & Time<sup class="deep-red-text">*</sup></label>
+                                <!-- end label  -->
+                                <!-- input  -->
+                                <input type="text" class="form-control input-round big-input datetimepicker" id="appointment_date" placeholder="" />
                                 <!-- end input  -->
                             </div>
                             <div class="form-group">
@@ -116,4 +124,11 @@ we are closed Sundays and UK bank holidays</p>
             <div class="col-md-4"> <button class="highlight-button btn btn-medium no-margin width-100" type="submit">Get Directions</button></div>
       </div>
 </section>
+<script type="text/javascript">
+	$(function () {
+		$('.datetimepicker').datetimepicker({
+			//sideBySide: true
+		});
+	});
+</script>
 {{ footer }}
