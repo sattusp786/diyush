@@ -2297,7 +2297,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 #modal-agree .modal-content .modal-title {font-size: 20px;line-height: 30px; text-transform: uppercase; color: #000000; font-weight: 400; display:none;}
 #modal-agree .nav-tabs {font-size: 16px;line-height: 24px; text-transform: uppercase; color: #000000; font-weight: 400; margin:0;}
 #modal-agree .col-xs-10 { width:100%;}
-#modal-agree .col-xs-10 input, #modal-agree .createaccounttext input {padding: 10px 4%; font-size: 16px;  line-height: 24px;  text-transform: uppercase;  margin: 8px 0; height:inherit; border-radius: 0;}
+#modal-agree .col-xs-10 input, #modal-agree .createaccounttext input, #modal-agree .col-xs-10 textarea {padding: 5px 3%; font-size: 16px;  line-height: 24px;  text-transform: uppercase;  margin: 8px 0; height:inherit; border-radius: 0;}
 #modal-agree .col-xs-10 input.form-control { height:inherit;}
 #modal-agree .checkoutlogintext { padding:5%!important;}
 #modal-agree .tab-content>.tab-pane { padding:20px 5%;}
@@ -2555,3 +2555,11 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .filteroption ul li.disabled  { color:#999999;}
 .bodyfixed { position:fixed;}
 #filterssearch ul#accordion { height:400px; overflow-y:scroll;}
+
+.datepicker {
+background-color: #fff ;
+color: #333 ;
+}
+.datepicker.dropdown-menu {
+  background-color:#FFF;
+}
