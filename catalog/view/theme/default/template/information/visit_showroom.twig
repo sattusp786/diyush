@@ -89,7 +89,7 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Appointment Date & Time<sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input datetimepicker" id="appointment_date" placeholder="" />
+                                <input type="text" class="form-control input-round big-input" id="appointment_date" placeholder="" />
                                 <!-- end input  -->
                             </div>
                             <div class="form-group">
@@ -126,9 +126,9 @@ we are closed Sundays and UK bank holidays</p>
       </div>
 </section>
 <script type="text/javascript">
-	$(function () {
-		$('.datetimepicker').datetimepicker({
-			//sideBySide: true
+	$(function(){
+		$('#appointment_date').appendDtpicker({
+			"closeOnSelected": true
 		});
 	});
 </script>
