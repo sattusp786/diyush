@@ -74,8 +74,8 @@
 .datepicker > .datepicker_header > .icon-home {
 	position:	absolute;
 	display:		block;
-	width:		16px;
-	height:		16px;
+	/*width:		16px;
+	height:		16px;*/
 	vertical-align: middle;
 	padding: 8px;
 	top: 0;
@@ -85,8 +85,8 @@
 .datepicker > .datepicker_header > .icon-close {
 	position: absolute;
 	display: block;
-	width: 16px;
-	height: 16px;
+	/*width: 16px;
+	height: 16px;*/
 	vertical-align: middle;
 	padding: 8px;
 	top: 0;
@@ -331,6 +331,7 @@
 .datepicker > .datepicker_inner_container > .datepicker_timelist > div.timelist_item.active {
 	color: #ffffff;
 	background-color:	#808080;
+	height:auto;
 }
 
 .datepicker > .datepicker_inner_container > .datepicker_timelist > div.timelist_item.hover {
