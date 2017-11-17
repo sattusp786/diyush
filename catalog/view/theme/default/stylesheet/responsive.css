@@ -705,6 +705,9 @@
     
     /*  text rotator  */
     .cd-headline.slide span { padding-bottom: 2em}
+	
+	.dessktopview { display:none!important;}
+	.mobileview { display:block!important;}
 }
 @media (max-width: 767px) {
     /*  custom  */
