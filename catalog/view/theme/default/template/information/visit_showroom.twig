@@ -26,13 +26,14 @@
                 <div class="row">
                     <div class="col-md-7 col-sm-12 text-center center-col">
                         <h1 class="white-text">Our Showroom</h1>
+						<p class="white-text">Visit our showroom at hatton Garden (London) for a one-toone consultation. We offer a totally no-pressure environment, so you choose the perfect diamond jewellery for you. Schedule and appointment to view our selection of diamond rings and fine jewellery today.</p>
                     </div>
                 </div>
           </div>
         </section>
         <section class="content-section padding-two">
 <div class="container width-100">
- 	<p>Visit our showroom at hatton Garden (London) for a one-toone consultation. We offer a totally no-pressure environment, so you choose the perfect diamond jewellery for you. Schedule and appointment to view our selection of diamond rings and fine jewellery today.</p>
+ 	
   <div class="col-md-6 no-padding">
   <h3 class="margin-one no-margin-top">Our Showroom</h3>
   	<p>Showroom visits are strictly by appointment only</p>
@@ -56,7 +57,7 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">First Name <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input text-lowercase" id="firstname" placeholder="First Name">
+                                <input type="text" class="form-control input-round big-input" id="firstname" placeholder="First Name">
                                 <!-- end input  -->
                             </div>
                              <div class="form-group">
@@ -64,15 +65,15 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Last Name <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input text-lowercase" id="lastname" placeholder="Last Name">
+                                <input type="text" class="form-control input-round big-input" id="lastname" placeholder="Last Name">
                                 <!-- end input  -->
                             </div>
                              <div class="form-group">
                                 <!-- label  -->
-                                <label for="exampleInputEmail1">Email address <sup class="deep-red-text">*</sup></label>
+                                <label for="exampleInputEmail1">Email Address <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="email" class="form-control input-round big-input text-lowercase" id="email" placeholder="Email address">
+                                <input type="email" class="form-control input-round big-input" id="email" placeholder="Email address">
                                 <!-- end input  -->
                             </div>
                             <div class="form-group">
@@ -80,7 +81,15 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Phone <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input text-lowercase" id="phone" placeholder="Phone">
+                                <input type="text" class="form-control input-round big-input" id="phone" placeholder="Phone">
+                                <!-- end input  -->
+                            </div>
+							<div class="form-group">
+                                <!-- label  -->
+                                <label for="exampleInputEmail1">Appointment Date & Time<sup class="deep-red-text">*</sup></label>
+                                <!-- end label  -->
+                                <!-- input  -->
+                                <input type="text" class="form-control input-round big-input" id="appointment_date" placeholder="" />
                                 <!-- end input  -->
                             </div>
                             <div class="form-group">
@@ -116,4 +125,11 @@ we are closed Sundays and UK bank holidays</p>
             <div class="col-md-4"> <button class="highlight-button btn btn-medium no-margin width-100" type="submit">Get Directions</button></div>
       </div>
 </section>
+<script type="text/javascript">
+	$(function(){
+		$('#appointment_date').appendDtpicker({
+			"closeOnSelected": true
+		});
+	});
+</script>
 {{ footer }}

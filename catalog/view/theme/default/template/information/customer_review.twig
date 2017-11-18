@@ -1,0 +1,68 @@
+{{ header }}
+ <section class="content-top-margin page-title page-title-small bg-gray padding-one">
+            <div class="container width-100">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-12 wow fadeInUp" data-wow-duration="300ms">
+                        <!-- page title -->
+                        <h1 class="black-text"><!--{{ heading_title }}--> Customer Reviews</h1>
+                        <!-- end page title -->
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none text-right" data-wow-duration="600ms">
+                        <!-- breadcrumb -->
+                        <ul>
+							{% for breadcrumb in breadcrumbs %}
+							<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+							{% endfor %}
+                        </ul>
+                        <!-- end breadcrumb -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content-section padding-two">
+       <div class="container width-100">
+       <h2 class="text-center margin-four no-margin-top">Customer Reviews</h2>         
+        <div class="col-md-12 no-padding text-center">
+		
+        	
+<div class="happymain">
+	<div style="text-align:center;">&nbsp;
+	<h2>EXCELLENT </h2>
+	<div class="star bstar5" style="display: inline-block; width:113px; height:21px;">&nbsp;</div>
+	<p style="padding:10px 0"><strong class="redLinkStyle">2471 </strong> customers have written a review on Trustpilot </p>
+	<div class="hshadow">&nbsp;</div>
+	<div class="flr paddRight"><span class="flt paddRight">Powered by :   </span> <span class="flt"><a href="https://www.trustpilot.co.uk/review/abelini.com" target="_blank" rel="nofollow"><img src="catalog/view/theme/default/image/Trustpilot_Icon.png"></a></span></div>
+	</div>
+
+<!-----------------------loop Start-------------------------------------->
+	<div style="display:block;">
+		{% for testimonial in testimonials %}
+		<ul>
+			<li>
+			<div class="flt" style="width:11%; border:1px solid #ccc; text-align:center;"><img alt="profilepic" src="{{ testimonial.image }}" /></div>
+			<div class="flt" style="width:83%; padding-right:1%; margin-left:3%;">
+				<div class="profilestar star star{{ testimonial.star }}">&nbsp;</div>
+				<div class="wepagesp"><a href="{{ testimonial.href }}" target="_blank">{{ testimonial.title }}</a></div>
+				<p>{{ testimonial.content }}</p>
+				<p class="r_name" style="text-align:right;">{{ testimonial.name }}, {{ testimonial.date }}</p>
+				<div class="hshadow">&nbsp;</div>
+			</div>
+			</li>
+		</ul>
+		{% endfor %}
+	</div>
+ <!--<div class="clear"></div>-->
+ </div>
+   <div><a target="_blank" class="flt wepagesp yellow solid-bder" href="https://www.trustpilot.co.uk/review/abelini.com" rel="nofollow">More testimonials from our customers? </a></div>
+   <div class="flr wepagesp" id="country"><a class="yellow solid-bder" target="_blank" href="https://www.trustpilot.co.uk/review/abelini.com" id="cuntry" rel="nofollow">View All</a><span class="darkRightYellow"></span></div>
+
+<!-----------------------loop end-------------------------------------->
+            <div class="clearfix"></div>
+            <a href="https://www.trustpilot.co.uk/review/abelini.com" class="highlight-button-dark btn btn-medium button xs-margin-bottom-five">View All</a>
+        </div>
+        <div class="clear"></div>
+        </div>
+</section>
+
+
+{{ footer }}

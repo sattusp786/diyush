@@ -20,159 +20,31 @@
             </div>
         </section>
         
+		
 <!-- content section -->
         <section class="wow">
             <div class="container">
                 <div class="row blog-masonry blog-masonry-2col no-transition">
+				{% for blog in blogs %}
                     <!-- post item -->
                     <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/600x900" alt=""/></a></div>
+                        <div class="blog-image"><a href="{{ blog.href }}"><img src="{{ blog.thumb }}" alt=""/></a></div>
                         <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Paul Scrivens</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">Minimum Usable Design</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
+                            <div class="blog-date">Posted by <a href="{{ blog.href }}">{{ blog.author }}</a> | {{ blog.date_modified }}</div>
+                            <div class="blog-title"><a href="{{ blog.href }}">{{ blog.name }}</a></div>
+                            <div class="blog-short-description">{{ blog.intro_text }}</div>
                             <div class="separator-line bg-black no-margin-lr"></div>
                             <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
                         </div>
                     </div>
                     <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/599x449" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Paul Scrivens</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">You Design It, They Do It</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/600x900" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Nathan Ford</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">For A More Readable Web Page</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/599x449" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Aarron Walter</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">Redesigning With Personality</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/600x900" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Colin Powell</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">User Experience Be Beautiful?</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/599x449" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Shoko Mugikura</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">A Beautifully Complex System</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/600x900" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Jeremy Girard</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">Creating Successful Websites</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/599x449" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Francisco</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">Designing for the Mind</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/600x900" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Paul Scrivens</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">Easier Is Better Than Better</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/599x449" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Paul Boag</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">Ready For A Design Challenge?</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/600x900" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Simon Schmid</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">Elements Of A Launch Page</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
-                    <!-- post item -->
-                    <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
-                        <div class="blog-image"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/599x449" alt=""/></a></div>
-                        <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="blog-masonry-2columns.html">Dan Rose</a> | 02 January 2015</div>
-                            <div class="blog-title"><a href="blog-single-right-sidebar.html">The Art Of Design Etiquette</a></div>
-                            <div class="blog-short-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
-                        </div>
-                    </div>
-                    <!-- end post item -->
+                    {% endfor %}
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 wow">
-                        <!-- pagination -->
-                        <div class="pagination">
+						{{ pagination }}
+					   <!-- pagination -->
+                        <!--<div class="pagination">
                             <a href="#"><img src="images/arrow-pre-small.png" alt=""/></a>
                             <a href="#">1</a>
                             <a href="#">2</a>
@@ -180,11 +52,13 @@
                             <a href="#">4</a>
                             <a href="#">5</a>
                             <a href="#"><img src="images/arrow-next-small.png" alt=""/></a>
-                        </div>
+                        </div>-->
                         <!-- end pagination -->
                     </div>
                 </div>
             </div>
         </section>
         <!-- end content section -->
+		
+		
 {{ footer }}

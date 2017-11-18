@@ -705,6 +705,9 @@
     
     /*  text rotator  */
     .cd-headline.slide span { padding-bottom: 2em}
+	
+	.dessktopview { display:none!important;}
+	.mobileview { display:block!important;}
 }
 @media (max-width: 767px) {
     /*  custom  */
@@ -1186,6 +1189,8 @@
     
     /*  about us option 2  */
     .specialise-box {min-height: 0;}
+	
+	.content-top-margin { margin-top: 80px;}
     
 }
 @media (max-width: 700px) {

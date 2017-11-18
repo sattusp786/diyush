@@ -21,4 +21,113 @@ class ModelCatalogInformation extends Model {
 			return 0;
 		}
 	}
+	
+	public function getTotalBlogs() {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "easy_blog_article");
+
+		return $query->row['total'];
+	}
+	
+	public function getBlogs($data = array()) {
+		$sql = "SELECT * FROM " . DB_PREFIX . "easy_blog_article b LEFT JOIN " . DB_PREFIX . "easy_blog_article_description bd ON (b.article_id = bd.article_id) WHERE bd.language_id = '" . (int)$this->config->get('config_language_id') . "' ";
+
+		$sql .= " GROUP BY b.article_id";
+
+		$sort_data = array(
+			'bd.name',
+			'b.sort_order'
+		);
+
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY b.sort_order";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+	
+	public function getTestimonials($business_id) {
+		 
+		$feed = $this->cache->get('testimonial.'.$business_id.'.' . (int) $this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id'));
+
+		$api_key = 'nHyxvSGxmDEg7DAuJWgRGZrGTLFm1RwK';
+		
+		if (!$feed) {
+
+		$reviews_url = 'https://api.trustpilot.com/v1/business-units/'. $business_id . '/reviews?stars=5,4&apikey='.$api_key;
+		
+		$feed = $this->is_curl($reviews_url, 1);
+		if(empty($feed))
+			$feed = $this->is_curl($reviews_url, 0);
+			
+		$feed = json_decode($feed,true);
+		
+		$this->cache->set('testimonial.'.$business_id.'.' . (int) $this->config->get('config_store_id') . '.' .  (int)$this->config->get('config_language_id'), $feed, 24*3600);
+		}
+		
+		return $feed;
+	}
+	
+	public function getTestimonialCount($business_id) {
+		
+		$feed = $this->cache->get('testimonial.'.$business_id.'.count.' . (int) $this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id'));
+
+		$api_key = 'nHyxvSGxmDEg7DAuJWgRGZrGTLFm1RwK';
+		
+		if (!$feed) {
+			
+		$count_url = 'https://api.trustpilot.com/v1/business-units/' . $business_id . '?apikey='.$api_key;
+		
+		
+		$feed = $this->is_curl($count_url, 1);
+		if(empty($feed))
+			$feed = $this->is_curl($count_url, 0);
+			
+		$feed = json_decode($feed,true);
+		
+		$this->cache->set('testimonial.'.$business_id.'.count.' . (int) $this->config->get('config_store_id') . '.' .  (int)$this->config->get('config_language_id'), $feed, 24*3600);
+		}
+		
+		return $feed;
+	}
+	
+	private function is_curl($url, $is_curl) {
+
+		if ($is_curl == 1) {
+			$ch = curl_init();									// Initiate a CURL object
+			curl_setopt($ch, CURLOPT_URL, $url);				// Set the URL
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);		// Set to return a string
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);		// Set the timeout
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);		// Follow URL Redirection
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_AUTOREFERER, true );
+			$output = curl_exec($ch);							// Execute the API call
+			curl_close($ch);									// Close the CURL object
+		} else {
+			$output = file_get_contents($url);
+		}
+
+		return $output;
+	}
 }

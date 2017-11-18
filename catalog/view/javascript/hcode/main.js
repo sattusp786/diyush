@@ -300,10 +300,10 @@ $(document).ready(function () {
     });
 	$("#filter-products").owlCarousel({
         navigation: true,
-        items: 9,
-        itemsDesktop: [1200, 9],
-        itemsTablet: [800, 6],
-        itemsMobile: [700, 3],
+        items: 7,
+        itemsDesktop: [1200, 7],
+        itemsTablet: [800, 2],
+        itemsMobile: [700, 2],
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
     });
     $("#owl-demo-brand").owlCarousel({

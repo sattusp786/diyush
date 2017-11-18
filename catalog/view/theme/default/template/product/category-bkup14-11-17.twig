@@ -98,27 +98,14 @@
         <section class="padding-two position-relative">
             <div id="content" class="container width-100">
                 <div class="row">
-						
+                    
                     <div class="col-md-12 col-sm-12">
-                        <div class="shorting clearfix xs-margin-top-three border-bottom margin-two-bottom">
+                        <div class="shorting clearfix xs-margin-top-three border-bottom">
                             <div class="desktopview">
-                                <div class="col-md-5 col-sm-7 grid-nav">                                   
-                                    <!--<span id="grid-view"><a><i class="fa fa-th"></i></a></span>
-                                     <span id="list-view"><a><i class="fa fa-bars"></i></a></span>-->
+                                <div class="col-md-8 col-sm-7 grid-nav">                                   
+                                    <span id="grid-view"><a><i class="fa fa-th"></i></a></span>
+                                     <span id="list-view"><a><i class="fa fa-bars"></i></a></span>
                                     <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
-                                </div>
-								<div class="col-md-3 col-sm-5 pull-right">
-                                    <div class="select-style input-round med-input shop-shorting ">
-                                        <select id="input-limit" class="form-control" onchange="location = this.value;">
-										  {% for limits in limits %}
-										  {% if limits.value == limit %}
-										  <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
-										  {% else %}
-										  <option value="{{ limits.href }}">{{ limits.text }}</option>
-										  {% endif %}
-										  {% endfor %}
-										</select>
-                                    </div>
                                 </div>
                                 <div class="col-md-3 col-sm-5 pull-right">
                                     <div class="select-style input-round med-input shop-shorting ">
@@ -134,25 +121,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="mobileview">
+                            <div class="mobileview">
                             	<div class="f-left">
                                 <a href="shop-with-sidebar-list.html"><i class="fa fa-bars"></i></a>
                                 <a href="shop-with-sidebar.html"><i class="fa fa-th"></i></a>
                                 <p class="text-uppercase letter-spacing-1 sm-display-none">{{ results }}</p>
-                            </div>-->
-                             	<div class="mobileview f-right">	
-                                <div class="select-style input-round med-input shop-shorting no-border pull-left">
-                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
-									  {% for limits in limits %}
-									  {% if limits.value == limit %}
-									  <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
-									  {% else %}
-									  <option value="{{ limits.href }}">{{ limits.text }}</option>
-									  {% endif %}
-									  {% endfor %}
-									</select>
-                                </div>
-								<div class="select-style input-round med-input shop-shorting no-border pull-right">
+                            </div>
+                             	<div class="f-right">
+                                <div class="select-style input-round med-input shop-shorting no-border">
                                     <select id="input-sort" class="form-control" onchange="location = this.value;">
 									  {% for sorts in sorts %}
 										  {% if sorts.value == '%s-%s'|format(sort, order) %}
@@ -174,9 +150,6 @@
                             <!-- shop item -->
                             <div class="col-md-4 col-sm-4">
                                 <div class="home-product text-center position-relative overflow-hidden margin-ten no-margin-top">
-                                <div class="rating margin-five no-margin-top">
-                            <span class="pull-left"><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star-o black-text"></i><span class="rating-text text-uppercase">5 Reviews</span></span><span class="rating-text text-uppercase pull-right no-margin"><i class="fa fa-heart black-text"></i> 845 Likes </span> <span class="clearfix"></span>
-                        </div>
                                     <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
                                     <span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
                                     {% if product.price %}
@@ -205,7 +178,46 @@
                             
 							
                         
-                        
+                        <div id="pro-listview" style="display:none;">
+                        {% if products %}
+							{% for product in products %}
+                            <!-- shop item -->
+                            <div class="col-md-12 col-sm-12 product-list margin-one no-margin-bottom">
+                                <!-- product image -->
+                                <div class="col-md-7 col-sm-12">
+                                    <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
+                                </div>
+                                <!-- end product image -->
+                                <!-- product details -->
+                                <div class="col-md-5 col-sm-12 margin-five sm-text-center">
+                                    <!-- product name -->
+                                    <span class="text-large text-uppercase font-weight-600 letter-spacing-2 black-text"><a href="{{ product.href }}">{{ product.name }}</a></span>
+                                    <!-- end product name -->
+                                    <!-- product stock -->
+                                    <p class="text-small text-uppercase letter-spacing-2 margin-two">In Stock / Shipping Available</p>
+                                    <!-- end product stock -->
+                                    <div class="separator-line bg-black no-margin-lr margin-five sm-display-none"></div>
+                                    <!-- product short description -->
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text.</p>
+                                    <!-- end product short description -->
+                                    {% if product.price %}
+                                    <span class="price black-text text-large no-letter-spacing">									
+									{% if not product.special %}
+									  {{ product.price }}
+									  {% else %}
+									  <del>{{ product.price }}</del>{{ product.special }}
+									  {% endif %}
+									  <!--{% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %}-->									
+									</span>
+                                    {% endif %}
+                                   <a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-bottom" title="{{ button_cart }}"><i class="icon-basket"></i> Add To Cart</a>
+                                </div>
+                                <!-- end product details -->
+                            </div>
+                            <!-- end shop item -->
+                            {% endfor %}
+						{% endif %}
+                            </div>
                         </div>
                         <!-- pagination -->
 						{{ pagination }}
@@ -224,6 +236,18 @@
             </div>
         </section>
         <!-- end content section -->
- 
+ <script>
+jQuery(document).ready(function($) { 
+	$("#grid-view").on('click', function() {
+		$("#pro-listview").fadeOut();  
+		$("#pro-gridview").show();
+	});
+
+	$("#list-view").on('click', function() {		
+		$("#pro-gridview").fadeOut();
+		$("#pro-listview").show();  
+	});
+});
+ </script>   
 
 {{ footer }} 

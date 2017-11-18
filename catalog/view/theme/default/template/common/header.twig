@@ -43,6 +43,7 @@
 <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/text-effect.css" />
 <!-- hamburger menu  -->
 <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/menu-hamburger.css" />
+<link rel="stylesheet" href="catalog/view/theme/default/stylesheet/jquery.simple-dtpicker.css" />
 <!-- common -->
 <link rel="stylesheet" href="catalog/view/theme/default/stylesheet/style.css" />
 <!-- responsive -->
@@ -99,8 +100,11 @@
 <script type="text/javascript" src="catalog/view/javascript/hcode/classie.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/hcode/hamburger-menu.js"></script>
 <!-- setting --> 
+<script type="text/javascript" src="catalog/view/javascript/jquery.simple-dtpicker.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/hcode/main.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5a06b05369fde30011eef507&product=inline-share-buttons"></script>
 {% for script in scripts %}
 <script src="{{ script }}" type="text/javascript"></script>
 {% endfor %}
@@ -120,22 +124,22 @@
             <div class="row">
             <div class="width-100 bg-black topbar-wrap">
                	<div class="col-md-12">
-                	<div class="col-md-3 text-left no-padding">
+                	<div class="col-md-2 text-left no-padding">
 						{% if logged %}
 							<a href="index.php?route=account/account"><i class="fa fa-user white-text extra-small-icon"> </i> My Account</a>
-							<a href="index.php?route=account/wishlist" class="agree"><i class="fa fa-heart-o white-text extra-small-icon"> </i> Wishlist</a>
+							<a href="index.php?route=account/wishlist"><i class="fa fa-heart-o white-text extra-small-icon"> </i> Wishlist</a>
 						{% else %}
 							<a href="index.php?route=account/login/popup" class="agree"><i class="fa fa-user white-text extra-small-icon"> </i> Login</a>
 							<a href="index.php?route=account/login/popup&favorite" class="agree"><i class="fa fa-heart-o white-text extra-small-icon"> </i> Wishlist</a>
 						{% endif %}
                     </div>
-                    <div class="col-md-6 text-center topbar-mid">
-                    	<a href="/book-appointment">Book Appointment</a>
+                    <div class="col-md-8 text-center topbar-mid">
+                    	<a href="index.php?route=information/visit_showroom/popup" class="agree">Book Appointment</a>
                         <a href="/warranty-and-care">Life Time Warranty</a>
                         <a href="/home-trial">Free Sample Services</a>
-                        <a href="/google-reviews">Google Reviews</a>
+                        <a href="https://uk.trustpilot.com/review/abelini.com" target="_blank">Independent Reviews</a>
                     </div>
-                    <div class="col-md-3 text-right no-padding">
+                    <div class="col-md-2 text-right no-padding">
                     	<a href="tel:0800 500 5000"><i class="fa fa-phone white-text extra-small-icon"> </i> 0800 500 5000</a>
                         <a href="javascript:$zopim.livechat.window.show();"><i class="fa fa-wechat white-text extra-small-icon"> </i></a>
                         <a href="index.php?route=information/contact/popup" class="agree"><i class="fa fa-envelope-o white-text extra-small-icon"> </i></a>
@@ -159,6 +163,33 @@
 				</div>
 				<!-- search input-->
 				<form id="search-header" method="post" action="#" onsubmit="return false;" name="search-header" class="mfp-hide search-form-result">
+					<div class="search-form position-relative">
+					   <select name="category_id" class="form-control">
+						<option value="0">{{ text_category }}</option>
+						{% for category_1 in categories %}
+						{% if category_1.category_id == category_id %}
+						<option value="{{ category_1.category_id }}" selected="selected">{{ category_1.name }}</option>
+						{% else %}
+						<option value="{{ category_1.category_id }}">{{ category_1.name }}</option>
+						{% endif %}
+						{% for category_2 in category_1.children %}
+						{% if category_2.category_id == category_id %}
+						<option value="{{ category_2.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+						{% else %}
+						<option value="{{ category_2.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+						{% endif %}
+						{% for category_3 in category_2.children %}
+						{% if category_3.category_id == category_id %}
+						<option value="{{ category_3.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+						{% else %}
+						<option value="{{ category_3.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+						{% endif %}
+						{% endfor %}
+						{% endfor %}
+						{% endfor %}
+					  </select>
+					  <input type="hidden" name="sub_category" value="true" />
+					</div>
 					<div class="search-form position-relative">
 						<button type="submit" class="fa fa-search close-search search-button"></button>
 						<input type="text" name="search" id="searcher" autocomplete="off" class="search-input" placeholder="Enter your keywords..." />
