@@ -5,267 +5,107 @@
 						<!-- menu item -->
 						<!--<li class="dropdown panel"><a href="/">Home <i class="fa fa-angle-down"></i></a></li>-->
 						<!-- end menu item -->
-
-						{% if categories %}
-						{% for category in categories %}
-							{% if category.children %}
-								<li class="dropdown panel"><a href="#collapse{{ category.category_id }}" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
-									<!-- sub menu -->
-									<ul id="collapse{{ category.category_id }}" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
-										<!-- sub menu column  -->
-										<li class="mega-menu-column col-sm-2">
-											<!-- sub menu item  -->
-											<ul>
-												{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-
-														{% for child in children %}
-														<li><a href="{{ child.href }}">{{ child.name }}</a></li>
-														{% endfor %}
-												{% endfor %}
-											</ul>
-											<!-- end sub menu item  -->
-										</li>
-										<!-- end sub menu column  -->
-                                        <li class="mega-menu-column col-sm-2">
-											<!-- sub menu item  -->
-										
-											<!-- end sub menu item  -->
-										</li>
-                                        <li class="mega-menu-column col-sm-2">
-											<!-- sub menu item  -->
-										
-											<!-- end sub menu item  -->
-										</li>
-										<!-- sub menu column  -->
-										<li class="mega-menu-column col-sm-3 banner">
-											<!-- banner image  -->
-											<ul>
-												<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
-											</ul>
-											<!-- end banner image  -->
-										</li>
-										<!-- end sub menu column  -->
-										<!-- sub menu column  -->
-										<li class="mega-menu-column col-sm-3 banner">
-											<!-- banner image  -->
-											<ul>
-												<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
-											</ul>
-											<!-- end banner image  -->
-										</li>
-										<!-- end sub menu column  -->
-									</ul>
-									<!-- end sub menu -->
-								</li>
-							{% else %}
-							    <li class="dropdown panel"><a href="{{ category.href }}">{{ category.name }}</a></li>
-							{% endif %}
-						{% endfor %}
-						{% endif %} 
-						<!-- menu item -->
-						<li class="dropdown panel simple-dropdown"><a href="/blog" >Blog</a></li>
-						<!-- end menu item -->
-						<li class="dropdown panel"><a href="#collapse0" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Information <i class="fa fa-angle-down"></i></a>
-							<!-- sub menu -->
-							<ul id="collapse0" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
-								<!-- sub menu column  -->
-								<li class="mega-menu-column col-sm-2">
-									<!-- sub menu item  -->
-									<div style="color:#fff;">About Abelini</div>
-									<ul>
-										<li><a href="/about-us">About Us</a></li>
-										<li><a href="/book-appointment">Visit Our Showroom</a></li>
-										<li><a href="/google-review">Our Customer Review</a></li>
-										<li><a href="/contact-us">Contact Us</a></li>
-									</ul>
-									<!-- end sub menu item  -->
-								</li>
-								<li class="mega-menu-column col-sm-2">
-									<!-- sub menu item  -->
-									<div style="color:#fff;">Customer Care</div>
-									<ul>
-										<li><a href="/free-shipping">Free Delivery</a></li>
-										<li><a href="/return-and-exchange">Return & Exchange</a></li>
-										<li><a href="/warranty-and-care">Warranty & Care</a></li>
-										<li><a href="/jewellery-insurance">Jewellery Insurance</a></li>
-										<li><a href="/bespoke">Bespoke</a></li>
-									</ul>
-									<!-- end sub menu item  -->
-								</li>
-								<li class="mega-menu-column col-sm-2">
-									<!-- sub menu item  -->
-									<div style="color:#fff;">Explore</div>
-									<ul>
-										<li><a href="/metal-guide">Metal Guide</a></li>
-										<li><a href="/stone-guide">Stone Guide</a></li>
-										<li><a href="/size-guide">Size Guide</a></li>
-										<li><a href="/jewellery-care">Jewellery Care</a></li>
-									</ul>
-									<!-- end sub menu item  -->
-								</li>
-								<!-- end sub menu column  -->
-								<!-- sub menu column  -->
-								<li class="mega-menu-column col-sm-3 banner">
-									<!-- banner image  -->
-									<ul>
-										<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
-									</ul>
-									<!-- end banner image  -->
-								</li>
-								<!-- end sub menu column  -->
-								<!-- sub menu column  -->
-								<li class="mega-menu-column col-sm-3 banner">
-									<!-- banner image  -->
-									<ul>
-										<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
-									</ul>
-									<!-- end banner image  -->
-								</li>
-								<!-- end sub menu column  -->
-							</ul>
-							<!-- end sub menu -->
-						</li>
                         
-                        <li class="dropdown panel dessktopview"><a href="#collapse5" class="dropdown-toggle collapsed no-active" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">New Tab <i class="fa fa-angle-down"></i></a>
+                        {% if categories %}
+						
+                        <li class="dropdown panel dessktopview"><a href="#collapse5" class="dropdown-toggle collapsed no-active" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Jewellery <i class="fa fa-angle-down"></i></a>
 							<!-- sub menu -->
 							<ul id="collapse5" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-2">
 									<!-- sub menu item  -->
-									<div style="color:#fff;">New Tab</div>
+									<div style="color:#fff;">Jewellery</div>
 									<ul>
-										<li><a href="#tabmenu_sec1" data-toggle="tab">Tab Menu 1</a></li>
-										<li><a href="#tabmenu_sec2" data-toggle="tab">Tab Menu 2</a></li>
-                                        <li><a href="#tabmenu_sec3" data-toggle="tab">Tab Menu 3</a></li>
-                                        <li><a href="#tabmenu_sec4" data-toggle="tab">Tab Menu 4</a></li>
-                                        <li><a href="#tabmenu_sec5" data-toggle="tab">Tab Menu 5</a></li>
+									{% for category in categories %}
+									{% if category.children %}
+										<li><a href="#tabmenu_sec{{ category.category_id }}" data-toggle="tab">{{ category.name }}</a></li>
+									{% endif %}
+									{% endfor %}
 									</ul>
 									<!-- end sub menu item  -->
 								</li>
 								<li class="mega-menu-column col-sm-7">
                                 	 <div class="tab-content position-relative overflow-hidden">
-                                     	<div class="tab-pane med-text fade in active" id="tabmenu_sec1">
-                                        <div style="color:#fff;">Tab Menu 1</div>
+                                	 {% set c = 0 %}
+									{% for category in categories %}
+									{% if category.children %}
+                                     	<div class="tab-pane med-text fade in {% if c == '0' %}active{% endif %}" id="tabmenu_sec{{ category.category_id }}">
+                                        <div style="color:#fff;">{{ category.name }}</div>
                                             <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
+                                            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+												{% for child in children %}
+													<li><a href="{{ child.href }}">{{ child.name }}</a></li>
+												{% endfor %}
+											{% endfor %}
                                             </ul>
+                                        </div>
+                                        {% set c=c+1 %}
+                                        {% endif %}
+                                        {% endfor %}
+                                     </div>
+                                </li>
+								
+								<!-- end sub menu column  -->
+								<!-- sub menu column  -->
+								<li class="mega-menu-column col-sm-3 banner">
+									<!-- banner image  -->
+									<ul>
+										<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
+									</ul>
+									<!-- end banner image  -->
+								</li>
+								<!-- end sub menu column  -->
+								
+							</ul>
+							<!-- end sub menu -->
+						</li>
+                        {% endif %}
+                        <li class="dropdown panel dessktopview simple-dropdown"><a href="/blog" >Blog</a></li>
+
+                        <li class="dropdown panel dessktopview"><a href="#collapsei" class="dropdown-toggle collapsed no-active" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Information <i class="fa fa-angle-down"></i></a>
+							<!-- sub menu -->
+							<ul id="collapsei" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
+								<!-- sub menu column  -->
+								<li class="mega-menu-column col-sm-2">
+									<!-- sub menu item  -->
+									<div style="color:#fff;">Information</div>
+									<ul>
+										<li><a href="#tabmenu_seca" data-toggle="tab">About Abelini</a></li>
+										<li><a href="#tabmenu_secb" data-toggle="tab">Customer Care</a></li>
+                                        <li><a href="#tabmenu_secc" data-toggle="tab">Explore</a></li>
+									</ul>
+									<!-- end sub menu item  -->
+								</li>
+								<li class="mega-menu-column col-sm-7">
+                                	 <div class="tab-content position-relative overflow-hidden">
+                                     	<div class="tab-pane med-text fade in active" id="tabmenu_seca">
+                                        <div style="color:#fff;">About Abelini</div>
                                             <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
+                                            	<li><a href="/about-us">About Us</a></li>
+												<li><a href="/book-appointment">Visit Our Showroom</a></li>
+												<li><a href="/google-review">Our Customer Review</a></li>
+												<li><a href="/contact-us">Contact Us</a></li>
                                             </ul>
                                         </div>
                                         
-                                        <div class="tab-pane fade in" id="tabmenu_sec2">
-                                        <div style="color:#fff;">Tab Menu 2</div>
+                                        <div class="tab-pane fade in" id="tabmenu_secb">
+                                        <div style="color:#fff;">Customer Care</div>
                                           <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
+                                            	<li><a href="/free-shipping">Free Delivery</a></li>
+												<li><a href="/return-and-exchange">Return & Exchange</a></li>
+												<li><a href="/warranty-and-care">Warranty & Care</a></li>
+												<li><a href="/jewellery-insurance">Jewellery Insurance</a></li>
+												<li><a href="/bespoke">Bespoke</a></li>
                                             </ul>
                                         </div>
                                         
-                                        <div class="tab-pane fade in" id="tabmenu_sec3">
-                                        <div style="color:#fff;">Tab Menu 3</div>
+                                        <div class="tab-pane fade in" id="tabmenu_secc">
+                                        <div style="color:#fff;">Explore</div>
                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                        </div>
-                                        
-                                        <div class="tab-pane fade in" id="tabmenu_sec4">
-                                        <div style="color:#fff;">Tab Menu 4</div>
-                                          <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                        </div>
-                                        
-                                        <div class="tab-pane fade in" id="tabmenu_sec5">
-                                        <div style="color:#fff;">Tab Menu 5</div>
-                                          <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
-                                            </ul>
-                                            <ul class="white-text col-sm-3">
-                                            	<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
+                                            	<li><a href="/metal-guide">Metal Guide</a></li>
+												<li><a href="/stone-guide">Stone Guide</a></li>
+												<li><a href="/size-guide">Size Guide</a></li>
+												<li><a href="/jewellery-care">Jewellery Care</a></li>
                                             </ul>
                                         </div>
                                      </div>
@@ -285,20 +125,23 @@
 							</ul>
 							<!-- end sub menu -->
 						</li>
-                        
-                        <li class="dropdown panel mobileview"><a href="#collapse6" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">New Tab <i class="fa fa-angle-down"></i></a>
+
+						{% if categories %}
+						{% for category in categories %}
+						{% if category.children %}
+                        <li class="dropdown panel mobileview"><a href="#collapsem{{ category.category_id }}" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
 							<!-- sub menu -->
-							<ul id="collapse6" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
+							<ul id="collapsem{{ category.category_id }}" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-2">
 									<!-- sub menu item  -->
 									
 									<ul class="white-text">
-										<li><a href="#">Tab Sub Menu 1</a></li>
-                                                <li><a href="#">Tab Sub Menu 2</a></li>
-                                                <li><a href="#">Tab Sub Menu 3</a></li>
-                                                <li><a href="#">Tab Sub Menu 4</a></li>
-                                                <li><a href="#">Tab Sub Menu 5</a></li>
+										{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+											{% for child in children %}
+												<li><a href="{{ child.href }}">{{ child.name }}</a></li>
+											{% endfor %}
+										{% endfor %}
 									</ul>
 									<!-- end sub menu item  -->
 								</li>
@@ -317,6 +160,10 @@
 							</ul>
 							<!-- end sub menu -->
 						</li>
+						{% endif %}
+						{% endfor %}
+						{% endif %}
+						<li class="dropdown panel mobileview simple-dropdown"><a href="/blog" >Blog</a></li>
 					</ul>
 				</div>
 			</div>
