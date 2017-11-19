@@ -276,7 +276,11 @@ class ControllerAccountLogin extends Controller {
 			$this->event->trigger('post.customer.login');
 
 			if($this->customer->isLogged()){
-				$json['redirect'] = $this->url->link('account/account', '', 'SSL');
+				if (isset($this->request->post['favorite']) && $this->request->post['favorite'] == '1') {
+					$json['redirect'] = $this->url->link('account/wishlist', '', 'SSL');
+				} else {
+					$json['redirect'] = $this->url->link('account/account', '', 'SSL');
+				}
 			}
 			
 		}elseif(!empty($this->error['warning'])) {

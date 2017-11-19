@@ -16,20 +16,21 @@
 	  {% if favorite == 'yes' %}
       <p class="texter">Sign in to your account so you can save your favorites.</p>
 	  {% endif %}
-        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" id="form-login">
+        <form action="" method="post" onsubmit="return false;" enctype="multipart/form-data" class="form-horizontal" id="form-login">
             <div class="form-group">
               <!--<label for="email" class="control-label col-xs-2">Email :</label>-->
               <div class="col-xs-10">
-              <input type="email" name="email" tabindex="1" class="form-control" placeholder="Email" value=""></div>
+              <input type="email" name="email" tabindex="1" class="form-control" placeholder="Email" value="" required /></div>
             </div>
             <div class="form-group">
               <!--<label for="password" class="control-label col-xs-2">Password</label>-->
               <div class="col-xs-10">
-              <input type="password" name="password" tabindex="2" class="form-control" placeholder="Password"></div>
+              <input type="password" name="password" tabindex="2" class="form-control" placeholder="Password" required /></div>
             </div>
             <div class="form-group formbtn">
                 <div class="col-xs-10">
-                  <input type="button" name="button-login" id="button-login" tabindex="4" class="btn-black button"  value="SIGN IN">
+                  <input type="hidden" name="favorite" value="{% if favorite == 'yes' %}1{% else %}0{% endif %}" />
+                  <input type="submit" name="button-login" id="button-login" tabindex="4" class="btn-black button"  value="SIGN IN">
                 </div>
             </div>
             <div class="form-group">
@@ -47,30 +48,31 @@
 
       <section id="register" class="tab-pane fade">
       <p class="texter" style="display:none;">Create an account so you can save your favorites.</p>
-         <form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" id ="form-register">
+         <form action=""  method="post" enctype="multipart/form-data" onsubmit="return false;" class="form-horizontal" id ="form-register">
               <div class="form-group">
                 <!--<label for="name" class="control-label col-xs-2">First Name :</label>-->
                 <div class="col-xs-10">
-                <input type="text" name="firstname" tabindex="1" class="form-control" placeholder="First Name" value=""></div>
+                <input type="text" name="firstname" tabindex="1" class="form-control" placeholder="First Name" value="" required /></div>
               </div>
-			  <div class="form-group">
+			       <div class="form-group">
                 <!--<label for="name" class="control-label col-xs-2">Last Name :</label>-->
                 <div class="col-xs-10">
-                <input type="text" name="lastname" tabindex="1" class="form-control" placeholder="Last Name" value=""></div>
+                <input type="text" name="lastname" tabindex="2" class="form-control" placeholder="Last Name" value="" required /></div>
               </div>
               <div class="form-group">
                 <!--<label for="email" class="control-label col-xs-2">Email :</label>-->
                 <div class="col-xs-10">
-                <input type="email" name="email" tabindex="2" class="form-control" placeholder="Email" value=""></div>
+                <input type="email" name="email" tabindex="3" class="form-control" placeholder="Email" value="" required /></div>
               </div>
               <div class="form-group">
                 <!--<label for="password" class="control-label col-xs-2">Password</label>-->
                 <div class="col-xs-10">
-                <input type="password" name="password" tabindex="3" class="form-control" placeholder="Password"></div>
+                <input type="password" name="password" tabindex="4" class="form-control" placeholder="Password" required /></div>
               </div>
               <div class="form-group formbtn">
                   <div class="col-xs-10">
-                    <input type="button" name="button-register" id="button-register" tabindex="4" class="btn-black button" value="CREATE ACCOUNT">
+                    <input type="hidden" name="favorite" value="{% if favorite == 'yes' %}1{% else %}0{% endif %}" />
+                    <input type="submit" name="button-register" id="button-register" tabindex="5" class="btn-black button" value="CREATE ACCOUNT">
                   </div>
               </div>
               <div class="form-group">
@@ -89,7 +91,7 @@
 </div>
 
 <div class="forgot-wrap hidden">	  
-	  <form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" id="form-forgot">
+	  <form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" onsubmit="return false;" id="form-forgot">
 	  <div id="forgotten-password">
 		<div class=" clearfix" id="forgot">
 		  <div class="forgotten-passwordtext createaccounttext checkoutlogintext">
@@ -97,8 +99,8 @@
 			<h3>Forgot Password</h3>
 			<p>Enter your email address and we'll send you instructions to reset your password.</p>
 			<ul class="createaccountform forgotpasswordform">
-				<li><input id="input-email" type="email" name="email" value="" placeholder="Email Address"></li>
-				<li class="formbtn"><input type="button" name="button-forgot" id="button-forgot" value="Send Reset Instructions" class="btn-black button desktopview"> <input type="button" name="button-forgot" id="button-forgot" value="Reset" class="btn-black button mobileview"></li>
+				<li><input id="input-email" type="email" name="email" value="" placeholder="Email Address" required /></li>
+				<li class="formbtn"><input type="submit" name="button-forgot" id="button-forgot" value="Send Reset Instructions" class="btn-black button desktopview"> <input type="button" name="button-forgot" id="button-forgot" value="Reset" class="btn-black button mobileview"></li>
 			</ul>
 			<div class="clear"></div>
 		  </div>
@@ -109,7 +111,8 @@
 </div>
 <script type="text/javascript"><!--
 
-$('#button-login').on('click', function() { 
+$('#form-login').on('submit', function(e) {
+  e.preventDefault();
   $.ajax({
     url: 'index.php?route=account/login/confirm',
     type: 'post',
@@ -126,6 +129,7 @@ $('#button-login').on('click', function() {
 
       if (json['error']) {
         $('#login').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+        return false;
       }
 
       if (json['success']) {
@@ -145,15 +149,18 @@ $('#button-login').on('click', function() {
 			location.href= json['redirect'];
 			return false;
 		}
+    return false;
       }
     }
   });
+  return false;
 });
 
 //--></script>
 <script type="text/javascript"><!--
 
-$('#button-register').on('click', function() {
+$('#form-register').on('submit', function(e) {
+  e.preventDefault();
   $.ajax({
     url: 'index.php?route=account/register/confirm',
     type: 'post',
@@ -170,6 +177,7 @@ $('#button-register').on('click', function() {
 
       if (json['error']) {
         $('#register').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+        return false;
       }
 
       if (json['success']) {
@@ -186,14 +194,17 @@ $('#button-register').on('click', function() {
 		}
 		
       }
+      return false;
     }
   });
+  return false;
 });
 
 //--></script>
 <script type="text/javascript"><!--
 
-$('#button-forgot').on('click', function() {
+$('#form-forgot').on('submit', function(e) {
+  e.preventDefault();
   $.ajax({
     url: 'index.php?route=account/forgotten/confirm',
     type: 'post',
@@ -210,19 +221,23 @@ $('#button-forgot').on('click', function() {
 
       if (json['error']) {
         $('#forgot').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+        return false;
       }
 
       if (json['success']) {
         $('#forgot').after('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
 
         $('input[name=\'email\']').val('');
+        return false;
         /*$('#modal-agree').modal('hide');
             setTimeout(function(){
                location.reload();
           }, 100);*/
       }
+      return false;
     }
   });
+  return false;
 });
 
 //--></script>
