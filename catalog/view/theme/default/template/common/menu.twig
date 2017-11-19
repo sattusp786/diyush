@@ -7,19 +7,20 @@
 						<!-- end menu item -->
                         
                         {% if categories %}
-						
-                        <li class="dropdown panel dessktopview"><a href="#collapse5" class="dropdown-toggle collapsed no-active" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Jewellery <i class="fa fa-angle-down"></i></a>
+						{% for category in categories %}
+						{% if category.children %}
+                        <li class="dropdown panel dessktopview"><a href="#collapse5" class="dropdown-toggle collapsed no-active" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
 							<!-- sub menu -->
 							<ul id="collapse5" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-2">
 									<!-- sub menu item  -->
-									<div style="color:#fff;">Jewellery</div>
+									<!--<div style="color:#fff;">Jewellery</div>-->
 									<ul>
-									{% for category in categories %}
-									{% if category.children %}
-										<li><a href="#tabmenu_sec{{ category.category_id }}" data-toggle="tab">{{ category.name }}</a></li>
-									{% endif %}
+									{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+									{% for child in children %}
+										<li><a href="#tabmenu_sec{{ child.children_id }}" data-toggle="tab">{{ child.name }}</a></li>
+									{% endfor %}
 									{% endfor %}
 									</ul>
 									<!-- end sub menu item  -->
@@ -27,21 +28,21 @@
 								<li class="mega-menu-column col-sm-7">
                                 	 <div class="tab-content position-relative overflow-hidden">
                                 	 {% set c = 0 %}
-									{% for category in categories %}
-									{% if category.children %}
-                                     	<div class="tab-pane med-text fade in {% if c == '0' %}active{% endif %}" id="tabmenu_sec{{ category.category_id }}">
-                                        <div style="color:#fff;">{{ category.name }}</div>
+									{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+										{% for child in children %}
+                                     	<div class="tab-pane med-text fade in {% if c == '0' %}active{% endif %}" id="tabmenu_sec{{ child.children_id }}">
+                                        <!--<div style="color:#fff;">{{ child.name }}</div>-->
                                             <ul class="white-text col-sm-3">
-                                            {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-												{% for child in children %}
-													<li><a href="{{ child.href }}">{{ child.name }}</a></li>
-												{% endfor %}
-											{% endfor %}
+                                            	{% if child.filters %}
+                                            	{% for filter in child.filters %}
+													<li><a href="{{ filter.href }}">{{ filter.name }}</a></li>
+                                            	{% endfor %}
+												{% endif %}
                                             </ul>
                                         </div>
-                                        {% set c=c+1 %}
-                                        {% endif %}
+                                        {% set c = c + 1 %}
                                         {% endfor %}
+											{% endfor %}
                                      </div>
                                 </li>
 								
@@ -59,6 +60,8 @@
 							</ul>
 							<!-- end sub menu -->
 						</li>
+						{% endif %}
+						{% endfor %}
                         {% endif %}
                         <li class="dropdown panel dessktopview simple-dropdown"><a href="/blog" >Blog</a></li>
 
@@ -68,7 +71,7 @@
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-2">
 									<!-- sub menu item  -->
-									<div style="color:#fff;">Information</div>
+									<!--<div style="color:#fff;">Information</div>-->
 									<ul>
 										<li><a href="#tabmenu_seca" data-toggle="tab">About Abelini</a></li>
 										<li><a href="#tabmenu_secb" data-toggle="tab">Customer Care</a></li>
@@ -79,7 +82,7 @@
 								<li class="mega-menu-column col-sm-7">
                                 	 <div class="tab-content position-relative overflow-hidden">
                                      	<div class="tab-pane med-text fade in active" id="tabmenu_seca">
-                                        <div style="color:#fff;">About Abelini</div>
+                                        <!--<div style="color:#fff;">About Abelini</div>-->
                                             <ul class="white-text col-sm-3">
                                             	<li><a href="/about-us">About Us</a></li>
 												<li><a href="/book-appointment">Visit Our Showroom</a></li>
@@ -89,7 +92,7 @@
                                         </div>
                                         
                                         <div class="tab-pane fade in" id="tabmenu_secb">
-                                        <div style="color:#fff;">Customer Care</div>
+                                        <!--<div style="color:#fff;">Customer Care</div>-->
                                           <ul class="white-text col-sm-3">
                                             	<li><a href="/free-shipping">Free Delivery</a></li>
 												<li><a href="/return-and-exchange">Return & Exchange</a></li>
@@ -100,7 +103,7 @@
                                         </div>
                                         
                                         <div class="tab-pane fade in" id="tabmenu_secc">
-                                        <div style="color:#fff;">Explore</div>
+                                        <!--<div style="color:#fff;">Explore</div>-->
                                            <ul class="white-text col-sm-3">
                                             	<li><a href="/metal-guide">Metal Guide</a></li>
 												<li><a href="/stone-guide">Stone Guide</a></li>
