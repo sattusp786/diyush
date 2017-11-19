@@ -2567,3 +2567,44 @@ color: #333 ;
 .mobileview { display:none !important;}
 
 .navbar-default .navbar-nav > .active > a.no-active { background:transparent; color:#373737;}
+.mega-menu-full .mega-menu-column ul li a { padding:2px 5px !important;}
+.mega-menu-full .mega-menu-column ul li.active a { background: #ddd; color: #010101 !important;}
+.mega-menu-full .mega-menu-column ul li.active a:before, .mega-menu-full .mega-menu-column ul li.active a:after {
+    border-right: 2px solid;
+    content: '';
+    display: block;
+    height: 8px;
+    margin-top: -6px;
+    position: absolute;
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    right: 10px;
+    top: 50%;
+    width: 0;
+}
+
+.mega-menu-full .mega-menu-column ul li.active a:after {
+    margin-top: -1px;
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.dropdown-menu ul.sub-navi li a { padding: 0 0 0 25px !important;}
+.dropdown-menu ul.sub-navi li a:before {
+    border-right: 2px solid;
+    content: '';
+    display: block;
+    height: 8px;
+    position: absolute;  
+    left: 10px;
+    top: 50%;
+    width: 0;
+    margin-top: -3px;
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
