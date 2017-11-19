@@ -142,12 +142,15 @@
 									<ul class="white-text">
 										{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
 											{% for child in children %}
-												<li><a href="{{ child.href }}">{{ child.name }}</a>
-                                                	<ul class="sub-navi">
+												<li><!--<a href="{{ child.href }}">{{ child.name }}</a>-->
+                                                <a data-toggle="collapse" data-parent="#collapse-sub1" href="#collapse-sub1">{{ child.name }} <i class="fa fa-angle-down"></i></a>
+                                             <div id="collapse-sub1" class="panel-collapse collapse">
+                                                    <ul class="sub-navi">
                                                     	<li><a href="#">Sub Tab 1</a></li>
                                                         <li><a href="#">Sub Tab 2</a></li>
                                                         <li><a href="#">Sub Tab 3</a></li>
                                                     </ul>
+                                                    </div>
                                                 </li>
 											{% endfor %}
 										{% endfor %}
