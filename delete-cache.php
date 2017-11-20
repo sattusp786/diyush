@@ -33,9 +33,7 @@ delTree(DIR_CACHE);
 
  echo "cache folder deleted!";
 
-delTree(DIR_MODIFICATION);
-
-
- echo "modification folder deleted!";
+//delTree(DIR_MODIFICATION);
+//echo "modification folder deleted!";
 
 ?>
