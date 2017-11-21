@@ -17,9 +17,11 @@
 									<!-- sub menu item  -->
 									<!--<div style="color:#fff;">Jewellery</div>-->
 									<ul>
+									{% set a = 0 %}
 									{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
 									{% for child in children %}
-										<li><a href="#tabmenu_sec{{ child.children_id }}" data-toggle="tab">{{ child.name }}</a></li>
+										<li class="{% if a == '0' %}active{% endif %}"><a href="#tabmenu_sec{{ child.children_id }}" data-toggle="tab">{{ child.name }}</a></li>
+									{% set a = a + 1 %}
 									{% endfor %}
 									{% endfor %}
 									</ul>
@@ -42,7 +44,7 @@
                                         </div>
                                         {% set c = c + 1 %}
                                         {% endfor %}
-											{% endfor %}
+										{% endfor %}
                                      </div>
                                 </li>
 								
@@ -146,9 +148,11 @@
                                                 <a data-toggle="collapse" data-parent="#collapse-sub1" href="#collapse-sub1">{{ child.name }} <i class="fa fa-angle-down"></i></a>
                                              <div id="collapse-sub1" class="panel-collapse collapse">
                                                     <ul class="sub-navi">
-                                                    	<li><a href="#">Sub Tab 1</a></li>
-                                                        <li><a href="#">Sub Tab 2</a></li>
-                                                        <li><a href="#">Sub Tab 3</a></li>
+													{% if child.filters %}
+													{% for filter in child.filters %}
+														<li><a href="{{ filter.href }}">{{ filter.name }}</a></li>
+													{% endfor %}
+													{% endif %}
                                                     </ul>
                                                     </div>
                                                 </li>
