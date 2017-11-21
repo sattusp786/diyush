@@ -105,8 +105,6 @@ function getProductOptions($product_id) {
             		$shape = 'rnd';
             	}
             }
-
-            /*
             //Carat
             if($product_option['option_id'] == '5' && $product_option_value['default'] == '1'){
             	if($product_option_value['name'] > 0 &&  $product_option_value['name'] <= 1){
@@ -119,14 +117,14 @@ function getProductOptions($product_id) {
             		$carat = '0.0000-1.0000';
             	}
             }
-            */
+
         }
     }
 
     $product_option_data['metal'] = $metal;
     $product_option_data['stonetype'] = $stonetype;
     $product_option_data['shape'] = $shape;
-    //$product_option_data['carat'] = $carat;
+    $product_option_data['carat'] = $carat;
 
     return $product_option_data;
 }
@@ -137,15 +135,10 @@ if($query_products->num_rows) {
 		
 		$product_options = getProductOptions($product['product_id']);
 
-        $carat_arr = array('0.0000-3.0000','0.0000-2.0000','0.0000-1.0000','1.0000-3.0000','1.0000-2.0000','2.0000-3.0000');
+		$image_path = 'product/'.strtolower($product['sku']).'/front/'.$product_options['metal'].'/'.$product_options['stonetype'].'/'.$product_options['shape'].'/'.$product_options['carat'].'/0001.jpg';
 
-        foreach($carat_arr as $carat) {
-		  $image_path = 'product/'.strtolower($product['sku']).'/front/'.$product_options['metal'].'/'.$product_options['stonetype'].'/'.$product_options['shape'].'/'.$carat.'/0001.jpg';
-          if(file_exists(DIR_IMAGE.$image_path)) {
-            $update_image = $db->query("UPDATE " . DB_PREFIX . "product SET `image` = '".$image_path."' WHERE product_id = '".$product['product_id']."' ");
-            break;
-          }
-        }
+		$update_image = $db->query("UPDATE " . DB_PREFIX . "product SET `image` = '".$image_path."' WHERE product_id = '".$product['product_id']."' ");
+
 	}
 }
 

@@ -3,7 +3,7 @@ class ControllerMarketingEmailManager extends Controller {
 	private $error = array();
    
   	public function index() {
-		$this->language->load('marketing/email_manager');
+		$this->load->language('marketing/email_manager');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -14,7 +14,7 @@ class ControllerMarketingEmailManager extends Controller {
               
   	public function insert() {
 
-		$this->language->load('marketing/email_manager');
+		$this->load->language('marketing/email_manager');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -39,14 +39,14 @@ class ControllerMarketingEmailManager extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 						
-      		$this->response->redirect($this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+      		$this->response->redirect($this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL'));
 		}
 	
     	$this->getForm();
   	}
 
   	public function update() {
-		$this->language->load('marketing/email_manager');
+		$this->load->language('marketing/email_manager');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -71,14 +71,14 @@ class ControllerMarketingEmailManager extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 			
-			$this->response->redirect($this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL'));
     	}
 	
     	$this->getForm();
   	}
 
   	public function delete() {
-		$this->language->load('marketing/email_manager');
+		$this->load->language('marketing/email_manager');
 	
     	$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -105,7 +105,7 @@ class ControllerMarketingEmailManager extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 			
-			$this->response->redirect($this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+			$this->response->redirect($this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL'));
    		}
 	
     	$this->getList();
@@ -148,18 +148,18 @@ class ControllerMarketingEmailManager extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),
+			'href'      => $this->url->link('common/home', 'user_token=' . $this->session->data['user_token'], 'SSL'),
       		'separator' => false
    		);
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+			'href'      => $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL'),
       		'separator' => ' :: '
    		);
 							
-		$data['add'] = $this->url->link('marketing/email_manager/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		$data['delete'] = $this->url->link('marketing/email_manager/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');	
+		$data['add'] = $this->url->link('marketing/email_manager/insert', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL');
+		$data['delete'] = $this->url->link('marketing/email_manager/delete', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL');	
 
 		$data['email_managers'] = array();
 		
@@ -179,7 +179,7 @@ class ControllerMarketingEmailManager extends Controller {
 			
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
-				'href' => $this->url->link('marketing/email_manager/update', 'token=' . $this->session->data['token'] . '&email_manager_id=' . $result['email_manager_id'] . $url, 'SSL')
+				'href' => $this->url->link('marketing/email_manager/update', 'user_token=' . $this->session->data['user_token'] . '&email_manager_id=' . $result['email_manager_id'] . $url, 'SSL')
 			);
 						
 			$data['email_managers'][] = array(
@@ -236,10 +236,10 @@ class ControllerMarketingEmailManager extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 		
-		$data['sort_subject'] = $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . '&sort=subject' . $url, 'SSL');
-		$data['sort_code'] = $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . '&sort=code' . $url, 'SSL');
-		$data['sort_short_description'] = $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . '&sort=short_description' . $url, 'SSL');
-		$data['sort_sort_order'] = $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . '&sort=ag.sort_order' . $url, 'SSL');
+		$data['sort_subject'] = $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . '&sort=subject' . $url, 'SSL');
+		$data['sort_code'] = $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . '&sort=code' . $url, 'SSL');
+		$data['sort_short_description'] = $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . '&sort=short_description' . $url, 'SSL');
+		$data['sort_sort_order'] = $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . '&sort=ag.sort_order' . $url, 'SSL');
 		
 		$url = '';
 
@@ -255,7 +255,7 @@ class ControllerMarketingEmailManager extends Controller {
 		$pagination->total = $email_manager_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . $url . '&page={page}', true);
+		$pagination->url = $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 		
@@ -331,29 +331,29 @@ class ControllerMarketingEmailManager extends Controller {
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'),    		
+			'href'      => $this->url->link('common/home', 'user_token=' . $this->session->data['user_token'], 'SSL'),    		
       		'separator' => false
    		);
 
    		$data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . $url, 'SSL'),
+			'href'      => $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL'),
       		'separator' => ' :: '
    		);
 		
 		if (!isset($this->request->get['email_manager_id'])) {
-			$data['action'] = $this->url->link('marketing/email_manager/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+			$data['action'] = $this->url->link('marketing/email_manager/insert', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL');
 		} else {
-			$data['action'] = $this->url->link('marketing/email_manager/update', 'token=' . $this->session->data['token'] . '&email_manager_id=' . $this->request->get['email_manager_id'] . $url, 'SSL');
+			$data['action'] = $this->url->link('marketing/email_manager/update', 'user_token=' . $this->session->data['user_token'] . '&email_manager_id=' . $this->request->get['email_manager_id'] . $url, 'SSL');
 		}
 			
-		$data['cancel'] = $this->url->link('marketing/email_manager', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$data['cancel'] = $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'] . $url, 'SSL');
 
 		if (isset($this->request->get['email_manager_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 		    $email_manager_info = $this->model_marketing_email_manager->getEmailManager($this->request->get['email_manager_id']);
 		}
 		
-		$data['token'] = $this->session->data['token'];
+		$data['user_token'] = $this->session->data['user_token'];
 		
 		$this->load->model('localisation/language');
 		

@@ -19,7 +19,6 @@ $_['text_masters']              = 'Masters';
 $_['text_category']             = 'Categories';
 $_['text_country']              = 'Countries';
 $_['text_coupon']               = 'Coupons';
-$_['text_email_manager']        = 'Email Manager';
 $_['text_currency']             = 'Currencies';
 $_['text_customer']             = 'Customers';
 $_['text_customer_group']       = 'Customer Groups';
@@ -43,6 +42,7 @@ $_['text_localisation']         = 'Localisation';
 $_['text_location']             = 'Store Location';
 $_['text_contact']              = 'Mail';
 $_['text_marketing']            = 'Marketing';
+$_['text_email_manager']        = 'Email Manager';
 $_['text_marketplace']          = 'Marketplace';
 $_['text_maintenance']          = 'Maintenance';
 $_['text_menu']                 = 'Menu Manager';
@@ -99,19 +99,20 @@ $_['text_paypal_search']        = 'Search';
 $_['text_complete_status']      = 'Orders Completed';
 $_['text_processing_status']    = 'Orders Processing';
 
-$_['text_blog']                        = 'Blog';
-$_['text_blog_article']                = 'Articles';
-$_['text_blog_setting']                = 'Settings';
+				$_['text_blog']                        = 'Blog';
+				$_['text_blog_article']                = 'Articles';
+				$_['text_blog_setting']                = 'Settings';
             
 $_['text_other_status']         = 'Other Statuses';
 
-// opencart Amazon connector code starts
-$_['text_opencart_amazon_connector']  = 'Opencart Amazon Connector';
-$_['text_amazon_account']             = 'Manage Amazon Accounts';
-// opencart Amazon connector code ends
-  
+              // opencart Amazon connector code starts
+                $_['text_opencart_amazon_connector']  = 'Opencart Amazon Connector';
+                $_['text_amazon_account']             = 'Manage Amazon Accounts';
+              // opencart Amazon connector code ends
+                  
 
-// opencart Amazon connector code starts
-$_['text_opencart_amazon_connector']  = 'Opencart Amazon Connector';
-$_['text_amazon_account']             = 'Manage Amazon Accounts';
-// opencart Amazon connector code ends
+              // opencart Amazon connector code starts
+                $_['text_opencart_amazon_connector']  = 'Opencart Amazon Connector';
+                $_['text_amazon_account']             = 'Manage Amazon Accounts';
+              // opencart Amazon connector code ends
+                  
