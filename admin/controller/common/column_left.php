@@ -488,6 +488,14 @@ class ControllerCommonColumnLeft extends Controller {
 				);	
 			}
 			
+			if ($this->user->hasPermission('access', 'marketing/email_manager')) {	
+				$marketing[] = array(
+					'name'	   => $this->language->get('text_email_manager'),
+					'href'     => $this->url->link('marketing/email_manager', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);	
+			}
+			
 			if ($this->user->hasPermission('access', 'marketing/coupon')) {	
 				$marketing[] = array(
 					'name'	   => $this->language->get('text_coupon'),
