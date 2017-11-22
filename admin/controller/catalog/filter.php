@@ -333,6 +333,8 @@ class ControllerCatalogFilter extends Controller {
 		} else {
 			$data['filters'] = array();
 		}
+		
+		$data['image_path'] = HTTP_CATALOG.'image/';
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

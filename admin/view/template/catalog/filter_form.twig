@@ -50,6 +50,7 @@
               <thead>
                 <tr>
                   <td class="text-left required">{{ entry_name }}</td>
+                  <td class="text-left">{{ entry_image }}</td>
                   <td class="text-right">{{ entry_sort_order }}</td>
                   <td></td>
                 </tr>
@@ -68,6 +69,8 @@
                   <div class="text-danger">{{ error_filter[filter_row][language.language_id] }}</div>
                   {% endif %}
                   {% endfor %}</td>
+				<td class="text-left"><a href="" id="thumb-image{{ filter_row }}" data-toggle="image" class="img-thumbnail"><img src="{% if filter.image %}{{ image_path }}{{ filter.image }}{% else %}{{ image_path }}no_image.png{% endif %}" alt="" title="" data-placeholder="{{ placeholder }}" style="width:100px;" /></a>
+                      <input type="hidden" name="filter[{{ filter_row }}][image]" value="{{ filter.image }}" id="input-image{{ filter_row }}" /></td>
                 <td class="text-right"><input type="text" name="filter[{{ filter_row }}][sort_order]" value="{{ filter.sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" /></td>
                 <td class="text-right"><button type="button" onclick="$('#filter-row{{ filter_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
               </tr>
@@ -99,6 +102,7 @@ function addFilterRow() {
     html += '  </div>';
 	{% endfor %}
 	html += '  </td>';
+	html += '  <td class="text-left"><a href="" id="thumb-image' + filter_row + '"data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="filter[' + filter_row + '][image]" value="" id="input-image' + filter_row + '" /></td>';
 	html += '  <td class="text-right"><input type="text" name="filter[' + filter_row + '][sort_order]" value="" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" /></td>';
 	html += '  <td class="text-right"><button type="button" onclick="$(\'#filter-row' + filter_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
