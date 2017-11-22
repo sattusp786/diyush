@@ -360,8 +360,22 @@ class ControllerMarketingEmailManager extends Controller {
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 		
 		$this->load->model('setting/store');
+
+		$data['stores'] = array();
 		
-		$data['stores'] = $this->model_setting_store->getStores();
+		$data['stores'][] = array(
+			'store_id' => 0,
+			'name'     => $this->language->get('text_default')
+		);
+		
+		$stores = $this->model_setting_store->getStores();
+
+		foreach ($stores as $store) {
+			$data['stores'][] = array(
+				'store_id' => $store['store_id'],
+				'name'     => $store['name']
+			);
+		}
 		
 		if (isset($this->request->post['email_manager_description'])) {
 			$data['email_manager_description'] = $this->request->post['email_manager_description'];
