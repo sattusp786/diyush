@@ -21,7 +21,7 @@
 @media (max-width: 1383px) {
     /*  navigation  */
     .sub-menu ul { right: -25px; z-index: 99; }
-    .search-form {width:80%}
+    .search-form {width:90%}
 
     /*  blog home slider  */
     .blog-slider-con figcaption h3 { letter-spacing: 1px; }

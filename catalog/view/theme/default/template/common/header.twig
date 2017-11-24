@@ -163,7 +163,8 @@
 				</div>
 				<!-- search input-->
 				<form id="search-header" method="post" action="#" onsubmit="return false;" name="search-header" class="mfp-hide search-form-result">
-					<div class="search-form position-relative">
+                	<div class="col-md-12">
+					<div class="col-md-4"><div class="search-form position-relative select-style input-round big-input margin-seven">
 					   <select name="category_id" class="form-control">
 						<option value="0">{{ text_category }}</option>
 						{% for category_1 in categories %}
@@ -189,11 +190,12 @@
 						{% endfor %}
 					  </select>
 					  <input type="hidden" name="sub_category" value="true" />
-					</div>
-					<div class="search-form position-relative">
+					</div></div>
+                    <div class="col-md-8"><div class="search-form position-relative">
 						<button type="submit" class="fa fa-search close-search search-button"></button>
 						<input type="text" name="search" id="searcher" autocomplete="off" class="search-input" placeholder="Enter your keywords..." />
-					</div>
+					</div></div>
+                    </div>
 				</form>
 				<!-- end search input -->
 				{{ cart }}
