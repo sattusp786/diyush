@@ -35,6 +35,7 @@
                                      	<div class="tab-pane med-text fade in {% if c == '0' %}active{% endif %}" id="tabmenu_sec{{ child.children_id }}">
                                         <!--<div style="color:#fff;">{{ child.name }}</div>-->
                                             <ul class="white-text col-sm-3">
+												<li><a href="{{ child.href }}">View All</a></li>
                                             	{% if child.filters %}
                                             	{% for filter in child.filters %}
 													<li><a href="{{ filter.href }}">{{ filter.name }}</a></li>
@@ -148,6 +149,7 @@
                                                 <a data-toggle="collapse" data-parent="#collapse-sub1" href="#collapse-sub1">{{ child.name }} <i class="fa fa-angle-down"></i></a>
                                              <div id="collapse-sub1" class="panel-collapse collapse">
                                                     <ul class="sub-navi">
+														<li><a href="{{ child.href }}">View All</a></li>
 													{% if child.filters %}
 													{% for filter in child.filters %}
 														<li><a href="{{ filter.href }}">{{ filter.name }}</a></li>
