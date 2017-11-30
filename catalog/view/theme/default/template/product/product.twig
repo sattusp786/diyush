@@ -1,6 +1,7 @@
 {{ header }}
 
 <!-- head section -->
+
         <section class="content-top-margin page-title page-title-small border-bottom-light border-top-light padding-one">
         <div class="bookapnt mobileview" ><a href="#" class="highlight-button-dark btn btn-medium button  text-center width-100"> <i class="fa fa-map-marker white-text" ></i> Book Appointment</a></div>
         <div class="clearfix"></div>
@@ -33,7 +34,28 @@
             </div>
         </section>
         <!-- end head section -->
-
+<section class="padding-one  bg-black floating-price-info" style="display:none;">
+            <div class="container width-100">
+            	<div class="row no-margin">
+                	<div class="col-md-4 text-left white-text itemslist">
+                    <p>Carat:0.25</p>
+                    <p>Clarity:I1</p>
+                    <p>Colour:H</p>
+                    <p>Certificate:Shining Diamonds</p>
+                    <p>Cut / Polish / Symmetry:Min. Good</p>
+                    </div>
+                    <div class="col-md-4 text-center ">
+                    	<h2 class="white-text">&euro;529.00</h2>
+                    </div>
+                    <div class="col-md-4 text-center">
+                    	<a class="btn-small-white-background btn btn-medium button xs-margin-bottom-five width-60 no-margin" id="button-cart" data-loading-text="Loading..." href="javascript:void(0);"><!--<i class="icon-basket"></i>--> Add to Cart</a>
+                        <a href="#" class="display-block white-text">Visit Showroom</a>
+                        <a href="#" class="display-block white-text">Order Free Sample</a>
+                    </div>
+                </div>
+            </div>
+            
+            </section>
         <!-- content section -->
         <section class="padding-two">
             <div class="container width-100">
@@ -1009,6 +1031,16 @@ $(document).ready(function() {
 	$(".printbtn").click(function () {
 		print()
 	});
+});
+</script>
+<script>
+$(document).scroll(function() {
+  var y = $(this).scrollTop();
+  if (y > 120) {
+    $('.floating-price-info').fadeIn();
+  } else {
+    $('.floating-price-info').fadeOut();
+  }
 });
 </script>
 {{ footer }} 

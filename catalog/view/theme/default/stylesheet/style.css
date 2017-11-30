@@ -333,6 +333,7 @@ i { color: #9a9a9a; margin: 0 3px}
 .display-table { display: table !important}
 
 /* position */
+.position-fixed{ position: fixed !important; z-index: 5 }
 .position-relative{ position: relative !important; z-index: 5 }
 .position-absolute {position: absolute !important;}
 .position-right { right:0 !important; }
@@ -2610,3 +2611,6 @@ ul.sub-navi li a:before {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
 }
+
+.floating-price-info { width:100%; position:fixed; z-index:9999; top:0;}
+.floating-price-info .itemslist p { margin:0 ;}
