@@ -8,8 +8,8 @@
                         
                         {% if categories %}
 						{% for category in categories %}
-						{% if category.children %}
                         <li class="dropdown panel dessktopview"><a href="#collapse5" class="dropdown-toggle collapsed no-active" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
+							{% if category.children %}
 							<!-- sub menu -->
 							<ul id="collapse5" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 								<!-- sub menu column  -->
@@ -17,38 +17,15 @@
 									<!-- sub menu item  -->
 									<!--<div style="color:#fff;">Jewellery</div>-->
 									<ul>
-									{% set a = 0 %}
+										<li><a href="{{ category.href }}">View All</a></li>
 									{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
 									{% for child in children %}
-										<li class="{% if a == '0' %}active{% endif %}"><a href="#tabmenu_sec{{ child.children_id }}" data-toggle="tab">{{ child.name }}</a></li>
-									{% set a = a + 1 %}
+										<li><a href="{{ child.href }}">{{ child.name }}</a></li>
 									{% endfor %}
 									{% endfor %}
 									</ul>
 									<!-- end sub menu item  -->
 								</li>
-								<li class="mega-menu-column col-sm-7">
-                                	 <div class="tab-content position-relative overflow-hidden">
-                                	 {% set c = 0 %}
-									{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-										{% for child in children %}
-                                     	<div class="tab-pane med-text fade in {% if c == '0' %}active{% endif %}" id="tabmenu_sec{{ child.children_id }}">
-                                        <!--<div style="color:#fff;">{{ child.name }}</div>-->
-                                            <ul class="white-text col-sm-3">
-												<li><a href="{{ child.href }}">View All</a></li>
-                                            	{% if child.filters %}
-                                            	{% for filter in child.filters %}
-													<li><a href="{{ filter.href }}">{{ filter.name }}</a></li>
-                                            	{% endfor %}
-												{% endif %}
-                                            </ul>
-                                        </div>
-                                        {% set c = c + 1 %}
-                                        {% endfor %}
-										{% endfor %}
-                                     </div>
-                                </li>
-								
 								<!-- end sub menu column  -->
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-3 banner">
@@ -62,8 +39,8 @@
 								
 							</ul>
 							<!-- end sub menu -->
+							{% endif %}
 						</li>
-						{% endif %}
 						{% endfor %}
                         {% endif %}
                         <li class="dropdown panel dessktopview simple-dropdown"><a href="/blog" >Blog</a></li>
@@ -134,37 +111,63 @@
 
 						{% if categories %}
 						{% for category in categories %}
-						{% if category.children %}
                         <li class="dropdown panel mobileview"><a href="#collapsem{{ category.category_id }}" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
+							{% if category.children %}
 							<!-- sub menu -->
 							<ul id="collapsem{{ category.category_id }}" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-2">
 									<!-- sub menu item  -->
-									
 									<ul class="white-text">
+										<li><a href="{{ category.href }}">View All</a></li>
 										{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
 											{% for child in children %}
-												<li><!--<a href="{{ child.href }}">{{ child.name }}</a>-->
-                                                <a data-toggle="collapse" data-parent="#collapse-sub1" href="#collapse-sub1">{{ child.name }} <i class="fa fa-angle-down"></i></a>
-                                             <div id="collapse-sub1" class="panel-collapse collapse">
-                                                    <ul class="sub-navi">
-														<li><a href="{{ child.href }}">View All</a></li>
-													{% if child.filters %}
-													{% for filter in child.filters %}
-														<li><a href="{{ filter.href }}">{{ filter.name }}</a></li>
-													{% endfor %}
-													{% endif %}
-                                                    </ul>
-                                                    </div>
-                                                </li>
+												<li><a href="{{ child.href }}">{{ child.name }}</a></li>
 											{% endfor %}
 										{% endfor %}
 									</ul>
 									<!-- end sub menu item  -->
 								</li>
-								
-								
+								<!-- end sub menu column  -->
+								<!-- sub menu column  -->
+								<li class="mega-menu-column col-sm-3 banner">
+									<!-- banner image  -->
+									<ul>
+										<li><a href="/"><img src="http://placehold.it/500x649" alt=""/></a></li>
+									</ul>
+									<!-- end banner image  -->
+								</li>
+								<!-- end sub menu column  -->
+							</ul>
+							<!-- end sub menu -->
+							{% endif %}
+						</li>
+						{% endfor %}
+						{% endif %}
+						<li class="dropdown panel mobileview simple-dropdown"><a href="/blog" >Blog</a></li>
+						<li class="dropdown panel mobileview"><a href="#collapsem9" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">Information <i class="fa fa-angle-down"></i></a>
+							<!-- sub menu -->
+							<ul id="collapsem9" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
+								<!-- sub menu column  -->
+								<li class="mega-menu-column col-sm-2">
+									<!-- sub menu item  -->
+									<ul class="white-text">
+										<li><a href="/about-us">About Us</a></li>
+										<li><a href="/book-appointment">Visit Our Showroom</a></li>
+										<li><a href="/google-review">Our Customer Review</a></li>
+										<li><a href="/contact-us">Contact Us</a></li>
+										<li><a href="/free-shipping">Free Delivery</a></li>
+										<li><a href="/return-and-exchange">Return & Exchange</a></li>
+										<li><a href="/warranty-and-care">Warranty & Care</a></li>
+										<li><a href="/jewellery-insurance">Jewellery Insurance</a></li>
+										<li><a href="/bespoke">Bespoke</a></li>
+										<li><a href="/metal-guide">Metal Guide</a></li>
+										<li><a href="/stone-guide">Stone Guide</a></li>
+										<li><a href="/size-guide">Size Guide</a></li>
+										<li><a href="/jewellery-care">Jewellery Care</a></li>
+									</ul>
+									<!-- end sub menu item  -->
+								</li>
 								<!-- end sub menu column  -->
 								<!-- sub menu column  -->
 								<li class="mega-menu-column col-sm-3 banner">
@@ -178,10 +181,6 @@
 							</ul>
 							<!-- end sub menu -->
 						</li>
-						{% endif %}
-						{% endfor %}
-						{% endif %}
-						<li class="dropdown panel mobileview simple-dropdown"><a href="/blog" >Blog</a></li>
 					</ul>
 				</div>
 			</div>
