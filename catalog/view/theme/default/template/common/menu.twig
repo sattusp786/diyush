@@ -8,7 +8,7 @@
                         
                         {% if categories %}
 						{% for category in categories %}
-                        <li class="dropdown panel dessktopview"><a href="#collapse5" class="dropdown-toggle collapsed no-active" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
+                        <li class="dropdown panel dessktopview"><a href="{{ category.href }}" data-hover="dropdown">{{ category.name }} <i class="fa fa-angle-down"></i></a>
 							{% if category.children %}
 							<!-- sub menu -->
 							<ul id="collapse5" class="dropdown-menu mega-menu panel-collapse collapse mega-menu-full">
@@ -17,7 +17,6 @@
 									<!-- sub menu item  -->
 									<!--<div style="color:#fff;">Jewellery</div>-->
 									<ul>
-										<li><a href="{{ category.href }}">View All</a></li>
 									{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
 									{% for child in children %}
 										<li><a href="{{ child.href }}">{{ child.name }}</a></li>
