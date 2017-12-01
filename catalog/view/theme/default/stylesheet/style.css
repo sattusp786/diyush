@@ -2614,3 +2614,5 @@ ul.sub-navi li a:before {
 
 .floating-price-info { width:100%; position:fixed; z-index:9999; top:0;}
 .floating-price-info .itemslist p { margin:0 ;}
+
+.nav.navbar-nav li.dropdown  { margin:10px 12px;}
