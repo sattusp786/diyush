@@ -37,7 +37,7 @@
             <div class="container width-100">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 wow fadeIn">
-                        <h3 class="white-text text-center text-uppercase margin-two no-margin-top">Filter by our Lovely Engagement Ring Designs</h3>
+                        <h3 class="white-text text-center text-uppercase margin-two no-margin-top">Filter by our Lovely {{ heading_title }} Designs</h3>
                         <!-- featured products slider -->
                         <div class="padding-left-right">
 						<div id="filter-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple ">
@@ -45,7 +45,7 @@
 							{% for filter in filter_group.filter %}
 							
 							<div class="item">
-								<div class="filter-product text-center position-relative overflow-hidden">
+								<div class="filter-product {% if filter.filter_id in filter_category %}active{% endif %} text-center position-relative overflow-hidden">
 									<span class="proimg"><a href="{{ category_href }}&filter={{ filter.filter_id }}"><img src="image/catalog/product/1.png" alt=""/></a></span>
 									<span class="product-name text-center "><a href="{{ category_href }}&filter={{ filter.filter_id }}">{{ filter.name }}</a></span>	
 								</div>
