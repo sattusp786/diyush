@@ -2616,3 +2616,10 @@ ul.sub-navi li a:before {
 .floating-price-info .itemslist p { margin:0 ;}
 
 .nav.navbar-nav li.dropdown  { margin:10px 12px;}
+.wrapper-dropdown-4.active .dropdown .icon-bg {width: 50px;
+    height: 25px;
+    display: inline-block;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: left;}
