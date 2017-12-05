@@ -83,10 +83,10 @@
 		{% for filter_group in filter_groups %} 
 		<li class="dropdown parentli"><a href="#collapsef{{ filter_group.filter_group_id }}" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown" class="display-block">{{ filter_group.name }} <i class="fa fa-angle-down f-right"></i></a>
 		<ul id="collapsef{{ filter_group.filter_group_id }}" class="collapse">
-			<li class="mega-menu-column col-sm-2">
+			<li class="mega-menu-column col-sm-2 ">
 				<ul>
 					{% for filter in filter_group.filter %}
-					<li class="{{ filter.filter_class }}"><a href="javascript:void(0);"><span class="filtername">{{ filter.name }}</span><span style="float:right;" class="arrow"><label style="background-image:url('{{ filter.filter_image }}');"><input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" {% if filter.filter_id in filter_category %} CHECKED {% endif %} /><span class="radiocheck"></span></label></span></a></li>
+					<li class="{{ filter.filter_class }}"><a href="javascript:void(0);"><input class="filtering" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" {% if filter.filter_id in filter_category %} CHECKED {% endif %} />  <label for="el-1"><i class="black-text small-icon"><span class="icon-bg" style="background-image:url('{{ filter.filter_image }}');"></span><!--<img class="img-black" src="catalog/view/theme/default/image/dummy-icon-black.png" alt="">--></i>{{ filter.name }}</label></a></li>
 					{% endfor %}
 				</ul>
 			</li>

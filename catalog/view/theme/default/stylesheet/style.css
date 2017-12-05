@@ -2539,6 +2539,7 @@ h2.final_price span.rrp { text-decoration:line-through;}
 .filteroption ul li:last-child { border:0;}
 .filteroption ul li .arrow-left { /*float:right;*/    position: absolute; width: 50%; height: 50%; top: 25%; right: 3%;  background: url(../image/mmenarrow.svg) no-repeat right center;}
 .filteroption ul li .arrow .fa { font-size:30px; line-height:30px; margin-right:5px;}
+.filteroption ul li .icon-bg {width: 40px;  height: 34px; display: inline-block; background-position: center center; background-size: contain; background-repeat: no-repeat;   float: left;}
 .filteroption .filterbtns { padding:30px 5%; margin:0; float:left; width:100%; background:#fff;}
 .filteroption .filterbtns span.clearbtn {float:left; width:25%;}
 .filteroption .filterbtns span.seeprobtn {float:right; width:65%;}
@@ -2624,9 +2625,9 @@ ul.sub-navi li a:before {
     background-repeat: no-repeat;
     float: left;}
 	
-#wpbs_slider {width:450px;  position:fixed; right:-420px; top:150px; z-index:9999;}
+#wpbs_slider {  position:fixed; right:0; top:150px; z-index:9999; }
 #icon_label { float:left;position: relative; width: 30px; height: 150px; padding-top:75px; cursor:pointer; }
 #icon_label span { display:block; text-transform: uppercase; margin-bottom: 10px; }
 #icon_label span.lbl {transform: rotate(-90deg);}
-#wpbs_cont {width:420px; padding:20px; float:right; position:relative;}
+#wpbs_cont {width:420px; padding:20px; float:right; position:relative; display:none; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
 #wpbs_cont #cls { position:absolute; width:30px; height:30px; right:10px; top:10px; cursor:pointer;}
