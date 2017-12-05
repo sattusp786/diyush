@@ -104,7 +104,7 @@
 {% endif %}
     </div>
     <div class="text-center desktopview">
-    <!--<button type="button" id="button-filter" class="btn btn-primary no-margin">{{ button_filter }}</button>-->
+    <button type="button" id="button-filter" class="highlight-button-dark btn btn-small button text-center button-filter">{{ button_filter }}</button>
     <a href="javascript:void(0);" style="display:none;" class="btn no-margin"><i class="fa fa-spinner" aria-hidden="true"></i>Load More</a>
     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <a href="{{ action }}" class="btn no-margin"><i class="fa fa-refresh" aria-hidden="true"></i>Clear All</a>
@@ -121,7 +121,7 @@ $(document).ready(function(){
 		$(".mobileview").remove();
 	}
 });
-
+/*
 $('.filtering').on('click', function() {
 	filter = [];
 
@@ -131,6 +131,7 @@ $('.filtering').on('click', function() {
 
 	location = '{{ action }}&filter=' + filter.join(',');
 });
+*/
 //--></script> 
 <script>
 $("#catfilter").on('click', function() {
