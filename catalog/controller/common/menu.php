@@ -23,6 +23,7 @@ class ControllerCommonMenu extends Controller {
 						foreach($filter_group['filter'] as $filter){
 
 							$style_filter_data = array(
+								'filter_category_id' => $category['category_id'],
 								'filter_filter'  => $filter['filter_id']
 							);
 
