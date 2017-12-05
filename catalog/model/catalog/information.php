@@ -22,6 +22,12 @@ class ModelCatalogInformation extends Model {
 		}
 	}
 	
+	public function getBlog($blog_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "easy_blog_article_description WHERE article_id='".$blog_id."' ");
+
+		return $query->row;
+	}
+	
 	public function getTotalBlogs() {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "easy_blog_article");
 

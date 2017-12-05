@@ -21,7 +21,27 @@
         </section>
         
 		
-<!-- content section -->
+		
+		{% if article_id is defined %}
+		<section class="wow">
+            <div class="container">
+                <div class="row blog-masonry blog-masonry-2col no-transition">
+                    <!-- post item -->
+                    <div class="col-md-12 col-sm-12 col-xs-12 blog-listing">
+                        <div class="blog-image text-center"><img src="{{ blog_image }}" alt=""/></div>
+                        <div class="blog-details">
+                            <div class="blog-date"><!--Posted by {{ blog.author }} | {{ blog.date_modified }}--></div>
+                            <div class="blog-title">{{ blog.name }}</div>
+                            <div class="blog-short-description">{{ blog.intro_text }}</div>
+                            <div class="separator-line bg-black no-margin-lr"></div>
+                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
+                        </div>
+                    </div>
+                    <!-- end post item -->
+                </div>
+            </div>
+        </section>
+		{% else %}
         <section class="wow">
             <div class="container">
                 <div class="row blog-masonry blog-masonry-2col no-transition">
@@ -30,7 +50,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-6 blog-listing">
                         <div class="blog-image"><a href="{{ blog.href }}"><img src="{{ blog.thumb }}" alt=""/></a></div>
                         <div class="blog-details">
-                            <div class="blog-date">Posted by <a href="{{ blog.href }}">{{ blog.author }}</a> | {{ blog.date_modified }}</div>
+                            <div class="blog-date"><!--Posted by <a href="{{ blog.href }}">{{ blog.author }}</a> | {{ blog.date_modified }}--></div>
                             <div class="blog-title"><a href="{{ blog.href }}">{{ blog.name }}</a></div>
                             <div class="blog-short-description">{{ blog.intro_text }}</div>
                             <div class="separator-line bg-black no-margin-lr"></div>
@@ -43,22 +63,12 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 wow">
 						{{ pagination }}
-					   <!-- pagination -->
-                        <!--<div class="pagination">
-                            <a href="#"><img src="images/arrow-pre-small.png" alt=""/></a>
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#" class="active">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#"><img src="images/arrow-next-small.png" alt=""/></a>
-                        </div>-->
-                        <!-- end pagination -->
                     </div>
                 </div>
             </div>
         </section>
-        <!-- end content section -->
+		{% endif %}
+        
 		
 		
 {{ footer }}
