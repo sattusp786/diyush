@@ -63,6 +63,12 @@ class ModelCatalogProduct extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
 			}
 		}
+		
+		if (isset($data['product_variant'])) {
+			foreach ($data['product_variant'] as $product_variant) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_variant SET product_id = '" . (int)$product_id . "', shape = '" . $this->db->escape($product_variant['shape']) . "', carat = '" . $this->db->escape($product_variant['carat']) . "', clarity = '" . $this->db->escape($product_variant['clarity']) . "', color = '" . $this->db->escape($product_variant['color']) . "', certificate = '" . $this->db->escape($product_variant['certificate']) . "', ringsize = '" . $this->db->escape($product_variant['ringsize']) . "' ");
+			}
+		}
 
 		if (isset($data['product_special'])) {
 			foreach ($data['product_special'] as $product_special) {
@@ -206,6 +212,14 @@ class ModelCatalogProduct extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "product_discount SET product_id = '" . (int)$product_id . "', customer_group_id = '" . (int)$product_discount['customer_group_id'] . "', quantity = '" . (int)$product_discount['quantity'] . "', priority = '" . (int)$product_discount['priority'] . "', price = '" . (float)$product_discount['price'] . "', date_start = '" . $this->db->escape($product_discount['date_start']) . "', date_end = '" . $this->db->escape($product_discount['date_end']) . "'");
 			}
 		}
+		
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_variant WHERE product_id = '" . (int)$product_id . "'");
+		
+		if (isset($data['product_variant'])) {
+			foreach ($data['product_variant'] as $product_variant) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "product_variant SET product_id = '" . (int)$product_id . "', shape = '" . $this->db->escape($product_variant['shape']) . "', carat = '" . $this->db->escape($product_variant['carat']) . "', clarity = '" . $this->db->escape($product_variant['clarity']) . "', color = '" . $this->db->escape($product_variant['color']) . "', certificate = '" . $this->db->escape($product_variant['certificate']) . "', ringsize = '" . $this->db->escape($product_variant['ringsize']) . "' ");
+			}
+		}
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_special WHERE product_id = '" . (int)$product_id . "'");
 
@@ -308,6 +322,7 @@ class ModelCatalogProduct extends Model {
 			$data['product_attribute'] = $this->getProductAttributes($product_id);
 			$data['product_description'] = $this->getProductDescriptions($product_id);
 			$data['product_discount'] = $this->getProductDiscounts($product_id);
+			$data['product_variant'] = $this->getProductVariants($product_id);
 			$data['product_filter'] = $this->getProductFilters($product_id);
 			$data['product_image'] = $this->getProductImages($product_id);
 			$data['product_option'] = $this->getProductOptions($product_id);
@@ -593,6 +608,12 @@ class ModelCatalogProduct extends Model {
 
 		return $query->rows;
 	}
+	
+	public function getProductVariants($product_id) {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_variant WHERE product_id = '" . (int)$product_id . "' ORDER BY product_variant_id ");
+
+		return $query->rows;
+	}
 
 	public function getProductSpecials($product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_special WHERE product_id = '" . (int)$product_id . "' ORDER BY priority, price");
@@ -766,5 +787,11 @@ class ModelCatalogProduct extends Model {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
 
 		return $query->row['total'];
+	}
+	
+	public function getOptionValues($option_id){
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "option_value_description WHERE option_id = '" . (int)$option_id . "' AND language_id='1' ORDER BY option_value_id ");
+		
+		return $query->rows;
 	}
 }

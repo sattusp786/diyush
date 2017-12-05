@@ -1201,6 +1201,34 @@ class ControllerCatalogProduct extends Controller {
 				'date_end'          => ($product_discount['date_end'] != '0000-00-00') ? $product_discount['date_end'] : ''
 			);
 		}
+		
+		$data['option_shapes'] = $this->model_catalog_product->getOptionValues(20);
+		$data['option_carats'] = $this->model_catalog_product->getOptionValues(5);
+		$data['option_claritys'] = $this->model_catalog_product->getOptionValues(10);
+		$data['option_colors'] = $this->model_catalog_product->getOptionValues(11);
+		$data['option_certificates'] = $this->model_catalog_product->getOptionValues(6);
+		$data['option_ringsizes'] = $this->model_catalog_product->getOptionValues(18);
+		
+		if (isset($this->request->post['product_variant'])) {
+			$product_variants = $this->request->post['product_variant'];
+		} elseif (isset($this->request->get['product_id'])) {
+			$product_variants = $this->model_catalog_product->getProductVariants($this->request->get['product_id']);
+		} else {
+			$product_variants = array();
+		}
+
+		$data['product_variants'] = array();
+
+		foreach ($product_variants as $product_variant) {
+			$data['product_variants'][] = array(
+				'shape' 			=> $product_variant['shape'],
+				'carat'          	=> $product_variant['carat'],
+				'clarity'          	=> $product_variant['clarity'],
+				'color'             => $product_variant['color'],
+				'certificate'       => $product_variant['certificate'],
+				'ringsize'          => $product_variant['ringsize']
+			);
+		}
 
 		if (isset($this->request->post['product_special'])) {
 			$product_specials = $this->request->post['product_special'];

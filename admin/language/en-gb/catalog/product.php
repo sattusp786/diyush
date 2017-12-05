@@ -76,6 +76,9 @@ $_['column_quantity']        = 'Quantity';
 $_['column_status']          = 'Status';
 $_['column_action']          = 'Action';
 
+//Tabs
+$_['tab_variant']          	 = 'Variants';
+
 // Entry
 $_['entry_name']             = 'Product Name';
 $_['entry_description']      = 'Description';
@@ -133,6 +136,12 @@ $_['entry_reward']           = 'Reward Points';
 $_['entry_layout']           = 'Layout Override';
 $_['entry_recurring']        = 'Recurring Profile';
 $_['entry_default']        	 = 'Default';
+$_['entry_shape']        	 = 'Shape';
+$_['entry_carat']        	 = 'Carat';
+$_['entry_clarity']        	 = 'Clarity';
+$_['entry_color']        	 = 'Color';
+$_['entry_certificate']      = 'Certificate';
+$_['entry_ringsize']         = 'RingSize';
 
 // Help
 $_['help_sku']               = 'Stock Keeping Unit';

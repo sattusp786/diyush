@@ -59,6 +59,7 @@
             <li><a href="#tab-reward" data-toggle="tab">{{ tab_reward }}</a></li>
             <li><a href="#tab-seo" data-toggle="tab">{{ tab_seo }}</a></li>
             <li><a href="#tab-design" data-toggle="tab">{{ tab_design }}</a></li>
+            <li><a href="#tab-variant" data-toggle="tab">{{ tab_variant }}</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-general">
@@ -1643,6 +1644,99 @@
                 </table>
               </div>
             </div>
+			<div class="tab-pane" id="tab-variant">
+              <div class="table-responsive">
+                <table id="variant" class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ entry_shape }}</td>
+                      <td class="text-right">{{ entry_carat }}</td>
+                      <td class="text-right">{{ entry_clarity }}</td>
+                      <td class="text-right">{{ entry_color }}</td>
+                      <td class="text-left">{{ entry_certificate }}</td>
+                      <td class="text-left">{{ entry_ringsize }}</td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  
+                  {% set variant_row = 0 %}
+                  {% for product_variant in product_variants %}
+                  <tr id="variant-row{{ variant_row }}">
+                    <td class="text-left">
+					<select name="product_variant[{{ variant_row }}][shape]" class="form-control">
+                        {% for option_shape in option_shapes %}
+                        {% if option_shape.option_value_id == product_variant.shape %}
+                        <option value="{{ option_shape.option_value_id }}" selected="selected">{{ option_shape.name }}</option>
+                        {% else %}
+                        <option value="{{ option_shape.option_value_id }}">{{ option_shape.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                      </select></td>
+					  <td class="text-left">
+					<select name="product_variant[{{ variant_row }}][carat]" class="form-control">
+                        {% for option_carat in option_carats %}
+                        {% if option_carat.option_value_id == product_variant.carat %}
+                        <option value="{{ option_carat.option_value_id }}" selected="selected">{{ option_carat.name }}</option>
+                        {% else %}
+                        <option value="{{ option_carat.option_value_id }}">{{ option_carat.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                      </select></td>
+					  <td class="text-left">
+					<select name="product_variant[{{ variant_row }}][clarity]" class="form-control">
+                        {% for option_clarity in option_claritys %}
+                        {% if option_clarity.option_value_id == product_variant.clarity %}
+                        <option value="{{ option_clarity.option_value_id }}" selected="selected">{{ option_clarity.name }}</option>
+                        {% else %}
+                        <option value="{{ option_clarity.option_value_id }}">{{ option_clarity.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                      </select></td>
+					  <td class="text-left">
+					<select name="product_variant[{{ variant_row }}][color]" class="form-control">
+                        {% for option_color in option_colors %}
+                        {% if option_color.option_value_id == product_variant.color %}
+                        <option value="{{ option_color.option_value_id }}" selected="selected">{{ option_color.name }}</option>
+                        {% else %}
+                        <option value="{{ option_color.option_value_id }}">{{ option_color.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                      </select></td>
+					  <td class="text-left">
+					<select name="product_variant[{{ variant_row }}][certificate]" class="form-control">
+                        {% for option_certificate in option_certificates %}
+                        {% if option_certificate.option_value_id == product_variant.certificate %}
+                        <option value="{{ option_certificate.option_value_id }}" selected="selected">{{ option_certificate.name }}</option>
+                        {% else %}
+                        <option value="{{ option_certificate.option_value_id }}">{{ option_certificate.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                      </select></td>
+					  <td class="text-left">
+					<select name="product_variant[{{ variant_row }}][ringsize]" class="form-control">
+                        {% for option_ringsize in option_ringsizes %}
+                        {% if option_ringsize.option_value_id == product_variant.ringsize %}
+                        <option value="{{ option_ringsize.option_value_id }}" selected="selected">{{ option_ringsize.name }}</option>
+                        {% else %}
+                        <option value="{{ option_ringsize.option_value_id }}">{{ option_ringsize.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                      </select></td>
+                    <td class="text-left"><button type="button" onclick="$('#variant-row{{ variant_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                  </tr>
+                  {% set variant_row = variant_row + 1 %}
+                  {% endfor %}
+                    </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="6"></td>
+                      <td class="text-left"><button type="button" onclick="addVariant();" data-toggle="tooltip" title="{{ button_variant_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -2058,6 +2152,53 @@ function addDiscount() {
 	});
 
 	discount_row++;
+}
+//--></script> 
+  <script type="text/javascript"><!--
+var variant_row = {{ variant_row }};
+
+function addVariant() {
+	html  = '<tr id="variant-row' + variant_row + '">';
+    html += '  <td class="text-left"><select name="product_variant[' + variant_row + '][shape]" class="form-control">';
+    {% for option_shape in option_shapes %}
+    html += '    <option value="{{ option_shape.option_value_id }}">{{ option_shape.name|escape('js') }}</option>';
+    {% endfor %}
+    html += '  </select></td>';
+    html += '  <td class="text-left"><select name="product_variant[' + variant_row + '][carat]" class="form-control">';
+    {% for option_carat in option_carats %}
+    html += '    <option value="{{ option_carat.option_value_id }}">{{ option_carat.name|escape('js') }}</option>';
+    {% endfor %}
+    html += '  </select></td>';
+	html += '  <td class="text-left"><select name="product_variant[' + variant_row + '][clarity]" class="form-control">';
+    {% for option_clarity in option_claritys %}
+    html += '    <option value="{{ option_clarity.option_value_id }}">{{ option_clarity.name|escape('js') }}</option>';
+    {% endfor %}
+    html += '  </select></td>';
+	html += '  <td class="text-left"><select name="product_variant[' + variant_row + '][color]" class="form-control">';
+    {% for option_color in option_colors %}
+    html += '    <option value="{{ option_color.option_value_id }}">{{ option_color.name|escape('js') }}</option>';
+    {% endfor %}
+    html += '  </select></td>';
+	html += '  <td class="text-left"><select name="product_variant[' + variant_row + '][certificate]" class="form-control">';
+    {% for option_certificate in option_certificates %}
+    html += '    <option value="{{ option_certificate.option_value_id }}">{{ option_certificate.name|escape('js') }}</option>';
+    {% endfor %}
+    html += '  </select></td>';
+	html += '  <td class="text-left"><select name="product_variant[' + variant_row + '][ringsize]" class="form-control">';
+    {% for option_ringsize in option_ringsizes %}
+    html += '    <option value="{{ option_ringsize.option_value_id }}">{{ option_ringsize.name|escape('js') }}</option>';
+    {% endfor %}
+    html += '  </select></td>';
+	html += '  <td class="text-left"><button type="button" onclick="$(\'#variant-row' + variant_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+	html += '</tr>';
+
+	$('#variant tbody').append(html);
+
+	$('.date').datetimepicker({
+		pickTime: false
+	});
+
+	variant_row++;
 }
 //--></script> 
   <script type="text/javascript"><!--
