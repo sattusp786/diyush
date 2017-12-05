@@ -205,7 +205,7 @@
                         <p class="text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by 10th Oct 2017</p>
 						<!--<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>-->
                         <!-- end product stock -->
-                        <div class="separator-line bg-black no-margin-lr margin-five"></div>
+                        <div class="separator-line bg-black no-margin-lr margin-two"></div>
                         <div class="pricewrap width-100">
                         <div class="col-md-6 no-padding-left">
                         {% if price %}
@@ -237,7 +237,7 @@
 						  </ul>
 						  {% endif %}
                           </div>
-                          <div class="col-md-4 padding-two border border-gray">
+                          <!--<div class="col-md-4 padding-two border border-gray">
                           	<ul>
                             	<li><a class="popup-with-zoom-anim" href="#lifetimewarranty-popup"><i><img src="catalog/view/theme/default/image/certificate-img.png" style="width:20px;" /></i> Life Time Warranty</a></li>
                                 <li><a class="popup-with-zoom-anim" href="#finanaceavailable-popup"><i><img src="catalog/view/theme/default/image/finance-img.png" style="width:20px;" /></i>Finanace Available ></a></li>
@@ -252,7 +252,7 @@
                                 <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
-                          </div>
+                          </div>-->
                           <div class="clearfix"></div>
                          </div>
 						
@@ -395,7 +395,8 @@
 							{% endif %}
                             <div class="form-group margin-two width-100 pro-delivered-text f-left text-center">
                             	<span class="margin-left-right-two"><a href="javascript:void(0);">Delivered by: Thesday, 10/10</a></span>
-                                <span class="margin-left-right-two"><a href="#finance-calculation" class="popup-with-zoom-anim">0% Finanace - Click to Calculation</a></span>
+                                <!--<span class="margin-left-right-two"><a href="#finance-calculation" class="popup-with-zoom-anim">0% Finanace - Click to Calculation</a></span>-->
+                                <span class="margin-left-right-two"><a href="#lifetimewarranty" class="popup-with-zoom-anim">Life Time Warranty</a></span>
                             </div>
 							<div class="form-group margin-one width-100 text-center">
 							  <div class="col-md-2 col-sm-12" style="display:none;"><label class="control-label" for="input-quantity">{{ entry_qty }}</label></div>
@@ -422,8 +423,8 @@
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
 							
-							<div id="finance-calculation" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
-                                <span class="slider-subtitle5 black-text no-margin-bottom">Interest Free Finance</span>
+							<div id="lifetimewarranty" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Life Time Warranty</span>
                                 <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
@@ -432,18 +433,18 @@
 							<div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
 							{% endif %}</div>
 						</form> 
-                        <div class="desktopview"> 
-                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left"></div>                       
-                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
+                        <div class="desktopview text-center"> 
+                                           
+                        <span class="padding-left-right-px width-auto">
                             <a href="index.php?route=information/contact/popup" class="agree"><i class="fa fa-user black-text"></i> Contact Us</a>
-                        </div>
-                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
+                        </span>
+                        <span class="padding-left-right-px width-auto">
                             <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> Save</a>
-                        </div>
-                        <div class="col-lg-2 col-md-5 col-sm-3 no-padding-left width-auto">
+                        </span>
+                        <span class="padding-left-right-px width-auto">
                             <a title="Print" href="javascript:void(0);" class="printbtn text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> Print</a>
-                        </div>
-                        <div class="col-md-5 col-sm-9 product-details-social no-padding">
+                        </span>
+                        <span class="padding-left-right-px product-details-social">
                             <!-- social media sharing -->
                             <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five sharethis-wrap"> <!--<i class="fa fa-share-alt black-text no-margin"></i>-->  <span class="sharethis-inline-share-buttons"></span>Share on</span>
                            <!-- <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -451,7 +452,7 @@
                             <a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a>
                             <a href="https://www.linkedin.com/" target="_blank"><i class="fa fa-linkedin"></i></a>-->
                             <!-- end social media sharing -->
-                        </div>
+                        </span>
                         </div>
                         <div class="mobileview">                     
                         <div class="width-100 text-center margin-three-bottom">

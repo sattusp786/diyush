@@ -2623,3 +2623,10 @@ ul.sub-navi li a:before {
     background-size: contain;
     background-repeat: no-repeat;
     float: left;}
+	
+#wpbs_slider {width:450px;  position:fixed; right:-420px; top:150px; z-index:9999;}
+#icon_label { float:left;position: relative; width: 30px; height: 150px; padding-top:75px; cursor:pointer; }
+#icon_label span { display:block; text-transform: uppercase; margin-bottom: 10px; }
+#icon_label span.lbl {transform: rotate(-90deg);}
+#wpbs_cont {width:420px; padding:20px; float:right; position:relative;}
+#wpbs_cont #cls { position:absolute; width:30px; height:30px; right:10px; top:10px; cursor:pointer;}
