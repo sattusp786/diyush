@@ -2556,7 +2556,8 @@ h2.final_price span.rrp { text-decoration:line-through;}
 
 .filteroption ul li.disabled  { color:#999999;}
 .bodyfixed { position:fixed;}
-#filterssearch ul#accordion { /*height:400px;*/ overflow-y:scroll;}
+#filterssearch ul#accordion li { max-height:400px; overflow:auto; }
+#filterssearch ul#accordion { height:auto; }
 
 .datepicker {
 background-color: #fff ;

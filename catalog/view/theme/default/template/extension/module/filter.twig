@@ -29,7 +29,7 @@
 		<div class="dd wrapper-dropdown-4">Select
 			<ul class="dropdown">
 				{% for filter in filter_group.filter %}
-				<li class="{{ filter.filter_class }}"><input class="filtering" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" {% if filter.filter_id in filter_category %} CHECKED {% endif %} />  <label for="el-1"><i class="black-text small-icon"><span class="icon-bg" style="background-image:url('{{ filter.filter_image }}');"></span><!--<img class="img-black" src="catalog/view/theme/default/image/dummy-icon-black.png" alt="">--></i>{{ filter.name }}</label></li>
+				<li class="{{ filter.filter_class }}"><input class="" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" {% if filter.filter_id in filter_category %} CHECKED {% endif %} />  <label for="el-1"><i class="black-text small-icon"><span class="icon-bg" style="background-image:url('{{ filter.filter_image }}');"></span><!--<img class="img-black" src="catalog/view/theme/default/image/dummy-icon-black.png" alt="">--></i>{{ filter.name }}</label></li>
 				{% endfor %}
 			</ul>
 		</div>
@@ -86,7 +86,7 @@
 			<li class="mega-menu-column col-sm-2 ">
 				<ul>
 					{% for filter in filter_group.filter %}
-					<li class="{{ filter.filter_class }}"><a href="javascript:void(0);"><input class="filtering" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" {% if filter.filter_id in filter_category %} CHECKED {% endif %} />  <label for="el-1"><i class="black-text small-icon"><span class="icon-bg" style="background-image:url('{{ filter.filter_image }}');"></span><!--<img class="img-black" src="catalog/view/theme/default/image/dummy-icon-black.png" alt="">--></i>{{ filter.name }}</label></a></li>
+					<li class="{{ filter.filter_class }}"><a href="javascript:void(0);"><input class="" type="checkbox" name="filter[]" value="{{ filter.filter_id }}" {% if filter.filter_id in filter_category %} CHECKED {% endif %} />  <label for="el-1"><i class="black-text small-icon"><span class="icon-bg" style="background-image:url('{{ filter.filter_image }}');"></span><!--<img class="img-black" src="catalog/view/theme/default/image/dummy-icon-black.png" alt="">--></i>{{ filter.name }}</label></a></li>
 					{% endfor %}
 				</ul>
 			</li>
