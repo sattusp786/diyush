@@ -1,54 +1,122 @@
 <div class="loginpop-wrap modal-popup-main zoom-anim-dialog">
+<div id="popstep-1">
 <section class="top">
-    <div class="loginpop-tabs">
-            <ul class="nav nav-tabs nav-justified">
-                <li class="active">Book Appointment</li>
-            </ul>
-      </div></section>
-      <div class="tab-content clearfix">
-      <section id="contacter" class="tab-pane active">
+    <h2 class="text-transform-uppercase no-margin">Book Appointment</h2>
+    </section>
+ <div class="tab-content clearfix">
+      <section id="contacter" class="popstep-pane">
+        <p>Suite 12, 88-90 Hatton Garden, London, EC1N 8PN</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.659604509942!2d-0.11065118451483483!3d51.51946067963707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b4dcd189fd7%3A0xd7a32525c194683e!2s88-90+Hatton+Garden%2C+London+EC1N+8PN%2C+UK!5e0!3m2!1sen!2sin!4v1511514368452" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+        </section>
+      </div>
+      <div class="popstep-btns"><a href="#" class="step-1next highlight-button btn btn-small button xs-margin-bottom-five no-margin">Next</a></div>
+</div>
+<div id="popstep-2"  style="display:none;">
+<section class="top">
+    <h2 class="text-transform-uppercase no-margin">Book Appointment</h2>
+    </section>
+ <div class="tab-content clearfix">
+      <section id="contacter" class="popstep-pane">
+        
+    <div class="form-group">
+       <input type="text" name="date2" value="2017/06/12 10:00" class="margin-two width-60">
+	<script type="text/javascript">
+		$(function(){
+			$('*[name=date2]').appendDtpicker({"inline": true});
+		});
+	</script>
+    </div>
+        </section>
+      </div>
+      <div class="popstep-btns"><a href="#" class="step-2back highlight-button btn btn-small button xs-margin-bottom-five"> Back </a> <a href="#" class="step-2next highlight-button btn btn-small button xs-margin-bottom-five no-margin">Next</a></div>
+</div>
+<div id="popstep-3" style="display:none;">
+<section class="top">
+    <h2 class="text-transform-uppercase no-margin">Book Appointment</h2>
+    </section>
+ <div class="tab-content clearfix">
+      <section id="contacter" class="popstep-pane">
          <form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" id ="form-appointment">
+         <div class="row">
+         <div class="col-md-6">
               <div class="form-group">
                 <div class="col-xs-10">
                 <input type="text" id="appointment-firstname" name="firstname" tabindex="1" class="form-control" placeholder="First Name" value=""></div>
-              </div>
+              </div></div>
+              <div class="col-md-6">
 			  <div class="form-group">
                 <div class="col-xs-10">
                 <input type="text" id="appointment-lastname" name="lastname" tabindex="2" class="form-control" placeholder="Last Name" value=""></div>
               </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
               <div class="form-group">                
                 <div class="col-xs-10">
                 <input type="email" id="appointment-email" name="email" tabindex="3" class="form-control" placeholder="Email Address" value=""></div>
-              </div>
+              </div></div>
+              <div class="col-md-6">
 			  <div class="form-group">
                 <div class="col-xs-10">
                 <input type="text" id="appointment-phone" name="phone" tabindex="4" class="form-control" placeholder="Phone" value=""></div>
+              </div></div>
               </div>
+              <div class="row">
+              <div class="col-md-6">
 			  <div class="form-group">
                 <div class="col-xs-10">
                 <input type="text" id="appointment-date" name="appointment_date" tabindex="5" class="datetimepicker form-control" placeholder="Appointment Date & Time" value=""></div>
-              </div>
+              </div></div>
+              <div class="col-md-6">
               <div class="form-group">
                 <div class="col-xs-10">
                 <textarea name="message" id="appointment-message" tabindex="6" rows="3" class="form-control" placeholder="Message"></textarea></div>
+              </div></div>
               </div>
+
+              <!--<div class="row">
               <div class="form-group formbtn">
                   <div class="col-xs-10">
                     <input type="button" name="button-appointment" id="button-appointment" tabindex="4" class="btn-black button" value="Send your Message">
                   </div>
               </div>
+              </div>-->
             </form>
         </section>
       </div>
-
+      <div class="popstep-btns"><a href="#" class="step-3back highlight-button btn btn-small button xs-margin-bottom-five"> Back </a> <a href="#" class="highlight-button btn btn-small button xs-margin-bottom-five no-margin">Confirm </a></div>
 </div>
-<script type="text/javascript">
-	$(function () {
-		$('.datetimepicker').datetimepicker({
-			//sideBySide: true
-		});
-	});
-</script>
+</div>
+<!--<script>
+$("#popstep-2").hide();  
+$("#popstep-3").hide();
+  
+$(".step-1next").on('click', function() {
+   $("#popstep-1").hide();   
+   $("#popstep-2").show(); 
+   $("#popstep-3").hide(); 
+});
+
+$(".step-2next").on('click', function() {
+   $("#popstep-1").hide();   
+   $("#popstep-2").hide(); 
+   $("#popstep-3").show(); 
+});
+
+$(".step-2back").on('click', function() {
+   $("#popstep-1").show();   
+   $("#popstep-2").hide(); 
+   $("#popstep-3").hide(); 
+});
+
+$(".step-3back").on('click', function() {
+   $("#popstep-1").(hide);   
+   $("#popstep-2").show(); 
+   $("#popstep-3").hide(); 
+});
+</script>-->
+  
 <script type="text/javascript"><!--
 $('#button-appointment').on('click', function() { 
   $.ajax({
