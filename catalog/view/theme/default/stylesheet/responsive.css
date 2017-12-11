@@ -281,6 +281,7 @@
     
     /* agency */
     .agency-header span { margin-top: 15%; }
+	.support-icons li { width:20%;}
 }
 @media (max-width: 991px) {
     /*  navigation panel  */
@@ -1253,6 +1254,8 @@
         .grid figcaption { bottom: 43%; }*/
     
     .table-scroll { overflow: hidden; overflow-x: scroll;}
+	
+	.support-icons li { width:45%;}
 }
 @media (max-width: 589px) {
     /*  countdown timer  */
