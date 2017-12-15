@@ -31,6 +31,12 @@ class ModelCatalogCategory extends Model {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "category_filter SET category_id = '" . (int)$category_id . "', filter_id = '" . (int)$filter_id . "'");
 			}
 		}
+		
+		if (isset($data['category_option'])) {
+			foreach ($data['category_option'] as $option_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "category_option SET category_id = '" . (int)$category_id . "', option_id = '" . (int)$option_id . "'");
+			}
+		}
 
 		if (isset($data['category_store'])) {
 			foreach ($data['category_store'] as $store_id) {
@@ -129,6 +135,14 @@ class ModelCatalogCategory extends Model {
 		if (isset($data['category_filter'])) {
 			foreach ($data['category_filter'] as $filter_id) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "category_filter SET category_id = '" . (int)$category_id . "', filter_id = '" . (int)$filter_id . "'");
+			}
+		}
+		
+		$this->db->query("DELETE FROM " . DB_PREFIX . "category_option WHERE category_id = '" . (int)$category_id . "'");
+
+		if (isset($data['category_option'])) {
+			foreach ($data['category_option'] as $option_id) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "category_option SET category_id = '" . (int)$category_id . "', option_id = '" . (int)$option_id . "'");
 			}
 		}
 
@@ -292,6 +306,18 @@ class ModelCatalogCategory extends Model {
 		}
 
 		return $category_filter_data;
+	}
+	
+	public function getCategoryOptions($category_id) {
+		$category_option_data = array();
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_option WHERE category_id = '" . (int)$category_id . "'");
+
+		foreach ($query->rows as $result) {
+			$category_option_data[] = $result['option_id'];
+		}
+
+		return $category_option_data;
 	}
 
 	public function getCategoryStores($category_id) {

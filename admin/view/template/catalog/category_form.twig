@@ -105,6 +105,19 @@
                   </div>
                 </div>
               </div>
+			  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-option"><span data-toggle="tooltip" title="{{ help_option }}">{{ entry_option }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="option" value="" placeholder="{{ entry_option }}" id="input-option" class="form-control" />
+                  <div id="category-option" class="well well-sm" style="height: 150px; overflow: auto;">
+                    {% for category_option in category_options %}
+                    <div id="category-option{{ category_option.option_id }}"><i class="fa fa-minus-circle"></i> {{ category_option.name }}
+                      <input type="hidden" name="category_option[]" value="{{ category_option.option_id }}" />
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label">{{ entry_store }}</label>
                 <div class="col-sm-10">
@@ -300,6 +313,35 @@ $('input[name=\'filter\']').autocomplete({
 });
 
 $('#category-filter').delegate('.fa-minus-circle', 'click', function() {
+	$(this).parent().remove();
+});
+//--></script>
+  <script type="text/javascript"><!--
+$('input[name=\'option\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/option/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['name'],
+						value: item['option_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'option\']').val('');
+
+		$('#category-option' + item['value']).remove();
+
+		$('#category-option').append('<div id="category-option' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="category_option[]" value="' + item['value'] + '" /></div>');
+	}
+});
+
+$('#category-option').delegate('.fa-minus-circle', 'click', function() {
 	$(this).parent().remove();
 });
 //--></script>

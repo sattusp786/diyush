@@ -402,6 +402,29 @@ class ControllerCatalogCategory extends Controller {
 				);
 			}
 		}
+		
+		$this->load->model('catalog/option');
+
+		if (isset($this->request->post['category_option'])) {
+			$options = $this->request->post['category_option'];
+		} elseif (isset($this->request->get['category_id'])) {
+			$options = $this->model_catalog_category->getCategoryOptions($this->request->get['category_id']);
+		} else {
+			$options = array();
+		}
+
+		$data['category_options'] = array();
+
+		foreach ($options as $option_id) {
+			$option_info = $this->model_catalog_option->getOption($option_id);
+
+			if ($option_info) {
+				$data['category_options'][] = array(
+					'option_id' => $option_info['option_id'],
+					'name'      => $option_info['name']
+				);
+			}
+		}
 
 		$this->load->model('setting/store');
 
