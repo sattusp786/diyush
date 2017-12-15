@@ -19,10 +19,16 @@
       <section id="contacter" class="popstep-pane">
         
     <div class="form-group">
-       <input type="text" name="date2" value="2017/06/12 10:00" class="margin-two width-60">
+       <input type="text" name="date2" id="date_pick" value="{{ "now"|date("Y-m-d H:i:s") }}" class="margin-two width-60">
 	<script type="text/javascript">
 		$(function(){
-			$('*[name=date2]').appendDtpicker({"inline": true});
+			$('*[name=date2]').appendDtpicker({
+					"inline": true
+				});
+			
+			$('#date_pick').change(function() {
+				$("#appointment-date").val($(this).val());
+			});
 		});
 	</script>
     </div>
@@ -41,12 +47,12 @@
          <div class="col-md-6">
               <div class="form-group">
                 <div class="col-xs-10">
-                <input type="text" id="appointment-firstname" name="firstname" tabindex="1" class="form-control" placeholder="First Name" value=""></div>
+                <input type="text" id="appointment-firstname" name="firstname" tabindex="1" class="form-control" placeholder="First Name" value="" required /></div>
               </div></div>
               <div class="col-md-6">
 			  <div class="form-group">
                 <div class="col-xs-10">
-                <input type="text" id="appointment-lastname" name="lastname" tabindex="2" class="form-control" placeholder="Last Name" value=""></div>
+                <input type="text" id="appointment-lastname" name="lastname" tabindex="2" class="form-control" placeholder="Last Name" value="" required /></div>
               </div>
               </div>
               </div>
@@ -54,24 +60,24 @@
               <div class="col-md-6">
               <div class="form-group">                
                 <div class="col-xs-10">
-                <input type="email" id="appointment-email" name="email" tabindex="3" class="form-control" placeholder="Email Address" value=""></div>
+                <input type="email" id="appointment-email" name="email" tabindex="3" class="form-control" placeholder="Email Address" value="" required /></div>
               </div></div>
               <div class="col-md-6">
 			  <div class="form-group">
                 <div class="col-xs-10">
-                <input type="text" id="appointment-phone" name="phone" tabindex="4" class="form-control" placeholder="Phone" value=""></div>
+                <input type="text" id="appointment-phone" name="phone" tabindex="4" class="form-control" placeholder="Phone" value="" required /></div>
               </div></div>
               </div>
               <div class="row">
               <div class="col-md-6">
 			  <div class="form-group">
                 <div class="col-xs-10">
-                <input type="text" id="appointment-date" name="appointment_date" tabindex="5" class="datetimepicker form-control" placeholder="Appointment Date & Time" value=""></div>
+                <input type="text" id="appointment-date" name="appointment_date" tabindex="5" class="datetimepicker form-control" placeholder="Appointment Date & Time" value="" required /></div>
               </div></div>
               <div class="col-md-6">
               <div class="form-group">
                 <div class="col-xs-10">
-                <textarea name="message" id="appointment-message" tabindex="6" rows="3" class="form-control" placeholder="Message"></textarea></div>
+                <textarea name="message" id="appointment-message" tabindex="6" rows="3" class="form-control" placeholder="Message" required></textarea></div>
               </div></div>
               </div>
               <!--<div class="row">
@@ -84,7 +90,7 @@
             </form>
         </section>
       </div>
-      <div class="popstep-btns"><a href="javascript:void(0)" class="step-3back highlight-button btn btn-small button xs-margin-bottom-five"> Back </a> <a href="javascript:void(0)" class="highlight-button btn btn-small button xs-margin-bottom-five no-margin">Confirm </a></div>
+      <div class="popstep-btns"><a href="javascript:void(0)" class="step-3back highlight-button btn btn-small button xs-margin-bottom-five"> Back </a> <a href="javascript:void(0)" class="highlight-button btn btn-small button xs-margin-bottom-five no-margin" id="button-appointment">Confirm </a></div>
 </div>
 </div>
 
@@ -126,7 +132,7 @@ $('#button-appointment').on('click', function() {
 });
 
 //--></script>
-<!--<script>
+<script type="text/javascript">
 $("#popstep-2").hide();  
 $("#popstep-3").hide();
   
@@ -149,8 +155,8 @@ $(".step-2back").on('click', function() {
 });
 
 $(".step-3back").on('click', function() {
-   $("#popstep-1").(hide);   
+   $("#popstep-1").hide();   
    $("#popstep-2").show(); 
    $("#popstep-3").hide(); 
 });
-</script>-->
+</script>
