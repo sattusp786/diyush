@@ -367,4 +367,278 @@ class ModelCatalogCategory extends Model {
 
 		return $query->row['total'];
 	}	
+	
+	public function addProductTemp($category_id, $data) {
+		
+		//carat = 5, clarity = 10, colour = 11, shape = 20
+		
+		if (isset($data['category_option']) && !empty($data['category_option'])) {
+			$option_str = implode(",",$this->request->post['category_option']);
+			
+			//echo "SELECT p.*,pd.name as description FROM " . DB_PREFIX . "product_to_category p2c LEFT JOIN " . DB_PREFIX . "product p ON p2c.product_id = p.product_id LEFT JOIN " . DB_PREFIX . "product_description pd ON p.product_id=pd.product_id WHERE p2c.category_id = '" . (int)$category_id . "' GROUP BY p.product_id";
+			
+			$get_products = $this->db->query("SELECT p.*,pd.name as description FROM " . DB_PREFIX . "product_to_category p2c LEFT JOIN " . DB_PREFIX . "product p ON p2c.product_id = p.product_id LEFT JOIN " . DB_PREFIX . "product_description pd ON p.product_id=pd.product_id WHERE p2c.category_id = '" . (int)$category_id . "' GROUP BY p.product_id");
+			
+			if($get_products->num_rows){
+				foreach($get_products->rows as $product){
+					
+					//echo "SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id WHERE pov.product_id = '" . (int)$product['product_id'] . "' AND pov.option_id IN (".$option_str.") ORDER BY pov.option_id GROUP BY pov.option_value_id";
+					
+					$get_options = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id WHERE pov.product_id = '" . (int)$product['product_id'] . "' AND pov.option_id IN (".$option_str.") GROUP BY pov.option_value_id ORDER BY pov.option_id ");
+					
+					$carat_arr = array();
+					$clarity_arr = array();
+					$color_arr = array();
+					$shape_arr = array();
+					if($get_options->num_rows){
+						$i = 0;
+						foreach($get_options->rows as $option){
+							if($option['option_id'] == '5'){
+								$carat_arr[$i]['option_value_id'] = $option['option_value_id'];
+								$carat_arr[$i]['name'] = $option['name'];
+							} elseif($option['option_id'] == '10'){
+								$clarity_arr[$i]['option_value_id'] = $option['option_value_id'];
+								$clarity_arr[$i]['name'] = $option['name'];
+							} elseif($option['option_id'] == '11'){
+								$color_arr[$i]['option_value_id'] = $option['option_value_id'];
+								$color_arr[$i]['name'] = $option['name'];
+							} elseif($option['option_id'] == '20'){
+								$shape_arr[$i]['option_value_id'] = $option['option_value_id'];
+								$shape_arr[$i]['name'] = $option['name'];
+							}
+							
+							$i++;
+						}
+					}
+					
+					/*
+					echo "<pre>";
+					print_r($carat_arr);
+					print_r($clarity_arr);
+					print_r($color_arr);
+					print_r($shape_arr);
+					echo "</pre>";
+					*/
+					
+					$option_value_ids = '';
+					$option_values = '';
+					
+					if(!empty($carat_arr) && !empty($clarity_arr) && !empty($color_arr) && !empty($shape_arr)){
+						if(!empty($carat_arr)){
+							foreach($carat_arr as $carat){
+								if(!empty($clarity_arr)){
+									foreach($clarity_arr as $clarity){
+										if(!empty($color_arr)){
+											foreach($color_arr as $color){
+												if(!empty($shape_arr)){
+													foreach($shape_arr as $shape){
+														
+														$option_value_ids = $carat['option_value_id'].','.$clarity['option_value_id'].','.$color['option_value_id'].','.$shape['option_value_id'];
+														$option_values = $carat['name'].','.$clarity['name'].','.$color['name'].','.$shape['name'];
+														
+														$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					} elseif(!empty($carat_arr) && !empty($clarity_arr) && !empty($color_arr)){
+						if(!empty($carat_arr)){
+							foreach($carat_arr as $carat){
+								if(!empty($clarity_arr)){
+									foreach($clarity_arr as $clarity){
+										if(!empty($color_arr)){
+											foreach($color_arr as $color){
+														
+												$option_value_ids = $carat['option_value_id'].','.$clarity['option_value_id'].','.$color['option_value_id'];
+												$option_values = $carat['name'].','.$clarity['name'].','.$color['name'];
+												
+												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+											}
+										}
+									}
+								}
+							}
+						}
+					}  elseif(!empty($carat_arr) && !empty($clarity_arr) && !empty($shape_arr)){
+						if(!empty($carat_arr)){
+							foreach($carat_arr as $carat){
+								if(!empty($clarity_arr)){
+									foreach($clarity_arr as $clarity){
+										if(!empty($shape_arr)){
+											foreach($shape_arr as $shape){
+												
+												$option_value_ids = $carat['option_value_id'].','.$clarity['option_value_id'].','.$shape['option_value_id'];
+												$option_values = $carat['name'].','.$clarity['name'].','.$shape['name'];
+												
+												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+											}
+										}
+									}
+								}
+							}
+						}
+					}  elseif(!empty($carat_arr) && !empty($color_arr) && !empty($shape_arr)){
+						if(!empty($carat_arr)){
+							foreach($carat_arr as $carat){
+								
+								if(!empty($color_arr)){
+									foreach($color_arr as $color){
+										if(!empty($shape_arr)){
+											foreach($shape_arr as $shape){
+												
+												$option_value_ids = $carat['option_value_id'].','.$color['option_value_id'].','.$shape['option_value_id'];
+												$option_values = $carat['name'].','.$color['name'].','.$shape['name'];
+												
+												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+											}
+										}
+									}
+								}
+								
+							}
+						}
+					}  elseif(!empty($clarity_arr) && !empty($color_arr) && !empty($shape_arr)){
+						
+						if(!empty($clarity_arr)){
+							foreach($clarity_arr as $clarity){
+								if(!empty($color_arr)){
+									foreach($color_arr as $color){
+										if(!empty($shape_arr)){
+											foreach($shape_arr as $shape){
+												
+												$option_value_ids = $clarity['option_value_id'].','.$color['option_value_id'].','.$shape['option_value_id'];
+												$option_values = $clarity['name'].','.$color['name'].','.$shape['name'];
+												
+												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+											}
+										}
+									}
+								}
+							}
+						}
+						
+					}   elseif(!empty($carat_arr) && !empty($clarity_arr)){
+						if(!empty($carat_arr)){
+							foreach($carat_arr as $carat){
+								if(!empty($clarity_arr)){
+									foreach($clarity_arr as $clarity){
+														
+										$option_value_ids = $carat['option_value_id'].','.$clarity['option_value_id'];
+										$option_values = $carat['name'].','.$clarity['name'];
+										
+										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+									}
+								}
+							}
+						}
+					} elseif(!empty($carat_arr) && !empty($color_arr)){
+						if(!empty($carat_arr)){
+							foreach($carat_arr as $carat){
+								
+								if(!empty($color_arr)){
+									foreach($color_arr as $color){
+												
+											$option_value_ids = $carat['option_value_id'].','.$color['option_value_id'];
+											$option_values = $carat['name'].','.$color['name'];
+											
+											$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+											
+									}
+								}
+								
+							}
+						}
+					} elseif(!empty($carat_arr) && !empty($shape_arr)){
+						if(!empty($carat_arr)){
+							foreach($carat_arr as $carat){
+								if(!empty($shape_arr)){
+									foreach($shape_arr as $shape){
+										
+										$option_value_ids = $carat['option_value_id'].','.$shape['option_value_id'];
+										$option_values = $carat['name'].','.$shape['name'];
+										
+										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+									}
+								}
+							}
+						}
+					} elseif(!empty($clarity_arr) && !empty($color_arr)){
+						
+						if(!empty($clarity_arr)){
+							foreach($clarity_arr as $clarity){
+								if(!empty($color_arr)){
+									foreach($color_arr as $color){
+										
+												
+											$option_value_ids = $clarity['option_value_id'].','.$color['option_value_id'];
+											$option_values = $clarity['name'].','.$color['name'];
+											
+											$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+											
+									}
+								}
+							}
+						}
+							
+					} elseif(!empty($clarity_arr) && !empty($shape_arr)){
+						if(!empty($clarity_arr)){
+							foreach($clarity_arr as $clarity){
+								if(!empty($shape_arr)){
+									foreach($shape_arr as $shape){
+										
+										$option_value_ids = $clarity['option_value_id'].','.$shape['option_value_id'];
+										$option_values = $clarity['name'].','.$shape['name'];
+										
+										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+									}
+								}	
+							}
+						}
+							
+					} elseif(!empty($color_arr) && !empty($shape_arr)){
+						
+						if(!empty($color_arr)){
+							foreach($color_arr as $color){
+								if(!empty($shape_arr)){
+									foreach($shape_arr as $shape){
+										
+										$option_value_ids = $color['option_value_id'].','.$shape['option_value_id'];
+										$option_values = $color['name'].','.$shape['name'];
+										
+										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+									}
+								}
+							}
+						}
+					}
+					
+					
+					
+					
+					/*
+					$product_option = array();
+					if(!empty($option_arr)){
+						foreach($option_arr as $option_id){
+							$a = 0;
+							foreach($option_arr[$option_id] as $optioner){
+								$b = 0;
+								foreach()
+								$product_option[$a][$b] = 
+							}
+						}
+					}
+					*/
+					
+					
+				}
+			}
+			
+		}
+		
+		return '1';
+	}	
 }

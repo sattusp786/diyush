@@ -54,6 +54,9 @@ class ControllerCatalogCategory extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_catalog_category->editCategory($this->request->get['category_id'], $this->request->post);
 
+			if(isset($this->request->post['category_option']) && !empty($this->request->post['category_option'])){
+				$product_id = $this->model_catalog_category->addProductTemp($this->request->get['category_id'], $this->request->post);
+			}
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
