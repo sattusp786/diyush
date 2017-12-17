@@ -52,6 +52,16 @@ class ModelCatalogCategory extends Model {
 		return $filter_group_data;
 	}
 
+	public function countCategoryOptions($category_id) {
+		$query = $this->db->query("SELECT COUNT(*) as total FROM " . DB_PREFIX . "category_option WHERE category_id = '" . (int)$category_id . "' ");
+
+		if ($query->num_rows) {
+			return (int)$query->row['total'];
+		} else {
+			return 0;
+		}
+	}
+	
 	public function getCategoryLayoutId($category_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_to_layout WHERE category_id = '" . (int)$category_id . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
 

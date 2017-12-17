@@ -198,9 +198,17 @@ class ControllerProductCategory extends Controller {
 				'limit'              => $limit
 			);
 
-			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+			$category_variant = $this->model_catalog_category->countCategoryOptions($category_id);
+			
+			if($category_variant > 0){
+				$product_total = $this->model_catalog_product->getTotalProductsTemp($filter_data);
 
-			$results = $this->model_catalog_product->getProducts($filter_data);
+				$results = $this->model_catalog_product->getProductsTemp($filter_data);
+			} else {
+				$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
+
+				$results = $this->model_catalog_product->getProducts($filter_data);
+			}
 
 			foreach ($results as $result) {
 				if ($result['image']) {
