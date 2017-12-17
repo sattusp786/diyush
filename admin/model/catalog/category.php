@@ -373,6 +373,7 @@ class ModelCatalogCategory extends Model {
 		//carat = 5, clarity = 10, colour = 11, shape = 20
 		
 		if (isset($data['category_option']) && !empty($data['category_option'])) {
+			
 			$option_str = implode(",",$this->request->post['category_option']);
 			
 			//echo "SELECT p.*,pd.name as description FROM " . DB_PREFIX . "product_to_category p2c LEFT JOIN " . DB_PREFIX . "product p ON p2c.product_id = p.product_id LEFT JOIN " . DB_PREFIX . "product_description pd ON p.product_id=pd.product_id WHERE p2c.category_id = '" . (int)$category_id . "' GROUP BY p.product_id";
@@ -381,6 +382,8 @@ class ModelCatalogCategory extends Model {
 			
 			if($get_products->num_rows){
 				foreach($get_products->rows as $product){
+					
+					$truncate = $this->db->query("DELETE FROM " . DB_PREFIX . "product_temp WHERE parent_id = '" . (int)$product['product_id'] . "'");
 					
 					//echo "SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id WHERE pov.product_id = '" . (int)$product['product_id'] . "' AND pov.option_id IN (".$option_str.") ORDER BY pov.option_id GROUP BY pov.option_value_id";
 					
