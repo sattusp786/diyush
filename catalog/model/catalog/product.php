@@ -207,7 +207,7 @@ class ModelCatalogProduct extends Model {
 	}
 	
 	public function getProductsTemp($data = array()) {
-		$sql = "SELECT pt.product_id, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = pt.parent_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT price FROM " . DB_PREFIX . "product_discount pd2 WHERE pd2.product_id = pt.parent_id AND pd2.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = pt.parent_id AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special";
+		$sql = "SELECT pt.*, (SELECT AVG(rating) AS total FROM " . DB_PREFIX . "review r1 WHERE r1.product_id = pt.parent_id AND r1.status = '1' GROUP BY r1.product_id) AS rating, (SELECT price FROM " . DB_PREFIX . "product_discount pd2 WHERE pd2.product_id = pt.parent_id AND pd2.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND pd2.quantity = '1' AND ((pd2.date_start = '0000-00-00' OR pd2.date_start < NOW()) AND (pd2.date_end = '0000-00-00' OR pd2.date_end > NOW())) ORDER BY pd2.priority ASC, pd2.price ASC LIMIT 1) AS discount, (SELECT price FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = pt.parent_id AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < NOW()) AND (ps.date_end = '0000-00-00' OR ps.date_end > NOW())) ORDER BY ps.priority ASC, ps.price ASC LIMIT 1) AS special";
 
 		if (!empty($data['filter_category_id'])) {
 			if (!empty($data['filter_sub_category'])) {
@@ -341,7 +341,29 @@ class ModelCatalogProduct extends Model {
 		$query = $this->db->query($sql);
 
 		foreach ($query->rows as $result) {
-			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
+			$product_data[$result['product_id']] =  array(
+				'product_id'       => $result['product_id'],
+				'parent_id'        => $result['parent_id'],
+				'name'             => str_replace(","," ",$result['option_values']).' '.$result['name'],
+				'model'            => $result['model'],
+				'sku'              => $result['sku'],
+				'special'          => '0',
+				'rating'           => '0',
+				'quantity'         => $result['quantity'],
+				'image'            => $result['image'],
+				'price'            => $result['price'],
+				'tax_class_id'     => $result['tax_class_id'],
+				'date_available'   => $result['date_available'],
+				'weight'           => $result['weight'],
+				'weight_class_id'  => $result['weight_class_id'],
+				'subtract'         => $result['subtract'],
+				'minimum'          => $result['minimum'],
+				'sort_order'       => $result['sort_order'],
+				'status'           => $result['status'],
+				'date_added'       => $result['date_added'],
+				'date_modified'    => $result['date_modified'],
+				'viewed'           => $result['viewed']
+			);
 		}
 
 		return $product_data;
