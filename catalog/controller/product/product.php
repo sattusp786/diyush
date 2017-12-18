@@ -319,6 +319,18 @@ class ControllerProductProduct extends Controller {
 					'price'    => $this->currency->format($this->tax->calculate($discount['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'])
 				);
 			}
+			
+			$option_ider = array();
+			if(isset($this->request->get['option_ids']) && !empty($this->request->get['option_ids'])){
+				$option_str = $this->request->get['option_ids'];
+				$option_ider = explode("-",$option_str);
+			}
+			
+			$option_valuer = array();
+			if(isset($this->request->get['option_values']) && !empty($this->request->get['option_values'])){
+				$option_value_str = $this->request->get['option_values'];
+				$option_valuer = explode("-",$option_value_str);
+			}
 
 			$data['options'] = array();
 
@@ -332,12 +344,23 @@ class ControllerProductProduct extends Controller {
 						} else {
 							$price = false;
 						}
+						
+						$default = '0';
+						if(in_array($option['option_id'],$option_ider)){
+							if(in_array($option_value['option_value_id'],$option_valuer)){
+								$default = '1';
+							}
+						} else {
+							if($option_value['default'] == '1'){
+								$default = '1';
+							}
+						}
 
 						$product_option_value_data[] = array(
 							'product_option_value_id' => $option_value['product_option_value_id'],
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
-							'default'                 => $option_value['default'],
+							'default'                 => $default,
 							'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
 							'price'                   => $price,
 							'price_prefix'            => $option_value['price_prefix']

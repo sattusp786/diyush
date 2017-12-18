@@ -617,9 +617,39 @@ class ModelCatalogCategory extends Model {
 								}
 							}
 						}
+					} elseif(!empty($carat_arr)){
+						foreach($carat_arr as $carat){
+									
+							$option_value_ids = $carat['option_value_id'];
+							$option_values = $carat['name'];
+							
+							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+						}
+					} elseif(!empty($clarity_arr)){
+						foreach($clarity_arr as $clarity){
+									
+							$option_value_ids = $clarity['option_value_id'];
+							$option_values = $clarity['name'];
+							
+							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+						}
+					} elseif(!empty($color_arr)){
+						foreach($color_arr as $color){
+									
+							$option_value_ids = $color['option_value_id'];
+							$option_values = $color['name'];
+							
+							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+						}
+					} elseif(!empty($shape_arr)){
+						foreach($shape_arr as $shape){
+									
+							$option_value_ids = $shape['option_value_id'];
+							$option_values = $shape['name'];
+							
+							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+						}
 					}
-					
-					
 					
 					
 					/*
