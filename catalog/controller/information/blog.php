@@ -17,6 +17,9 @@ class ControllerInformationBlog extends Controller {
 			
 			$data['article_id'] = $article_id;
 			$data['blog'] = $this->model_catalog_information->getBlog($article_id);
+			if($data['blog']['description'] != ''){
+				$data['blog']['description'] = html_entity_decode($data['blog']['description']);
+			}
 			
 			if ($data['blog']['image']) {
 				$data['blog_image'] = 'image/'.$data['blog']['image'];

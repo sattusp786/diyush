@@ -24,7 +24,7 @@ class ModelCatalogInformation extends Model {
 	
 	public function getBlog($blog_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "easy_blog_article_description WHERE article_id='".$blog_id."' ");
-
+		
 		return $query->row;
 	}
 	
