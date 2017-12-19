@@ -45,10 +45,12 @@ class ControllerInformationVisitShowroom extends Controller {
 	public function confirm() {
 
 		$this->load->language('information/visit_showroom');
+		
+		$this->load->model('catalog/information');
 
 		$json = array();
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 
 			$mail = new Mail($this->config->get('config_mail_engine'));
 			$mail->parameter = $this->config->get('config_mail_parameter');
@@ -60,11 +62,21 @@ class ControllerInformationVisitShowroom extends Controller {
 
 			$mail->setTo($this->config->get('config_email'));
 			$mail->setFrom($this->config->get('config_email'));
-			$mail->setReplyTo($this->request->post['email']);
-			$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
-			$mail->setText($this->request->post['enquiry']);
+			$mail->setReplyTo($this->request->post['appointment_email']);
+			$mail->setSender(html_entity_decode('Admin', ENT_QUOTES, 'UTF-8'));
+			$mail->setSubject('New Appointment Request'. $this->request->post['appointment_firstname']);
+			$mail->setText($this->request->post['appointment_message']);
 			$mail->send();
+			
+			$appointment_data = array();
+			$appointment_data['name'] = $this->request->post['appointment_firstname'];
+			$appointment_data['lname'] = $this->request->post['appointment_lastname'];
+			$appointment_data['email'] = $this->request->post['appointment_email'];
+			$appointment_data['name'] = $this->request->post['appointment_phone'];
+			$appointment_data['phone'] = $this->request->post['appointment_date'];
+			$appointment_data['text'] = $this->request->post['appointment_message'];
+			$appointment_data['enquiry_type_id'] = '1';
+			$appointment_info = $this->model_catalog_information->addEnquiry($appointment_data);
 			
 			$json['success'] =  'Your details submitted successfully!';
 			

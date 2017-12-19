@@ -136,4 +136,38 @@ class ModelCatalogInformation extends Model {
 
 		return $output;
 	}
+	
+	public function addEnquiry($data) {
+		
+		$clientuseripadd = $_SERVER['REMOTE_ADDR'];
+		
+		if(!isset($data['enquiry_type_id'])){
+			$data['enquiry_type_id'] = '0';
+		}
+		if(!isset($data['name'])){
+			$data['name'] = '';
+		}
+		if(!isset($data['lname'])){
+			$data['lname'] = '';
+		}
+		if(!isset($data['subject'])){
+			$data['subject'] = '';
+		}
+		if(!isset($data['text'])){
+			$data['text'] = '';
+		}
+		if(!isset($data['email'])){
+			$data['email'] = '';
+		}
+		if(!isset($data['phone'])){
+			$data['phone'] = '';
+		}
+		if(!isset($data['address'])){
+			$data['address'] = '';
+		}
+		
+		$query = $this->db->query("INSERT INTO " . DB_PREFIX . "enquiry SET enquiry_type_id='".$data['enquiry_type_id']."', name='".$data['name']."', lname='".$data['lname']."', subject='".$data['subject']."', text='".$data['text']."', email='".$data['email']."', phone='".$data['phone']."', address='".$data['address']."', enquiry_status='1', ip='".$clientuseripadd."', date_added=NOW(), date_modified=NOW(), status='1' ");
+
+		return '1';
+	}
 }

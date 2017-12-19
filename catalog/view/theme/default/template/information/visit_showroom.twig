@@ -49,14 +49,14 @@ Saturday 10:00 - 17:00<br />
 we are closed Sundays and UK bank holidays</p>
   
   </div>
-  <div class="col-md-6">
-  	<form>
+  <div class="col-md-6" id="appointment_page_div">
+  	<form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" name="form-appointment_page" id ="form-appointment_page">
                             <div class="form-group">
                                 <!-- label  -->
                                 <label for="exampleInputEmail1">First Name <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input" id="firstname" placeholder="First Name">
+                                <input type="text" class="form-control input-round big-input" id="appointment_page-firstname" name="appointment_firstname" placeholder="First Name" required />
                                 <!-- end input  -->
                             </div>
                              <div class="form-group">
@@ -64,7 +64,7 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Last Name <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input" id="lastname" placeholder="Last Name">
+                                <input type="text" class="form-control input-round big-input" id="appointment_page-lastname" name="appointment_lastname" placeholder="Last Name" required />
                                 <!-- end input  -->
                             </div>
                              <div class="form-group">
@@ -72,7 +72,7 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Email Address <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="email" class="form-control input-round big-input" id="email" placeholder="Email address">
+                                <input type="email" class="form-control input-round big-input" id="appointment_page-email" name="appointment_email" placeholder="Email address" required />
                                 <!-- end input  -->
                             </div>
                             <div class="form-group">
@@ -80,7 +80,7 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Phone <sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input" id="phone" placeholder="Phone">
+                                <input type="text" class="form-control input-round big-input" id="appointment_page-phone" name="appointment_phone" placeholder="Phone" required />
                                 <!-- end input  -->
                             </div>
 							<div class="form-group">
@@ -88,7 +88,7 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Appointment Date & Time<sup class="deep-red-text">*</sup></label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                                <input type="text" class="form-control input-round big-input" id="appointment_date" placeholder="" />
+                                <input type="text" class="form-control input-round big-input" id="appointment_page-date" name="appointment_date" placeholder="" required />
                                 <!-- end input  -->
                             </div>
                             <div class="form-group">
@@ -96,13 +96,13 @@ we are closed Sundays and UK bank holidays</p>
                                 <label for="exampleInputEmail1">Additional information</label>
                                 <!-- end label  -->
                                 <!-- input  -->
-                               <textarea name="enquiry" rows="5" id="input-enquiry" class="form-control"></textarea>
+                               <textarea name="appointment_message" id="appointment_page-message" rows="5" class="form-control"></textarea>
                                 <!-- end input  -->
                             </div>
                             
                             
                             <!-- button  -->
-                            <button class="highlight-button btn btn-medium no-margin" type="submit">Submit</button>
+                            <button class="highlight-button btn btn-medium no-margin" id="button-appointment_page" type="submit">Submit</button>
                             <!-- end button  -->
                         </form>
   </div>
@@ -127,9 +127,73 @@ we are closed Sundays and UK bank holidays</p>
 </section>
 <script type="text/javascript">
 	$(function(){
-		$('#appointment_date').appendDtpicker({
+		$('#appointment_page-date').appendDtpicker({
 			"closeOnSelected": true
 		});
 	});
 </script>
+<script type="text/javascript"><!--
+$('#form-appointment_page').on('submit', function(e) {
+	e.preventDefault();
+	
+	var firstname = $("#appointment_page-firstname").val();
+	var lastname = $("#appointment_page-lastname").val();
+	var email = $("#appointment_page-email").val();
+	var phone = $("#appointment_page-phone").val();
+	var date = $("#appointment_page-date").val();
+	
+	if(firstname == ''){
+		alert('Please enter your firstname');
+		return false;
+	} else if(lastname == ''){
+		alert('Please enter your lastname');
+		return false;
+	} else if(email == ''){
+		alert('Please enter your email');
+		return false;
+	} else if(phone == ''){
+		alert('Please enter your phone no.');
+		return false;
+	} else if(date == ''){
+		alert('Please enter appointment date');
+		return false;
+	}
+	
+  $.ajax({
+    url: 'index.php?route=information/visit_showroom/confirm',
+    type: 'post',
+    dataType: 'json',
+    data: $("#form-appointment_page").serialize(),
+    beforeSend: function() {
+      $('#button-appointment_page').button('loading');
+    },
+    complete: function() {
+      $('#button-appointment_page').button('reset');
+    },
+    success: function(json) {
+      $('.alert-success, .alert-danger').remove();
+
+      if (json['error']) {
+        $('#appointment_page_div').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+      }
+
+      if (json['success']) {
+        $('#appointment_page_div').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+        $('#appointment_page-firstname').val('');
+        $('#appointment_page-lastname').val('');
+        $('#appointment_page-email').val('');
+        $('#appointment_page-phone').val('');
+        $('#appointment_page-date').val('');
+        $('#appointment_page-message').val('');
+        
+		if(json['redirect']){
+			location.href= json['redirect'];
+			return false;
+		}
+      }
+    }
+  });
+});
+
+//--></script>
 {{ footer }}
