@@ -72,9 +72,9 @@ class ControllerInformationVisitShowroom extends Controller {
 			$appointment_data['name'] = $this->request->post['appointment_firstname'];
 			$appointment_data['lname'] = $this->request->post['appointment_lastname'];
 			$appointment_data['email'] = $this->request->post['appointment_email'];
-			$appointment_data['name'] = $this->request->post['appointment_phone'];
-			$appointment_data['phone'] = $this->request->post['appointment_date'];
-			$appointment_data['text'] = $this->request->post['appointment_message'];
+			$appointment_data['phone'] = $this->request->post['appointment_phone'];
+			$appointment_data['subject'] = 'Appointment Form';
+			$appointment_data['text'] = $this->request->post['appointment_message'].'<br/> Appointment Date : '.$this->request->post['appointment_date'];
 			$appointment_data['enquiry_type_id'] = '1';
 			$appointment_info = $this->model_catalog_information->addEnquiry($appointment_data);
 			
