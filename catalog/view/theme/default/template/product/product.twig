@@ -185,22 +185,18 @@
 							</div>
 							{% endif %}
 							{% if option.type == 'radio' %}
-							<!--<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
+							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
 							  <div class="col-md-2 col-sm-12"><label class="control-label">{{ option.name }}</label></div>
 							  <div class="col-md-10 col-sm-12 option-img"><div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
 								<div class="radio" style="float:left;width:45px;margin-top:0;">
 								  <label style="padding-left:0;">
 									<input style="display:none;" class="imager" type="radio" {% if option_value.default == 1 %} CHECKED {% endif %} name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
-									{% if option_value.image %} <img {% if option_value.default == 1 %} style="border:1px solid #ddd;" {% else %} style="border:0;" {% endif %} src="{{ option_value.image }}" alt="input-option{{ option.product_option_id }}" class="img-thumbnail option_image input-option{{ option.product_option_id }}" /> {% endif %}                  
-									{{ option_value.name }}
-									{% if option_value.price %}
-									({{ option_value.price_prefix }}{{ option_value.price }})
-									{% endif %}
+									{% if option_value.image %} <img {% if option_value.default == 1 %} style="border:1px solid #ddd;" {% else %} style="border:0;" {% endif %} src="{{ option_value.image }}" alt="input-option{{ option.product_option_id }}" class="img-thumbnail option_image input-option{{ option.product_option_id }}" /> {% endif %}	
 									</label>
 								</div>
 								{% endfor %} </div></div>
 								<div class="clear" style="clear:both;"></div>
-							</div>-->
+							</div>
 							{% endif %}
 							{% if option.type == 'checkbox' %}
 							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
