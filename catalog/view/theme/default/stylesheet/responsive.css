@@ -979,7 +979,7 @@
     /*  header right */
     .search-cart-header .subtitle { display: none;}
     .search-cart-header { padding: 14px 15px 0 0px;}
-    #top-search { margin: 1px 0 0 10px; }
+    #top-search { margin:0; }
 
     /*  ET-line icons */
     .glyphs .box1 { width: 50%;}

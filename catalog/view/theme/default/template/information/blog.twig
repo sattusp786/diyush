@@ -23,18 +23,21 @@
 		
 		
 		{% if article_id is defined %}
-		<section class="wow">
+		<section class="wow padding-two">
             <div class="container">
                 <div class="row blog-masonry blog-masonry-2col no-transition">
                     <!-- post item -->
                     <div class="col-md-12 col-sm-12 col-xs-12 blog-listing">
-                        <div class="blog-image text-center"><img src="{{ blog_image }}" alt=""/></div>
-                        <div class="blog-details">
-                            <div class="blog-date"><!--Posted by {{ blog.author }} | {{ blog.date_modified }}--></div>
-                            <div class="blog-title">{{ blog.name }}</div>
-                            <div class="blog-short-description">{{ blog.description }}</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
+                     	<h2 class="blog-details-headline text-black">{{ blog.name }}</h2>
+                         <div class="blog-date no-padding-top"><!--Posted by {{ blog.author }} | {{ blog.date_modified }}--></div>
+                        <div class="blog-image text-center margin-four"><img src="{{ blog_image }}" alt=""/></div>
+                        <div class="blog-details"> 
+                            <div class="blog-short-description width-100">{{ blog.description }}</div>
+                            <div class="separator-line bg-black no-margin-lr margin-four"></div>
+                            <!--<div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>-->
+                            <div>
+                                <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five sharethis-wrap">   <span class="sharethis-inline-share-buttons"></span>Share on</span>
+                            </div>
                         </div>
                     </div>
                     <!-- end post item -->
@@ -42,7 +45,7 @@
             </div>
         </section>
 		{% else %}
-        <section class="wow">
+        <section class="wow padding-two">
             <div class="container">
                 <div class="row blog-masonry blog-masonry-2col no-transition">
 				{% for blog in blogs %}
@@ -52,9 +55,16 @@
                         <div class="blog-details">
                             <div class="blog-date"><!--Posted by <a href="{{ blog.href }}">{{ blog.author }}</a> | {{ blog.date_modified }}--></div>
                             <div class="blog-title"><a href="{{ blog.href }}">{{ blog.name }}</a></div>
-                            <div class="blog-short-description">{{ blog.intro_text }}</div>
-                            <div class="separator-line bg-black no-margin-lr"></div>
-                            <div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>
+                            <div class="blog-short-description width-100">{{ blog.intro_text }}</div>
+                            <div class="separator-line bg-black no-margin-lr margin-four"></div>
+                            <!--<div><a href="#" class="blog-like"><i class="fa fa-heart-o"></i>Likes</a><a href="#" class="blog-share"><i class="fa fa-share-alt"></i>Share</a><a href="#" class="comment"><i class="fa fa-comment-o"></i>3 comment(s)</a></div>-->
+                            <!--<div>
+                                <a href="#" class="blog-share"><i class="fa fa-share-alt small-icon black-text"></i></a>
+                                <a href="#" class="blog-share"><i class="fa fa-share-alt small-icon black-text"></i></a>
+                                <a href="#" class="blog-share"><i class="fa fa-share-alt small-icon black-text"></i></a>
+                                <a href="#" class="blog-share"><i class="fa fa-share-alt small-icon black-text"></i></a>
+                            </div>-->
+                            <!--<div><span class="black-text text-uppercase text-small vertical-align-middle margin-right-five sharethis-wrap">   <span class="sharethis-inline-share-buttons"></span>Share on</span></div>-->
                         </div>
                     </div>
                     <!-- end post item -->

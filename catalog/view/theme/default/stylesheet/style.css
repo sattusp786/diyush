@@ -2684,3 +2684,7 @@ ul.sub-navi li a:before {
     background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
+
+.zopim:first-child { display:none;}
+
+.navbar-toggle { margin-right:0;}
