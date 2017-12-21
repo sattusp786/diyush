@@ -112,6 +112,22 @@
 		</li>
 		{% endfor %}
 	</ul>
+	
+    <div class="col-md-12">
+	<p>
+	<label for="amount">Carat Range:</label>
+	<input type="text" id="carat_value" readonly style="border:0; color:#f6931f; font-weight:bold;">
+	</p>
+	<div id="carat-range"></div>
+    </div>
+     <div class="col-md-12">
+	<p>
+	<label for="amount">Price Range:</label>
+	<input type="text" id="price_value" readonly style="border:0; color:#f6931f; font-weight:bold;">
+	</p>
+	<div id="price-range"></div>
+    </div>
+	
     <div class="clear-both"></div>
     <div class="filterbtns">
     	<span class="clearbtn"><a href="javascript:void(0);" class="highlight-button btn btn-small button width-100 text-center clear-btn"><b>Clear</b></a></span>
@@ -134,6 +150,7 @@
 </div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="catalog/view/javascript/jquery/jquery.ui.touch-punch.min.js"></script>
 <script type="text/javascript"><!--
 $(document).ready(function(){
 	var windowwidth = $(window).width();
@@ -233,6 +250,7 @@ $('.clear-btn').on('click', function() {
 <script>
   $( function() {
   
+	//Desktop Sliders..
     $( "#carat-range" ).slider({
       range: true,
       min: 0.20,
@@ -259,5 +277,9 @@ $('.clear-btn').on('click', function() {
     $( "#price_value" ).val( $( "#price-range" ).slider( "values", 0 ) +
       " ct - " + $( "#price-range" ).slider( "values", 1 ) + " ct" );
 	  
+	$('#carat-range').draggable();
+	$('#price-range').draggable();
+	 
+	
   });
   </script>
