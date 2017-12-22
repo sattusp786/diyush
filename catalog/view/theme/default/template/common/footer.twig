@@ -157,9 +157,21 @@ $("#wpbs_cont #cls").click(function(){
 });
 </script>
 
-<script>
+<script type="text/javascript">
+$(document).mouseover(function(e)
+{
+	if($('#settingmenu').is(':visible') === true){
+		var container = $("#settingmenu");
+		// if the target of the click isn't the container nor a descendant of the container
+		if (!container.is(e.target) && container.has(e.target).length === 0)
+		{
+			$("#settingmenu").hide();
+			//container.hide();
+		}
+	}
+});
 $("#settingmenuclick").click(function(){
-	$('#settingmenu').show();	
+	$('#settingmenu').slideToggle("slow");
 });
 
 </script>
