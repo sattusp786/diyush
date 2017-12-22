@@ -1,3 +1,9 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
@@ -220,10 +226,21 @@
 				</form>
 				<!-- end search input -->
                 <div class="mobileview setting-icon f-right">
-                	<i class="fa fa-cog search-button extra-small-icon"></i>
+                	<span id="settingmenuclick"><i class="fa fa-cog search-button extra-small-icon"></i></span>
                 </div>
+                
 				{{ cart }}
 			</div>
+            <div class="mobileview">
+                	<ul id="settingmenu" class="setting-menu"> 
+                    	<li><span class="display-block">Select Currency</span> 
+                        <span class="currency-icons"><a href="#" class="active"><i class="fa fa-usd extra-small-icon"></i></a> <a href="#"><i class="fa fa-eur extra-small-icon"></i></a> <a href="#"><i class="fa fa-jpy extra-small-icon"></i></a></span></li>                   	
+                    	<li><a href="#">Login / Register</a></li>
+                    	<li><a href="#">My Account</a></li>
+                        <li><a href="#">My Wishlist</a></li>
+                        <li><a href="#">Checkout</a></li>
+                    </ul>
+            </div>
 			<!-- end search and cart  -->
 			<!-- toggle navigation -->
 			<div class="navbar-header col-sm-8 col-xs-2 pull-right">
@@ -366,6 +383,7 @@ b.keyup(function(e){
 						});
 
 						delay(function(){
+
 							$.ajax({
 									url: 'index.php?route=product/search/saveSearch',
 									type: 'post',
@@ -396,4 +414,6 @@ b.keyup(function(e){
 
 }).blur(function(){ setTimeout(function(){  },500); }).focus(function(){ repositionLivesearch(); a.show(); });
 });
-</script>
+</script><body>
+</body>
+</html>

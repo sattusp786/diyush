@@ -2688,3 +2688,10 @@ ul.sub-navi li a:before {
 .zopim:first-child { display:none;}
 
 .navbar-toggle { margin-right:0;}
+#settingmenu { display:none; background-color: rgba(27, 22, 28, 0.95); clear: both; min-height: 0;  padding: 0;  position: absolute; right:0;  top: 87px; width: 50%;}
+.setting-menu li{    float: left;  width: 100% !important; margin: 0 !important; border-top: 1px solid rgba(255, 255, 255, 0.06) !important; padding:0 15px; color: #fff;}
+.setting-menu li a, .setting-menu li span{color: #fff; display: block; height: 30px; line-height: 30px; padding:0; text-align: left;}
+.setting-menu li span.currency-icons a { width: auto; margin: 5px 10px 5px 0; float: left; padding: 5px; border: 1px solid #fff;  text-align: center;}
+.setting-menu li span.currency-icons a .fa { color:#fff;}
+.setting-menu li span.currency-icons a.active { background:#fff;}
+.setting-menu li span.currency-icons a.active .fa { color:#000;}
