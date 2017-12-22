@@ -158,18 +158,28 @@ $("#wpbs_cont #cls").click(function(){
 </script>
 
 <script type="text/javascript">
-$(document).mouseover(function(e)
-{
-	if($('#settingmenu').is(':visible') === true){
+$(document).bind("scroll", function(e) {
+   if($('#settingmenu').is(':visible') === true){
 		var container = $("#settingmenu");
 		// if the target of the click isn't the container nor a descendant of the container
 		if (!container.is(e.target) && container.has(e.target).length === 0)
 		{
-			$("#settingmenu").hide();
+			$("#settingmenu").slideUp("slow");
+			//container.hide();
+		}
+	}
+}).bind("mouseover", function(e) {
+    if($('#settingmenu').is(':visible') === true){
+		var container = $("#settingmenu");
+		// if the target of the click isn't the container nor a descendant of the container
+		if (!container.is(e.target) && container.has(e.target).length === 0)
+		{
+			$("#settingmenu").slideUp("slow");
 			//container.hide();
 		}
 	}
 });
+
 $("#settingmenuclick").click(function(){
 	$('#settingmenu').slideToggle("slow");
 });
