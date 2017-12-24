@@ -25,6 +25,42 @@ class ControllerMastersStonePrice extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
+			
+			if (isset($this->request->get['filter_stone'])) {
+				$url .= '&filter_stone=' . $this->request->get['filter_stone'];
+			}
+			
+			if (isset($this->request->get['filter_shape'])) {
+				$url .= '&filter_shape=' . $this->request->get['filter_shape'];
+			}
+			
+			if (isset($this->request->get['filter_crt_from'])) {
+				$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+			}
+			
+			if (isset($this->request->get['filter_crt_to'])) {
+				$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+			}
+			
+			if (isset($this->request->get['filter_weight'])) {
+				$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+			}
+			
+			if (isset($this->request->get['filter_clarity'])) {
+				$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+			}
+			
+			if (isset($this->request->get['filter_color'])) {
+				$url .= '&filter_color=' . $this->request->get['filter_color'];
+			}
+			
+			if (isset($this->request->get['filter_lab'])) {
+				$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+			}
+			
+			if (isset($this->request->get['filter_cut'])) {
+				$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+			}
 
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -57,6 +93,42 @@ class ControllerMastersStonePrice extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
+			
+			if (isset($this->request->get['filter_stone'])) {
+				$url .= '&filter_stone=' . $this->request->get['filter_stone'];
+			}
+			
+			if (isset($this->request->get['filter_shape'])) {
+				$url .= '&filter_shape=' . $this->request->get['filter_shape'];
+			}
+			
+			if (isset($this->request->get['filter_crt_from'])) {
+				$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+			}
+			
+			if (isset($this->request->get['filter_crt_to'])) {
+				$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+			}
+			
+			if (isset($this->request->get['filter_weight'])) {
+				$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+			}
+			
+			if (isset($this->request->get['filter_clarity'])) {
+				$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+			}
+			
+			if (isset($this->request->get['filter_color'])) {
+				$url .= '&filter_color=' . $this->request->get['filter_color'];
+			}
+			
+			if (isset($this->request->get['filter_lab'])) {
+				$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+			}
+			
+			if (isset($this->request->get['filter_cut'])) {
+				$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+			}
 
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -92,6 +164,42 @@ class ControllerMastersStonePrice extends Controller {
 
 			$url = '';
 
+			if (isset($this->request->get['filter_stone'])) {
+				$url .= '&filter_stone=' . $this->request->get['filter_stone'];
+			}
+			
+			if (isset($this->request->get['filter_shape'])) {
+				$url .= '&filter_shape=' . $this->request->get['filter_shape'];
+			}
+			
+			if (isset($this->request->get['filter_crt_from'])) {
+				$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+			}
+			
+			if (isset($this->request->get['filter_crt_to'])) {
+				$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+			}
+			
+			if (isset($this->request->get['filter_weight'])) {
+				$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+			}
+			
+			if (isset($this->request->get['filter_clarity'])) {
+				$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+			}
+			
+			if (isset($this->request->get['filter_color'])) {
+				$url .= '&filter_color=' . $this->request->get['filter_color'];
+			}
+			
+			if (isset($this->request->get['filter_lab'])) {
+				$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+			}
+			
+			if (isset($this->request->get['filter_cut'])) {
+				$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+			}
+			
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -112,6 +220,61 @@ class ControllerMastersStonePrice extends Controller {
 
 	protected function getList() {
 		$this->load->language('masters/stone_price');
+		
+		if (isset($this->request->get['filter_stone'])) {
+			$filter_stone = $this->request->get['filter_stone'];
+		} else {
+			$filter_stone = '';
+		}
+		
+		if (isset($this->request->get['filter_shape'])) {
+			$filter_shape = $this->request->get['filter_shape'];
+		} else {
+			$filter_shape = '';
+		}
+		
+		if (isset($this->request->get['filter_crt_from'])) {
+			$filter_crt_from = $this->request->get['filter_crt_from'];
+		} else {
+			$filter_crt_from = '';
+		}
+		
+		if (isset($this->request->get['filter_crt_to'])) {
+			$filter_crt_to = $this->request->get['filter_crt_to'];
+		} else {
+			$filter_crt_to = '';
+		}
+		
+		if (isset($this->request->get['filter_weight'])) {
+			$filter_weight = $this->request->get['filter_weight'];
+		} else {
+			$filter_weight = '';
+		}
+		
+		if (isset($this->request->get['filter_clarity'])) {
+			$filter_clarity = $this->request->get['filter_clarity'];
+		} else {
+			$filter_clarity = '';
+		}
+		
+		if (isset($this->request->get['filter_color'])) {
+			$filter_color = $this->request->get['filter_color'];
+		} else {
+			$filter_color = '';
+		}
+		
+		if (isset($this->request->get['filter_lab'])) {
+			$filter_lab = $this->request->get['filter_lab'];
+		} else {
+			$filter_lab = '';
+		}
+		
+		if (isset($this->request->get['filter_cut'])) {
+			$filter_cut = $this->request->get['filter_cut'];
+		} else {
+			$filter_cut = '';
+		}
+		
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -132,6 +295,42 @@ class ControllerMastersStonePrice extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_stone'])) {
+			$url .= '&filter_stone=' . $this->request->get['filter_stone'];
+		}
+		
+		if (isset($this->request->get['filter_shape'])) {
+			$url .= '&filter_shape=' . $this->request->get['filter_shape'];
+		}
+		
+		if (isset($this->request->get['filter_crt_from'])) {
+			$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+		}
+		
+		if (isset($this->request->get['filter_crt_to'])) {
+			$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+		}
+		
+		if (isset($this->request->get['filter_weight'])) {
+			$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+		}
+		
+		if (isset($this->request->get['filter_clarity'])) {
+			$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+		}
+		
+		if (isset($this->request->get['filter_color'])) {
+			$url .= '&filter_color=' . $this->request->get['filter_color'];
+		}
+		
+		if (isset($this->request->get['filter_lab'])) {
+			$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+		}
+		
+		if (isset($this->request->get['filter_cut'])) {
+			$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+		}
+			
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -166,6 +365,15 @@ class ControllerMastersStonePrice extends Controller {
 		$data['stone_prices'] = array();
 
 		$filter_data = array(
+			'filter_stone'	  => $filter_stone,
+			'filter_shape'	  => $filter_shape,
+			'filter_crt_from' => $filter_crt_from,
+			'filter_crt_to'	  => $filter_crt_to,
+			'filter_weight'	  => $filter_weight,
+			'filter_clarity'  => $filter_clarity,
+			'filter_color'	  => $filter_color,
+			'filter_lab'	  => $filter_lab,
+			'filter_cut'	  => $filter_cut,
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
@@ -179,16 +387,23 @@ class ControllerMastersStonePrice extends Controller {
 		foreach ($results as $result) {
 			$data['stone_prices'][] = array(
 				'stone_price_id'  	 => $result['stone_price_id'],
-				'diamond_type'       => $result['diamond_type'],
+				'stone'       		=> $result['stone'],
 				'shape'       		=> $result['shape'],
-				'carat_from'       => $result['carat_from'],
-				'carat_to'       => $result['carat_to'],
+				'crt_from'       => $result['crt_from'],
+				'crt_to'       => $result['crt_to'],
+				'weight'       => $result['weight'],
 				'clarity'       => $result['clarity'],
 				'color'       => $result['color'],
 				'lab'       => $result['lab'],
 				'cut'       => $result['cut'],
-				'price'   	=> $result['price'],
-				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
+				'polish'       => $result['polish'],
+				'symmetry'       => $result['symmetry'],
+				'fluorescence'       => $result['fluorescence'],
+				'intensity'       => $result['intensity'],
+				'carat_price'   	=> $result['carat_price'],
+				'total_price'   	=> $result['total_price'],
+				'sprice'   	=> $result['sprice'],
+				'mprice'   	=> $result['mprice'],
 				'edit'       => $this->url->link('masters/stone_price/edit', 'user_token=' . $this->session->data['user_token'] . '&stone_price_id=' . $result['stone_price_id'] . $url, true)
 			);
 		}
@@ -215,6 +430,42 @@ class ControllerMastersStonePrice extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_stone'])) {
+			$url .= '&filter_stone=' . $this->request->get['filter_stone'];
+		}
+		
+		if (isset($this->request->get['filter_shape'])) {
+			$url .= '&filter_shape=' . $this->request->get['filter_shape'];
+		}
+		
+		if (isset($this->request->get['filter_crt_from'])) {
+			$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+		}
+		
+		if (isset($this->request->get['filter_crt_to'])) {
+			$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+		}
+		
+		if (isset($this->request->get['filter_weight'])) {
+			$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+		}
+		
+		if (isset($this->request->get['filter_clarity'])) {
+			$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+		}
+		
+		if (isset($this->request->get['filter_color'])) {
+			$url .= '&filter_color=' . $this->request->get['filter_color'];
+		}
+		
+		if (isset($this->request->get['filter_lab'])) {
+			$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+		}
+		
+		if (isset($this->request->get['filter_cut'])) {
+			$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+		}
+		
 		if ($order == 'ASC') {
 			$url .= '&order=DESC';
 		} else {
@@ -225,19 +476,63 @@ class ControllerMastersStonePrice extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_diamond_type'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=diamond_type' . $url, true);
+		$data['sort_stone'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=stone' . $url, true);
 		$data['sort_shape'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=shape' . $url, true);
-		$data['sort_carat_from'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=carat_from' . $url, true);
-		$data['sort_carat_to'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=carat_to' . $url, true);
+		$data['sort_crt_from'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=crt_from' . $url, true);
+		$data['sort_crt_to'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=crt_to' . $url, true);
+		$data['sort_weight'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=weight' . $url, true);
 		$data['sort_clarity'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=clarity' . $url, true);
 		$data['sort_color'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=color' . $url, true);
 		$data['sort_lab'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=lab' . $url, true);
 		$data['sort_cut'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=cut' . $url, true);
-		$data['sort_price'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=price' . $url, true);
+		$data['sort_polish'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=polish' . $url, true);
+		$data['sort_symmetry'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=symmetry' . $url, true);
+		$data['sort_fluorescence'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=fluorescence' . $url, true);
+		$data['sort_intensity'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=intensity' . $url, true);
+		$data['sort_carat_price'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=carat_price' . $url, true);
+		$data['sort_total_price'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=total_price' . $url, true);
+		$data['sort_sprice'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=sprice' . $url, true);
+		$data['sort_mprice'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=mprice' . $url, true);
 		$data['sort_status'] = $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'] . '&sort=status' . $url, true);
 
 		$url = '';
 
+		if (isset($this->request->get['filter_stone'])) {
+			$url .= '&filter_stone=' . $this->request->get['filter_stone'];
+		}
+		
+		if (isset($this->request->get['filter_shape'])) {
+			$url .= '&filter_shape=' . $this->request->get['filter_shape'];
+		}
+		
+		if (isset($this->request->get['filter_crt_from'])) {
+			$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+		}
+		
+		if (isset($this->request->get['filter_crt_to'])) {
+			$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+		}
+		
+		if (isset($this->request->get['filter_weight'])) {
+			$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+		}
+		
+		if (isset($this->request->get['filter_clarity'])) {
+			$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+		}
+		
+		if (isset($this->request->get['filter_color'])) {
+			$url .= '&filter_color=' . $this->request->get['filter_color'];
+		}
+		
+		if (isset($this->request->get['filter_lab'])) {
+			$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+		}
+		
+		if (isset($this->request->get['filter_cut'])) {
+			$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+		}
+		
 		if (isset($this->request->get['sort'])) {
 			$url .= '&sort=' . $this->request->get['sort'];
 		}
@@ -256,6 +551,16 @@ class ControllerMastersStonePrice extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($stone_price_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($stone_price_total - $this->config->get('config_limit_admin'))) ? $stone_price_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $stone_price_total, ceil($stone_price_total / $this->config->get('config_limit_admin')));
 
+		$data['filter_stone'] = $filter_stone;
+		$data['filter_shape'] = $filter_shape;
+		$data['filter_crt_from'] = $filter_crt_from;
+		$data['filter_crt_to'] = $filter_crt_to;
+		$data['filter_weight'] = $filter_weight;
+		$data['filter_clarity'] = $filter_clarity;
+		$data['filter_color'] = $filter_color;
+		$data['filter_lab'] = $filter_lab;
+		$data['filter_cut'] = $filter_cut;
+		
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
@@ -341,6 +646,42 @@ class ControllerMastersStonePrice extends Controller {
 
 		$url = '';
 
+		if (isset($this->request->get['filter_stone'])) {
+			$url .= '&filter_stone=' . $this->request->get['filter_stone'];
+		}
+		
+		if (isset($this->request->get['filter_shape'])) {
+			$url .= '&filter_shape=' . $this->request->get['filter_shape'];
+		}
+		
+		if (isset($this->request->get['filter_crt_from'])) {
+			$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+		}
+		
+		if (isset($this->request->get['filter_crt_to'])) {
+			$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+		}
+		
+		if (isset($this->request->get['filter_weight'])) {
+			$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+		}
+		
+		if (isset($this->request->get['filter_clarity'])) {
+			$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+		}
+		
+		if (isset($this->request->get['filter_color'])) {
+			$url .= '&filter_color=' . $this->request->get['filter_color'];
+		}
+		
+		if (isset($this->request->get['filter_lab'])) {
+			$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+		}
+		
+		if (isset($this->request->get['filter_cut'])) {
+			$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+		}
+		
 		if (isset($this->request->get['page'])) {
 			$url .= '&page=' . $this->request->get['page'];
 		}
@@ -377,12 +718,12 @@ class ControllerMastersStonePrice extends Controller {
 			$stone_price_info = $this->model_masters_stone_price->getStonePrice($this->request->get['stone_price_id']);
 		}
 
-		if (isset($this->request->post['diamond_type'])) {
-			$data['diamond_type'] = $this->request->post['diamond_type'];
+		if (isset($this->request->post['stone'])) {
+			$data['stone'] = $this->request->post['stone'];
 		} elseif (!empty($stone_price_info)) {
-			$data['diamond_type'] = $stone_price_info['diamond_type'];
+			$data['stone'] = $stone_price_info['stone'];
 		} else {
-			$data['diamond_type'] = '';
+			$data['stone'] = '';
 		}
 
 		if (isset($this->request->post['shape'])) {
@@ -393,20 +734,20 @@ class ControllerMastersStonePrice extends Controller {
 			$data['shape'] = '';
 		}
 
-		if (isset($this->request->post['carat_from'])) {
-			$data['carat_from'] = $this->request->post['carat_from'];
+		if (isset($this->request->post['crt_from'])) {
+			$data['crt_from'] = $this->request->post['crt_from'];
 		} elseif (!empty($stone_price_info)) {
-			$data['carat_from'] = $stone_price_info['carat_from'];
+			$data['crt_from'] = $stone_price_info['crt_from'];
 		} else {
-			$data['carat_from'] = '';
+			$data['crt_from'] = '';
 		}
 
-		if (isset($this->request->post['carat_to'])) {
-			$data['carat_to'] = $this->request->post['carat_to'];
+		if (isset($this->request->post['crt_to'])) {
+			$data['crt_to'] = $this->request->post['crt_to'];
 		} elseif (!empty($stone_price_info)) {
-			$data['carat_to'] = $stone_price_info['carat_to'];
+			$data['crt_to'] = $stone_price_info['crt_to'];
 		} else {
-			$data['carat_to'] = '';
+			$data['crt_to'] = '';
 		}
 
 		if (isset($this->request->post['clarity'])) {
@@ -449,14 +790,6 @@ class ControllerMastersStonePrice extends Controller {
 			$data['price'] = '';
 		}
 
-		if (isset($this->request->post['status'])) {
-			$data['status'] = $this->request->post['status'];
-		} elseif (!empty($stone_price_info)) {
-			$data['status'] = $stone_price_info['status'];
-		} else {
-			$data['status'] = true;
-		}
-
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -469,20 +802,20 @@ class ControllerMastersStonePrice extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if ((utf8_strlen($this->request->post['diamond_type']) < 2) || (utf8_strlen($this->request->post['diamond_type']) > 20)) {
-			$this->error['diamond_type'] = $this->language->get('error_diamond_type');
+		if ((utf8_strlen($this->request->post['stone']) < 2) || (utf8_strlen($this->request->post['stone']) > 20)) {
+			$this->error['stone'] = $this->language->get('error_stone');
 		}
 
 		if ((utf8_strlen($this->request->post['shape']) < 2) || (utf8_strlen($this->request->post['shape']) > 20)) {
 			$this->error['shape'] = $this->language->get('error_shape');
 		}
 
-		if ((utf8_strlen($this->request->post['carat_from']) < 2) || (utf8_strlen($this->request->post['carat_from']) > 20)) {
-			$this->error['carat_from'] = $this->language->get('error_carat_from');
+		if ((utf8_strlen($this->request->post['crt_from']) < 2) || (utf8_strlen($this->request->post['crt_from']) > 20)) {
+			$this->error['crt_from'] = $this->language->get('error_crt_from');
 		}
 
-		if ((utf8_strlen($this->request->post['carat_to']) < 2) || (utf8_strlen($this->request->post['carat_to']) > 20)) {
-			$this->error['carat_to'] = $this->language->get('error_carat_to');
+		if ((utf8_strlen($this->request->post['crt_to']) < 2) || (utf8_strlen($this->request->post['crt_to']) > 20)) {
+			$this->error['crt_to'] = $this->language->get('error_crt_to');
 		}
 
 		if ((utf8_strlen($this->request->post['clarity']) < 2) || (utf8_strlen($this->request->post['clarity']) > 20)) {
@@ -501,8 +834,8 @@ class ControllerMastersStonePrice extends Controller {
 			$this->error['cut'] = $this->language->get('error_cut');
 		}
 
-		if ((utf8_strlen($this->request->post['price']) < 1) || (utf8_strlen($this->request->post['price']) > 20)) {
-			$this->error['price'] = $this->language->get('error_price');
+		if ((utf8_strlen($this->request->post['carat_price']) < 1) || (utf8_strlen($this->request->post['carat_price']) > 20)) {
+			$this->error['carat_price'] = $this->language->get('error_carat_price');
 		}
 
 		return !$this->error;
@@ -533,18 +866,42 @@ class ControllerMastersStonePrice extends Controller {
 			
 			$url = '';
 			
-			/*
-			if (isset($this->request->get['filter_model'])) {
-			$url .= '&filter_model=' .$this->request->get['filter_model'];
-			}
-			if (isset($this->request->get['filter_title'])) {
-				$url .= '&filter_title=' .$this->request->get['filter_title'];
+			if (isset($this->request->get['filter_stone'])) {
+			$url .= '&filter_stone=' . $this->request->get['filter_stone'];
 			}
 			
-			if (isset($this->request->get['filter_category'])) {
-				$url .= '&filter_category=' .$this->request->get['filter_category'];
+			if (isset($this->request->get['filter_shape'])) {
+				$url .= '&filter_shape=' . $this->request->get['filter_shape'];
 			}
-			*/
+			
+			if (isset($this->request->get['filter_crt_from'])) {
+				$url .= '&filter_crt_from=' . $this->request->get['filter_crt_from'];
+			}
+			
+			if (isset($this->request->get['filter_crt_to'])) {
+				$url .= '&filter_crt_to=' . $this->request->get['filter_crt_to'];
+			}
+			
+			if (isset($this->request->get['filter_weight'])) {
+				$url .= '&filter_weight=' . $this->request->get['filter_weight'];
+			}
+			
+			if (isset($this->request->get['filter_clarity'])) {
+				$url .= '&filter_clarity=' . $this->request->get['filter_clarity'];
+			}
+			
+			if (isset($this->request->get['filter_color'])) {
+				$url .= '&filter_color=' . $this->request->get['filter_color'];
+			}
+			
+			if (isset($this->request->get['filter_lab'])) {
+				$url .= '&filter_lab=' . $this->request->get['filter_lab'];
+			}
+			
+			if (isset($this->request->get['filter_cut'])) {
+				$url .= '&filter_cut=' . $this->request->get['filter_cut'];
+			}
+		
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -572,17 +929,17 @@ class ControllerMastersStonePrice extends Controller {
         $this->load->model('masters/stone_price');
         
         $data = array(
-            'sort' => 'code',
+            'sort' => 'stone',
             'order' => 'ASC'
         );
         
-        $stone_price = "Stone Price ID,Diamond Type,Shape,Carat From,Carat To,Clarity,Color,Lab,Cut,Price,Status\n";
+        $stone_price = "Stone Price ID,Stone Type,Shape,Carat From,Carat To,Weight,Clarity,Color,Lab,Cut,Polish,Symmetry,Fluorescence,Intensity,Carat Price,Total Price,Single Stone Price,Multistone Price\n";
         $results     = $this->model_masters_stone_price->getStonePriceExport($data);		
 		
 			if($results){
 				foreach ($results as $result) {
 					
-					$stone_price .= $this->db->escape($result['stone_price_id']) . "," . $this->db->escape($result['diamond_type']) . "," . $this->db->escape($result['shape']) . "," . $this->db->escape($result['carat_from']) . "," . $this->db->escape($result['carat_to']) . "," . $this->db->escape($result['clarity']) . "," . $this->db->escape($result['color']) . "," . $this->db->escape($result['lab']) . "," . $this->db->escape($result['cut']) . "," . $this->db->escape($result['price']) . "," . $this->db->escape($result['status']) . "\n";
+					$stone_price .= $this->db->escape($result['stone_price_id']) . "," . $this->db->escape($result['stone']) . "," . $this->db->escape($result['shape']) . "," . $this->db->escape($result['crt_from']) . "," . $this->db->escape($result['crt_to']) . "," . $this->db->escape($result['clarity']) . "," . $this->db->escape($result['color']) . "," . $this->db->escape($result['lab']) . "," . $this->db->escape($result['cut']) . "," . $this->db->escape($result['polish']) . "," . $this->db->escape($result['symmetry']) . "," . $this->db->escape($result['fluorescence']) . "," . $this->db->escape($result['intensity']) . "," . $this->db->escape($result['carat_price']) . "," . $this->db->escape($result['total_price']) . "," . $this->db->escape($result['sprice']) . "," . $this->db->escape($result['mprice']) . "\n";
 				}
 			}
 			header("Cache-Control: must-revalidate, post-check=0, pre-check=0");

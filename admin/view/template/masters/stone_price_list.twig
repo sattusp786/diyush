@@ -24,6 +24,56 @@
       <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
     {% endif %}
+	<div class="row">
+	<div id="filter-product" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-filter"></i> {{ text_filter }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="control-label" for="input-stone">{{ entry_stone }}</label>
+              <input type="text" name="filter_stone" value="{{ filter_stone }}" placeholder="{{ entry_stone }}" id="input-stone" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-shape">{{ entry_shape }}</label>
+              <input type="text" name="filter_shape" value="{{ filter_shape }}" placeholder="{{ entry_shape }}" id="input-shape" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-crt_from">{{ entry_crt_from }}</label>
+              <input type="text" name="filter_crt_from" value="{{ filter_crt_from }}" placeholder="{{ entry_crt_from }}" id="input-crt_from" class="form-control" />
+            </div>
+			<div class="form-group">
+              <label class="control-label" for="input-crt_to">{{ entry_crt_to }}</label>
+              <input type="text" name="filter_crt_to" value="{{ filter_crt_to }}" placeholder="{{ entry_crt_to }}" id="input-crt_to" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-weight">{{ entry_weight }}</label>
+              <input type="text" name="filter_weight" value="{{ filter_weight }}" placeholder="{{ entry_weight }}" id="input-weight" class="form-control" />
+            </div>
+			<div class="form-group">
+              <label class="control-label" for="input-clarity">{{ entry_clarity }}</label>
+              <input type="text" name="filter_clarity" value="{{ filter_clarity }}" placeholder="{{ entry_clarity }}" id="input-clarity" class="form-control" />
+            </div>
+			<div class="form-group">
+              <label class="control-label" for="input-color">{{ entry_color }}</label>
+              <input type="text" name="filter_color" value="{{ filter_color }}" placeholder="{{ entry_color }}" id="input-color" class="form-control" />
+            </div>
+			<div class="form-group">
+              <label class="control-label" for="input-lab">{{ entry_lab }}</label>
+              <input type="text" name="filter_lab" value="{{ filter_lab }}" placeholder="{{ entry_lab }}" id="input-lab" class="form-control" />
+            </div>
+			<div class="form-group">
+              <label class="control-label" for="input-cut">{{ entry_cut }}</label>
+              <input type="text" name="filter_cut" value="{{ filter_cut }}" placeholder="{{ entry_cut }}" id="input-cut" class="form-control" />
+            </div>
+            <div class="form-group text-right">
+              <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+	<div class="col-md-9 col-md-pull-3 col-sm-12">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
@@ -41,25 +91,30 @@
               <thead>
                 <tr>
                   <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
-                  <td class="text-left">{% if sort == 'diamond_type' %}
-                    <a href="{{ sort_diamond_type }}" class="{{ order|lower }}">{{ column_diamond_type }}</a>
+                  <td class="text-left">{% if sort == 'stone' %}
+                    <a href="{{ sort_stone }}" class="{{ order|lower }}">{{ column_stone }}</a>
                     {% else %}
-                    <a href="{{ sort_diamond_type }}">{{ column_diamond_type }}</a>
+                    <a href="{{ sort_stone }}">{{ column_stone }}</a>
                     {% endif %}</td>
                   <td class="text-left">{% if sort == 'shape' %}
                     <a href="{{ sort_shape }}" class="{{ order|lower }}">{{ column_shape }}</a>
                     {% else %}
                     <a href="{{ sort_shape }}">{{ column_shape }}</a>
                     {% endif %}</td>
-                  <td class="text-left">{% if sort == 'carat_from' %}
-                    <a href="{{ sort_carat_from }}" class="{{ order|lower }}">{{ column_carat_from }}</a>
+                  <td class="text-left">{% if sort == 'crt_from' %}
+                    <a href="{{ sort_crt_from }}" class="{{ order|lower }}">{{ column_crt_from }}</a>
                     {% else %}
-                    <a href="{{ sort_carat_from }}">{{ column_carat_from }}</a>
+                    <a href="{{ sort_crt_from }}">{{ column_crt_from }}</a>
                     {% endif %}</td>
-                  <td class="text-left">{% if sort == 'carat_to' %}
-                    <a href="{{ sort_carat_to }}" class="{{ order|lower }}">{{ column_carat_to }}</a>
+                  <td class="text-left">{% if sort == 'crt_to' %}
+                    <a href="{{ sort_crt_to }}" class="{{ order|lower }}">{{ column_crt_to }}</a>
                     {% else %}
-                    <a href="{{ sort_carat_to }}">{{ column_carat_to }}</a>
+                    <a href="{{ sort_crt_to }}">{{ column_crt_to }}</a>
+                    {% endif %}</td>
+				  <td class="text-left">{% if sort == 'weight' %}
+                    <a href="{{ sort_weight }}" class="{{ order|lower }}">{{ column_weight }}</a>
+                    {% else %}
+                    <a href="{{ sort_weight }}">{{ column_weight }}</a>
                     {% endif %}</td>
                   <td class="text-left">{% if sort == 'clarity' %}
                     <a href="{{ sort_clarity }}" class="{{ order|lower }}">{{ column_clarity }}</a>
@@ -81,15 +136,45 @@
                     {% else %}
                     <a href="{{ sort_cut }}">{{ column_cut }}</a>
                     {% endif %}</td>
-                  <td class="text-right">{% if sort == 'price' %}
-                    <a href="{{ sort_price }}" class="{{ order|lower }}">{{ column_price }}</a>
+				  <td class="text-left">{% if sort == 'polish' %}
+                    <a href="{{ sort_polish }}" class="{{ order|lower }}">{{ column_polish }}</a>
                     {% else %}
-                    <a href="{{ sort_price }}">{{ column_price }}</a>
+                    <a href="{{ sort_polish }}">{{ column_polish }}</a>
                     {% endif %}</td>
-                  <td class="text-left">{% if sort == 'status' %}
-                    <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
+				  <td class="text-left">{% if sort == 'symmetry' %}
+                    <a href="{{ sort_symmetry }}" class="{{ order|lower }}">{{ column_symmetry }}</a>
                     {% else %}
-                    <a href="{{ sort_status }}">{{ column_status }}</a>
+                    <a href="{{ sort_symmetry }}">{{ column_symmetry }}</a>
+                    {% endif %}</td>
+			 	  <td class="text-left">{% if sort == 'fluorescence' %}
+                    <a href="{{ sort_fluorescence }}" class="{{ order|lower }}">{{ column_fluorescence }}</a>
+                    {% else %}
+                    <a href="{{ sort_fluorescence }}">{{ column_fluorescence }}</a>
+                    {% endif %}</td>
+				  <td class="text-left">{% if sort == 'intensity' %}
+                    <a href="{{ sort_intensity }}" class="{{ order|lower }}">{{ column_intensity }}</a>
+                    {% else %}
+                    <a href="{{ sort_intensity }}">{{ column_intensity }}</a>
+                    {% endif %}</td>
+                  <td class="text-right">{% if sort == 'carat_price' %}
+                    <a href="{{ sort_carat_price }}" class="{{ order|lower }}">{{ column_carat_price }}</a>
+                    {% else %}
+                    <a href="{{ sort_carat_price }}">{{ column_carat_price }}</a>
+                    {% endif %}</td>
+				  <td class="text-right">{% if sort == 'total_price' %}
+                    <a href="{{ sort_total_price }}" class="{{ order|lower }}">{{ column_total_price }}</a>
+                    {% else %}
+                    <a href="{{ sort_total_price }}">{{ column_total_price }}</a>
+                    {% endif %}</td>
+				  <td class="text-right">{% if sort == 'sprice' %}
+                    <a href="{{ sort_sprice }}" class="{{ order|lower }}">{{ column_sprice }}</a>
+                    {% else %}
+                    <a href="{{ sort_sprice }}">{{ column_sprice }}</a>
+                    {% endif %}</td>
+				  <td class="text-right">{% if sort == 'mprice' %}
+                    <a href="{{ sort_mprice }}" class="{{ order|lower }}">{{ column_mprice }}</a>
+                    {% else %}
+                    <a href="{{ sort_mprice }}">{{ column_mprice }}</a>
                     {% endif %}</td>
                   <td class="text-right">{{ column_action }}</td>
                 </tr>
@@ -103,16 +188,23 @@
                     {% else %}
                     <input type="checkbox" name="selected[]" value="{{ stone_price.stone_price_id }}" />
                     {% endif %}</td>
-                  <td class="text-left">{{ stone_price.diamond_type }}</td>
+                  <td class="text-left">{{ stone_price.stone }}</td>
                   <td class="text-left">{{ stone_price.shape }}</td>
-                  <td class="text-left">{{ stone_price.carat_from }}</td>
-                  <td class="text-left">{{ stone_price.carat_to }}</td>
+                  <td class="text-left">{{ stone_price.crt_from }}</td>
+                  <td class="text-left">{{ stone_price.crt_to }}</td>
+                  <td class="text-left">{{ stone_price.weight }}</td>
                   <td class="text-left">{{ stone_price.clarity }}</td>
                   <td class="text-left">{{ stone_price.color }}</td>
                   <td class="text-left">{{ stone_price.lab }}</td>
                   <td class="text-left">{{ stone_price.cut }}</td>
-                  <td class="text-right">{{ stone_price.price }}</td>
-                  <td class="text-left">{{ stone_price.status }}</td>
+                  <td class="text-left">{{ stone_price.polish }}</td>
+                  <td class="text-left">{{ stone_price.symmetry }}</td>
+                  <td class="text-left">{{ stone_price.fluorescence }}</td>
+                  <td class="text-left">{{ stone_price.intensity }}</td>
+                  <td class="text-left">{{ stone_price.carat_price }}</td>
+                  <td class="text-left">{{ stone_price.total_price }}</td>
+                  <td class="text-right">{{ stone_price.sprice }}</td>
+                  <td class="text-right">{{ stone_price.mprice }}</td>
                   <td class="text-right"><a href="{{ stone_price.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
@@ -131,8 +223,71 @@
         </div>
       </div>
     </div>
+	</div>
+	</div>
   </div>
 </div>
+<script type="text/javascript"><!--
+$('#button-filter').on('click', function() {
+	var url = '';
+
+	var filter_stone = $('input[name=\'filter_stone\']').val();
+
+	if (filter_stone) {
+		url += '&filter_stone=' + encodeURIComponent(filter_stone);
+	}
+
+	var filter_shape = $('input[name=\'filter_shape\']').val();
+
+	if (filter_shape) {
+		url += '&filter_shape=' + encodeURIComponent(filter_shape);
+	}
+
+	var filter_crt_from = $('input[name=\'filter_crt_from\']').val();
+
+	if (filter_crt_from) {
+		url += '&filter_crt_from=' + encodeURIComponent(filter_crt_from);
+	}
+
+	var filter_crt_to = $('input[name=\'filter_crt_to\']').val();
+
+	if (filter_crt_to) {
+		url += '&filter_crt_to=' + encodeURIComponent(filter_crt_to);
+	}
+
+	var filter_weight = $('input[name=\'filter_weight\']').val();
+
+	if (filter_weight !== '') {
+		url += '&filter_weight=' + encodeURIComponent(filter_weight);
+	}
+	
+	var filter_clarity = $('input[name=\'filter_clarity\']').val();
+
+	if (filter_clarity !== '') {
+		url += '&filter_clarity=' + encodeURIComponent(filter_clarity);
+	}
+	
+	var filter_color = $('input[name=\'filter_color\']').val();
+
+	if (filter_color !== '') {
+		url += '&filter_color=' + encodeURIComponent(filter_color);
+	}
+	
+	var filter_lab = $('input[name=\'filter_lab\']').val();
+
+	if (filter_lab !== '') {
+		url += '&filter_lab=' + encodeURIComponent(filter_lab);
+	}
+	
+	var filter_cut = $('input[name=\'filter_cut\']').val();
+
+	if (filter_cut !== '') {
+		url += '&filter_cut=' + encodeURIComponent(filter_cut);
+	}
+
+	location = 'index.php?route=masters/stone_price&user_token={{ user_token }}' + url;
+});
+//--></script> 
 <script type="text/javascript">
 function importstoneprice() {
     var impurl = 'index.php?route=masters/stone_price/import&user_token={{ user_token }}';

@@ -30,24 +30,63 @@ class ModelMastersStonePrice extends Model {
 	}
 
 	public function getStonePrices($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "stone_price";
+		$sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE 1 ";
 
 		$sort_data = array(
-			'diamond_type',
+			'stone',
 			'shape',
-			'carat_from',
-			'carat_to',
+			'crt_from',
+			'crt_to',
 			'clarity',
 			'color',
 			'lab',
 			'cut',
-			'price'
+			'carat_price',
+			'total_price',
+			'sprice',
+			'mprice'
 		);
+		
+		if (!empty($data['filter_stone'])) {
+			$sql .= " AND stone LIKE '" . $this->db->escape($data['filter_stone']) . "%'";
+		}
+		
+		if (!empty($data['filter_shape'])) {
+			$sql .= " AND shape LIKE '" . $this->db->escape($data['filter_shape']) . "%'";
+		}
+		
+		if (!empty($data['filter_crt_from'])) {
+			$sql .= " AND crt_from LIKE '" . $this->db->escape($data['filter_crt_from']) . "%'";
+		}
+		
+		if (!empty($data['filter_crt_to'])) {
+			$sql .= " AND crt_to LIKE '" . $this->db->escape($data['filter_crt_to']) . "%'";
+		}
+		
+		if (!empty($data['filter_weight'])) {
+			$sql .= " AND weight LIKE '" . $this->db->escape($data['filter_weight']) . "%'";
+		}
+		
+		if (!empty($data['filter_clarity'])) {
+			$sql .= " AND clarity LIKE '" . $this->db->escape($data['filter_clarity']) . "%'";
+		}
+		
+		if (!empty($data['filter_color'])) {
+			$sql .= " AND color LIKE '" . $this->db->escape($data['filter_color']) . "%'";
+		}
+		
+		if (!empty($data['filter_lab'])) {
+			$sql .= " AND lab LIKE '" . $this->db->escape($data['filter_lab']) . "%'";
+		}
+		
+		if (!empty($data['filter_cut'])) {
+			$sql .= " AND cut LIKE '" . $this->db->escape($data['filter_cut']) . "%'";
+		}
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY diamond_type";
+			$sql .= " ORDER BY stone";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -74,8 +113,46 @@ class ModelMastersStonePrice extends Model {
 	}
 
 	public function getTotalStonePrices() {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "stone_price");
-
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "stone_price WHERE 1 ";
+		
+		if (!empty($data['filter_stone'])) {
+			$sql .= " AND stone LIKE '" . $this->db->escape($data['filter_stone']) . "%'";
+		}
+		
+		if (!empty($data['filter_shape'])) {
+			$sql .= " AND shape LIKE '" . $this->db->escape($data['filter_shape']) . "%'";
+		}
+		
+		if (!empty($data['filter_crt_from'])) {
+			$sql .= " AND crt_from LIKE '" . $this->db->escape($data['filter_crt_from']) . "%'";
+		}
+		
+		if (!empty($data['filter_crt_to'])) {
+			$sql .= " AND crt_to LIKE '" . $this->db->escape($data['filter_crt_to']) . "%'";
+		}
+		
+		if (!empty($data['filter_weight'])) {
+			$sql .= " AND weight LIKE '" . $this->db->escape($data['filter_weight']) . "%'";
+		}
+		
+		if (!empty($data['filter_clarity'])) {
+			$sql .= " AND clarity LIKE '" . $this->db->escape($data['filter_clarity']) . "%'";
+		}
+		
+		if (!empty($data['filter_color'])) {
+			$sql .= " AND color LIKE '" . $this->db->escape($data['filter_color']) . "%'";
+		}
+		
+		if (!empty($data['filter_lab'])) {
+			$sql .= " AND lab LIKE '" . $this->db->escape($data['filter_lab']) . "%'";
+		}
+		
+		if (!empty($data['filter_cut'])) {
+			$sql .= " AND cut LIKE '" . $this->db->escape($data['filter_cut']) . "%'";
+		}
+		
+		$query = $this->db->query($sql);
+		
 		return $query->row['total'];
 	}
 	
@@ -94,16 +171,23 @@ class ModelMastersStonePrice extends Model {
 					continue;
 				}
 				
-				$data['diamond_type'] 		= $data[1];
+				$data['stone'] 				= $data[1];
 				$data['shape'] 				= $data[2];
-				$data['carat_from'] 		= $data[3];
-				$data['carat_to'] 			= $data[4];
-				$data['clarity'] 			= $data[5];
-				$data['color'] 				= $data[6];
-				$data['lab'] 				= $data[7];
-				$data['cut'] 				= $data[8];
-				$data['price'] 				= $data[9];
-				$data['status'] 			= $data[10];
+				$data['crt_from'] 			= $data[3];
+				$data['crt_to'] 			= $data[4];
+				$data['weight'] 			= $data[5];
+				$data['clarity'] 			= $data[6];
+				$data['color'] 				= $data[7];
+				$data['lab'] 				= $data[8];
+				$data['cut'] 				= $data[9];
+				$data['polish'] 			= $data[10];
+				$data['symmetry'] 			= $data[11];
+				$data['fluorescence'] 		= $data[12];
+				$data['intensity'] 			= $data[13];
+				$data['carat_price'] 		= $data[14];
+				$data['total_price'] 		= $data[15];
+				$data['sprice'] 			= $data[16];
+				$data['mprice'] 			= $data[17];
 		
 				$this->addStonePrice($data);
 				
@@ -119,21 +203,21 @@ class ModelMastersStonePrice extends Model {
 
 		$sort_data = array(
 			'stone_price_id',
-			'diamond_type',
+			'stone',
 			'shape',
-			'carat_from',
-			'carat_to',
+			'crt_from',
+			'crt_to',
 			'clarity',
 			'color',
 			'lab',
 			'cut',
-			'price'
+			'sprice'
 		);
 		
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY diamond_type";
+			$sql .= " ORDER BY stone";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
