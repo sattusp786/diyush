@@ -92,6 +92,16 @@
       </div>
       <div class="popstep-btns"><a href="javascript:void(0)" class="step-3back highlight-button btn btn-small button xs-margin-bottom-five"> Back </a> <a href="javascript:void(0)" class="highlight-button btn btn-small button xs-margin-bottom-five no-margin" onclick="$('#form-appointment').submit();" id="button-appointment">Confirm </a></div>
 </div>
+<div id="popstep-4" style="display:none;height:200px;">
+<section class="top">
+    <h2 class="text-transform-uppercase no-margin">Book Appointment</h2>
+    </section>
+	<div class="tab-content clearfix">
+		<section id="contacter" class="popstep-pane" style="padding:5% 5%;">
+			<div style="text-align:center;color:green;font-weight:bold;">Your appointment details submitted successfully.</div>
+		</section>
+	</div>
+</div>
 </div>
 
   
@@ -148,7 +158,9 @@ $('#form-appointment').on('submit', function(e) {
         $('#appointment-phone').val('');
         $('#appointment-date').val('');
         $('#appointment-message').val('');
-		setTimeout(function(){ $(".close").trigger('click'); }, 3000);
+		$('#popstep-3').hide();
+		$('#popstep-4').show();
+		//setTimeout(function(){ $(".close").trigger('click'); }, 3000);
         
 		if(json['redirect']){
 			location.href= json['redirect'];
