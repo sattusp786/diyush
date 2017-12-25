@@ -228,11 +228,19 @@
             <div class="mobileview">
                 	<ul id="settingmenu" class="setting-menu"> 
                     	<li><span class="display-block">Select Currency</span> 
-                        <span class="currency-icons"><a href="#" class="active"><i class="fa fa-usd extra-small-icon"></i></a> <a href="#"><i class="fa fa-eur extra-small-icon"></i></a> <a href="#"><i class="fa fa-jpy extra-small-icon"></i></a></span></li>                   	
-                    	<li><a href="#">Login / Register</a></li>
-                    	<li><a href="#">My Account</a></li>
-                        <li><a href="#">My Wishlist</a></li>
-                        <li><a href="#">Checkout</a></li>
+                        <span class="currency-icons">
+							<a href="javascript:void(0);" class="{% if currency_code == 'GBP' %}active{% endif %} currency" alt="GBP"><i class="fa fa-gbp extra-small-icon"></i></a> 
+							<a href="javascript:void(0);" class="{% if currency_code == 'USD' %}active{% endif %} currency" alt="USD"><i class="fa fa-usd extra-small-icon"></i></a> 
+							<a href="javascript:void(0);" class="{% if currency_code == 'EUR' %}active{% endif %} currency" alt="EUR"><i class="fa fa-eur extra-small-icon"></i></a>
+						</span></li>     						
+						{% if logged %}
+							<li><a href="index.php?route=account/account">My Account</a></li>
+							<li><a href="index.php?route=account/wishlist">Wishlist</a></li>
+						{% else %}
+							<li><a href="index.php?route=account/login/popup" class="agree">Login / Register</a></li>
+							<li><a href="index.php?route=account/login/popup&favorite" class="agree">Wishlist</a></li>
+						{% endif %}
+                        <li><a href="index.php?route=checkout/cart">Checkout</a></li>
                     </ul>
             </div>
 			<!-- end search and cart  -->
@@ -304,6 +312,29 @@
 #livesearch a:hover strike {  color: lightblue;}
 #livesearch small {display: block; }
 </style>
+<script type="text/javascript">
+$(function(){
+	$(".currency").click(function(){
+		var alter = $(this).attr('alt');
+		$.ajax({
+			url: 'index.php?route=common/currency/currency',
+			type: 'post',
+			dataType: 'html',
+			data: 'code=' + alter,
+			beforeSend: function() {
+				
+			},
+			complete: function() {
+				
+			},
+			success: function(response) {
+				location.reload(true);
+			}
+
+		});
+	});
+});
+</script>
 <script type="text/javascript">
 $(function(){
 
