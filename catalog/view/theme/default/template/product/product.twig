@@ -145,7 +145,7 @@
                           <div class="clearfix"></div>
                          </div>
 						
-						<form name="product-option-form" id="product-option-form" onsubmit="return false" action="" method="post">
+						<form name="product-option-form" id="product-option-form" onSubmit="return false" action="" method="post">
 						  <div id="product"> {% if options %}
 							<hr>
 							<h3 class="margin-three no-margin-top">{{ text_option }}</h3>
@@ -324,7 +324,7 @@
                             <a href="index.php?route=information/contact/popup" class="agree"><i class="fa fa-user black-text"></i> Contact Us</a>
                         </span>
                         <span class="padding-left-right-px width-auto">
-                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> Save</a>
+                            <a title="Add to Wishlist" href="javascript:void(0);" onClick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> Save</a>
                         </span>
                         <span class="padding-left-right-px width-auto">
                             <a title="Print" href="javascript:void(0);" class="printbtn text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> Print</a>
@@ -343,7 +343,7 @@
                         <div class="width-100 text-center margin-three-bottom">
                             <a href="index.php?route=information/contact/popup" class="agree"><i class="fa fa-user black-text"></i> Contact Us</a>         
                              &nbsp;&nbsp;&nbsp;
-                            <a title="Add to Wishlist" href="javascript:void(0);" onclick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> Save</a>
+                            <a title="Add to Wishlist" href="javascript:void(0);" onClick="wishlist.add('{{ product_id }}');" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-heart-o black-text"></i> Save</a>
 							&nbsp;&nbsp;&nbsp;
                             <a title="Print" href="javascript:void(0);" class="text-uppercase text-small vertical-align-middle"><i class="fa fa-print black-text"></i> Print</a>
                         </div>
@@ -547,8 +547,8 @@
                                 <!-- tab navigation -->
                                 <ul class="nav nav-tabs nav-tabs-light text-left">
                                     <li class="active"><a href="#tab_sec1" data-toggle="tab">Details</a></li>
-                                    <li><a href="#tab_sec2" data-toggle="tab">Return &amp; Delivery</a></li>
-                                    <li><a href="#tab_sec3" data-toggle="tab">Sizing</a></li>
+                                    <li><a href="#tab_sec2" data-toggle="tab">Shipping &amp; Return</a></li>
+                                    <li><a href="#tab_sec3" data-toggle="tab">Size Guide</a></li>
                                 </ul>
                                 <!-- tab end navigation -->
                             </div>
@@ -568,25 +568,34 @@
                                     <div class="row">
                                         
                                         <div class="col-md-12 col-sm-12 ">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
+                                           <h3 class="margin-two no-margin-top">Free International Shipping</h3>
+<p>WE ARE PROUD TO OFFER FREE DELIVERY IN UK. FOR CUSTOMERS OUTSIDE OF THE UK, WE APPLY A SMALL CHARGE AND EMPLOY FEDEX TO DISPATCH THE GOODS DIRECT TO YOUR DOOR, ALL WITH COMPREHENSIVE INSURANCE THAT KEEPS YOUR PURCHASE SAFE IN TRANSIT. </p>
+<p><a href="/free-shipping">Read More</a></p>
+
+<h3 class="margin-two no-margin-top">30 Days Return</h3>
+<p>Our primary goal at Abelini is to deliver the highest standards of customer service and satisfaction at all times. After you purchase from us, if you are not completely satisfied with any item we will gladly offer you a full refund or exchange.</p>
+<p><a href="/return-and-exchange">Read More</a></p>
+
                                         </div>
                                     </div>
                                 </div>
                                 <!-- end tab content -->
                                 <!-- tab content -->
                                 <div class="tab-pane fade in" id="tab_sec3">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <ul class="instructions">
-                                                <li><strong>Weight:</strong> 7.25 Kg</li>
-                                                <li><strong>Dimensions:</strong> 90x60x90 Cm</li>
-                                                <li><strong>Size:</strong> One Size Fits All</li>
-                                                <li><strong>Color:</strong> White</li>
-                                                <li><strong>Guarantee:</strong> 5 Years</li>
-                                            </ul>
-                                        </div>
+                                    <div class="row">                                        
                                         <div class="col-md-12 col-sm-12 sm-margin-top-seven">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. </p>
+                                            <p>Regardless of whether you need to know the size of your ring finger or a current ring, we have made things straightforward. Here is your guide for measuring your ring size yourself at your home.</p>
+                                            <div class="col-md-10 center-col ">
+                                            <div class="col-md-6 text-center features-box-style1"><i class="icon-book-open medium-icon gray-text"></i>
+         <h3 class="margin-three no-margin-top">Download Ring Sizer</h3>
+          <a href="#" class="highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
+                                            <div class="col-md-6 text-center features-box-style1"><i class="icon-envelope medium-icon gray-text"></i>
+          <h3 class="margin-three no-margin-top">Free Ring Sizer</h3>
+          <a href="#" class="highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
+                                            <div class="clear-both"></div>
+                                            
+                                            <p class="text-center margin-two"><a href="/size-guide">Read out Complete Size Guide</a></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -627,9 +636,9 @@
 						  {% endif %}
 						<div class="quick-buy">
 							<div class="product-share">
-								<a href="javascript:void(0);" onclick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="javascript:void(0);" onclick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+								<a href="javascript:void(0);" onClick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="javascript:void(0);" onClick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="javascript:void(0);" onClick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
 							</div>
 						</div>
 					</div>
