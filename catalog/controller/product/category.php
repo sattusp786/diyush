@@ -105,8 +105,15 @@ class ControllerProductCategory extends Controller {
 							'filter_filter'      => $filter['filter_id']
 						);
 
+						$filter_id_arr = array();
+						$filter_str = '';
+						$filter_id_arr = $data['filter_category'];
+						$filter_id_arr[] = $filter['filter_id'];
+						$filter_id_arr = array_unique($filter_id_arr);
+						$filter_str = implode(",",$filter_id_arr);
 						$childen_data[] = array(
 							'filter_id' => $filter['filter_id'],
+							'filter_href' => $filter_str,
 							'name'      => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : '')
 						);
 					}
