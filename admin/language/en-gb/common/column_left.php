@@ -35,6 +35,7 @@ $_['text_filter']               = 'Filters';
 $_['text_geo_zone']             = 'Geo Zones';
 $_['text_information']          = 'Information';
 $_['text_enquiry']          	= 'Enquiry';
+$_['text_bespoke']          	= 'Bespoke Design';
 $_['text_installer']            = 'Installer';
 $_['text_language']             = 'Languages';
 $_['text_language_editor']      = 'Language Editor';

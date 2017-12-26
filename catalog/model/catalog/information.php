@@ -73,6 +73,51 @@ class ModelCatalogInformation extends Model {
 		return $query->rows;
 	}
 	
+	public function getTotalBespokes() {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "bespoke");
+
+		return $query->row['total'];
+	}
+	
+	public function getBespokes($data = array()) {
+		$sql = "SELECT * FROM " . DB_PREFIX . "bespoke WHERE 1 ";
+
+		$sql .= " GROUP BY bespoke_id ";
+
+		$sort_data = array(
+			'title',
+			'sort_order'
+		);
+
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY sort_order";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		return $query->rows;
+	}
+	
 	public function getTestimonials($business_id) {
 		 
 		$feed = $this->cache->get('testimonial.'.$business_id.'.' . (int) $this->config->get('config_store_id') . '.' . (int)$this->config->get('config_language_id'));
