@@ -262,16 +262,17 @@
                         <h1>Start Your Consultation Today</h1>
                         <p class="text-med width-90 center-col margin-four">Enjoy your complimentary no-obligation consultation today and get to know your very own personal design consultant who will be with you every step of the way.</p>
                     </div>
+					<form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" name="form-bespoke_page" id ="form-bespoke_page">
                     <div class="col-md-8 col-sm-10 text-center center-col">
                     	<div class="row">
                         	<div class="col-md-6">
                             	<!-- input -->
-                            <input type="text" placeholder="Your Name" required="" name="name">
+                            <input type="text" placeholder="Your Name" required id="bespoke_name" name="bespoke_name" />
                             <!-- end input -->
                             </div>
                             <div class="col-md-6">
                             	 <!-- input  -->
-                            <input type="text" placeholder="Your E-mail Address" required="" name="email">
+                            <input type="email" placeholder="Your E-mail Address" required id="bespoke_email" name="bespoke_email" />
                             <!-- end input -->
                             </div>
                             <div class="clearfix"></div>
@@ -279,7 +280,7 @@
                         <div class="row">
                         	<div class="col-md-12">
                             	 <!-- textarea  -->
-                            <textarea placeholder="Enquiry" name="enquiry"></textarea>
+                            <textarea placeholder="Enquiry" name="bespoke_enquiry" id="bespoke_enquiry" required></textarea>
                             <!-- end textarea  -->
                             </div>
                             <div class="clearfix"></div>
@@ -288,7 +289,7 @@
                         <div class="row">
                         	
                     <div class="col-md-12 text-center">
-                        <button class="highlight-button btn btn-medium button no-margin" type="submit">Send Your Message</button>
+                        <button class="highlight-button btn btn-medium button no-margin" id="button-bespoke_page" type="submit">Send Your Message</button>
                     </div>
                             <div class="clearfix"></div>
                         </div>
@@ -330,7 +331,58 @@
             </div>
         </section>
         <!-- end testimonial section -->
+		
+<script type="text/javascript"><!--
+$('#form-bespoke_page').on('submit', function(e) {
+	e.preventDefault();
+	
+	var name = $("#bespoke_name").val();
+	var email = $("#bespoke_email").val();
+	var enquiry = $("#bespoke_enquiry").val();
+	
+	if(name == ''){
+		alert('Please enter your name');
+		return false;
+	} else if(email == ''){
+		alert('Please enter your email');
+		return false;
+	} else if(enquiry == ''){
+		alert('Please enter your enquiry message');
+		return false;
+	}
+	
+  $.ajax({
+    url: 'index.php?route=information/bespoke/confirm',
+    type: 'post',
+    dataType: 'json',
+    data: $("#form-bespoke_page").serialize(),
+    beforeSend: function() {
+      $('#button-bespoke_page').button('loading');
+    },
+    complete: function() {
+      $('#button-bespoke_page').button('reset');
+    },
+    success: function(json) {
+      $('.alert-success, .alert-danger').remove();
+
+      if (json['error']) {
+        $('#form-bespoke_page').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+      }
+
+      if (json['success']) {
+        $('#form-bespoke_page').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+        $('#bespoke_name').val('');
+        $('#bespoke_email').val('');
+        $('#bespoke_enquiry').val('');
         
-		
-		
+		if(json['redirect']){
+			location.href= json['redirect'];
+			return false;
+		}
+      }
+    }
+  });
+});
+
+//--></script>
 {{ footer }}

@@ -132,5 +132,58 @@ class ControllerInformationBespoke extends Controller {
 		$this->response->setOutput($this->load->view('information/bespoke', $data));
 	}
 
-	
+	public function confirm() {
+
+		$this->load->language('information/bespoke');
+		
+		$this->load->model('catalog/information');
+
+		$json = array();
+
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+			$mail = new Mail($this->config->get('config_mail_engine'));
+			$mail->parameter = $this->config->get('config_mail_parameter');
+			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
+			$mail->smtp_username = $this->config->get('config_mail_smtp_username');
+			$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
+			$mail->smtp_port = $this->config->get('config_mail_smtp_port');
+			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
+
+			$mail->setTo($this->config->get('config_email'));
+			$mail->setFrom($this->config->get('config_email'));
+			$mail->setReplyTo($this->request->post['bespoke_email']);
+			$mail->setSender(html_entity_decode('Admin', ENT_QUOTES, 'UTF-8'));
+			$mail->setSubject('New Bespoke Enquiry'. $this->request->post['bespoke_name']);
+			$mail->setText($this->request->post['bespoke_enquiry']);
+			$mail->send();
+			
+			$bespoke_data = array();
+			$bespoke_data['name'] = $this->request->post['bespoke_name'];
+			$bespoke_data['email'] = $this->request->post['bespoke_email'];
+			$bespoke_data['subject'] = 'Bespoke Design Enquiry';
+			$bespoke_data['text'] = $this->request->post['bespoke_enquiry'];
+			$bespoke_data['enquiry_type_id'] = '3';
+			$bespoke_info = $this->model_catalog_information->addEnquiry($bespoke_data);
+			
+			$json['success'] =  'Your details submitted successfully!';
+			
+		}
+		
+		if (isset($this->error['name'])) {
+			$json['error'] = $this->error['name'];
+		}
+
+		if (isset($this->error['email'])) {
+			$json['error'] = $this->error['email'];
+		}
+
+		if (isset($this->error['enquiry'])) {
+			$json['error'] = $this->error['enquiry'];
+		}
+		
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));			
+
+	}
 }
