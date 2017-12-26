@@ -39,10 +39,13 @@ class ControllerCommonMenu extends Controller {
 				// Level 1
 				$data['categories'][] = array(
 					'category_id'     => $category['category_id'],
-					'name'     => $category['name'],
-					'children' => $style_data,
-					'column'   => $category['column'] ? $category['column'] : 1,
-					'href'     => $this->url->link('product/category', 'path=' . $category['category_id'])
+					'name'     	=> $category['name'],
+					'image'     => !empty($category['image']) ? HTTP_SERVER.'image/'.$category['image'] : '',
+					'image2'    => !empty($category['image2']) ? HTTP_SERVER.'image/'.$category['image2'] : '',
+					'image3'    => !empty($category['image3']) ? HTTP_SERVER.'image/'.$category['image3'] : '',
+					'children' 	=> $style_data,
+					'column'   	=> $category['column'] ? $category['column'] : 1,
+					'href'     	=> $this->url->link('product/category', 'path=' . $category['category_id'])
 				);
 			}
 		}

@@ -264,7 +264,7 @@ class Cart {
 				$stone_sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE 1 ";
 				
 				if(isset($final_option['Stone Type']) && !empty($final_option['Stone Type'])){
-					$stone_sql .= " AND diamond_type = '".$final_option['Stone Type']."' ";
+					$stone_sql .= " AND stone = '".$final_option['Stone Type']."' ";
 				}
 				
 				if(isset($final_option['Shape']) && !empty($final_option['Shape'])){
@@ -272,7 +272,7 @@ class Cart {
 				}
 				
 				if(isset($final_option['Carat']) && !empty($final_option['Carat'])){
-					$stone_sql .= " AND '".$final_option['Carat']."' between carat_from AND carat_to ";
+					$stone_sql .= " AND '".$final_option['Carat']."' between crt_from AND crt_to ";
 				}
 				
 				if(isset($final_option['Clarity']) && !empty($final_option['Clarity'])){
@@ -291,12 +291,28 @@ class Cart {
 					$stone_sql .= " AND cut = '".$final_option['Cut']."' ";
 				}
 				
+				if(isset($final_option['Polish']) && !empty($final_option['Polish'])){
+					$stone_sql .= " AND polish = '".$final_option['Polish']."' ";
+				}
+				
+				if(isset($final_option['Symmetry']) && !empty($final_option['Symmetry'])){
+					$stone_sql .= " AND symmetry = '".$final_option['Symmetry']."' ";
+				}
+				
+				if(isset($final_option['Fluo.']) && !empty($final_option['Fluo.'])){
+					$stone_sql .= " AND fluorescence = '".$final_option['Fluo.']."' ";
+				}
+				
+				if(isset($final_option['Intensity']) && !empty($final_option['Intensity'])){
+					$stone_sql .= " AND intensity = '".$final_option['Intensity']."' ";
+				}
+				
 				$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 1 ";
 				
 				$get_stone_price = $this->db->query($stone_sql);
 				
 				if($get_stone_price->num_rows){
-					$stone_price = $get_stone_price->row['price'];
+					$stone_price = $get_stone_price->row['sprice'];
 				}
 				
 				$final_price = $metal_price + $stone_price;

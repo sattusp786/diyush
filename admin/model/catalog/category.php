@@ -8,6 +8,12 @@ class ModelCatalogCategory extends Model {
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "category SET image = '" . $this->db->escape($data['image']) . "' WHERE category_id = '" . (int)$category_id . "'");
 		}
+		if (isset($data['image2'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "category SET image2 = '" . $this->db->escape($data['image2']) . "' WHERE category_id = '" . (int)$category_id . "'");
+		}
+		if (isset($data['image3'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "category SET image3 = '" . $this->db->escape($data['image3']) . "' WHERE category_id = '" . (int)$category_id . "'");
+		}
 
 		foreach ($data['category_description'] as $language_id => $value) {
 			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");
@@ -71,6 +77,12 @@ class ModelCatalogCategory extends Model {
 
 		if (isset($data['image'])) {
 			$this->db->query("UPDATE " . DB_PREFIX . "category SET image = '" . $this->db->escape($data['image']) . "' WHERE category_id = '" . (int)$category_id . "'");
+		}
+		if (isset($data['image2'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "category SET image2 = '" . $this->db->escape($data['image2']) . "' WHERE category_id = '" . (int)$category_id . "'");
+		}
+		if (isset($data['image3'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "category SET image3 = '" . $this->db->escape($data['image3']) . "' WHERE category_id = '" . (int)$category_id . "'");
 		}
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "category_description WHERE category_id = '" . (int)$category_id . "'");
