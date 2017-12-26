@@ -52,7 +52,7 @@ class Cart {
 
 					if ($option_query->num_rows) {
 						if ($option_query->row['type'] == 'select' || $option_query->row['type'] == 'radio') {
-							$option_value_query = $this->db->query("SELECT pov.option_value_id, ovd.name, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$value . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+							$option_value_query = $this->db->query("SELECT pov.option_value_id, ov.code, ovd.name, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$value . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 							if ($option_value_query->num_rows) {
 								if ($option_value_query->row['price_prefix'] == '+') {
@@ -83,6 +83,7 @@ class Cart {
 									'option_id'               => $option_query->row['option_id'],
 									'option_value_id'         => $option_value_query->row['option_value_id'],
 									'name'                    => $option_query->row['name'],
+									'code'                    => $option_value_query->row['code'],
 									'value'                   => $option_value_query->row['name'],
 									'type'                    => $option_query->row['type'],
 									'quantity'                => $option_value_query->row['quantity'],
@@ -97,7 +98,7 @@ class Cart {
 							}
 						} elseif ($option_query->row['type'] == 'checkbox' && is_array($value)) {
 							foreach ($value as $product_option_value_id) {
-								$option_value_query = $this->db->query("SELECT pov.option_value_id, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, ovd.name FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (pov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$product_option_value_id . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+								$option_value_query = $this->db->query("SELECT pov.option_value_id, ov.code, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, ovd.name FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (pov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$product_option_value_id . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 								if ($option_value_query->num_rows) {
 									if ($option_value_query->row['price_prefix'] == '+') {
@@ -128,6 +129,7 @@ class Cart {
 										'option_id'               => $option_query->row['option_id'],
 										'option_value_id'         => $option_value_query->row['option_value_id'],
 										'name'                    => $option_query->row['name'],
+										'code'                    => $option_value_query->row['code'],
 										'value'                   => $option_value_query->row['name'],
 										'type'                    => $option_query->row['type'],
 										'quantity'                => $option_value_query->row['quantity'],
@@ -240,7 +242,7 @@ class Cart {
 				$final_option = array();
 				if(!empty($option_data)){
 					foreach($option_data as $option){
-						$final_option[$option['name']] = $option['value'];
+						$final_option[$option['name']] = $option['code'];
 					}
 				}
 				
@@ -249,7 +251,7 @@ class Cart {
 				$metal_weight = $product_query->row['weight'] + $option_weight;
 				
 				$metal_price_per_gram = 0;
-				$get_metal_price = $this->db->query("SELECT * FROM " . DB_PREFIX . "metal_price WHERE name = '".$final_option['Metal']."' ");
+				$get_metal_price = $this->db->query("SELECT * FROM " . DB_PREFIX . "metal_price WHERE code = '".$final_option['Metal']."' ");
 				if($get_metal_price->num_rows){
 					$metal_price_per_gram = $get_metal_price->row['price'];
 				}
@@ -272,7 +274,7 @@ class Cart {
 				}
 				
 				if(isset($final_option['Carat']) && !empty($final_option['Carat'])){
-					$stone_sql .= " AND '".$final_option['Carat']."' between crt_from AND crt_to ";
+					$stone_sql .= " AND '".($final_option['Carat']/100)."' between crt_from AND crt_to ";
 				}
 				
 				if(isset($final_option['Clarity']) && !empty($final_option['Clarity'])){
@@ -308,6 +310,8 @@ class Cart {
 				}
 				
 				$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 1 ";
+				
+				//echo $stone_sql;
 				
 				$get_stone_price = $this->db->query($stone_sql);
 				
