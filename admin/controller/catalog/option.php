@@ -360,6 +360,7 @@ class ControllerCatalogOption extends Controller {
 				'option_value_description' => $option_value['option_value_description'],
 				'image'                    => $image,
 				'thumb'                    => $this->model_tool_image->resize($thumb, 100, 100),
+				'code'               	   => $option_value['code'],
 				'sort_order'               => $option_value['sort_order']
 			);
 		}

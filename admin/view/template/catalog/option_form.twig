@@ -183,6 +183,7 @@
                 <tr>
                   <td class="text-left required">{{ entry_option_value }}</td>
                   <td class="text-center">{{ entry_image }}</td>
+                  <td class="text-center">{{ entry_code }}</td>
                   <td class="text-right">{{ entry_sort_order }}</td>
                   <td></td>
                 </tr>
@@ -203,6 +204,7 @@
                   {% endfor %}</td>
                 <td class="text-left"><a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ option_value.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
                   <input type="hidden" name="option_value[{{ option_value_row }}][image]" value="{{ option_value.image }}" id="input-image{{ option_value_row }}" /></td>
+                <td class="text-left"><input type="text" name="option_value[{{ option_value_row }}][code]" value="{{ option_value.code }}" class="form-control" /></td>
                 <td class="text-right"><input type="text" name="option_value[{{ option_value_row }}][sort_order]" value="{{ option_value.sort_order }}" class="form-control" /></td>
                 <td class="text-right"><button type="button" onclick="$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
               </tr>
@@ -245,6 +247,7 @@ function addOptionValue() {
 	{% endfor %}
 	html += '  </td>';
     html += '  <td class="text-center"><a href="" id="thumb-image' + option_value_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="option_value[' + option_value_row + '][image]" value="" id="input-image' + option_value_row + '" /></td>';
+	html += '  <td class="text-right"><input type="text" name="option_value[' + option_value_row + '][code]" value="" placeholder="{{ entry_code }}" class="form-control" /></td>';
 	html += '  <td class="text-right"><input type="text" name="option_value[' + option_value_row + '][sort_order]" value="" placeholder="{{ entry_sort_order }}" class="form-control" /></td>';
 	html += '  <td class="text-right"><button type="button" onclick="$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
