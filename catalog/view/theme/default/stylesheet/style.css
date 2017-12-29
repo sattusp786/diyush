@@ -2628,7 +2628,7 @@ ul.sub-navi li a:before {
     float: left;}
 	
 #wpbs_slider {  position:fixed; right:10px; bottom:0px; z-index:9999; }
-#icon_label { /*float:left;*/position: relative; width: 150px; height:30px; padding:5px ; cursor:pointer; background:#eeb013 ; }
+#icon_label { /*float:left;*/position: relative; width: 130px; height:30px; padding:5px ; cursor:pointer; background:#eeb013 ; }
 #icon_label span { display:block; text-transform: uppercase; color:#000; }
 #icon_label span.lbl {transform: rotate(-90deg);}
 #wpbs_cont {width:420px; padding:20px; float:right; position:relative; display:none; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); border:1px solid #eeb013;}
@@ -2685,7 +2685,7 @@ ul.sub-navi li a:before {
     cursor: pointer; /* Cursor on hover */
 }
 
-.zopim:first-child { display:none;}
+.zopim { display:none !important;}
 
 .navbar-toggle { margin-right:0;}
 #settingmenu { display:none; background-color: rgba(27, 22, 28, 0.95); clear: both; min-height: 0;  padding: 0;  position: absolute; right:0;  top: 87px; width: 50%;}
@@ -2697,3 +2697,10 @@ ul.sub-navi li a:before {
 .setting-menu li span.currency-icons a.active .fa { color:#000;}
 .nav-tabs.protabs > li > a {  margin:0 15px; padding-left:15px; padding-right:15px;}
 .nav-tabs.protabs > li.active > a { color:#fff; background:#000; }
+
+.rviwcolumn2 {width: 124px;
+    height: 50px;
+    overflow: hidden;
+    position: absolute;
+    right: 20px;
+    top: 0;}

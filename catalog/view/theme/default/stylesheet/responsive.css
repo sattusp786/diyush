@@ -1192,6 +1192,9 @@
     .specialise-box {min-height: 0;}
 	
 	.content-top-margin { margin-top: 80px;}
+	#wpbs_slider { right:0px;}
+	#wpbs_cont {width:100%;}
+	.rviwcolumn2 { position:static; margin:20px 0;}
     
 }
 @media (max-width: 700px) {
