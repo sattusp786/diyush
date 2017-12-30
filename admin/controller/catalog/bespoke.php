@@ -26,32 +26,16 @@ class ControllerCatalogBespoke extends Controller {
 
 			$url = '';
 
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_lname'])) {
-				$url .= '&filter_lname=' . urlencode(html_entity_decode($this->request->get['filter_lname'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_description'])) {
+				$url .= '&filter_description=' . urlencode(html_entity_decode($this->request->get['filter_description'], ENT_QUOTES, 'UTF-8'));
 			}
 			
-			if (isset($this->request->get['filter_subject'])) {
-				$url .= '&filter_subject=' . urlencode(html_entity_decode($this->request->get['filter_subject'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_text'])) {
-				$url .= '&filter_text=' . urlencode(html_entity_decode($this->request->get['filter_text'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_email'])) {
-				$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_phone'])) {
-				$url .= '&filter_phone=' . urlencode(html_entity_decode($this->request->get['filter_phone'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_address'])) {
-				$url .= '&filter_address=' . urlencode(html_entity_decode($this->request->get['filter_address'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_sort_order'])) {
+				$url .= '&filter_sort_order=' . urlencode(html_entity_decode($this->request->get['filter_sort_order'], ENT_QUOTES, 'UTF-8'));
 			}
 
 			if (isset($this->request->get['filter_status'])) {
@@ -90,32 +74,16 @@ class ControllerCatalogBespoke extends Controller {
 
 			$url = '';
 
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_lname'])) {
-				$url .= '&filter_lname=' . urlencode(html_entity_decode($this->request->get['filter_lname'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_description'])) {
+				$url .= '&filter_description=' . urlencode(html_entity_decode($this->request->get['filter_description'], ENT_QUOTES, 'UTF-8'));
 			}
 			
-			if (isset($this->request->get['filter_subject'])) {
-				$url .= '&filter_subject=' . urlencode(html_entity_decode($this->request->get['filter_subject'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_text'])) {
-				$url .= '&filter_text=' . urlencode(html_entity_decode($this->request->get['filter_text'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_email'])) {
-				$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_phone'])) {
-				$url .= '&filter_phone=' . urlencode(html_entity_decode($this->request->get['filter_phone'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_address'])) {
-				$url .= '&filter_address=' . urlencode(html_entity_decode($this->request->get['filter_address'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_sort_order'])) {
+				$url .= '&filter_sort_order=' . urlencode(html_entity_decode($this->request->get['filter_sort_order'], ENT_QUOTES, 'UTF-8'));
 			}
 
 			if (isset($this->request->get['filter_status'])) {
@@ -156,32 +124,16 @@ class ControllerCatalogBespoke extends Controller {
 
 			$url = '';
 
-			if (isset($this->request->get['filter_name'])) {
-				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_title'])) {
+				$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
 			}
 
-			if (isset($this->request->get['filter_lname'])) {
-				$url .= '&filter_lname=' . urlencode(html_entity_decode($this->request->get['filter_lname'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_description'])) {
+				$url .= '&filter_description=' . urlencode(html_entity_decode($this->request->get['filter_description'], ENT_QUOTES, 'UTF-8'));
 			}
 			
-			if (isset($this->request->get['filter_subject'])) {
-				$url .= '&filter_subject=' . urlencode(html_entity_decode($this->request->get['filter_subject'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_text'])) {
-				$url .= '&filter_text=' . urlencode(html_entity_decode($this->request->get['filter_text'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_email'])) {
-				$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_phone'])) {
-				$url .= '&filter_phone=' . urlencode(html_entity_decode($this->request->get['filter_phone'], ENT_QUOTES, 'UTF-8'));
-			}
-			
-			if (isset($this->request->get['filter_address'])) {
-				$url .= '&filter_address=' . urlencode(html_entity_decode($this->request->get['filter_address'], ENT_QUOTES, 'UTF-8'));
+			if (isset($this->request->get['filter_sort_order'])) {
+				$url .= '&filter_sort_order=' . urlencode(html_entity_decode($this->request->get['filter_sort_order'], ENT_QUOTES, 'UTF-8'));
 			}
 
 			if (isset($this->request->get['filter_status'])) {
@@ -207,46 +159,22 @@ class ControllerCatalogBespoke extends Controller {
 	}
 
 	protected function getList() {
-		if (isset($this->request->get['filter_name'])) {
-			$filter_name = $this->request->get['filter_name'];
+		if (isset($this->request->get['filter_title'])) {
+			$filter_title = $this->request->get['filter_title'];
 		} else {
-			$filter_name = '';
+			$filter_title = '';
 		}
 
-		if (isset($this->request->get['filter_lname'])) {
-			$filter_lname = $this->request->get['filter_lname'];
+		if (isset($this->request->get['filter_description'])) {
+			$filter_description = $this->request->get['filter_description'];
 		} else {
-			$filter_lname = '';
+			$filter_description = '';
 		}
 		
-		if (isset($this->request->get['filter_subject'])) {
-			$filter_subject = $this->request->get['filter_subject'];
+		if (isset($this->request->get['filter_sort_order'])) {
+			$filter_sort_order = $this->request->get['filter_sort_order'];
 		} else {
-			$filter_subject = '';
-		}
-		
-		if (isset($this->request->get['filter_text'])) {
-			$filter_text = $this->request->get['filter_text'];
-		} else {
-			$filter_text = '';
-		}
-		
-		if (isset($this->request->get['filter_email'])) {
-			$filter_email = $this->request->get['filter_email'];
-		} else {
-			$filter_email = '';
-		}
-		
-		if (isset($this->request->get['filter_phone'])) {
-			$filter_phone = $this->request->get['filter_phone'];
-		} else {
-			$filter_phone = '';
-		}
-		
-		if (isset($this->request->get['filter_address'])) {
-			$filter_address = $this->request->get['filter_address'];
-		} else {
-			$filter_address = '';
+			$filter_sort_order = '';
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -275,32 +203,16 @@ class ControllerCatalogBespoke extends Controller {
 
 		$url = '';
 
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_lname'])) {
-			$url .= '&filter_lname=' . urlencode(html_entity_decode($this->request->get['filter_lname'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_description'])) {
+			$url .= '&filter_description=' . urlencode(html_entity_decode($this->request->get['filter_description'], ENT_QUOTES, 'UTF-8'));
 		}
 		
-		if (isset($this->request->get['filter_subject'])) {
-			$url .= '&filter_subject=' . urlencode(html_entity_decode($this->request->get['filter_subject'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_text'])) {
-			$url .= '&filter_text=' . urlencode(html_entity_decode($this->request->get['filter_text'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_phone'])) {
-			$url .= '&filter_phone=' . urlencode(html_entity_decode($this->request->get['filter_phone'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_address'])) {
-			$url .= '&filter_address=' . urlencode(html_entity_decode($this->request->get['filter_address'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_sort_order'])) {
+			$url .= '&filter_sort_order=' . urlencode(html_entity_decode($this->request->get['filter_sort_order'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -337,13 +249,9 @@ class ControllerCatalogBespoke extends Controller {
 		$data['bespokes'] = array();
 
 		$filter_data = array(
-			'filter_name'    => $filter_name,
-			'filter_lname'     => $filter_lname,
-			'filter_subject'     => $filter_subject,
-			'filter_text'     => $filter_text,
-			'filter_email'     => $filter_email,
-			'filter_phone'     => $filter_phone,
-			'filter_address'     => $filter_address,
+			'filter_title'    => $filter_title,
+			'filter_description'     => $filter_description,
+			'filter_sort_order'     => $filter_sort_order,
 			'filter_status'     => $filter_status,
 			'sort'              => $sort,
 			'order'             => $order,
@@ -355,16 +263,22 @@ class ControllerCatalogBespoke extends Controller {
 
 		$results = $this->model_catalog_bespoke->getBespokes($filter_data);
 
+		$this->load->model('tool/image');
+		
 		foreach ($results as $result) {
+
+			if (!empty($result['image'])) {
+				$image = $this->model_tool_image->resize($result['image'], 100, 100);
+			} else {
+				$image = $this->model_tool_image->resize('no_image.png', 100, 100);
+			}
+			
 			$data['bespokes'][] = array(
 				'bespoke_id'  => $result['bespoke_id'],
-				'name'       => $result['name'],
-				'lname'     => $result['lname'],
-				'subject'     => $result['subject'],
-				'text'     => $result['text'],
-				'email'     => $result['email'],
-				'phone'     => $result['phone'],
-				'address'     => $result['address'],
+				'title'       => $result['title'],
+				'image'       => $image,
+				'description'     => $result['description'],
+				'sort_order'     => $result['sort_order'],
 				'status'     => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'edit'       => $this->url->link('catalog/bespoke/edit', 'user_token=' . $this->session->data['user_token'] . '&bespoke_id=' . $result['bespoke_id'] . $url, true)
@@ -395,32 +309,16 @@ class ControllerCatalogBespoke extends Controller {
 
 		$url = '';
 
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_lname'])) {
-			$url .= '&filter_lname=' . urlencode(html_entity_decode($this->request->get['filter_lname'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_description'])) {
+			$url .= '&filter_description=' . urlencode(html_entity_decode($this->request->get['filter_description'], ENT_QUOTES, 'UTF-8'));
 		}
 		
-		if (isset($this->request->get['filter_subject'])) {
-			$url .= '&filter_subject=' . urlencode(html_entity_decode($this->request->get['filter_subject'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_text'])) {
-			$url .= '&filter_text=' . urlencode(html_entity_decode($this->request->get['filter_text'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_phone'])) {
-			$url .= '&filter_phone=' . urlencode(html_entity_decode($this->request->get['filter_phone'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_address'])) {
-			$url .= '&filter_address=' . urlencode(html_entity_decode($this->request->get['filter_address'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_sort_order'])) {
+			$url .= '&filter_sort_order=' . urlencode(html_entity_decode($this->request->get['filter_sort_order'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -437,42 +335,22 @@ class ControllerCatalogBespoke extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_name'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=e.name' . $url, true);
-		$data['sort_lname'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=e.lname' . $url, true);
-		$data['sort_subject'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=e.subject' . $url, true);
-		$data['sort_text'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=e.text' . $url, true);
-		$data['sort_email'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=e.email' . $url, true);
-		$data['sort_phone'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=e.phone' . $url, true);
-		$data['sort_status'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=r.status' . $url, true);
+		$data['sort_title'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=title' . $url, true);
+		$data['sort_description'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=description' . $url, true);
+		$data['sort_status'] = $this->url->link('catalog/bespoke', 'user_token=' . $this->session->data['user_token'] . '&sort=status' . $url, true);
 
 		$url = '';
 
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_lname'])) {
-			$url .= '&filter_lname=' . urlencode(html_entity_decode($this->request->get['filter_lname'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_description'])) {
+			$url .= '&filter_description=' . urlencode(html_entity_decode($this->request->get['filter_description'], ENT_QUOTES, 'UTF-8'));
 		}
 		
-		if (isset($this->request->get['filter_subject'])) {
-			$url .= '&filter_subject=' . urlencode(html_entity_decode($this->request->get['filter_subject'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_text'])) {
-			$url .= '&filter_text=' . urlencode(html_entity_decode($this->request->get['filter_text'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_phone'])) {
-			$url .= '&filter_phone=' . urlencode(html_entity_decode($this->request->get['filter_phone'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_address'])) {
-			$url .= '&filter_address=' . urlencode(html_entity_decode($this->request->get['filter_address'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_sort_order'])) {
+			$url .= '&filter_sort_order=' . urlencode(html_entity_decode($this->request->get['filter_sort_order'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -497,13 +375,9 @@ class ControllerCatalogBespoke extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($bespoke_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($bespoke_total - $this->config->get('config_limit_admin'))) ? $bespoke_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $bespoke_total, ceil($bespoke_total / $this->config->get('config_limit_admin')));
 
-		$data['filter_name'] = $filter_name;
-		$data['filter_lname'] = $filter_lname;
-		$data['filter_subject'] = $filter_subject;
-		$data['filter_text'] = $filter_text;
-		$data['filter_email'] = $filter_email;
-		$data['filter_phone'] = $filter_phone;
-		$data['filter_address'] = $filter_address;
+		$data['filter_title'] = $filter_title;
+		$data['filter_description'] = $filter_description;
+		$data['filter_sort_order'] = $filter_sort_order;
 		$data['filter_status'] = $filter_status;
 
 		$data['sort'] = $sort;
@@ -525,58 +399,30 @@ class ControllerCatalogBespoke extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		if (isset($this->error['name'])) {
-			$data['error_name'] = $this->error['name'];
+		if (isset($this->error['title'])) {
+			$data['error_title'] = $this->error['title'];
 		} else {
-			$data['error_name'] = '';
+			$data['error_title'] = '';
 		}
 
-		if (isset($this->error['lname'])) {
-			$data['error_lname'] = $this->error['lname'];
+		if (isset($this->error['description'])) {
+			$data['error_description'] = $this->error['description'];
 		} else {
-			$data['error_lname'] = '';
+			$data['error_description'] = '';
 		}
-
-		if (isset($this->error['text'])) {
-			$data['error_text'] = $this->error['text'];
-		} else {
-			$data['error_text'] = '';
-		}
-
-		if (isset($this->error['subject'])) {
-			$data['error_subject'] = $this->error['subject'];
-		} else {
-			$data['error_subject'] = '';
-		}
-
+		
 		$url = '';
 
-		if (isset($this->request->get['filter_name'])) {
-			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . urlencode(html_entity_decode($this->request->get['filter_title'], ENT_QUOTES, 'UTF-8'));
 		}
 
-		if (isset($this->request->get['filter_lname'])) {
-			$url .= '&filter_lname=' . urlencode(html_entity_decode($this->request->get['filter_lname'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_description'])) {
+			$url .= '&filter_description=' . urlencode(html_entity_decode($this->request->get['filter_description'], ENT_QUOTES, 'UTF-8'));
 		}
 		
-		if (isset($this->request->get['filter_subject'])) {
-			$url .= '&filter_subject=' . urlencode(html_entity_decode($this->request->get['filter_subject'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_text'])) {
-			$url .= '&filter_text=' . urlencode(html_entity_decode($this->request->get['filter_text'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_email'])) {
-			$url .= '&filter_email=' . urlencode(html_entity_decode($this->request->get['filter_email'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_phone'])) {
-			$url .= '&filter_phone=' . urlencode(html_entity_decode($this->request->get['filter_phone'], ENT_QUOTES, 'UTF-8'));
-		}
-		
-		if (isset($this->request->get['filter_address'])) {
-			$url .= '&filter_address=' . urlencode(html_entity_decode($this->request->get['filter_address'], ENT_QUOTES, 'UTF-8'));
+		if (isset($this->request->get['filter_sort_order'])) {
+			$url .= '&filter_sort_order=' . urlencode(html_entity_decode($this->request->get['filter_sort_order'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -623,68 +469,28 @@ class ControllerCatalogBespoke extends Controller {
 		
 		$this->load->model('catalog/product');
 
-		if (isset($this->request->post['name'])) {
-			$data['name'] = $this->request->post['name'];
+		if (isset($this->request->post['title'])) {
+			$data['title'] = $this->request->post['title'];
 		} elseif (!empty($bespoke_info)) {
-			$data['name'] = $bespoke_info['name'];
+			$data['title'] = $bespoke_info['title'];
 		} else {
-			$data['name'] = '';
+			$data['title'] = '';
 		}
 
-		if (isset($this->request->post['lname'])) {
-			$data['lname'] = $this->request->post['lname'];
+		if (isset($this->request->post['description'])) {
+			$data['description'] = $this->request->post['description'];
 		} elseif (!empty($bespoke_info)) {
-			$data['lname'] = $bespoke_info['lname'];
+			$data['description'] = $bespoke_info['description'];
 		} else {
-			$data['lname'] = '';
+			$data['description'] = '';
 		}
 
-		if (isset($this->request->post['subject'])) {
-			$data['subject'] = $this->request->post['subject'];
+		if (isset($this->request->post['sort_order'])) {
+			$data['sort_order'] = $this->request->post['sort_order'];
 		} elseif (!empty($bespoke_info)) {
-			$data['subject'] = $bespoke_info['subject'];
+			$data['sort_order'] = $bespoke_info['sort_order'];
 		} else {
-			$data['subject'] = '';
-		}
-
-		if (isset($this->request->post['email'])) {
-			$data['email'] = $this->request->post['email'];
-		} elseif (!empty($bespoke_info)) {
-			$data['email'] = $bespoke_info['email'];
-		} else {
-			$data['email'] = '';
-		}
-
-		if (isset($this->request->post['phone'])) {
-			$data['phone'] = $this->request->post['phone'];
-		} elseif (!empty($bespoke_info)) {
-			$data['phone'] = $bespoke_info['phone'];
-		} else {
-			$data['phone'] = '';
-		}
-		
-		if (isset($this->request->post['address'])) {
-			$data['address'] = $this->request->post['address'];
-		} elseif (!empty($bespoke_info)) {
-			$data['address'] = $bespoke_info['address'];
-		} else {
-			$data['address'] = '';
-		}
-		
-		if (isset($this->request->post['ip'])) {
-			$data['ip'] = $this->request->post['ip'];
-		} elseif (!empty($bespoke_info)) {
-			$data['ip'] = $bespoke_info['ip'];
-		} else {
-			$data['ip'] = '';
-		}
-
-		if (isset($this->request->post['date_added'])) {
-			$data['date_added'] = $this->request->post['date_added'];
-		} elseif (!empty($bespoke_info)) {
-			$data['date_added'] = ($bespoke_info['date_added'] != '0000-00-00 00:00' ? $bespoke_info['date_added'] : '');
-		} else {
-			$data['date_added'] = '';
+			$data['sort_order'] = '';
 		}
 
 		if (isset($this->request->post['status'])) {
@@ -693,6 +499,24 @@ class ControllerCatalogBespoke extends Controller {
 			$data['status'] = $bespoke_info['status'];
 		} else {
 			$data['status'] = '';
+		}
+		
+		if (isset($this->request->post['image'])) {
+			$data['image'] = $this->request->post['image'];
+		} elseif (!empty($bespoke_info)) {
+			$data['image'] = $bespoke_info['image'];
+		} else {
+			$data['image'] = '';
+		}
+		
+		$this->load->model('tool/image');
+
+		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
+			$data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 100, 100);
+		} elseif (!empty($bespoke_info) && is_file(DIR_IMAGE . $bespoke_info['image'])) {
+			$data['thumb'] = $this->model_tool_image->resize($bespoke_info['image'], 100, 100);
+		} else {
+			$data['thumb'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 		}
 
 		$data['header'] = $this->load->controller('common/header');
@@ -707,16 +531,8 @@ class ControllerCatalogBespoke extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if (!$this->request->post['name']) {
-			$this->error['name'] = $this->language->get('name');
-		}
-
-		if ((utf8_strlen($this->request->post['lname']) < 3) || (utf8_strlen($this->request->post['lname']) > 64)) {
-			$this->error['lname'] = $this->language->get('error_lname');
-		}
-
-		if (utf8_strlen($this->request->post['text']) < 1) {
-			$this->error['text'] = $this->language->get('error_text');
+		if (!$this->request->post['title']) {
+			$this->error['title'] = $this->language->get('title');
 		}
 
 		return !$this->error;

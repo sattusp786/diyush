@@ -10,27 +10,19 @@ $_['text_edit']         = 'Edit Bespoke';
 $_['text_filter']       = 'Filter';
 
 // Column
-$_['column_name']    	= 'First Name';
-$_['column_lname']     	= 'Last Name';
-$_['column_subject']    = 'Subject';
-$_['column_text']     	= 'Message';
-$_['column_email']     	= 'Email';
-$_['column_phone']     	= 'Phone';
-$_['column_address']    = 'Address';
-$_['column_ip']     	= 'IP Address';
+$_['column_title']    	= 'Title';
+$_['column_description']     	= 'Description';
+$_['column_sort_order']    = 'Sort Order';
+$_['column_image']    = 'Image';
 $_['column_status']     = 'Status';
 $_['column_date_added'] = 'Date Added';
 $_['column_action']     = 'Action';
 
 // Entry
-$_['entry_name']     = 'First Name';
-$_['entry_lname']      = 'Last Name';
-$_['entry_subject']      = 'Subject';
-$_['entry_text']      = 'Message';
-$_['entry_email']      = 'Email';
-$_['entry_phone']      = 'Phone';
-$_['entry_address']      = 'Address';
-$_['entry_ip']      = 'IP Address';
+$_['entry_title']     = 'Title';
+$_['entry_description']      = 'Description';
+$_['entry_image']      = 'Image';
+$_['entry_sort_order']      = 'Sort Order';
 $_['entry_status']      = 'Status';
 $_['entry_date_added']  = 'Date Added';
 
@@ -39,7 +31,5 @@ $_['help_product']      = '(Autocomplete)';
 
 // Error
 $_['error_permission']  = 'Warning: You do not have permission to modify bespokes!';
-$_['error_name']     = 'First name required!';
-$_['error_lname']      = 'Last name must be between 3 and 64 characters!';
-$_['error_text']        = 'Bespoke Text must be at least 1 character!';
-$_['error_subject']      = 'Bespoke Subject required!';
+$_['error_title']     = 'First name required!';
+$_['error_description']      = 'Last name must be between 3 and 64 characters!';

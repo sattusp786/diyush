@@ -25,51 +25,27 @@
       <div class="panel-body">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-bespoke" class="form-horizontal">
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+            <label class="col-sm-2 control-label" for="input-title">{{ entry_title }}</label>
             <div class="col-sm-10">
-              <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+              <input type="text" name="title" value="{{ title }}" placeholder="{{ entry_title }}" id="input-title" class="form-control" />
+			</div>
+          </div>
+		  <div class="form-group">
+			<label class="col-sm-2 control-label">{{ entry_image }}</label>
+			<div class="col-sm-10"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+			  <input type="hidden" name="image" value="{{ image }}" id="input-image" />
+			</div>
+		  </div>
+		  <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-description">{{ entry_description }}</label>
+            <div class="col-sm-10">
+              <textarea name="description" placeholder="{{ entry_description }}" id="input-description" class="form-control">{{ description }}</textarea>
 			</div>
           </div>
 		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-lname">{{ entry_lname }}</label>
+            <label class="col-sm-2 control-label" for="input-sort_order">{{ entry_sort_order }}</label>
             <div class="col-sm-10">
-              <input type="text" name="lname" value="{{ lname }}" placeholder="{{ entry_lname }}" id="input-lname" class="form-control" />
-			</div>
-          </div>
-		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-subject">{{ entry_subject }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="subject" value="{{ subject }}" placeholder="{{ entry_subject }}" id="input-subject" class="form-control" />
-			</div>
-          </div>
-		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name">{{ entry_text }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="text" value="{{ text }}" placeholder="{{ entry_text }}" id="input-text" class="form-control" />
-			</div>
-          </div>
-		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name">{{ entry_email }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
-			</div>
-          </div>
-		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-phone">{{ entry_phone }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="phone" value="{{ phone }}" placeholder="{{ entry_phone }}" id="input-phone" class="form-control" />
-			</div>
-          </div>
-		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-address">{{ entry_address }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="address" value="{{ address }}" placeholder="{{ entry_address }}" id="input-address" class="form-control" />
-			</div>
-          </div>
-		  <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-ip">{{ entry_ip }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="ip" value="{{ ip }}" placeholder="{{ entry_ip }}" id="input-ip" class="form-control" />
+              <input type="text" name="sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort_order" class="form-control" />
 			</div>
           </div>
           <div class="form-group">
@@ -90,33 +66,5 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
-$('.datetime').datetimepicker({
-	language: '{{ datepicker }}',
-	pickDate: true,
-	pickTime: true
-});
-//--></script> 
-  <script type="text/javascript"><!--
-$('input[name=\'product\']').autocomplete({
-	'source': function(request, response) {
-		$.ajax({
-			url: 'index.php?route=catalog/product/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
-			dataType: 'json',			
-			success: function(json) {
-				response($.map(json, function(item) {
-					return {
-						label: item['name'],
-						value: item['product_id']
-					}
-				}));
-			}
-		});
-	},
-	'select': function(item) {
-		$('input[name=\'product\']').val(item['label']);
-		$('input[name=\'product_id\']').val(item['value']);		
-	}	
-});
-//--></script></div>
+</div>
 {{ footer }}

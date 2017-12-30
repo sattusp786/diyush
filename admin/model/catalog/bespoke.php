@@ -1,15 +1,23 @@
 <?php
 class ModelCatalogBespoke extends Model {
 	public function addBespoke($data) {
-		$this->db->query("INSERT INTO " . DB_PREFIX . "bespoke SET name = '" . $this->db->escape($data['name']) . "', lname = '" . $this->db->escape($data['lname']) . "', subject = '" . $this->db->escape($data['subject']) . "', email = '" . $this->db->escape($data['email']) . "', text = '" . $this->db->escape($data['text']) . "', phone = '" . $this->db->escape($data['phone']) . "', address = '" . $this->db->escape($data['address']) . "', ip = '" . $this->db->escape($data['ip']) . "' ");
+		$this->db->query("INSERT INTO " . DB_PREFIX . "bespoke SET title = '" . $this->db->escape($data['title']) . "', description = '" . $this->db->escape($data['description']) . "', sort_order = '" . $this->db->escape($data['sort_order']) . "', status = '" . $this->db->escape($data['status']) . "' ");
 
 		$bespoke_id = $this->db->getLastId();
 
+		if (isset($data['image'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "bespoke SET image = '" . $this->db->escape($data['image']) . "' WHERE bespoke_id = '" . (int)$bespoke_id . "'");
+		}
+		
 		return $bespoke_id;
 	}
 
 	public function editBespoke($bespoke_id, $data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "bespoke SET name = '" . $this->db->escape($data['name']) . "', lname = '" . $this->db->escape($data['lname']) . "', subject = '" . $this->db->escape($data['subject']) . "', email = '" . $this->db->escape($data['email']) . "', text = '" . $this->db->escape($data['text']) . "', phone = '" . $this->db->escape($data['phone']) . "', address = '" . $this->db->escape($data['address']) . "', ip = '" . $this->db->escape($data['ip']) . "' WHERE bespoke_id = '" . (int)$bespoke_id . "'");
+		$this->db->query("UPDATE " . DB_PREFIX . "bespoke SET title = '" . $this->db->escape($data['title']) . "', description = '" . $this->db->escape($data['description']) . "', sort_order = '" . $this->db->escape($data['sort_order']) . "', status = '" . $this->db->escape($data['status']) . "' WHERE bespoke_id = '" . (int)$bespoke_id . "'");
+		
+		if (isset($data['image'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "bespoke SET image = '" . $this->db->escape($data['image']) . "' WHERE bespoke_id = '" . (int)$bespoke_id . "'");
+		}
 	}
 
 	public function deleteBespoke($bespoke_id) {
@@ -23,56 +31,36 @@ class ModelCatalogBespoke extends Model {
 	}
 
 	public function getBespokes($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "bespoke e WHERE 1 ";
+		$sql = "SELECT * FROM " . DB_PREFIX . "bespoke WHERE 1 ";
 
-		if (!empty($data['filter_name'])) {
-			$sql .= " AND e.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		if (!empty($data['filter_title'])) {
+			$sql .= " AND title LIKE '" . $this->db->escape($data['filter_title']) . "%'";
 		}
 
-		if (!empty($data['filter_lname'])) {
-			$sql .= " AND e.lname LIKE '" . $this->db->escape($data['filter_lname']) . "%'";
+		if (!empty($data['filter_description'])) {
+			$sql .= " AND description LIKE '" . $this->db->escape($data['filter_description']) . "%'";
 		}
 		
-		if (!empty($data['filter_subject'])) {
-			$sql .= " AND e.subject LIKE '" . $this->db->escape($data['filter_subject']) . "%'";
-		}
-		
-		if (!empty($data['filter_text'])) {
-			$sql .= " AND e.text LIKE '" . $this->db->escape($data['filter_text']) . "%'";
-		}
-		
-		if (!empty($data['filter_email'])) {
-			$sql .= " AND e.email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
-		}
-		
-		if (!empty($data['filter_phone'])) {
-			$sql .= " AND e.phone LIKE '" . $this->db->escape($data['filter_phone']) . "%'";
-		}
-		
-		if (!empty($data['filter_address'])) {
-			$sql .= " AND e.address LIKE '" . $this->db->escape($data['filter_address']) . "%'";
+		if (!empty($data['filter_sort_order'])) {
+			$sql .= " AND sort_order = '" . $this->db->escape($data['filter_sort_order']) . "'";
 		}
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
-			$sql .= " AND e.status = '" . (int)$data['filter_status'] . "'";
+			$sql .= " AND status = '" . (int)$data['filter_status'] . "'";
 		}
 
 		$sort_data = array(
-			'e.name',
-			'e.lname',
-			'e.subject',
-			'e.text',
-			'e.email',
-			'e.phone',
-			'e.address',
-			'e.status',
-			'e.date_added'
+			'title',
+			'description',
+			'sort_order',
+			'status',
+			'date_added'
 		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
 		} else {
-			$sql .= " ORDER BY e.date_added";
+			$sql .= " ORDER BY date_added";
 		}
 
 		if (isset($data['order']) && ($data['order'] == 'DESC')) {
@@ -99,38 +87,22 @@ class ModelCatalogBespoke extends Model {
 	}
 
 	public function getTotalBespokes($data = array()) {
-		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "bespoke e WHERE 1 ";
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "bespoke WHERE 1 ";
 
-		if (!empty($data['filter_name'])) {
-			$sql .= " AND e.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		if (!empty($data['filter_title'])) {
+			$sql .= " AND title LIKE '" . $this->db->escape($data['filter_title']) . "%'";
 		}
 
-		if (!empty($data['filter_lname'])) {
-			$sql .= " AND e.lname LIKE '" . $this->db->escape($data['filter_lname']) . "%'";
+		if (!empty($data['filter_description'])) {
+			$sql .= " AND description LIKE '" . $this->db->escape($data['filter_description']) . "%'";
 		}
 		
-		if (!empty($data['filter_subject'])) {
-			$sql .= " AND e.subject LIKE '" . $this->db->escape($data['filter_subject']) . "%'";
-		}
-		
-		if (!empty($data['filter_text'])) {
-			$sql .= " AND e.text LIKE '" . $this->db->escape($data['filter_text']) . "%'";
-		}
-		
-		if (!empty($data['filter_email'])) {
-			$sql .= " AND e.email LIKE '" . $this->db->escape($data['filter_email']) . "%'";
-		}
-		
-		if (!empty($data['filter_phone'])) {
-			$sql .= " AND e.phone LIKE '" . $this->db->escape($data['filter_phone']) . "%'";
-		}
-		
-		if (!empty($data['filter_address'])) {
-			$sql .= " AND e.address LIKE '" . $this->db->escape($data['filter_address']) . "%'";
+		if (!empty($data['filter_sort_order'])) {
+			$sql .= " AND sort_order = '" . $this->db->escape($data['filter_sort_order']) . "'";
 		}
 
 		if (isset($data['filter_status']) && $data['filter_status'] !== '') {
-			$sql .= " AND e.status = '" . (int)$data['filter_status'] . "'";
+			$sql .= " AND status = '" . (int)$data['filter_status'] . "'";
 		}
 
 		$query = $this->db->query($sql);
