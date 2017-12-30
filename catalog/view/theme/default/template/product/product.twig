@@ -96,7 +96,7 @@
                         <!-- end product stock -->
                         <div class="separator-line bg-black no-margin-lr margin-two"></div>
                         <div class="pricewrap width-100">
-                        <div class="col-md-6 no-padding-left">
+                        <div class="col-md-9 no-padding-left">
                         {% if price %}
 						  <ul class="list-unstyled">
 							{% if not special %}
@@ -109,7 +109,7 @@
 							  <h2 class="final_price">{{ special }} <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
 							</li>
 							{% endif %}
-                             <li>(Inc. VAT, Postage and Packaging)</li>
+                             <li>(Inc. VAT, Postage and Packaging) <a href="#fairpricing" class="highlight-button-dark btn btn-very-small button xs-no-margin popup-with-zoom-anim" style=" margin: 0 10px; line-height: initial;">Fair pricing Policy</a></li>
 							<!--{% if tax %}                           
 							<li>{{ text_tax }} {{ tax }}</li>
 							{% endif %}
@@ -126,6 +126,12 @@
 						  </ul>
 						  {% endif %}
                           </div>
+                          <div id="fairpricing" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 text-center center-col bg-white modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Fair pricing Policy </span>
+                                <h3 class="margin-four">WE COMPARE SO YOU DONT HAVE TO</h3>
+                                <p>It's easy to lose sight of what value really means. If your version of value is like ours and about getting more and paying less, then you're in the right place. Buying direct from manufacturer online can save half of high street jewellers. We don't do endless promotions and high low pricing; we offer our lowest price permanently. Compare us and we know that you'll feel the difference.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
                           <!--<div class="col-md-4 padding-two border border-gray">
                           	<ul>
                             	<li><a class="popup-with-zoom-anim" href="#lifetimewarranty-popup"><i><img src="catalog/view/theme/default/image/certificate-img.png" style="width:20px;" /></i> Life Time Warranty</a></li>
@@ -276,6 +282,7 @@
 								{% endfor %}
 							  </select>
 							  <div class="help-block" id="recurring-description"></div>
+                              
 							</div>
 							{% endif %}
                             <div class="form-group margin-two width-100 pro-delivered-text f-left text-center">
@@ -289,11 +296,11 @@
 							  <input type="hidden" name="product_id" value="{{ product_id }}" /></div>
 							  <br />
                               <div class="text-center">
-							  <a class="highlight-button-dark btn btn-medium button width-60" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><!--<i class="icon-basket"></i>--> {{ button_cart }}</a></div>
+							  <a class="highlight-button-dark btn btn-medium button width-60 no-margin" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><!--<i class="icon-basket"></i>--> {{ button_cart }}</a></div>
 							</div>
                             <div class="form-group margin-two width-100 f-left text-center">
                             
-                            	<a href="index.php?route=information/contact/popup" class="agree highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
+                            	<a href="index.php?route=information/visit_showroom/popup" class="agree highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
                                 <a href="#freesample-popup" class="popup-with-zoom-anim highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Order Free Sample</a>
                             </div>
                             <div id="visitshowroom-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
@@ -308,10 +315,19 @@
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
 							
-							<div id="lifetimewarranty" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
-                                <span class="slider-subtitle5 black-text no-margin-bottom">Life Time Warranty</span>
-                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+							<div id="lifetimewarranty" class="zoom-anim-dialog mfp-hide col-lg-9 col-md-6 col-sm-7 col-xs-11 center-col bg-white modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom  text-center">Life Time Warranty</span>
+                                <p class="margin-two">ABELINI PRIDES ITSELF ON ITS SUPERIOR JEWELLERY, SKILFULLY AND CAREFULLY CRAFTED TO LAST A LIFETIME AND MORE.</p>
+                                <h2 class="margin-two">WHAT OUR WARRANTY COVERS?</h2>
+                                <p>OUR MANUFACTURING WARRANTY COVERS THE CRAFTSMANSHIP OF OUR JEWELLERY FOR 12 MONTHS FROM THE DATE OF PURCHASE.</p>
+                                <h3>01. NY MANUFACTURING FAULT</h3>
+                                <p>If there is found to be a fault or defect in the way that the jewellery was crafted we will correct the defect by remaking or exchanging the Jewellery at no cost to you.</p>
+                                <h3>02. BIRITISH STANDARDS</h3>
+                                <p>We are proud that our diamonds are Conflict Free. Our Silver, Gold and Platinum are all hallmarked by the Assay Office as per the strict legal requirements of the UK.</p>
+                                <h3>03. 30 DAYS RETURNS</h3>
+                                <p>Our Jewellery is backed by a 30 Day Money Back guarantee. Read more about our Returns Policy</p>
+                                <p><a class="highlight-button btn btn-very-small button" href="/warranty-and-care">CONTINUE READING</a></p>
+                                <!--<a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>-->
                             </div>
                             
 							{% if minimum > 1 %}
@@ -331,7 +347,7 @@
                         </span>
                         <span class="padding-left-right-px product-details-social">
                             <!-- social media sharing -->
-                            <span class="black-text text-uppercase text-small vertical-align-middle margin-right-five sharethis-wrap"> <!--<i class="fa fa-share-alt black-text no-margin"></i>-->  <span class="sharethis-inline-share-buttons"></span>Share on</span>
+                            <span class="black-text text-uppercase text-small vertical-align-middle  sharethis-wrap"> <!--<i class="fa fa-share-alt black-text no-margin"></i>-->  <span class="sharethis-inline-share-buttons"></span>Share on</span>
                            <!-- <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
                             <a href="https://plus.google.com" target="_blank"><i class="fa fa-google-plus"></i></a>

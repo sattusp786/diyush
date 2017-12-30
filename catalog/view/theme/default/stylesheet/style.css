@@ -2628,11 +2628,13 @@ ul.sub-navi li a:before {
     float: left;}
 	
 #wpbs_slider {  position:fixed; right:10px; bottom:0px; z-index:9999; }
-#icon_label { /*float:left;*/position: relative; width: 130px; height:30px; padding:5px ; cursor:pointer; background:#eeb013 ; }
-#icon_label span { display:block; text-transform: uppercase; color:#000; }
+#icon_label { /*float:left;*/position: relative; width: 130px; height:30px; padding:5px ; cursor:pointer; background:#000 ; }
+#icon_label span { display:block; text-transform: uppercase; color:#fff; }
 #icon_label span.lbl {transform: rotate(-90deg);}
-#wpbs_cont {width:420px; padding:20px; float:right; position:relative; display:none; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); border:1px solid #eeb013;}
+#wpbs_cont {width:420px; padding:20px; float:right; position:relative; display:none; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); border:1px solid rgba(0, 0, 0, 0.1);}
 #wpbs_cont #cls { position:absolute; width:30px; height:30px; right:10px; top:10px; cursor:pointer;}
+
+#wpbs_cont .col-md-6 { width:50%; float:left;}
 
 .popstep-btns { padding:15px 5% 25px; text-align:right;}
 .popstep-pane { padding:0 5%;}
