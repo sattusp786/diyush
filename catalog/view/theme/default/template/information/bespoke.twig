@@ -43,77 +43,20 @@
                     <!-- end section title -->
                 </div>
                 <div class="row">
-                    <!-- blog item -->
+					{% for bespoke in bespokes %}
                     <div class="col-md-4 col-sm-4 wow fadeInUp margin-three no-margin-top" data-wow-duration="300ms">
                         <div class="blog-post">
-                            <div class="blog-post-images"><a href="blog-single-full-width-with-image-slider.html"><img src="http://placehold.it/800x500" alt=""></a></div>
+                            <div class="blog-post-images"><a href="javascript:void(0);"><img src="{{ bespoke.thumb }}" alt=""></a></div>
                             <div class="post-details text-center">
-                                <a href="blog-single-full-width-with-image-slider.html" class="post-title">Standard post with picture</a>
-                                
-                                
+                                <a href="javascript:void(0);" class="post-title">{{ bespoke.title }}</a>
                             </div>
                         </div>
                     </div>
-                    <!-- end blog item -->
-                    <!-- blog item -->
-                    <div class="col-md-4 col-sm-4 wow fadeInUp  margin-three no-margin-top" data-wow-duration="600ms">
-                        <div class="blog-post">
-                            <div class="blog-post-images"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/800x500" alt=""></a></div>
-                            <div class="post-details text-center">
-                                <a href="blog-single-right-sidebar.html" class="post-title">Post with featured picture</a>
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end blog item -->
-                    <div class="col-md-4 col-sm-4 wow fadeInUp  margin-three no-margin-top" data-wow-duration="900ms">
-                        <div class="blog-post">
-                            <div class="blog-post-images"><a href="blog-single-full-width.html"><img src="http://placehold.it/800x500" alt=""></a></div>
-                            <div class="post-details text-center">
-                                <a href="blog-single-full-width.html" class="post-title">Standard post with slider</a>
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
-                     <!-- blog item -->
-                    <div class="col-md-4 col-sm-4 wow fadeInUp  margin-three no-margin-top" data-wow-duration="300ms">
-                        <div class="blog-post">
-                            <div class="blog-post-images"><a href="blog-single-full-width-with-image-slider.html"><img src="http://placehold.it/800x500" alt=""></a></div>
-                            <div class="post-details text-center">
-                                <a href="blog-single-full-width-with-image-slider.html" class="post-title">Standard post with picture</a>
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end blog item -->
-                    <!-- blog item -->
-                    <div class="col-md-4 col-sm-4 wow fadeInUp  margin-three no-margin-top" data-wow-duration="600ms">
-                        <div class="blog-post">
-                            <div class="blog-post-images"><a href="blog-single-right-sidebar.html"><img src="http://placehold.it/800x500" alt=""></a></div>
-                            <div class="post-details text-center">
-                                <a href="blog-single-right-sidebar.html" class="post-title">Post with featured picture</a>
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end blog item -->
-                    <div class="col-md-4 col-sm-4 wow fadeInUp  margin-three no-margin-top" data-wow-duration="900ms">
-                        <div class="blog-post">
-                            <div class="blog-post-images"><a href="blog-single-full-width.html"><img src="http://placehold.it/800x500" alt=""></a></div>
-                            <div class="post-details text-center">
-                                <a href="blog-single-full-width.html" class="post-title">Standard post with slider</a>
-                                
-                                
-                            </div>
-                        </div>
-                    </div>
+                   {% endfor %}
                 </div>
-                <!-- end blog item -->
-                <div class="row">
+                
+                <!--
+				<div class="row">
                   
                     <div class="col-md-12 text-center">
                         <p><a href="#" class="highlight-button btn btn-medium button no-margin">View All</a></p>
@@ -121,6 +64,7 @@
                     </div>
                     
                 </div>
+				-->
             </div>
         </section>
         

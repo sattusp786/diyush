@@ -11,28 +11,12 @@ class ControllerInformationBespoke extends Controller {
 		
 		$this->document->setTitle($this->language->get('heading_title'));
 		
-		if (isset($this->request->get['article_id'])) {
-			
-			$article_id = $this->request->get['article_id'];
-			
-			$data['article_id'] = $article_id;
-			$data['bespoke'] = $this->model_catalog_information->getBespoke($article_id);
-			if($data['bespoke']['description'] != ''){
-				$data['bespoke']['description'] = html_entity_decode($data['bespoke']['description']);
-			}
-			
-			if ($data['bespoke']['image']) {
-				$data['bespoke_image'] = 'image/'.$data['bespoke']['image'];
-			} else {
-				$data['bespoke_image'] = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
-			}
-				
-		} else {
+		
 			
 			if (isset($this->request->get['sort'])) {
 				$sort = $this->request->get['sort'];
 			} else {
-				$sort = 'b.sort_order';
+				$sort = 'sort_order';
 			}
 
 			if (isset($this->request->get['order'])) {
@@ -74,15 +58,12 @@ class ControllerInformationBespoke extends Controller {
 				}
 
 				$data['bespokes'][] = array(
-					'article_id'  => $result['article_id'],
+					'bespoke_id'  => $result['bespoke_id'],
 					'thumb'       => $image,
-					'name'        => $result['name'],
+					'title'        => $result['title'],
 					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
-					'intro_text'  => $result['intro_text'],
-					'author'      => $result['author'],
-					'tag'      	  => $result['tag'],
-					'date_modified' => date("d F Y",strtotime($result['date_modified'])),
-					'href'        => 'index.php?route=information/bespoke&article_id='.$result['article_id']
+					'date_added' => date("d F Y",strtotime($result['date_added']))
+					//'href'        => 'index.php?route=information/bespoke&article_id='.$result['article_id']
 				);
 			}
 			
@@ -118,7 +99,7 @@ class ControllerInformationBespoke extends Controller {
 			$data['order'] = $order;
 			$data['limit'] = $limit;
 			
-		}
+		
 		
 		
 		
