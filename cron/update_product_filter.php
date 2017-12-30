@@ -60,6 +60,7 @@ function updateProductFilters($product_id, $product_name) {
 	
 	if(!empty($filters)){
 		foreach($filters as $filter_id => $filter_name){
+			$product_name = str_ireplace(array("Diamond Plain Engagement","Three Stone"),array("Classic Solitaire","Trilogy"),$product_name);
 			if(stripos($product_name, str_ireplace(array("Rings","Earrings","Pendants","Bracelet","Setting"),"",$filter_name)) !== false){
 				$insert = $db->query("INSERT INTO " . DB_PREFIX . "product_filter SET product_id = '".$product_id."', filter_id = '".$filter_id."' ");
 			}
