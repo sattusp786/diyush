@@ -1,5 +1,17 @@
 <?php 
 
+set_time_limit(0);
+ini_set('memory_limit', '-1');
+ini_set('max_execution_time', 3600);
+
+# Declaration of rest variables
+clearstatcache();
+$start_time = microtime(true);
+$debug = false;
+date_default_timezone_set("Europe/London");
+
+require_once(dirname(__FILE__) . '/../config.php');
+
 	# Copy Files, if dimension is given then also resize.
 	function copyFile($source_path, $dest_path, $dest_dimensions, $type, $img_quality) {
 		if (!file_exists($dest_path)) {
@@ -56,7 +68,8 @@
 	}
 	
 	
-	$dest_root = "diyush_images";
+
+	$dest_root = DIR_IMAGE."upload_images";
 	$type = 'h';
 	$img_quality = 100;
 	$first_iters = array();
@@ -85,10 +98,10 @@
 			$carat_to = $carat[1];
 			$filename = strtolower(end($path_arr));
 			
-			$full_path = 'diyush/'.$design_no.'/'.$view_type.'/'.$metal_type.'/'.$stone_type.'/'.$shape.'/'.$carat.'/'.$filename;
-			
-			copyFile($pathname, $full_path, '', $type, $img_quality); 
-			
+			$full_path = DIR_IMAGE.'product/'.$design_no.'/'.$view_type.'/'.$metal_type.'/'.$stone_type.'/'.$shape.'/'.$carat.'/'.$filename;
+			if(!file_exists($full_path)){
+				copyFile($pathname, $full_path, '', $type, $img_quality); 
+			}
 		}
 	}
 	
