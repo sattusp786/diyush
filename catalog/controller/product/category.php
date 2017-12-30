@@ -113,6 +113,7 @@ class ControllerProductCategory extends Controller {
 						$filter_str = implode(",",$filter_id_arr);
 						$childen_data[] = array(
 							'filter_id' => $filter['filter_id'],
+							'filter_image' => !empty($filter['image']) ? HTTP_SERVER."image/".$filter['image'] : '',
 							'filter_href' => $filter_str,
 							'name'      => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : '')
 						);
