@@ -530,6 +530,14 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$data['sort_order'] = 0;
 		}
+		
+		if (isset($this->request->post['delivery_days'])) {
+			$data['delivery_days'] = $this->request->post['delivery_days'];
+		} elseif (!empty($category_info)) {
+			$data['delivery_days'] = $category_info['delivery_days'];
+		} else {
+			$data['delivery_days'] = 0;
+		}
 
 		if (isset($this->request->post['status'])) {
 			$data['status'] = $this->request->post['status'];

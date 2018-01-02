@@ -31,6 +31,7 @@ $_['entry_image2']            = 'Image 2';
 $_['entry_image3']            = 'Image 3';
 $_['entry_top']              = 'Top';
 $_['entry_column']           = 'Columns';
+$_['entry_delivery_days']    = 'Delivery Days';
 $_['entry_sort_order']       = 'Sort Order';
 $_['entry_status']           = 'Status';
 $_['entry_layout']           = 'Layout Override';

@@ -784,6 +784,14 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['sort_order'] = 1;
 		}
+		
+		if (isset($this->request->post['delivery_days'])) {
+			$data['delivery_days'] = $this->request->post['delivery_days'];
+		} elseif (!empty($product_info)) {
+			$data['delivery_days'] = $product_info['delivery_days'];
+		} else {
+			$data['delivery_days'] = 1;
+		}
 
 		$this->load->model('localisation/stock_status');
 

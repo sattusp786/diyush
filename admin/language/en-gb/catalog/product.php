@@ -142,6 +142,7 @@ $_['entry_clarity']        	 = 'Clarity';
 $_['entry_color']        	 = 'Color';
 $_['entry_certificate']      = 'Certificate';
 $_['entry_ringsize']         = 'RingSize';
+$_['entry_delivery_days']    = 'Delivery Days';
 
 // Help
 $_['help_sku']               = 'Stock Keeping Unit';
