@@ -196,7 +196,7 @@
 							  <div class="col-md-10 col-sm-12 option-img"><div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
 								<div class="radio" style="float:left;width:45px;margin-top:0;">
 								  <label style="padding-left:0;">
-									<input style="display:none;" class="imager" type="radio" {% if option_value.default == 1 %} CHECKED {% endif %} name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+									<input style="display:none;" class="imager" type="radio" {% if option_value.default == 1 %} CHECKED {% endif %} name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" alt="{{ option_value.name }}" />
 									{% if option_value.image %} <img {% if option_value.default == 1 %} style="border:1px solid #ddd;" {% else %} style="border:0;" {% endif %} src="{{ option_value.image }}" alt="input-option{{ option.product_option_id }}" class="img-thumbnail option_image input-option{{ option.product_option_id }}" /> {% endif %}	
 									</label>
 								</div>
@@ -286,7 +286,7 @@
 							</div>
 							{% endif %}
                             <div class="form-group margin-two width-100 pro-delivered-text f-left text-center">
-                            	<span class="margin-left-right-two"><a href="javascript:void(0);">Delivered by: Thesday, 10/10</a></span>
+                            	<span class="margin-left-right-two"><a href="javascript:void(0);">Delivered by: {{ delivery_date }}</a></span>
                                 <!--<span class="margin-left-right-two"><a href="#finance-calculation" class="popup-with-zoom-anim">0% Finanace - Click to Calculation</a></span>-->
                                 <span class="margin-left-right-two"><a href="#lifetimewarranty" class="popup-with-zoom-anim">Life Time Warranty</a></span>
                             </div>
@@ -576,30 +576,35 @@
                                 <!-- tab content -->
                                 <div class="tab-pane med-text fade in active" id="tab_sec1">
                                     <div class="row">   
-                                    <div class="col-md-12 col-sm-12 ">                                   
-                                         <!--{{ description }}-->
+                                    <div class="col-md-12 col-sm-12 ">
                                          <h3 class="text-center margin-two no-margin-top">About Your Ring</h3>
-                                         <p class="text-center">Two graceful curves embrace and hold the center gemstone in this simply beautiful ring.</p>
-                                          <h3 class="text-center margin-two no-margin-top">Reference Code: 9HV</h3>
+                                         <p class="text-center">{{ description }}</p>
+                                          <h3 class="text-center margin-two no-margin-top">Reference Code: {{ sku }}</h3>
                                           <div class="col-md-6">
                                           	<h3 class="margin-five">Ring Information</h3>
-                                            <p>Metal<br />
-Metal: 18K White Gold<br />
-Metal Weight: Approx. 4.4gms.</p>
-                                            <h3 class="margin-five">Stones</h3>
-                                            <p>Stone Type: Diamond<br />
-Shape: Round<br />
-Colour: G<br />
-Clarity: S/1<br />
-Setting: 4 Prong Square<br />
-Total Weight: Approx 0.3 ct. wt. (0.300ct.X1)</p>
+                                            <p>
+												Metal<br />
+												Metal: <span class="metal_purity">{{ metal_name }}</span><br />
+												Metal Weight: Approx. <span class="metal_weight">0</span> gms.
+											</p>
+                                            <h3 class="margin-five" id="stone_details">Stones</h3>
+                                            <p>
+												Stone Type: Diamond<br />
+												Shape: Round<br />
+												Colour: G<br />
+												Clarity: S/1<br />
+												Setting: 4 Prong Square<br />
+												Total Weight: Approx 0.3 ct. wt. (0.300ct.X1)
+											</p>
                                           </div>
                                           <div class="col-md-6">
-                                          	<h3 class="margin-five">Dimension</h3>
-                                            <p>Setting Height: 6.7mm<br />
-Shoulder Width: 2.5mm<br />
-Shank Width: 2.9mm<br />
-Band Thickness: 1.5mm</p>
+                                          	<h3 class="margin-five" id="dimension_details">Dimension</h3>
+                                            <p>
+												Setting Height: 6.7mm<br />
+												Shoulder Width: 2.5mm<br />
+												Shank Width: 2.9mm<br />
+												Band Thickness: 1.5mm
+											</p>
                                           </div>
                                          </div>
                                     </div>
@@ -956,6 +961,8 @@ $('.product-option').on('change', function() {
 			}
 
 			if (json['success'] == '1') {
+				var metal_name = $(".imager:checked").attr('alt');
+				$(".metal_purity").html(metal_name);
 				$(".metal_weight").html(json['weight']);
 				$(".final_price").html(json['price']);
 			}

@@ -244,6 +244,17 @@ class ControllerProductProduct extends Controller {
 			$data['weight'] = round($product_info['weight'],2);
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
 
+			if($product_info['delivery_days'] > 0){
+				$delivery_days = $product_info['delivery_days'];
+			} elseif($category_info['delivery_days'] > 0){
+				$delivery_days = $category_info['delivery_days'];
+			} else {
+				$delivery_days = '14';
+			}
+			
+			$today_date = date('Y-m-d');
+			$data['delivery_date'] = date('l, d/m/Y', strtotime($today_date. ' + 1 days'));
+			
 			if ($product_info['quantity'] <= 0) {
 				$data['stock'] = $product_info['stock_status'];
 			} elseif ($this->config->get('config_stock_display')) {
@@ -334,6 +345,7 @@ class ControllerProductProduct extends Controller {
 
 			$data['options'] = array();
 
+			$data['metal_name'] = '';
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
 				$product_option_value_data = array();
 
@@ -354,6 +366,10 @@ class ControllerProductProduct extends Controller {
 							if($option_value['default'] == '1'){
 								$default = '1';
 							}
+						}
+						
+						if($option['option_id'] == '14' && $default == '1'){
+							$data['metal_name'] = $option_value['name'];
 						}
 
 						$product_option_value_data[] = array(
