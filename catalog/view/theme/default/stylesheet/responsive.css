@@ -709,6 +709,9 @@
 	
 	.dessktopview { display:none!important;}
 	.mobileview { display:block!important;}
+	.proreviewbot {border-top: 1px solid #e5e5e5; border-right: 0; padding-top:5%;}
+	.rviwcolumn2 {top:5%;}
+	.prodetailsbot { width:100%;}
 }
 @media (max-width: 767px) {
     /*  custom  */

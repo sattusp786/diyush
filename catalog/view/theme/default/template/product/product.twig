@@ -374,117 +374,7 @@
                         </div>
                         </div>
                         
-                        <div class="panel-group accordion-style1 mobileview margin-four" id="accordion-two">
-                            <!-- accordion item -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading active-accordion">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link1"><h4 class="panel-title">Details<span class="pull-right"><i class="fa fa-minus"></i></span></h4></a>
-                                </div>
-                                <div id="accordion-one-link1" class="panel-collapse collapse in">
-                                    <div class="panel-body">
-                                            <!-- product short description -->
-											<p>{{ description }}</p>
-											<!-- end product short description -->
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end accordion item -->
-							{% if review_status %}
-                            <!-- accordion item -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link4"><h4 class="panel-title">Reviews (10)<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
-                                </div>
-                                <div id="accordion-one-link4" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <form class="form-horizontal" id="form-review">
-										<div id="review"></div>
-										<h2>{{ text_write }}</h2>
-										{% if review_guest %}
-										<div class="form-group required">
-										  <div class="col-sm-12">
-											<label class="control-label" for="input-name">{{ entry_name }}</label>
-											<input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
-										  </div>
-										</div>
-										<div class="form-group required">
-										  <div class="col-sm-12">
-											<label class="control-label" for="input-review">{{ entry_review }}</label>
-											<textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
-											<div class="help-block">{{ text_note }}</div>
-										  </div>
-										</div>
-										<div class="form-group required">
-										  <div class="col-sm-12">
-											<label class="control-label">{{ entry_rating }}</label>
-											&nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
-											<input type="radio" name="rating" value="1" />
-											&nbsp;
-											<input type="radio" name="rating" value="2" />
-											&nbsp;
-											<input type="radio" name="rating" value="3" />
-											&nbsp;
-											<input type="radio" name="rating" value="4" />
-											&nbsp;
-											<input type="radio" name="rating" value="5" />
-											&nbsp;{{ entry_good }}</div>
-										</div>
-										{{ captcha }}
-										<div class="buttons clearfix">
-										  <div class="pull-right">
-											<button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
-										  </div>
-										</div>
-										{% else %}
-										{{ text_login }}
-										{% endif %}
-									  </form>
-                                    </div>
-                                </div>
-                            </div>
-							{% endif %}
-                            <!-- end accordion item -->
-                            <!-- accordion item -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link2"><h4 class="panel-title">FAQ's<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
-                                </div>
-                                <div id="accordion-one-link2" class="panel-collapse collapse">
-                                    <div class="panel-body">                                   
-                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end accordion item -->
-                            <!-- accordion item -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link3"><h4 class="panel-title">Size Guide<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
-                                </div>
-                                <div id="accordion-one-link3" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        <div class="col-md-12 col-sm-12">
-                                            <ul class="instructions">
-                                                <li><strong>Weight:</strong> 7.25 Kg</li>
-                                                <li><strong>Dimensions:</strong> 90x60x90 Cm</li>
-                                                <li><strong>Size:</strong> One Size Fits All</li>
-                                                <li><strong>Color:</strong> White</li>
-                                                <li><strong>Guarantee:</strong> 5 Years</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the standard dummy text. </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end accordion item -->
-							
-							
-                        </div>
-                        
+                       
                     </div>
                 </div>
             </div>
@@ -533,34 +423,7 @@
 	<div class="container width-100">
 		<div class="row">
         	<div class="col-md-12">
-            	<div class="col-md-6 border-right">
-                	<h2 class="margin-two no-margin-top">Customer Review</h2>
-                    <div class="rviwcolumn2 spaceTop">
-		<script async="" type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.sync.bootstrap.min.js"></script>
-			<div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8807dec7e10d38f59f32" data-businessunit-id="4cc5012400006400050e0a76" data-style-height="150px" data-style-width="100%" style="position: relative;"><iframe frameborder="0" scrolling="no" title="Customer reviews powered by Trustpilot" src="https://widget.trustpilot.com/trustboxes/53aa8807dec7e10d38f59f32/index.html?locale=en-GB&amp;templateId=53aa8807dec7e10d38f59f32&amp;businessunitId=4cc5012400006400050e0a76&amp;styleHeight=150px&amp;styleWidth=100%25" style="position: relative; height: 150px; width: 100%; border-style: none; display: block; overflow: hidden;"></iframe></div>		</div>
-                    <div class="review-main">
-                    	<div class="review">
-							<p class="letter-spacing-2 text-uppercase review-name"><strong>Elaine,</strong> November 17, 2017</p>
-							<p><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa black-text fa-star"></i></p>
-							<p><strong>Absolutely stunning jewellery …</strong></p>
-							<p>Absolutely stunning jewellery beautifully made excellent craftsmanship the wow factor when you receive your jewellery well there is nothing like it ,,my pieces of jewelry fro Abelini I will never take them off ..the staff and customer service is outstanding so helpful and such a quick delivery unbelievable I would recommend .anyone to buy from Abelini I certainly will again I would give them 10 starsif I could ...Brilliant .</p>
-						</div>
-						<div class="review">
-							<p class="letter-spacing-2 text-uppercase review-name"><strong>Bob Staples,</strong> November 13, 2017</p>
-							<p><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa black-text fa-star"></i></p>
-							<p><strong>Great company to deal with</strong></p>
-							<p>Great company to deal with. There was a question whether the item could be delivered in time for my partners birthday but Abelini went the extra mile and arranged next day deluvery. Product was extremely good quality, delighted with both product and service.</p>
-						</div>
-						<!--<ul class="list-inline comment-pagination">
-							<li><a href="#" class="active">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">...</a></li>
-							<li><a href="#">8</a></li>
-							<li><a href="#">9</a></li>
-						</ul>-->
-                    </div>
-                </div>
-                <div class="col-md-6">
+            <div class="col-md-6 f-right prodetailsbot">
                 	<div class="tab-style1">
                             <div class="col-md-12 col-sm-12 no-padding">
                                 <!-- tab navigation -->
@@ -652,6 +515,32 @@
                             <!-- end tab content section -->
                         </div>
                 </div>
+            	<div class="col-md-6 f-left proreviewbot">
+                	<h2 class="margin-two no-margin-top">Customer Review</h2>
+                    <div class="rviwcolumn2 spaceTop"><a href="#"><img src="catalog/view/theme/default/image/productpage/trustpilot.jpg" alt="" /></a></div>
+                    <div class="review-main">
+                    	<div class="review">
+							<p class="letter-spacing-2 text-uppercase review-name"><strong>Elaine,</strong> November 17, 2017</p>
+							<p><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa black-text fa-star"></i></p>
+							<p><strong>Absolutely stunning jewellery …</strong></p>
+							<p>Absolutely stunning jewellery beautifully made excellent craftsmanship the wow factor when you receive your jewellery well there is nothing like it ,,my pieces of jewelry fro Abelini I will never take them off ..the staff and customer service is outstanding so helpful and such a quick delivery unbelievable I would recommend .anyone to buy from Abelini I certainly will again I would give them 10 starsif I could ...Brilliant .</p>
+						</div>
+						<div class="review">
+							<p class="letter-spacing-2 text-uppercase review-name"><strong>Bob Staples,</strong> November 13, 2017</p>
+							<p><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa black-text fa-star"></i></p>
+							<p><strong>Great company to deal with</strong></p>
+							<p>Great company to deal with. There was a question whether the item could be delivered in time for my partners birthday but Abelini went the extra mile and arranged next day deluvery. Product was extremely good quality, delighted with both product and service.</p>
+						</div>
+						<!--<ul class="list-inline comment-pagination">
+							<li><a href="#" class="active">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">...</a></li>
+							<li><a href="#">8</a></li>
+							<li><a href="#">9</a></li>
+						</ul>-->
+                    </div>
+                </div>
+                
             </div>
         </div>
      </div>
