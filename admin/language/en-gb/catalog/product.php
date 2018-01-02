@@ -143,6 +143,8 @@ $_['entry_color']        	 = 'Color';
 $_['entry_certificate']      = 'Certificate';
 $_['entry_ringsize']         = 'RingSize';
 $_['entry_delivery_days']    = 'Delivery Days';
+$_['entry_multistone']    	 = 'Multistone (Y/N)';
+$_['entry_side_stone']    	 = 'Side Stone';
 
 // Help
 $_['help_sku']               = 'Stock Keeping Unit';

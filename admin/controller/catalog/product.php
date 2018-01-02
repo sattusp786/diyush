@@ -790,7 +790,23 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['delivery_days'] = $product_info['delivery_days'];
 		} else {
-			$data['delivery_days'] = 1;
+			$data['delivery_days'] = 0;
+		}
+		
+		if (isset($this->request->post['multistone'])) {
+			$data['multistone'] = $this->request->post['multistone'];
+		} elseif (!empty($product_info)) {
+			$data['multistone'] = $product_info['multistone'];
+		} else {
+			$data['multistone'] = 0;
+		}
+		
+		if (isset($this->request->post['side_stone'])) {
+			$data['side_stone'] = $this->request->post['side_stone'];
+		} elseif (!empty($product_info)) {
+			$data['side_stone'] = $product_info['side_stone'];
+		} else {
+			$data['side_stone'] = '';
 		}
 
 		$this->load->model('localisation/stock_status');
