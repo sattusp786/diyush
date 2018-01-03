@@ -244,10 +244,15 @@ class ControllerProductProduct extends Controller {
 			$data['weight'] = round($product_info['weight'],2);
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
 
+			$categories_info['delivery_days'] = 0;
+			$categories = $this->model_catalog_product->getCategories($product_id);
+			$get_category_id = $categories[0]['category_id'];
+			$categories_info = $this->model_catalog_category->getCategory($get_category_id);
+			
 			if($product_info['delivery_days'] > 0){
 				$delivery_days = $product_info['delivery_days'];
-			} elseif($category_info['delivery_days'] > 0){
-				$delivery_days = $category_info['delivery_days'];
+			} elseif($categories_info['delivery_days'] > 0){
+				$delivery_days = $categories_info['delivery_days'];
 			} else {
 				$delivery_days = '14';
 			}
