@@ -238,90 +238,18 @@ class Cart {
 				}
 
 				//Code added by Paul to calculate price starts...
-				$final_price = 0;
+				
 				$final_option = array();
 				if(!empty($option_data)){
 					foreach($option_data as $option){
 						$final_option[$option['name']] = $option['code'];
 					}
 				}
+				$final_option['metal_weight'] = $product_query->row['weight'] + $option_weight;
 				
-				//Calculate Metal Price..
-				$metal_price = 0;
-				$metal_weight = $product_query->row['weight'] + $option_weight;
+				$final_price = $this->calculatePrice($final_option);
 				
-				$metal_price_per_gram = 0;
-				$get_metal_price = $this->db->query("SELECT * FROM " . DB_PREFIX . "metal_price WHERE code = '".$final_option['Metal']."' ");
-				if($get_metal_price->num_rows){
-					$metal_price_per_gram = $get_metal_price->row['price'];
-				}
-				
-				if($metal_price_per_gram > 0){
-					$metal_price = $metal_price_per_gram * $metal_weight;
-				}
-				
-				//Calculate Stone Price..
-				$stone_price = 0;
-				
-				$stone_sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE 1 ";
-				
-				if(isset($final_option['Stone Type']) && !empty($final_option['Stone Type'])){
-					$stone_sql .= " AND stone = '".$final_option['Stone Type']."' ";
-				}
-				
-				if(isset($final_option['Shape']) && !empty($final_option['Shape'])){
-					$stone_sql .= " AND shape = '".$final_option['Shape']."' ";
-				}
-				
-				if(isset($final_option['Carat']) && !empty($final_option['Carat'])){
-					$stone_sql .= " AND '".($final_option['Carat']/100)."' between crt_from AND crt_to ";
-				}
-				
-				if(isset($final_option['Clarity']) && !empty($final_option['Clarity'])){
-					$stone_sql .= " AND clarity = '".$final_option['Clarity']."' ";
-				}
-				
-				if(isset($final_option['Colour']) && !empty($final_option['Colour'])){
-					$stone_sql .= " AND color = '".$final_option['Colour']."' ";
-				}
-				
-				if(isset($final_option['Certificate']) && !empty($final_option['Certificate'])){
-					$stone_sql .= " AND lab = '".$final_option['Certificate']."' ";
-				}
-				
-				if(isset($final_option['Cut']) && !empty($final_option['Cut'])){
-					$stone_sql .= " AND cut = '".$final_option['Cut']."' ";
-				}
-				
-				if(isset($final_option['Polish']) && !empty($final_option['Polish'])){
-					$stone_sql .= " AND polish = '".$final_option['Polish']."' ";
-				}
-				
-				if(isset($final_option['Symmetry']) && !empty($final_option['Symmetry'])){
-					$stone_sql .= " AND symmetry = '".$final_option['Symmetry']."' ";
-				}
-				
-				if(isset($final_option['Fluo.']) && !empty($final_option['Fluo.'])){
-					$stone_sql .= " AND fluorescence = '".$final_option['Fluo.']."' ";
-				}
-				
-				if(isset($final_option['Intensity']) && !empty($final_option['Intensity'])){
-					$stone_sql .= " AND intensity = '".$final_option['Intensity']."' ";
-				}
-				
-				$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 1 ";
-				
-				//echo $stone_sql;
-				
-				$get_stone_price = $this->db->query($stone_sql);
-				
-				if($get_stone_price->num_rows){
-					$stone_price = $get_stone_price->row['sprice'];
-				}
-				
-				$final_price = $metal_price + $stone_price;
 				//Code added by Paul to calculate price ends...
-				
 				
 				
 				$product_data[] = array(
@@ -357,6 +285,90 @@ class Cart {
 		}
 
 		return $product_data;
+	}
+	
+	public function calculatePrice($data) {
+		
+		//Code added by Paul to calculate price starts...
+		$final_price = 0;
+		
+		//Calculate Metal Price..
+		$metal_price = 0;
+		$metal_weight = $data['metal_weight'];
+		
+		$metal_price_per_gram = 0;
+		$get_metal_price = $this->db->query("SELECT * FROM " . DB_PREFIX . "metal_price WHERE code = '".$data['Metal']."' ");
+		if($get_metal_price->num_rows){
+			$metal_price_per_gram = $get_metal_price->row['price'];
+		}
+		
+		if($metal_price_per_gram > 0){
+			$metal_price = $metal_price_per_gram * $metal_weight;
+		}
+		
+		//Calculate Stone Price..
+		$stone_price = 0;
+		
+		$stone_sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE 1 ";
+		
+		if(isset($data['Stone Type']) && !empty($data['Stone Type'])){
+			$stone_sql .= " AND stone = '".$data['Stone Type']."' ";
+		}
+		
+		if(isset($data['Shape']) && !empty($data['Shape'])){
+			$stone_sql .= " AND shape = '".$data['Shape']."' ";
+		}
+		
+		if(isset($data['Carat']) && !empty($data['Carat'])){
+			$stone_sql .= " AND '".($data['Carat']/100)."' between crt_from AND crt_to ";
+		}
+		
+		if(isset($data['Clarity']) && !empty($data['Clarity'])){
+			$stone_sql .= " AND clarity = '".$data['Clarity']."' ";
+		}
+		
+		if(isset($data['Colour']) && !empty($data['Colour'])){
+			$stone_sql .= " AND color = '".$data['Colour']."' ";
+		}
+		
+		if(isset($data['Certificate']) && !empty($data['Certificate'])){
+			$stone_sql .= " AND lab = '".$data['Certificate']."' ";
+		}
+		
+		if(isset($data['Cut']) && !empty($data['Cut'])){
+			$stone_sql .= " AND cut = '".$data['Cut']."' ";
+		}
+		
+		if(isset($data['Polish']) && !empty($data['Polish'])){
+			$stone_sql .= " AND polish = '".$data['Polish']."' ";
+		}
+		
+		if(isset($data['Symmetry']) && !empty($data['Symmetry'])){
+			$stone_sql .= " AND symmetry = '".$data['Symmetry']."' ";
+		}
+		
+		if(isset($data['Fluo.']) && !empty($data['Fluo.'])){
+			$stone_sql .= " AND fluorescence = '".$data['Fluo.']."' ";
+		}
+		
+		if(isset($data['Intensity']) && !empty($data['Intensity'])){
+			$stone_sql .= " AND intensity = '".$data['Intensity']."' ";
+		}
+		
+		$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 1 ";
+		
+		//echo $stone_sql;
+		
+		$get_stone_price = $this->db->query($stone_sql);
+		
+		if($get_stone_price->num_rows){
+			$stone_price = $get_stone_price->row['sprice'];
+		}
+		
+		$final_price = $metal_price + $stone_price;
+		//Code added by Paul to calculate price ends...
+		
+		return $final_price;
 	}
 
 	public function add($product_id, $quantity = 1, $option = array(), $recurring_id = 0) {

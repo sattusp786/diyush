@@ -380,6 +380,13 @@ class ModelCatalogCategory extends Model {
 		return $query->row['total'];
 	}	
 	
+	public function getOptionValuesData($product_id) {
+		
+		$query = $this->db->query("SELECT pov.product_option_value_id, pov.weight, pov.weight_prefix, od.name, ov.code, ov.sort_order, pov.product_option_id, po.required, o.option_id, pov.default FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN ".DB_PREFIX."product_option po ON pov.product_option_id = po.product_option_id LEFT JOIN " . DB_PREFIX . "option o ON ( pov.option_id = o.option_id) LEFT JOIN " . DB_PREFIX . "option_description od ON o.option_id=od.option_id LEFT JOIN " . DB_PREFIX . "option_value ov ON ( pov.option_value_id = ov.option_value_id) WHERE pov.product_id =" . $product_id . " AND (pov.`default`=1)");
+		
+		return $query->rows;
+	}
+
 	public function addProductTemp($category_id, $data) {
 		
 		//carat = 5, clarity = 10, colour = 11, shape = 20
@@ -399,7 +406,7 @@ class ModelCatalogCategory extends Model {
 					
 					//echo "SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id WHERE pov.product_id = '" . (int)$product['product_id'] . "' AND pov.option_id IN (".$option_str.") ORDER BY pov.option_id GROUP BY pov.option_value_id";
 					
-					$get_options = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id WHERE pov.product_id = '" . (int)$product['product_id'] . "' AND pov.option_id IN (".$option_str.") GROUP BY pov.option_value_id ORDER BY pov.option_id ");
+					$get_options = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON pov.option_value_id = ov.option_value_id LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON pov.option_value_id=ovd.option_value_id WHERE pov.product_id = '" . (int)$product['product_id'] . "' AND pov.option_id IN (".$option_str.") GROUP BY pov.option_value_id ORDER BY pov.option_id ");
 					
 					$carat_arr = array();
 					$clarity_arr = array();
@@ -407,19 +414,23 @@ class ModelCatalogCategory extends Model {
 					$shape_arr = array();
 					if($get_options->num_rows){
 						$i = 0;
-						foreach($get_options->rows as $option){
-							if($option['option_id'] == '5'){
-								$carat_arr[$i]['option_value_id'] = $option['option_value_id'];
-								$carat_arr[$i]['name'] = $option['name'];
-							} elseif($option['option_id'] == '10'){
-								$clarity_arr[$i]['option_value_id'] = $option['option_value_id'];
-								$clarity_arr[$i]['name'] = $option['name'];
-							} elseif($option['option_id'] == '11'){
-								$color_arr[$i]['option_value_id'] = $option['option_value_id'];
-								$color_arr[$i]['name'] = $option['name'];
-							} elseif($option['option_id'] == '20'){
-								$shape_arr[$i]['option_value_id'] = $option['option_value_id'];
-								$shape_arr[$i]['name'] = $option['name'];
+						foreach($get_options->rows as $optioner){
+							if($optioner['option_id'] == '5'){
+								$carat_arr[$i]['option_value_id'] = $optioner['option_value_id'];
+								$carat_arr[$i]['name'] = $optioner['name'];
+								$carat_arr[$i]['code'] = $optioner['code'];
+							} elseif($optioner['option_id'] == '10'){
+								$clarity_arr[$i]['option_value_id'] = $optioner['option_value_id'];
+								$clarity_arr[$i]['name'] = $optioner['name'];
+								$clarity_arr[$i]['code'] = $optioner['code'];
+							} elseif($optioner['option_id'] == '11'){
+								$color_arr[$i]['option_value_id'] = $optioner['option_value_id'];
+								$color_arr[$i]['name'] = $optioner['name'];
+								$color_arr[$i]['code'] = $optioner['code'];
+							} elseif($optioner['option_id'] == '20'){
+								$shape_arr[$i]['option_value_id'] = $optioner['option_value_id'];
+								$shape_arr[$i]['name'] = $optioner['name'];
+								$shape_arr[$i]['code'] = $optioner['code'];
 							}
 							
 							$i++;
@@ -434,6 +445,23 @@ class ModelCatalogCategory extends Model {
 					print_r($shape_arr);
 					echo "</pre>";
 					*/
+					
+					$option_weight = 0;
+					$default_options = array();
+					$default_options = $this->getOptionValuesData($product['product_id']);
+					foreach ($default_options as $option) {
+						if($option['default'] == '1' && $option['required'] == '1'){
+							$default_options[$option['name']] = $option['code'];
+							
+							if ($option['weight_prefix'] == '+') {
+								$option_weight += $option['weight'];
+							} elseif ($option['weight_prefix'] == '-') {
+								$option_weight -= $option['weight'];
+							}
+						}
+					}
+					
+					$default_options['metal_weight'] = $product['weight'] + $option_weight;
 					
 					$option_value_ids = '';
 					$option_values = '';
@@ -452,6 +480,18 @@ class ModelCatalogCategory extends Model {
 														$option_values = $carat['name'].','.$clarity['name'].','.$color['name'].','.$shape['name'];
 														
 														$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+														
+														$product_temp_id = $this->db->getLastId();
+														
+														$default_options[$carat['name']] = $carat['code'];
+														$default_options[$clarity['name']] = $clarity['code'];
+														$default_options[$color['name']] = $color['code'];
+														$default_options[$shape['name']] = $shape['code'];
+														
+														$product_price = $this->cart->calculatePrice($default_options);
+														
+														$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
+														
 													}
 												}
 											}
@@ -472,6 +512,16 @@ class ModelCatalogCategory extends Model {
 												$option_values = $carat['name'].','.$clarity['name'].','.$color['name'];
 												
 												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+												
+												$product_temp_id = $this->db->getLastId();
+														
+												$default_options[$carat['name']] = $carat['code'];
+												$default_options[$clarity['name']] = $clarity['code'];
+												$default_options[$color['name']] = $color['code'];
+												
+												$product_price = $this->cart->calculatePrice($default_options);
+												
+												$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 											}
 										}
 									}
@@ -490,6 +540,16 @@ class ModelCatalogCategory extends Model {
 												$option_values = $carat['name'].','.$clarity['name'].','.$shape['name'];
 												
 												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+												
+												$product_temp_id = $this->db->getLastId();
+														
+												$default_options[$carat['name']] = $carat['code'];
+												$default_options[$clarity['name']] = $clarity['code'];
+												$default_options[$shape['name']] = $shape['code'];
+												
+												$product_price = $this->cart->calculatePrice($default_options);
+												
+												$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 											}
 										}
 									}
@@ -509,6 +569,17 @@ class ModelCatalogCategory extends Model {
 												$option_values = $carat['name'].','.$color['name'].','.$shape['name'];
 												
 												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+												
+												$product_temp_id = $this->db->getLastId();
+														
+												$default_options[$carat['name']] = $carat['code'];
+												$default_options[$color['name']] = $color['code'];
+												$default_options[$shape['name']] = $shape['code'];
+												
+												$product_price = $this->cart->calculatePrice($default_options);
+												
+												$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
+														
 											}
 										}
 									}
@@ -529,6 +600,17 @@ class ModelCatalogCategory extends Model {
 												$option_values = $clarity['name'].','.$color['name'].','.$shape['name'];
 												
 												$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+												
+												$product_temp_id = $this->db->getLastId();
+														
+												$default_options[$clarity['name']] = $clarity['code'];
+												$default_options[$color['name']] = $color['code'];
+												$default_options[$shape['name']] = $shape['code'];
+												
+												$product_price = $this->cart->calculatePrice($default_options);
+												
+												$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
+														
 											}
 										}
 									}
@@ -546,6 +628,15 @@ class ModelCatalogCategory extends Model {
 										$option_values = $carat['name'].','.$clarity['name'];
 										
 										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+										
+										$product_temp_id = $this->db->getLastId();
+														
+										$default_options[$carat['name']] = $carat['code'];
+										$default_options[$clarity['name']] = $clarity['code'];
+										
+										$product_price = $this->cart->calculatePrice($default_options);
+										
+										$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 									}
 								}
 							}
@@ -562,6 +653,15 @@ class ModelCatalogCategory extends Model {
 											
 											$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
 											
+											$product_temp_id = $this->db->getLastId();
+														
+											$default_options[$carat['name']] = $carat['code'];
+											$default_options[$color['name']] = $color['code'];
+											
+											$product_price = $this->cart->calculatePrice($default_options);
+											
+											$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
+											
 									}
 								}
 								
@@ -577,6 +677,15 @@ class ModelCatalogCategory extends Model {
 										$option_values = $carat['name'].','.$shape['name'];
 										
 										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+										
+										$product_temp_id = $this->db->getLastId();
+														
+										$default_options[$carat['name']] = $carat['code'];
+										$default_options[$shape['name']] = $shape['code'];
+										
+										$product_price = $this->cart->calculatePrice($default_options);
+										
+										$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 									}
 								}
 							}
@@ -594,6 +703,15 @@ class ModelCatalogCategory extends Model {
 											
 											$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
 											
+											$product_temp_id = $this->db->getLastId();
+														
+											$default_options[$clarity['name']] = $clarity['code'];
+											$default_options[$color['name']] = $color['code'];
+											
+											$product_price = $this->cart->calculatePrice($default_options);
+											
+											$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
+											
 									}
 								}
 							}
@@ -609,6 +727,15 @@ class ModelCatalogCategory extends Model {
 										$option_values = $clarity['name'].','.$shape['name'];
 										
 										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+										
+										$product_temp_id = $this->db->getLastId();
+														
+										$default_options[$clarity['name']] = $clarity['code'];
+										$default_options[$shape['name']] = $shape['code'];
+										
+										$product_price = $this->cart->calculatePrice($default_options);
+										
+										$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 									}
 								}	
 							}
@@ -625,6 +752,15 @@ class ModelCatalogCategory extends Model {
 										$option_values = $color['name'].','.$shape['name'];
 										
 										$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+										
+										$product_temp_id = $this->db->getLastId();
+														
+										$default_options[$color['name']] = $color['code'];
+										$default_options[$shape['name']] = $shape['code'];
+										
+										$product_price = $this->cart->calculatePrice($default_options);
+										
+										$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 									}
 								}
 							}
@@ -636,6 +772,14 @@ class ModelCatalogCategory extends Model {
 							$option_values = $carat['name'];
 							
 							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+							
+							$product_temp_id = $this->db->getLastId();
+														
+							$default_options[$carat['name']] = $carat['code'];
+							
+							$product_price = $this->cart->calculatePrice($default_options);
+							
+							$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 						}
 					} elseif(!empty($clarity_arr)){
 						foreach($clarity_arr as $clarity){
@@ -644,6 +788,14 @@ class ModelCatalogCategory extends Model {
 							$option_values = $clarity['name'];
 							
 							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+							
+							$product_temp_id = $this->db->getLastId();
+														
+							$default_options[$clarity['name']] = $clarity['code'];
+							
+							$product_price = $this->cart->calculatePrice($default_options);
+							
+							$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 						}
 					} elseif(!empty($color_arr)){
 						foreach($color_arr as $color){
@@ -652,6 +804,14 @@ class ModelCatalogCategory extends Model {
 							$option_values = $color['name'];
 							
 							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+							
+							$product_temp_id = $this->db->getLastId();
+														
+							$default_options[$color['name']] = $color['code'];
+							
+							$product_price = $this->cart->calculatePrice($default_options);
+							
+							$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 						}
 					} elseif(!empty($shape_arr)){
 						foreach($shape_arr as $shape){
@@ -660,6 +820,14 @@ class ModelCatalogCategory extends Model {
 							$option_values = $shape['name'];
 							
 							$insert = $this->db->query("INSERT INTO " . DB_PREFIX . "product_temp SET parent_id='".(int)$product['product_id']."', name='".$product['description']."', model='".$product['model']."', sku='".$product['sku']."', quantity='".$product['quantity']."', image='".$product['image']."', price='".$product['price']."', option_ids='".$option_str."', option_value_ids='".$option_value_ids."', option_values='".$option_values."', tax_class_id='".$product['tax_class_id']."', date_available='".$product['date_available']."', weight='".$product['weight']."', weight_class_id='".$product['weight_class_id']."', subtract='".$product['subtract']."', minimum='".$product['minimum']."', sort_order='".$product['sort_order']."', status='".$product['status']."', viewed='".$product['viewed']."', date_added=NOW(), date_modified=NOW() ");
+							
+							$product_temp_id = $this->db->getLastId();
+														
+							$default_options[$shape['name']] = $shape['code'];
+							
+							$product_price = $this->cart->calculatePrice($default_options);
+							
+							$update = $this->db->query("UPDATE " . DB_PREFIX . "product_temp SET price='".$product_price."' WHERE product_id = '".$product_temp_id."' ");
 						}
 					}
 					
