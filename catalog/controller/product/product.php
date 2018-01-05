@@ -776,12 +776,20 @@ class ControllerProductProduct extends Controller {
 					$price = $this->currency->format($unit_price, $this->session->data['currency']);
 					$total = $this->currency->format($unit_price * $product['quantity'], $this->session->data['currency']);
 				} else {
+					$unit_price = 0;
 					$price = false;
 					$total = false;
 				}
 				
+				$json['rrp'] = '';
+				$json['yousave'] = '';
 				$json['price'] = $total;
 				$json['weight'] = round($product['weight'],2);
+				if($unit_price > 0 && $product['rrp'] > 0){
+					$rrp = $unit_price + ($unit_price * $product['rrp']);
+					$json['rrp'] = $this->currency->format($rrp, $this->session->data['currency']);
+					$json['yousave'] = $this->currency->format($rrp - $unit_price, $this->session->data['currency']);
+				}
 			}
 			
 			if($json['price'] != ''){

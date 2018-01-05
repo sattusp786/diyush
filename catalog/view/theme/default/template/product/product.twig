@@ -101,12 +101,12 @@
 						  <ul class="list-unstyled">
 							{% if not special %}
 							<li>
-							  <h2 class="final_price">{{ price }} <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
+							  <h2 class="final_price"><span class="final_prod_price">{{ price }}</span> <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
 							</li>
 							{% else %}
 							<li><span style="text-decoration: line-through;">{{ price }}</span></li>
 							<li>
-							  <h2 class="final_price">{{ special }} <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
+							  <h2 class="final_price"><span class="final_prod_price">{{ special }}</span> <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
 							</li>
 							{% endif %}
                              <li>(Inc. VAT, Postage and Packaging) <a href="#fairpricing" class="highlight-button-dark btn btn-very-small button xs-no-margin popup-with-zoom-anim" style=" margin: 0 10px; line-height: initial;">Fair pricing Policy</a></li>
@@ -853,7 +853,16 @@ $('.product-option').on('change', function() {
 				var metal_name = $(".imager:checked").attr('alt');
 				$(".metal_purity").html(metal_name);
 				$(".metal_weight").html(json['weight']);
-				$(".final_price").html(json['price']);
+				$(".final_prod_price").html(json['price']);
+				if(json['rrp'] != ''){
+					$(".rrp").html('RRP: '+json['rrp']);
+					$(".yousave").html('YOU SAVE: '+json['yousave']);
+					$(".sep").html('|');
+				} else {
+					$(".rrp").html('');
+					$(".yousave").html('');
+					$(".sep").html('');
+				}
 			}
 		}
 	});

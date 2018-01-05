@@ -52,7 +52,8 @@ class ModelCatalogProduct extends Model {
 				'viewed'           => $query->row['viewed'],
 				'delivery_days'    => $query->row['delivery_days'],
 				'multistone'       => $query->row['multistone'],
-				'side_stone'       => $query->row['side_stone']
+				'side_stone'       => $query->row['side_stone'],
+				'rrp'       	   => $query->row['rrp']
 			);
 		} else {
 			return false;
