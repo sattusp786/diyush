@@ -808,6 +808,30 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['side_stone'] = '';
 		}
+		
+		if (isset($this->request->post['rrp'])) {
+			$data['rrp'] = $this->request->post['rrp'];
+		} elseif (!empty($product_info)) {
+			$data['rrp'] = $product_info['rrp'];
+		} else {
+			$data['rrp'] = '';
+		}
+		
+		if (isset($this->request->post['carat_from'])) {
+			$data['carat_from'] = $this->request->post['carat_from'];
+		} elseif (!empty($product_info)) {
+			$data['carat_from'] = $product_info['carat_from'];
+		} else {
+			$data['carat_from'] = '';
+		}
+		
+		if (isset($this->request->post['carat_to'])) {
+			$data['carat_to'] = $this->request->post['carat_to'];
+		} elseif (!empty($product_info)) {
+			$data['carat_to'] = $product_info['carat_to'];
+		} else {
+			$data['carat_to'] = '';
+		}
 
 		$this->load->model('localisation/stock_status');
 

@@ -145,6 +145,9 @@ $_['entry_ringsize']         = 'RingSize';
 $_['entry_delivery_days']    = 'Delivery Days';
 $_['entry_multistone']    	 = 'Multistone (Y/N)';
 $_['entry_side_stone']    	 = 'Side Stone';
+$_['entry_rrp']    	 		 = 'RRP';
+$_['entry_carat_from']    	 = 'Carat From';
+$_['entry_carat_to']    	 = 'Carat To';
 
 // Help
 $_['help_sku']               = 'Stock Keeping Unit';
