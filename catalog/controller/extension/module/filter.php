@@ -7,6 +7,13 @@ class ControllerExtensionModuleFilter extends Controller {
 			$parts = array();
 		}
 
+		$data['currency_symbol'] = $this->currency->getSymbolLeft($this->session->data['currency']);
+		
+		$data['carat_from'] = 0.20;
+		$data['carat_to'] = 1.00;
+		$data['price_from'] = 0;
+		$data['price_to'] = 5000;
+		
 		$category_id = end($parts);
 
 		$this->load->model('catalog/category');
@@ -16,6 +23,19 @@ class ControllerExtensionModuleFilter extends Controller {
 		if ($category_info) {
 			$this->load->language('extension/module/filter');
 
+			if (isset($this->request->get['carat_from'])) {
+				$data['carat_from'] = $this->request->get['carat_from'];
+			}
+			if (isset($this->request->get['carat_to'])) {
+				$data['carat_to'] = $this->request->get['carat_to'];
+			}
+			if (isset($this->request->get['price_from'])) {
+				$data['price_from'] = $this->request->get['price_from'];
+			}
+			if (isset($this->request->get['price_to'])) {
+				$data['price_to'] = $this->request->get['price_to'];
+			}
+			
 			$url = '';
 
 			if (isset($this->request->get['sort'])) {
@@ -51,6 +71,10 @@ class ControllerExtensionModuleFilter extends Controller {
 
 						foreach ($filter_group['filter'] as $filter) {
 							$filter_data = array(
+								'filter_carat_from'  => $data['carat_from'],
+								'filter_carat_to' 	 => $data['carat_to'],
+								'filter_price_from'  => $data['price_from'],
+								'filter_price_to' 	 => $data['price_to'],
 								'filter_category_id' => $category_id,
 								'filter_filter'      => $filter['filter_id']
 							);

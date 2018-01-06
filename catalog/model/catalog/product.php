@@ -156,6 +156,14 @@ class ModelCatalogProduct extends Model {
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
+		
+		if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
+			//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+		}
+		
+		if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
+			$sql .= " AND p.price between " . $data['filter_price_from'] . " AND " . $data['filter_price_to'] . " ";
+		}
 
 		$sql .= " GROUP BY p.product_id";
 
@@ -296,6 +304,14 @@ class ModelCatalogProduct extends Model {
 			}
 
 			$sql .= ")";
+		}
+		
+		if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
+			//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+		}
+		
+		if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
+			$sql .= " AND pt.price between " . $data['filter_price_from'] . " AND " . $data['filter_price_to'] . " ";
 		}
 
 		$sql .= " GROUP BY pt.product_id";
@@ -680,6 +696,14 @@ class ModelCatalogProduct extends Model {
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
+		
+		if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
+			//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+		}
+		
+		if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
+			$sql .= " AND p.price between " . $data['filter_price_from'] . " AND " . $data['filter_price_to'] . " ";
+		}
 
 		$query = $this->db->query($sql);
 
@@ -772,6 +796,14 @@ class ModelCatalogProduct extends Model {
 			}
 
 			$sql .= ")";
+			
+			if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
+				//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+			}
+			
+			if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
+				$sql .= " AND pt.price between " . $data['filter_price_from'] . " AND " . $data['filter_price_to'] . " ";
+			}
 		}
 
 		$query = $this->db->query($sql);

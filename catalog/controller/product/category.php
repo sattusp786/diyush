@@ -83,6 +83,30 @@ class ControllerProductCategory extends Controller {
 
 		$category_info = $this->model_catalog_category->getCategory($category_id);
 		
+		if (isset($this->request->get['carat_from'])) {
+			$filter_carat_from = $this->request->get['carat_from'];
+		} else {
+			$filter_carat_from = '';
+		}
+		
+		if (isset($this->request->get['carat_to'])) {
+			$filter_carat_to = $this->request->get['carat_to'];
+		} else {
+			$filter_carat_to = '';
+		}
+		
+		if (isset($this->request->get['price_from'])) {
+			$filter_price_from = $this->request->get['price_from'];
+		} else {
+			$filter_price_from = '';
+		}
+		
+		if (isset($this->request->get['price_to'])) {
+			$filter_price_to = $this->request->get['price_to'];
+		} else {
+			$filter_price_to = '';
+		}
+			
 		/* Filter Started */
 		if (isset($this->request->get['filter'])) {
 			$data['filter_category'] = explode(',', $this->request->get['filter']);
@@ -101,6 +125,10 @@ class ControllerProductCategory extends Controller {
 
 					foreach ($filter_group['filter'] as $filter) {
 						$filter_data = array(
+							'filter_carat_from' => $filter_carat_from,
+							'filter_carat_to'   => $filter_carat_to,
+							'filter_price_from' => $filter_price_from,
+							'filter_price_to'   => $filter_price_to,
 							'filter_category_id' => $category_id,
 							'filter_filter'      => $filter['filter_id']
 						);
@@ -197,8 +225,14 @@ class ControllerProductCategory extends Controller {
 
 			$data['products'] = array();
 
+			
+			
 			$filter_data = array(
 				'filter_category_id' => $category_id,
+				'filter_carat_from'  => $filter_carat_from,
+				'filter_carat_to'    => $filter_carat_to,
+				'filter_price_from'  => $filter_price_from,
+				'filter_price_to'    => $filter_price_to,
 				'filter_filter'      => $filter,
 				'sort'               => $sort,
 				'order'              => $order,
