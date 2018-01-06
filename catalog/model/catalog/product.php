@@ -158,7 +158,7 @@ class ModelCatalogProduct extends Model {
 		}
 		
 		if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
-			//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+			$sql .= " AND (p.carat_from >= ".$data['filter_carat_from']." OR p.carat_to <= ".$data['filter_carat_to'].") ";
 		}
 		
 		if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
@@ -306,8 +306,8 @@ class ModelCatalogProduct extends Model {
 			$sql .= ")";
 		}
 		
-		if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
-			//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+		if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {	
+			$sql .= " AND (p.carat_from >= ".$data['filter_carat_from']." OR p.carat_to <= ".$data['filter_carat_to'].") ";
 		}
 		
 		if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
@@ -698,7 +698,7 @@ class ModelCatalogProduct extends Model {
 		}
 		
 		if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
-			//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+			$sql .= " AND (p.carat_from >= ".$data['filter_carat_from']." OR p.carat_to <= ".$data['filter_carat_to'].") ";
 		}
 		
 		if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
@@ -798,7 +798,7 @@ class ModelCatalogProduct extends Model {
 			$sql .= ")";
 			
 			if (isset($data['filter_carat_from']) && isset($data['filter_carat_to']) && $data['filter_carat_from'] != '' && $data['filter_carat_to'] != '') {
-				//$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+				$sql .= " AND (p.carat_from >= ".$data['filter_carat_from']." OR p.carat_to <= ".$data['filter_carat_to'].") ";
 			}
 			
 			if (isset($data['filter_price_from']) && isset($data['filter_price_to']) && $data['filter_price_from'] != '' && $data['filter_price_to'] != '') {
