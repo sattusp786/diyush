@@ -12,6 +12,12 @@ class ControllerInformationVisitShowroom extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		$data['config_address'] = nl2br($this->config->get('config_address'));
+		$data['config_email'] = $this->config->get('config_email');
+		$data['config_telephone'] = $this->config->get('config_telephone');
+		$data['config_fax'] = $this->config->get('config_fax');
+		$data['config_open'] = nl2br($this->config->get('config_open'));
+		
 		$this->response->setOutput($this->load->view('information/visit_showroom', $data));
 	}
 	

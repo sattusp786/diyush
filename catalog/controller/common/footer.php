@@ -35,6 +35,10 @@ class ControllerCommonFooter extends Controller {
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 
+		$data['config_telephone'] = $this->config->get('config_telephone');
+		$data['config_address'] = $this->config->get('config_address');
+		$data['config_email'] = $this->config->get('config_email');
+		
 		$data['about_company']		= HTTP_SERVER.'about_company';
 		$data['what_we_do']			= HTTP_SERVER.'what_we_do';
 		$data['what_we_think']		= HTTP_SERVER.'what_we_think';

@@ -38,7 +38,7 @@
         	<div class="col-md-3"><i class="fa fa-map-marker black-text medium-icon"> </i></div>
             <div class="col-md-9">
             	<h3>Visit Our Location</h3>
-                <p>Suite 12,<br />88-90 Hatton Garden<br />London<br />EC1N 8PN</p>
+                <p>{{ config_address }}</p>
             </div>
         </div>
         <div class="col-md-3 no-padding">
@@ -52,14 +52,14 @@
         	<div class="col-md-3"><i class="fa fa-clock-o black-text medium-icon"> </i></div>
             <div class="col-md-9">
             	<h3>Working hours</h3>
-                <p>Mon - Fri: 8AM - 10PM<br /> Sat: 9AM - 8PM</p>
+                <p>{{ config_open }}</p>
             </div>
         </div>
         <div class="col-md-3 no-padding">
         	<div class="col-md-3"><i class="fa fa-phone black-text medium-icon"> </i></div>
             <div class="col-md-9">
             	<h3>Call us</h3>
-                <p>T +44 (0) 2036377362<br /> F +44 (0) 2036378488</p>
+                <p>T {{ config_telephone }}<br /> F {{ config_fax }}</p>
                 
             </div>
         </div>
