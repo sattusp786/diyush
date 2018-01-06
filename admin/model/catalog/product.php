@@ -9,8 +9,8 @@ class ModelCatalogProduct extends Model {
 		if($data['multistone'] == '1'){
 
 			$delete = $this->db->query("DELETE FROM `".DB_PREFIX."side_stone` WHERE product_id = '".$product_id."' ");
-				if($side_stone != ''){
-					$side_stone_arr = explode("|",$side_stone);
+				if($data['side_stone'] != ''){
+					$side_stone_arr = explode("|",$data['side_stone']);
 					if(!empty($side_stone_arr)){
 						foreach($side_stone_arr as $stones){
 						if(!empty($stones)){
@@ -208,8 +208,8 @@ class ModelCatalogProduct extends Model {
 		if($data['multistone'] == '1'){
 
 			$delete = $this->db->query("DELETE FROM `".DB_PREFIX."side_stone` WHERE product_id = '".$product_id."' ");
-				if($side_stone != ''){
-					$side_stone_arr = explode("|",$side_stone);
+				if($data['side_stone'] != ''){
+					$side_stone_arr = explode("|",$data['side_stone']);
 					if(!empty($side_stone_arr)){
 						foreach($side_stone_arr as $stones){
 						if(!empty($stones)){
