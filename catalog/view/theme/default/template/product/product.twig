@@ -91,7 +91,7 @@
                         <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
                         <!-- end product name -->
                         <!-- product stock -->
-                        <p class="text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by 10th Oct 2017</p>
+                        <p class="text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by {{ delivery_date_top }}</p>
 						<!--<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>-->
                         <!-- end product stock -->
                         <div class="separator-line bg-black no-margin-lr margin-two"></div>
@@ -101,12 +101,12 @@
 						  <ul class="list-unstyled">
 							{% if not special %}
 							<li>
-							  <h2 class="final_price"><span class="final_prod_price">{{ price }}</span> <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
+							  <h2 class="final_price"><span class="final_prod_price">{{ price }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
 							</li>
 							{% else %}
 							<li><span style="text-decoration: line-through;">{{ price }}</span></li>
 							<li>
-							  <h2 class="final_price"><span class="final_prod_price">{{ special }}</span> <span class="rrp">RRP: $200</span><span class="sep">|</span><span class="yousave">YOU SAVE: 100</span></h2>
+							  <h2 class="final_price"><span class="final_prod_price">{{ special }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
 							</li>
 							{% endif %}
                              <li>(Inc. VAT, Postage and Packaging) <a href="#fairpricing" class="highlight-button-dark btn btn-very-small button xs-no-margin popup-with-zoom-anim" style=" margin: 0 10px; line-height: initial;">Fair pricing Policy</a></li>
@@ -168,7 +168,7 @@
 								{% set default_val = '0' %}
 								{% for option_value in option.product_option_value %}
 								{% if option_value.default == 1 %} {% set default_val = option_value.product_option_value_id %} {% endif %}
-								<li {% if option_value.default == 1 %} class="active" {% endif %} ><a class="option_square input-option{{ option.product_option_id }}" href="javascript:void(0);" alt="{{ option_value.product_option_value_id }}">{{ option_value.name }}</a></li>
+								<li class="optioner_{{ option.option_id }} {% if option_value.default == 1 %} active {% endif %}" ><a class="option_square input-option{{ option.product_option_id }}" href="javascript:void(0);" alt="{{ option_value.product_option_value_id }}">{{ option_value.name }}</a></li>
 								{% set o = o + 1 %}
 								{% endfor %}
                                 <!--<li class="size-chart"><a href="#">Size Chart</a></li>-->
@@ -446,21 +446,15 @@
                                           <div class="col-md-6">
                                           	<h3 class="margin-five">Ring Information</h3>
                                             <p>
-												Metal<br />
 												Metal: <span class="metal_purity">{{ metal_name }}</span><br />
 												Metal Weight: Approx. <span class="metal_weight">0</span> gms.
 											</p>
-                                            <h3 class="margin-five" id="stone_details">Stones</h3>
-                                            <p>
-												Stone Type: Diamond<br />
-												Shape: Round<br />
-												Colour: G<br />
-												Clarity: S/1<br />
-												Setting: 4 Prong Square<br />
-												Total Weight: Approx 0.3 ct. wt. (0.300ct.X1)
+                                            <h3 class="margin-five">Stones</h3>
+											<p id="stone_details">
+											
 											</p>
                                           </div>
-                                          <div class="col-md-6">
+                                          <div class="col-md-6" style="display:none;">
                                           	<h3 class="margin-five" id="dimension_details">Dimension</h3>
                                             <p>
 												Setting Height: 6.7mm<br />
@@ -854,6 +848,7 @@ $('.product-option').on('change', function() {
 				$(".metal_purity").html(metal_name);
 				$(".metal_weight").html(json['weight']);
 				$(".final_prod_price").html(json['price']);
+				$("#stone_details").html(json['stones']);
 				if(json['rrp'] != ''){
 					$(".rrp").html('RRP: '+json['rrp']);
 					$(".yousave").html('YOU SAVE: '+json['yousave']);

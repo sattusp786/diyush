@@ -258,7 +258,8 @@ class ControllerProductProduct extends Controller {
 			}
 			
 			$today_date = date('Y-m-d');
-			$data['delivery_date'] = date('l, d/m/Y', strtotime($today_date. ' + 1 days'));
+			$data['delivery_date_top'] = date('jS M Y', strtotime($today_date. ' + '.$delivery_days.' days'));
+			$data['delivery_date'] = date('l, d/m/Y', strtotime($today_date. ' + '.$delivery_days.' days'));
 			
 			if ($product_info['quantity'] <= 0) {
 				$data['stock'] = $product_info['stock_status'];
@@ -790,6 +791,21 @@ class ControllerProductProduct extends Controller {
 					$json['rrp'] = $this->currency->format($rrp, $this->session->data['currency']);
 					$json['yousave'] = $this->currency->format($rrp - $unit_price, $this->session->data['currency']);
 				}
+				
+				$json['stones'] = '';
+				
+				if(!empty($product['option'])){
+					foreach($product['option'] as $option){
+						if($option['name'] != 'Metal'){
+							if($option['name'] == 'Carat'){
+								$json['stones'] .= 'Total Weight : Approx '. $option['value'].' ct. wt.<br/>';
+							} else {
+								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
+							}
+						}
+					}
+				}
+				$json['stones'] = substr($json['stones'],0,-5);
 			}
 			
 			if($json['price'] != ''){
