@@ -301,7 +301,7 @@ class Cart {
 		
 		if (isset($data['Metal']) && !empty($data['Metal']))
 		{
-			$metal_sql = "SELECT price, gravity, markup_rate, code FROM " . DB_PREFIX . "metal_price WHERE  code = '" . $this->db->escape($data['Metal']) . "'";
+			$metal_sql = "SELECT price, gravity, code FROM " . DB_PREFIX . "metal_price WHERE  code = '" . $this->db->escape($data['Metal']) . "'";
 
 			$metal_query = $this->db->query($metal_sql);
 			if ($metal_query->num_rows)
