@@ -300,8 +300,8 @@ $(document).ready(function () {
     });
 	$("#filter-products").owlCarousel({
         navigation: true,
-        items: 7,
-        itemsDesktop: [1200, 7],
+        items: 6,
+        itemsDesktop: [1200, 6],
         itemsTablet: [800, 2],
         itemsMobile: [700, 2],
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]

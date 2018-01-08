@@ -2317,7 +2317,9 @@ h2.final_price span.rrp { text-decoration:line-through;}
 
 
 #filter-products .owl-item .item .filter-product .proimg {border: 1px solid #676767; padding: 5px; margin:0 10px;}
-#filter-products .owl-item .item .filter-product.active .proimg {border: 1px solid #fff;}
+#filter-products .owl-item .item .filter-product label input { display:none;}
+/*#filter-products .owl-item .item .filter-product.active .proimg {border: 1px solid #fff;}*/
+#filter-products .owl-item .item .filter-product label input:checked + span.proimg {border: 1px solid #fff;}
 #filter-products .item span.proimg { display: block; padding: 0 15px; }
 #filter-products .item span.proimg a { display: block; background:#fff;}
 #filter-products .item span.product-name a { color:#fff;}
