@@ -875,7 +875,7 @@ $(document).ready(function() {
 		$(this).parent('li').addClass('active');
 		$("#"+idname).val(valuename);
 		
-		$(".product-option").change();
+		$(".product-option:first").change();
 	});
 	
 	$(".imager").click(function(){
@@ -884,7 +884,7 @@ $(document).ready(function() {
 			$(this).css('border','0');
 		});
 		$(this).siblings('.option_image').css('border','1px solid #ddd');
-		$(".product-option").change();
+		$(".product-option:first").change();
 	});
 	
 	/*
@@ -896,7 +896,7 @@ $(document).ready(function() {
 		});
 		$(this).css('border','1px solid #ddd');
 		//$("#"+idname).val(valuename);
-		$(".product-option").change();
+		$(".product-option:first").change();
 	});
 */
 	
@@ -908,7 +908,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$(".product-option").change();
+	$(".product-option:first").change();
 });
 //--></script> 
 <script>

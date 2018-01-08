@@ -292,6 +292,7 @@ class Cart {
 	
 	public function calculatePrice($data) {
 		
+		$default_gravity = 15.50;
 		//Code added by Paul to calculate price starts...
 		$final_price = 0;
 		
