@@ -247,8 +247,10 @@ class Cart {
 				}
 				$final_option['metal_weight'] = $product_query->row['weight'] + $option_weight;
 				
-				$final_price = $this->calculatePrice($final_option);
+				$optioner = $this->calculatePrice($final_option);
 				
+				$final_price = $optioner['final_price'];
+				$metal_weight = $optioner['metal_weight'];
 				//Code added by Paul to calculate price ends...
 				
 				
@@ -271,6 +273,7 @@ class Cart {
 					'points'          => ($product_query->row['points'] ? ($product_query->row['points'] + $option_points) * $cart['quantity'] : 0),
 					'tax_class_id'    => $product_query->row['tax_class_id'],
 					'weight'          => ($product_query->row['weight'] + $option_weight) * $cart['quantity'],
+					'metal_weight'    => $metal_weight,
 					'weight_class_id' => $product_query->row['weight_class_id'],
 					'length'          => $product_query->row['length'],
 					'width'           => $product_query->row['width'],
@@ -294,16 +297,24 @@ class Cart {
 		
 		//Calculate Metal Price..
 		$metal_price = 0;
-		$metal_weight = $data['metal_weight'];
+		$metal_weight = $data['metal_weight'];		
 		
-		$metal_price_per_gram = 0;
-		$get_metal_price = $this->db->query("SELECT * FROM " . DB_PREFIX . "metal_price WHERE code = '".$data['Metal']."' ");
-		if($get_metal_price->num_rows){
-			$metal_price_per_gram = $get_metal_price->row['price'];
-		}
-		
-		if($metal_price_per_gram > 0){
-			$metal_price = $metal_price_per_gram * $metal_weight;
+		if (isset($data['Metal']) && !empty($data['Metal']))
+		{
+			$metal_sql = "SELECT price, gravity, markup_rate, code FROM " . DB_PREFIX . "metal_price WHERE  code = '" . $this->db->escape($data['Metal']) . "'";
+
+			$metal_query = $this->db->query($metal_sql);
+			if ($metal_query->num_rows)
+			{
+				foreach($metal_query->rows AS $metal_result)
+				{
+					if ($data['Metal'] == $metal_result['code'])
+					{
+						$metal_weight = ($metal_weight / $default_gravity) * $metal_result['gravity'];
+						$metal_price+= $metal_result['price'] * $metal_weight;
+					}
+				}
+			}
 		}
 		
 		//Calculate Stone Price..
@@ -368,7 +379,11 @@ class Cart {
 		$final_price = $metal_price + $stone_price;
 		//Code added by Paul to calculate price ends...
 		
-		return $final_price;
+		$option = array();
+		
+		$option['final_price'] = $final_price;
+		$option['metal_weight'] = $metal_weight;
+		return $option;
 	}
 
 	public function add($product_id, $quantity = 1, $option = array(), $recurring_id = 0) {
