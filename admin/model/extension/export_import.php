@@ -1146,66 +1146,6 @@ class ModelToolExportImport extends Model {
 			$sql .= ";";
 			$this->db->query($sql);
 		}
-		
-		//Added by Paul to insert multistone details into side_stone table....
-		if($multistone == '1'){
-
-			$delete = $this->db->query("DELETE FROM `".DB_PREFIX."side_stone` WHERE product_id = '".$product_id."' ");
-				if($side_stone != ''){
-					$side_stone_arr = explode("|",$side_stone);
-					if(!empty($side_stone_arr)){
-						foreach($side_stone_arr as $stones){
-						if(!empty($stones)){
-							
-							$stone_type = '';
-							$stone_shape = '';
-							$stone_carat = '';
-							$stone_pieces = '';
-							$stone_color = '';
-							$stone_clarity = '';
-							$stone_cert = '';
-							$ring_sizes = '';
-							$lengths = '';
-							$band_widths = '';
-							
-							$stones_arr = explode(",",$stones);
-							if(!empty($stones_arr)){
-								foreach($stones_arr as $stoner){
-									if(!empty($stoner)){
-										list($key,$value) = explode(":",$stoner);
-										if(strtolower($key) == 'stone'){
-											$stone_type = $value;
-										} elseif(strtolower($key) == 'shape'){
-											$stone_shape = $value;
-										} elseif(strtolower($key) == 'carat'){
-											$stone_carat = $value;
-										} elseif(strtolower($key) == 'pieces'){
-											$stone_pieces = $value;
-										} elseif(strtolower($key) == 'color'){
-											$stone_color = $value;
-										} elseif(strtolower($key) == 'clarity'){
-											$stone_clarity = $value;
-										} elseif(strtolower($key) == 'cert'){
-											$stone_cert = $value;
-										} elseif(strtolower($key) == 'ring_size'){
-											$ring_sizes = $value;
-										} elseif(strtolower($key) == 'length'){
-											$lengths = $value;
-										} elseif(strtolower($key) == 'width'){
-											$band_widths = $value;
-										}
-									}
-								}
-								
-								$insert_side_stone = $this->db->query("INSERT INTO `".DB_PREFIX."side_stone` SET product_id = '".$product_id."', stone = '".$stone_type."', shape = '".$stone_shape."', carat = '".$stone_carat."', pieces = '".$stone_pieces."', color = '".$stone_color."', clarity = '".$stone_clarity."', lab = '".$stone_cert."', ringsize = '".$ring_sizes."', length = '".$lengths."', bandwidth = '".$band_widths."' ");
-								
-							}
-							
-						}
-					}
-				}
-			}
-		}
 	}
 
 
@@ -2210,19 +2150,140 @@ class ModelToolExportImport extends Model {
 		$weight = $product_option_value['weight'];
 		$weight_prefix = $product_option_value['weight_prefix'];
 		$default = $product_option_value['default'];
+		$stone_type = $product_option_value['stone_type'];
+		$side_stone = $product_option_value['side_stone'];
+		$multi_stone = $product_option_value['multi_stone'];
 		$product_option_id = $product_option_value['product_option_id'];
 		if (isset($old_product_option_value_ids[$product_id][$option_id][$option_value_id])) {
 			$product_option_value_id = $old_product_option_value_ids[$product_id][$option_id][$option_value_id];
 			$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
-			$sql .= "(`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`,`default` ) VALUES "; 
-			$sql .= "($product_option_value_id,$product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix',$default)";
+			$sql .= "(`product_option_value_id`,`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`,`default`,`stone_type`,`side_stone`,`multi_stone` ) VALUES "; 
+			$sql .= "($product_option_value_id,$product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix',$default,'$stone_type','$side_stone','$multi_stone')";
 			$this->db->query($sql);
 			unset($old_product_option_value_ids[$product_id][$option_id][$option_value_id]);
 		} else {
 			$sql  = "INSERT INTO `".DB_PREFIX."product_option_value` ";
-			$sql .= "(`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`,`default` ) VALUES "; 
-			$sql .= "($product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix',$default)";
+			$sql .= "(`product_option_id`,`product_id`,`option_id`,`option_value_id`,`quantity`,`subtract`,`price`,`price_prefix`,`points`,`points_prefix`,`weight`,`weight_prefix`,`default`,`stone_type`,`side_stone`,`multi_stone` ) VALUES "; 
+			$sql .= "($product_option_id,$product_id,$option_id,$option_value_id,$quantity,$subtract,$price,'$price_prefix',$points,'$points_prefix',$weight,'$weight_prefix',$default,'$stone_type','$side_stone','$multi_stone')";
 			$this->db->query($sql);
+			
+			$product_option_value_id = $this->db->getLastId();
+		}
+		
+		//Added by Paul to insert side stone and multi stone details...
+		$this->db->query("DELETE FROM `".DB_PREFIX."side_stone` WHERE product_option_value_id='".(int)$product_option_value_id."'");
+		$this->db->query("DELETE FROM `".DB_PREFIX."multi_stone` WHERE product_option_value_id='".(int)$product_option_value_id."'");
+		
+				//Added by Paul to insert sidestone details into side_stone table....
+				
+				if($side_stone != ''){
+					$side_stone_arr = explode("|",$side_stone);
+					if(!empty($side_stone_arr)){
+						foreach($side_stone_arr as $stones){
+						if(!empty($stones)){
+							
+							$stone_type = '';
+							$stone_shape = '';
+							$stone_carat = '';
+							$stone_pieces = '';
+							$stone_color = '';
+							$stone_clarity = '';
+							$stone_cert = '';
+							$ring_sizes = '';
+							$lengths = '';
+							$band_widths = '';
+							
+							$stones_arr = explode(",",$stones);
+							if(!empty($stones_arr)){
+								foreach($stones_arr as $stoner){
+									if(!empty($stoner)){
+										list($key,$value) = explode(":",$stoner);
+										if(strtolower($key) == 'stone'){
+											$stone_type = $value;
+										} elseif(strtolower($key) == 'shape'){
+											$stone_shape = $value;
+										} elseif(strtolower($key) == 'carat'){
+											$stone_carat = $value;
+										} elseif(strtolower($key) == 'pieces'){
+											$stone_pieces = $value;
+										} elseif(strtolower($key) == 'color'){
+											$stone_color = $value;
+										} elseif(strtolower($key) == 'clarity'){
+											$stone_clarity = $value;
+										} elseif(strtolower($key) == 'cert'){
+											$stone_cert = $value;
+										} elseif(strtolower($key) == 'ring_size'){
+											$ring_sizes = $value;
+										} elseif(strtolower($key) == 'length'){
+											$lengths = $value;
+										} elseif(strtolower($key) == 'width'){
+											$band_widths = $value;
+										}
+									}
+								}
+								
+								$insert_side_stone = $this->db->query("INSERT INTO `".DB_PREFIX."side_stone` SET product_id = '".$product_id."', product_option_value_id = '".$product_option_value_id."', stone = '".$stone_type."', shape = '".$stone_shape."', carat = '".$stone_carat."', pieces = '".$stone_pieces."', color = '".$stone_color."', clarity = '".$stone_clarity."', lab = '".$stone_cert."', ringsize = '".$ring_sizes."', length = '".$lengths."', bandwidth = '".$band_widths."' ");
+								
+							}
+							
+						}
+					}
+				}
+			}
+			
+			if($multi_stone != ''){
+				$multi_stone_arr = explode("|",$multi_stone);
+				if(!empty($multi_stone_arr)){
+					foreach($multi_stone_arr as $stones){
+					if(!empty($stones)){
+						
+						$stone_type = '';
+						$stone_shape = '';
+						$stone_carat = '';
+						$stone_pieces = '';
+						$stone_color = '';
+						$stone_clarity = '';
+						$stone_cert = '';
+						$ring_sizes = '';
+						$lengths = '';
+						$band_widths = '';
+						
+						$stones_arr = explode(",",$stones);
+						if(!empty($stones_arr)){
+							foreach($stones_arr as $stoner){
+								if(!empty($stoner)){
+									list($key,$value) = explode(":",$stoner);
+									if(strtolower($key) == 'stone'){
+										$stone_type = $value;
+									} elseif(strtolower($key) == 'shape'){
+										$stone_shape = $value;
+									} elseif(strtolower($key) == 'carat'){
+										$stone_carat = $value;
+									} elseif(strtolower($key) == 'pieces'){
+										$stone_pieces = $value;
+									} elseif(strtolower($key) == 'color'){
+										$stone_color = $value;
+									} elseif(strtolower($key) == 'clarity'){
+										$stone_clarity = $value;
+									} elseif(strtolower($key) == 'cert'){
+										$stone_cert = $value;
+									} elseif(strtolower($key) == 'ring_size'){
+										$ring_sizes = $value;
+									} elseif(strtolower($key) == 'length'){
+										$lengths = $value;
+									} elseif(strtolower($key) == 'width'){
+										$band_widths = $value;
+									}
+								}
+							}
+							
+							$insert_multi_stone = $this->db->query("INSERT INTO `".DB_PREFIX."multi_stone` SET product_id = '".$product_id."', product_option_value_id = '".$product_option_value_id."', stone = '".$stone_type."', shape = '".$stone_shape."', carat = '".$stone_carat."', pieces = '".$stone_pieces."', color = '".$stone_color."', clarity = '".$stone_clarity."', lab = '".$stone_cert."', ringsize = '".$ring_sizes."', length = '".$lengths."', bandwidth = '".$band_widths."' ");
+							
+						}
+						
+					}
+				}
+			}
 		}
 	}
 
@@ -2230,6 +2291,8 @@ class ModelToolExportImport extends Model {
 	protected function deleteProductOptionValues() {
 		$sql = "TRUNCATE TABLE `".DB_PREFIX."product_option_value`";
 		$this->db->query( $sql );
+		$this->db->query( "TRUNCATE TABLE `".DB_PREFIX."side_stone`" );
+		$this->db->query( "TRUNCATE TABLE `".DB_PREFIX."multi_stone`" );
 	}
 
 
@@ -2247,6 +2310,8 @@ class ModelToolExportImport extends Model {
 		if ($old_product_option_value_ids) {
 			$sql = "DELETE FROM `".DB_PREFIX."product_option_value` WHERE product_id='".(int)$product_id."'";
 			$this->db->query( $sql );
+			$this->db->query( "DELETE FROM `".DB_PREFIX."side_stone` WHERE product_id='".(int)$product_id."'" );
+			$this->db->query( "DELETE FROM `".DB_PREFIX."multi_stone` WHERE product_id='".(int)$product_id."'" );
 		}
 		return $old_product_option_value_ids;
 	}
@@ -2256,6 +2321,8 @@ class ModelToolExportImport extends Model {
 		foreach ($unlisted_product_ids as $product_id) {
 			$sql = "DELETE FROM `".DB_PREFIX."product_option_value` WHERE product_id='".(int)$product_id."'";
 			$this->db->query( $sql );
+			$this->db->query( "DELETE FROM `".DB_PREFIX."side_stone` WHERE product_id='".(int)$product_id."'" );
+			$this->db->query( "DELETE FROM `".DB_PREFIX."multi_stone` WHERE product_id='".(int)$product_id."'" );
 		}
 	}
 
@@ -2328,7 +2395,10 @@ class ModelToolExportImport extends Model {
 			$points_prefix = $this->getCell($data,$i,$j++,'+');
 			$weight = $this->getCell($data,$i,$j++,'0.00');
 			$weight_prefix = $this->getCell($data,$i,$j++,'+');
-			$default = $this->getCell($data,$i,$j++,'+');
+			$default = $this->getCell($data,$i,$j++,'0');
+			$stone_type = $this->getCell($data,$i,$j++,'');
+			$side_stone = $this->getCell($data,$i,$j++,'');
+			$multi_stone = $this->getCell($data,$i,$j++,'');
 			if ($product_id != $previous_product_id) {
 				$product_option_ids = $this->getProductOptionIds( $product_id );
 			}
@@ -2345,6 +2415,9 @@ class ModelToolExportImport extends Model {
 			$product_option_value['weight'] = $weight;
 			$product_option_value['weight_prefix'] = $weight_prefix;
 			$product_option_value['default'] = $default;
+			$product_option_value['stone_type'] = $stone_type;
+			$product_option_value['side_stone'] = $side_stone;
+			$product_option_value['multi_stone'] = $multi_stone;
 			$product_option_value['product_option_id'] = isset($product_option_ids[$option_id]) ? $product_option_ids[$option_id] : 0;
 			if (($incremental) && ($product_id != $previous_product_id)) {
 				$old_product_option_value_ids = $this->deleteProductOptionValue( $product_id );
@@ -4183,15 +4256,15 @@ class ModelToolExportImport extends Model {
 		}
 		if ($this->config->get('export_import_settings_use_option_id')) {
 			if ($this->config->get('export_import_settings_use_option_value_id')) {
-				$expected_heading = array( "product_id", "option_id", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
+				$expected_heading = array( "product_id", "option_id", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default", "stone_type", "side_stone", "multi_stone" );
 			} else {
-				$expected_heading = array( "product_id", "option_id", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
+				$expected_heading = array( "product_id", "option_id", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default", "stone_type", "side_stone", "multi_stone" );
 			}
 		} else {
 			if ($this->config->get('export_import_settings_use_option_value_id')) {
-				$expected_heading = array( "product_id", "option", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
+				$expected_heading = array( "product_id", "option", "option_value_id", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default", "stone_type", "side_stone", "multi_stone" );
 			} else {
-				$expected_heading = array( "product_id", "option", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default" );
+				$expected_heading = array( "product_id", "option", "option_value", "quantity", "subtract", "price", "price_prefix", "points", "points_prefix", "weight", "weight_prefix", "default", "stone_type", "side_stone", "multi_stone" );
 			}
 		}
 		$expected_multilingual = array();
@@ -7568,7 +7641,7 @@ class ModelToolExportImport extends Model {
 		$language_id = $this->getDefaultLanguageId();
 		$sql  = "SELECT ";
 		$sql .= "  p.product_id, pov.option_id, pov.option_value_id, pov.quantity, pov.subtract, od.name AS `option`, ovd.name AS option_value, ";
-		$sql .= "  pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, pov.default ";
+		$sql .= "  pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, pov.default, pov.stone_type, pov.side_stone, pov.multi_stone ";
 		$sql .= "FROM ";
 		$sql .= "( SELECT product_id ";
 		$sql .= "  FROM `".DB_PREFIX."product` ";
@@ -7609,6 +7682,9 @@ class ModelToolExportImport extends Model {
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('weight'),10)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('weight_prefix'),5)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('default'),10)+1);
+		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('stone_type'),10)+1);
+		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('side_stone'),30)+1);
+		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('multi_stone'),30)+1);
 
 		// The heading row and column styles
 		$styles = array();
@@ -7639,6 +7715,9 @@ class ModelToolExportImport extends Model {
 		$data[$j++] = 'weight';
 		$data[$j++] = 'weight_prefix';
 		$data[$j++] = 'default';
+		$data[$j++] = 'stone_type';
+		$data[$j++] = 'side_stone';
+		$data[$j++] = 'multi_stone';
 		$worksheet->getRowDimension($i)->setRowHeight(30);
 		$this->setCellRow( $worksheet, $i, $data, $box_format );
 
@@ -7669,6 +7748,9 @@ class ModelToolExportImport extends Model {
 			$data[$j++] = $row['weight'];
 			$data[$j++] = $row['weight_prefix'];
 			$data[$j++] = $row['default'];
+			$data[$j++] = $row['stone_type'];
+			$data[$j++] = $row['side_stone'];
+			$data[$j++] = $row['multi_stone'];
 			$this->setCellRow( $worksheet, $i, $data, $this->null_array, $styles );
 			$i += 1;
 			$j = 0;
