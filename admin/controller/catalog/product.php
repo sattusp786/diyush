@@ -1199,7 +1199,10 @@ class ControllerCatalogProduct extends Controller {
 						'points'                  => $product_option_value['points'],
 						'points_prefix'           => $product_option_value['points_prefix'],
 						'weight'                  => $product_option_value['weight'],
-						'weight_prefix'           => $product_option_value['weight_prefix']
+						'weight_prefix'           => $product_option_value['weight_prefix'],
+						'stone_type'           	  => $product_option_value['stone_type'],
+						'side_stone'           	  => $product_option_value['side_stone'],
+						'multi_stone'             => $product_option_value['multi_stone']
 					);
 				}
 			}

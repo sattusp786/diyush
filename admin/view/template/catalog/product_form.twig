@@ -660,6 +660,9 @@
                               <td class="text-right">{{ entry_price }}</td>
                               <td class="text-right">{{ entry_option_points }}</td>
                               <td class="text-right">{{ entry_weight }}</td>
+                              <td class="text-right">{{ entry_stone_type }}</td>
+                              <td class="text-right">{{ entry_side_stone }}</td>
+                              <td class="text-right">{{ entry_multi_stone }}</td>
                               <td></td>
                             </tr>
                           </thead>
@@ -815,6 +818,9 @@
                               
                               </select>
                               <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][weight]" value="{{ product_option_value.weight }}" placeholder="{{ entry_weight }}" class="form-control" /></td>
+							 <td class="text-left"><input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][stone_type]" value="{{ product_option_value.stone_type }}" placeholder="{{ entry_stone_type }}" class="form-control" /></td>
+							 <td class="text-left"><input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][side_stone]" value="{{ product_option_value.side_stone }}" placeholder="{{ entry_side_stone }}" class="form-control" /></td>
+							 <td class="text-left"><input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][multi_stone]" value="{{ product_option_value.multi_stone }}" placeholder="{{ entry_multi_stone }}" class="form-control" /></td>
                             <td class="text-right"><button type="button" onclick="$(this).tooltip('destroy');$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
                           </tr>
                           {% set option_value_row = option_value_row + 1 %}
@@ -823,7 +829,7 @@
                           
                           <tfoot>
                             <tr>
-                              <td colspan="6"></td>
+                              <td colspan="10"></td>
                               <td class="text-left"><button type="button" onclick="addOptionValue('{{ option_row }}');" data-toggle="tooltip" title="{{ button_option_value_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
                             </tr>
                           </tfoot>
@@ -2070,6 +2076,9 @@ $('input[name=\'option\']').autocomplete({
 			html += '        <td class="text-right">{{ entry_price }}</td>';
 			html += '        <td class="text-right">{{ entry_option_points }}</td>';
 			html += '        <td class="text-right">{{ entry_weight }}</td>';
+			html += '        <td class="text-right">{{ entry_stone_type }}</td>';
+			html += '        <td class="text-right">{{ entry_side_stone }}</td>';
+			html += '        <td class="text-right">{{ entry_multi_stone }}</td>';
 			html += '        <td></td>';
 			html += '      </tr>';
 			html += '  	 </thead>';
@@ -2077,7 +2086,7 @@ $('input[name=\'option\']').autocomplete({
 			html += '    </tbody>';
 			html += '    <tfoot>';
 			html += '      <tr>';
-			html += '        <td colspan="6"></td>';
+			html += '        <td colspan="10"></td>';
 			html += '        <td class="text-left"><button type="button" onclick="addOptionValue(' + option_row + ');" data-toggle="tooltip" title="{{ button_option_value_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>';
 			html += '      </tr>';
 			html += '    </tfoot>';
@@ -2154,6 +2163,9 @@ function addOptionValue(option_row) {
 	html += '    <option value="-">-</option>';
 	html += '  </select>';
 	html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" placeholder="{{ entry_weight }}" class="form-control" /></td>';
+	html += '  <td class="text-left"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][stone_type]" value="" placeholder="{{ entry_stone_type }}" class="form-control" /></td>';
+	html += '  <td class="text-left"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][side_stone]" value="" placeholder="{{ entry_side_stone }}" class="form-control" /></td>';
+	html += '  <td class="text-left"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][multi_stone]" value="" placeholder="{{ entry_multi_stone }}" class="form-control" /></td>';
 	html += '  <td class="text-left"><button type="button" onclick="$(this).tooltip(\'destroy\');$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" rel="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
 
