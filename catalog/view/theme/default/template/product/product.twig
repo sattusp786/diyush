@@ -444,15 +444,19 @@
                                          <h3 class="text-center margin-two no-margin-top">About Your Ring</h3>
                                          <p class="text-center">{{ description }}</p>
                                           <h3 class="text-center margin-two no-margin-top">Reference Code: {{ sku }}</h3>
-                                          <div class="col-md-6">
+                                          <div class="col-md-10">
                                           	<h3 class="margin-five">Ring Information</h3>
                                             <p>
 												Metal: <span class="metal_purity">{{ metal_name }}</span><br />
 												Metal Weight: Approx. <span class="metal_weight">0</span> gms.
 											</p>
-                                            <h3 class="margin-five">Stones</h3>
-											<p id="stone_details">
-											
+                                            <h3 style="float:left;" class="margin-five">Stone</h3>
+                                            <h3 style="float:right;display:none;" class="margin-five sidestone_heading">Side Stone</h3>
+											<p style="float:left;clear:both;" id="stone_details">
+												
+											</p>
+											<p style="float:right;" id="sidestone_details">
+												
 											</p>
                                           </div>
                                           <div class="col-md-6" style="display:none;">
@@ -850,6 +854,10 @@ $('.product-option').on('change', function() {
 				$(".metal_weight").html(json['weight']);
 				$(".final_prod_price").html(json['price']);
 				$("#stone_details").html(json['stones']);
+				if(json['side_stones'] != ''){
+					$(".sidestone_heading").show();
+					$("#sidestone_details").html(json['side_stones']);
+				}
 				if(json['rrp'] != ''){
 					$(".rrp").html('RRP: '+json['rrp']);
 					$(".yousave").html('YOU SAVE: '+json['yousave']);

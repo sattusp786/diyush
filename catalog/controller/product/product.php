@@ -793,12 +793,26 @@ class ControllerProductProduct extends Controller {
 				}
 				
 				$json['stones'] = '';
+				$json['side_stones'] = '';
 				
 				if(!empty($product['option'])){
 					foreach($product['option'] as $option){
 						if($option['name'] != 'Metal'){
 							if($option['name'] == 'Carat'){
-								$json['stones'] .= 'Total Weight : Approx '. $option['value'].' ct. wt.<br/>';
+								if(strtolower($product['multistone']) == 'm' || strtolower($product['multistone']) == 'sm'){
+									$total_carat = $option['value'];
+									$single_carat = $option['multi_carat'];
+									$pieces = $option['multi_pieces'];
+								} else {
+									$total_carat = $option['value'];
+									$single_carat = $option['value'];
+									$pieces = 1;
+								}
+								
+								if(strtolower($product['multistone']) == 's' || strtolower($product['multistone']) == 'sm'){
+									$json['side_stones'] .= 'Stone Type : '.$option['side_stone'].'<br>Shape : '.$option['side_shape'].'<br>Clarity : '.$option['side_clarity'].'<br>Colour : '.$option['side_color'].'<br>Certificate : '.$option['side_lab'].'<br>Total Weight : Approx '. ($option['side_carat']*$option['side_pieces']).' ct. wt. ('.$option['side_carat'].'ct. x '.$option['side_pieces'].')';
+								}
+								$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt. ('.$single_carat.'ct. x '.$pieces.')<br/>';
 							} else {
 								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
 							}

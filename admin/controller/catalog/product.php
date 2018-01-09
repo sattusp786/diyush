@@ -798,7 +798,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['multistone'] = $product_info['multistone'];
 		} else {
-			$data['multistone'] = 0;
+			$data['multistone'] = '';
 		}
 		
 		if (isset($this->request->post['side_stone'])) {
