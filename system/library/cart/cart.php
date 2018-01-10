@@ -52,7 +52,7 @@ class Cart {
 
 					if ($option_query->num_rows) {
 						if ($option_query->row['type'] == 'select' || $option_query->row['type'] == 'radio') {
-							$option_value_query = $this->db->query("SELECT ss.stone as side_stone, ss.shape as side_shape, ss.carat as side_carat, ss.pieces as side_pieces, ss.color as side_color, ss.clarity as side_clarity, ss.lab as side_lab, ms.stone as multi_stone, ms.shape as multi_shape, ms.carat as multi_carat, ms.pieces as multi_pieces, ms.color as multi_color, ms.clarity as multi_clarity, ms.lab as multi_lab, pov.option_value_id, ov.code, ovd.name, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, pov.stone_type FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) LEFT JOIN " . DB_PREFIX . "side_stone ss ON (pov.product_option_value_id = ss.product_option_value_id) LEFT JOIN " . DB_PREFIX . "multi_stone ms ON (pov.product_option_value_id = ms.product_option_value_id) WHERE pov.product_option_value_id = '" . (int)$value . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+							$option_value_query = $this->db->query("SELECT pov.option_value_id, ov.code, ovd.name, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, pov.stone_type FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$value . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 							if ($option_value_query->num_rows) {
 								if ($option_value_query->row['price_prefix'] == '+') {
@@ -76,7 +76,44 @@ class Cart {
 								if ($option_value_query->row['subtract'] && (!$option_value_query->row['quantity'] || ($option_value_query->row['quantity'] < $cart['quantity']))) {
 									$stock = false;
 								}
-
+								
+								//Sidestones..
+								$sidestones = array();
+								$sidestone_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "side_stone WHERE product_option_value_id = '" . (int)$value . "' ");
+								if($sidestone_query->num_rows){
+									$i = 0;
+									foreach($sidestone_query->rows as $sidestone){
+										$sidestones[$i]['stone'] = $sidestone['stone'];
+										$sidestones[$i]['shape'] = $sidestone['shape'];
+										$sidestones[$i]['carat'] = $sidestone['carat'];
+										$sidestones[$i]['pieces'] = $sidestone['pieces'];
+										$sidestones[$i]['color'] = $sidestone['color'];
+										$sidestones[$i]['clarity'] = $sidestone['clarity'];
+										$sidestones[$i]['lab'] = $sidestone['lab'];
+										
+										$i++;
+									}
+								}
+								
+								//Multistones..
+								$multistones = array();
+								$multistone_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "multi_stone WHERE product_option_value_id = '" . (int)$value . "' ");
+								if($multistone_query->num_rows){
+									$j = 0;
+									foreach($multistone_query->rows as $multistone){
+										$multistones[$j]['stone'] = $multistone['stone'];
+										$multistones[$j]['shape'] = $multistone['shape'];
+										$multistones[$j]['carat'] = $multistone['carat'];
+										$multistones[$j]['pieces'] = $multistone['pieces'];
+										$multistones[$j]['color'] = $multistone['color'];
+										$multistones[$j]['clarity'] = $multistone['clarity'];
+										$multistones[$j]['lab'] = $multistone['lab'];
+										
+										$j++;
+									}
+								}
+								
+								
 								$option_data[] = array(
 									'product_option_id'       => $product_option_id,
 									'product_option_value_id' => $value,
@@ -95,25 +132,13 @@ class Cart {
 									'weight'                  => $option_value_query->row['weight'],
 									'weight_prefix'           => $option_value_query->row['weight_prefix'],
 									'stone_type'           	  => $option_value_query->row['stone_type'],
-									'side_stone'           	  	  => $option_value_query->row['side_stone'],
-									'side_shape'           	  	  => $option_value_query->row['side_shape'],
-									'side_carat'           	  	  => $option_value_query->row['side_carat'],
-									'side_pieces'           	  => $option_value_query->row['side_pieces'],
-									'side_color'           	  	  => $option_value_query->row['side_color'],
-									'side_clarity'           	  => $option_value_query->row['side_clarity'],
-									'side_lab'           	  	  => $option_value_query->row['side_lab'],
-									'multi_stone'           	  => $option_value_query->row['multi_stone'],
-									'multi_shape'           	  => $option_value_query->row['multi_shape'],
-									'multi_carat'           	  => $option_value_query->row['multi_carat'],
-									'multi_pieces'           	  => $option_value_query->row['multi_pieces'],
-									'multi_color'           	  => $option_value_query->row['multi_color'],
-									'multi_clarity'           	  => $option_value_query->row['multi_clarity'],
-									'multi_lab'           	  	  => $option_value_query->row['multi_lab']
+									'side_stones'             => $sidestones,
+									'multi_stones'            => $multistones
 								);
 							}
 						} elseif ($option_query->row['type'] == 'checkbox' && is_array($value)) {
 							foreach ($value as $product_option_value_id) {
-								$option_value_query = $this->db->query("SELECT ss.stone as side_stone, ss.shape as side_shape, ss.carat as side_carat, ss.pieces as side_pieces, ss.color as side_color, ss.clarity as side_clarity, ss.lab as side_lab, ms.stone as multi_stone, ms.shape as multi_shape, ms.carat as multi_carat, ms.pieces as multi_pieces, ms.color as multi_color, ms.clarity as multi_clarity, ms.lab as multi_lab, pov.option_value_id, ov.code, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, ovd.name, pov.stone_type FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (pov.option_value_id = ovd.option_value_id) LEFT JOIN " . DB_PREFIX . "side_stone ss ON (pov.product_option_value_id = ss.product_option_value_id) LEFT JOIN " . DB_PREFIX . "multi_stone ms ON (pov.product_option_value_id = ms.product_option_value_id) WHERE pov.product_option_value_id = '" . (int)$product_option_value_id . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+								$option_value_query = $this->db->query("SELECT pov.option_value_id, ov.code, pov.quantity, pov.subtract, pov.price, pov.price_prefix, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, ovd.name, pov.stone_type FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (pov.option_value_id = ovd.option_value_id) WHERE pov.product_option_value_id = '" . (int)$product_option_value_id . "' AND pov.product_option_id = '" . (int)$product_option_id . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 								if ($option_value_query->num_rows) {
 									if ($option_value_query->row['price_prefix'] == '+') {
@@ -137,6 +162,42 @@ class Cart {
 									if ($option_value_query->row['subtract'] && (!$option_value_query->row['quantity'] || ($option_value_query->row['quantity'] < $cart['quantity']))) {
 										$stock = false;
 									}
+									
+									//Sidestones..
+									$sidestones = array();
+									$sidestone_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "side_stone WHERE product_option_value_id = '" . (int)$product_option_value_id . "' ");
+									if($sidestone_query->num_rows){
+										$i = 0;
+										foreach($sidestone_query->rows as $sidestone){
+											$sidestones[$i]['stone'] = $sidestone['stone'];
+											$sidestones[$i]['shape'] = $sidestone['shape'];
+											$sidestones[$i]['carat'] = $sidestone['carat'];
+											$sidestones[$i]['pieces'] = $sidestone['pieces'];
+											$sidestones[$i]['color'] = $sidestone['color'];
+											$sidestones[$i]['clarity'] = $sidestone['clarity'];
+											$sidestones[$i]['lab'] = $sidestone['lab'];
+											
+											$i++;
+										}
+									}
+									
+									//Multistones..
+									$multistones = array();
+									$multistone_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "multi_stone WHERE product_option_value_id = '" . (int)$product_option_value_id . "' ");
+									if($multistone_query->num_rows){
+										$j = 0;
+										foreach($multistone_query->rows as $multistone){
+											$multistones[$j]['stone'] = $multistone['stone'];
+											$multistones[$j]['shape'] = $multistone['shape'];
+											$multistones[$j]['carat'] = $multistone['carat'];
+											$multistones[$j]['pieces'] = $multistone['pieces'];
+											$multistones[$j]['color'] = $multistone['color'];
+											$multistones[$j]['clarity'] = $multistone['clarity'];
+											$multistones[$j]['lab'] = $multistone['lab'];
+											
+											$j++;
+										}
+									}
 
 									$option_data[] = array(
 										'product_option_id'       => $product_option_id,
@@ -156,20 +217,8 @@ class Cart {
 										'weight'                  => $option_value_query->row['weight'],
 										'weight_prefix'           => $option_value_query->row['weight_prefix'],
 										'stone_type'           	  => $option_value_query->row['stone_type'],
-										'side_stone'           	  	  => $option_value_query->row['side_stone'],
-										'side_shape'           	  	  => $option_value_query->row['side_shape'],
-										'side_carat'           	  	  => $option_value_query->row['side_carat'],
-										'side_pieces'           	  => $option_value_query->row['side_pieces'],
-										'side_color'           	  	  => $option_value_query->row['side_color'],
-										'side_clarity'           	  => $option_value_query->row['side_clarity'],
-										'side_lab'           	  	  => $option_value_query->row['side_lab'],
-										'multi_stone'           	  => $option_value_query->row['multi_stone'],
-										'multi_shape'           	  => $option_value_query->row['multi_shape'],
-										'multi_carat'           	  => $option_value_query->row['multi_carat'],
-										'multi_pieces'           	  => $option_value_query->row['multi_pieces'],
-										'multi_color'           	  => $option_value_query->row['multi_color'],
-										'multi_clarity'           	  => $option_value_query->row['multi_clarity'],
-										'multi_lab'           	  	  => $option_value_query->row['multi_lab']
+										'side_stones'             => $sidestones,
+										'multi_stones'            => $multistones
 									);
 								}
 							}
@@ -275,38 +324,11 @@ class Cart {
 				if(!empty($option_data)){
 					foreach($option_data as $option){
 						$final_option[$option['name']] = $option['code'];
-						if(isset($option['stone_type']) && strtolower($option['stone_type']) == 's'){
-							$side_stone['stone'] 	= $option['side_stone'];
-							$side_stone['shape'] 	= $option['side_shape'];
-							$side_stone['carat'] 	= $option['side_carat'];
-							$side_stone['pieces'] 	= $option['side_pieces'];
-							$side_stone['color'] 	= $option['side_color'];
-							$side_stone['clarity'] 	= $option['side_clarity'];
-							$side_stone['lab'] 		= $option['side_lab'];
-						} elseif(isset($option['stone_type']) && strtolower($option['stone_type']) == 'm'){
-							$multi_stone['stone'] 	= $option['multi_stone'];
-							$multi_stone['shape'] 	= $option['multi_shape'];
-							$multi_stone['carat'] 	= $option['multi_carat'];
-							$multi_stone['pieces'] 	= $option['multi_pieces'];
-							$multi_stone['color'] 	= $option['multi_color'];
-							$multi_stone['clarity'] = $option['multi_clarity'];
-							$multi_stone['lab'] 	= $option['multi_lab'];
-						} elseif(isset($option['stone_type']) && strtolower($option['stone_type']) == 'sm'){
-							$side_stone['stone'] 	= $option['side_stone'];
-							$side_stone['shape'] 	= $option['side_shape'];
-							$side_stone['carat'] 	= $option['side_carat'];
-							$side_stone['pieces'] 	= $option['side_pieces'];
-							$side_stone['color'] 	= $option['side_color'];
-							$side_stone['clarity'] 	= $option['side_clarity'];
-							$side_stone['lab'] 		= $option['side_lab'];
-							
-							$multi_stone['stone'] 	= $option['multi_stone'];
-							$multi_stone['shape'] 	= $option['multi_shape'];
-							$multi_stone['carat'] 	= $option['multi_carat'];
-							$multi_stone['pieces'] 	= $option['multi_pieces'];
-							$multi_stone['color'] 	= $option['multi_color'];
-							$multi_stone['clarity'] = $option['multi_clarity'];
-							$multi_stone['lab'] 	= $option['multi_lab'];
+						if(isset($option['side_stones']) && !empty($option['side_stones'])){
+							$side_stone = $option['side_stones'];
+						}
+						if(isset($option['multi_stones']) && !empty($option['multi_stones'])){
+							$multi_stone = $option['multi_stones'];
 						}
 					}
 				}
@@ -448,30 +470,46 @@ class Cart {
 		//Calculate Side Stone Price..
 		$sidestone_price = 0;
 		if(isset($data['side_stone']) && !empty($data['side_stone'])){
-			
-			$side_stone = $data['side_stone'];
-			
-			$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$side_stone['stone']."' AND shape='".$side_stone['shape']."' AND ".$side_stone['carat']." between crt_from AND crt_to AND clarity='".$side_stone['clarity']."' AND color='".$side_stone['color']."' AND lab='".$side_stone['lab']."' LIMIT 1";
-			
-			$get_sidestone_price = $this->db->query($sidestone_sql);
-			
-			if($get_sidestone_price->num_rows){
-				$sidestone_price = $get_sidestone_price->row['mprice'] * ($side_stone['carat']) * $side_stone['pieces'];
+			foreach($data['side_stone'] as $side){
+				
+				$sider_stone = (isset($side['stone']) && !empty($side['stone'])) ? $side['stone'] : $data['Stone Type'];
+				$sider_shape = (isset($side['shape']) && !empty($side['shape'])) ? $side['shape'] : $data['Shape'];
+				$sider_carat = (isset($side['carat']) && !empty($side['carat'])) ? $side['carat'] : $data['Carat'];
+				$sider_color = (isset($side['color']) && !empty($side['color'])) ? $side['color'] : $data['Colour'];
+				$sider_clarity = (isset($side['clarity']) && !empty($side['clarity'])) ? $side['clarity'] : $data['Clarity'];
+				$sider_lab = (isset($side['lab']) && !empty($side['lab'])) ? $side['lab'] : $data['Certificate'];
+				$sider_pieces = (isset($side['pieces']) && !empty($side['pieces'])) ? $side['pieces'] : 1;
+				
+				$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sider_stone."' AND shape='".$sider_shape."' AND ".$sider_carat." between crt_from AND crt_to AND clarity='".$sider_clarity."' AND color='".$sider_color."' AND lab='".$sider_lab."' LIMIT 1";
+				
+				$get_sidestone_price = $this->db->query($sidestone_sql);
+				
+				if($get_sidestone_price->num_rows){
+					$sidestone_price += $get_sidestone_price->row['mprice'] * ($sider_carat) * $sider_pieces;
+				}
 			}
 		}
 		
 		//Calculate Multi Stone Price..
 		$multistone_price = 0;
 		if(isset($data['multi_stone']) && !empty($data['multi_stone'])){
-			
-			$multi_stone = $data['multi_stone'];
-			
-			$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multi_stone['stone']."' AND shape='".$multi_stone['shape']."' AND ".$multi_stone['carat']." between crt_from AND crt_to AND clarity='".$multi_stone['clarity']."' AND color='".$multi_stone['color']."' AND lab='".$multi_stone['lab']."' LIMIT 1";
-			
-			$get_multistone_price = $this->db->query($multistone_sql);
-			
-			if($get_multistone_price->num_rows){
-				$multistone_price = $get_multistone_price->row['mprice'] * ($multi_stone['carat']) * $multi_stone['pieces'];
+			foreach($data['multi_stone'] as $multi){
+				
+				$multir_stone = (isset($multi['stone']) && !empty($multi['stone'])) ? $multi['stone'] : $data['Stone Type'];
+				$multir_shape = (isset($multi['shape']) && !empty($multi['shape'])) ? $multi['shape'] : $data['Shape'];
+				$multir_carat = (isset($multi['carat']) && !empty($multi['carat'])) ? $multi['carat'] : $data['Carat'];
+				$multir_color = (isset($multi['color']) && !empty($multi['color'])) ? $multi['color'] : $data['Colour'];
+				$multir_clarity = (isset($multi['clarity']) && !empty($multi['clarity'])) ? $multi['clarity'] : $data['Clarity'];
+				$multir_lab = (isset($multi['lab']) && !empty($multi['lab'])) ? $multi['lab'] : $data['Certificate'];
+				$multir_pieces = (isset($multi['pieces']) && !empty($multi['pieces'])) ? $multi['pieces'] : 1;
+				
+				$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity='".$multir_clarity."' AND color='".$multir_color."' AND lab='".$multir_lab."' LIMIT 1";
+				
+				$get_multistone_price = $this->db->query($multistone_sql);
+				
+				if($get_multistone_price->num_rows){
+					$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
+				}
 			}
 		}
 		

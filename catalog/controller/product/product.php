@@ -800,19 +800,26 @@ class ControllerProductProduct extends Controller {
 						if($option['name'] != 'Metal'){
 							if($option['name'] == 'Carat'){
 								if(strtolower($product['multistone']) == 'm' || strtolower($product['multistone']) == 'sm'){
+									$pieces = '';
+									if(isset($option['multi_stones']) && !empty($option['multi_stones'])){
+										foreach($option['multi_stones'] as $multi){
+											$pieces .= '('.$multi['carat'].'ct. x '.$multi['pieces'].')';
+										}
+									}
 									$total_carat = $option['value'];
-									$single_carat = $option['multi_carat'];
-									$pieces = $option['multi_pieces'];
 								} else {
 									$total_carat = $option['value'];
-									$single_carat = $option['value'];
-									$pieces = 1;
+									$pieces = '('.$option['value'].'ct. x 1)';
 								}
 								
 								if(strtolower($product['multistone']) == 's' || strtolower($product['multistone']) == 'sm'){
-									$json['side_stones'] .= 'Stone Type : '.$option['side_stone'].'<br>Shape : '.$option['side_shape'].'<br>Clarity : '.$option['side_clarity'].'<br>Colour : '.$option['side_color'].'<br>Certificate : '.$option['side_lab'].'<br>Total Weight : Approx '. ($option['side_carat']*$option['side_pieces']).' ct. wt. ('.$option['side_carat'].'ct. x '.$option['side_pieces'].')';
+									if(isset($option['side_stones']) && !empty($option['side_stones'])){
+										foreach($option['side_stones'] as $sider){
+											$json['side_stones'] .= 'Stone Type : '.$sider['stone'].'<br>Shape : '.$sider['shape'].'<br>Clarity : '.$sider['clarity'].'<br>Colour : '.$sider['color'].'<br>Certificate : '.$sider['lab'].'<br>Total Weight : Approx '. ($sider['carat']*$sider['pieces']).' ct. wt. ('.$sider['carat'].'ct. x '.$sider['pieces'].')';
+										}
+									}
 								}
-								$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt. ('.$single_carat.'ct. x '.$pieces.')<br/>';
+								$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt. '.$pieces.'<br/>';
 							} else {
 								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
 							}
