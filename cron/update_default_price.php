@@ -226,22 +226,17 @@ function getOptionValueMapping()
 {
 	global $db;
 	
-	if (!$mapping_array)
+	$mapping_array = array();
+	$mapping_query = $db->query("SELECT * FROM  " . DB_PREFIX . "stone_mapping sm"
+			. " LEFT JOIN " . DB_PREFIX . "stone_mapping_value smv ON (sm.stone_mapping_id = smv.stone_mapping_id)");
+	
+	foreach($mapping_query->rows as $map)
 	{
-		$mapping_array = array();
-		$mapping_query = $db->query("SELECT * FROM  " . DB_PREFIX . "stone_mapping sm"
-				. " LEFT JOIN " . DB_PREFIX . "stone_mapping_value smv ON (sm.stone_mapping_id = smv.stone_mapping_id)");
-		
-		//echo "<pre>";print_r($mapping_query->rows);		echo "</pre>"; die;
-		
-		foreach($mapping_query->rows as $map)
-		{
-			if (!empty($map['option_value']))
-			{	
-				$mapping_array[$map['certificate']][$map['option_value']] = "'" . str_replace(",", "','", $map['option_value_mapping']) . "'";
-				$mapping_array[$map['certificate']]['total'] = $map['total'];
-				$mapping_array[$map['certificate']]['markup'] = $map['markup_percent'] . '|'.$map['markup_fixed'];
-			}
+		if (!empty($map['option_value']))
+		{	
+			$mapping_array[$map['certificate']][$map['option_value']] = "'" . str_replace(",", "','", $map['option_value_mapping']) . "'";
+			$mapping_array[$map['certificate']]['total'] = $map['total'];
+			$mapping_array[$map['certificate']]['markup'] = $map['markup_percent'] . '|'.$map['markup_fixed'];
 		}
 	}
 
