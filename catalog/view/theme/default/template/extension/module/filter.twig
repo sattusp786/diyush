@@ -37,7 +37,7 @@
         </div>
     </div>
     {% endfor %}
-    <div class="width-20 f-left text-left">
+    <!--<div class="width-20 f-left text-left">
     <div class="col-md-12">
 	<h3>
 	<label for="amount">Carat Range:</label>
@@ -47,7 +47,7 @@
 	</h3>
 	<div id="carat-range"></div>
     </div>
-    </div>
+    </div>-->
      <div class="width-20 f-left text-left">
      <div class="col-md-12">
 	<h3>
@@ -194,12 +194,12 @@ $('.button-filter').on('click', function() {
 		filter.push(this.value);
 	});
 	
-	var carat_from = $("#carat_from").val();
-	var carat_to = $("#carat_to").val();
+	//var carat_from = $("#carat_from").val();
+	//var carat_to = $("#carat_to").val();
 	var price_from = $("#price_from").val();
 	var price_to = $("#price_to").val();
 	
-	location = '{{ action }}&filter=' + filter.join(',')+'&carat_from='+carat_from+'&carat_to='+carat_to+'&price_from='+price_from+'&price_to='+price_to;
+	location = '{{ action }}&filter=' + filter.join(',')+'&price_from='+price_from+'&price_to='+price_to;
 });
 $('.clear-btn').on('click', function() {
 	$('input[name^=\'filter\']:checked').each(function(element) {
@@ -260,7 +260,7 @@ $('.clear-btn').on('click', function() {
 <script>
   $( function() {
   
-	//Desktop Sliders..
+	/*
     $( "#carat-range" ).slider({
       range: true,
       min: 0.20,
@@ -275,7 +275,8 @@ $('.clear-btn').on('click', function() {
     });
     $( "#carat_value" ).val( $( "#carat-range" ).slider( "values", 0 ) +
       " ct - " + $( "#carat-range" ).slider( "values", 1 ) + " ct" );
-	  
+	*/
+	
 	$( "#price-range" ).slider({
       range: true,
       min: 0,
@@ -291,7 +292,7 @@ $('.clear-btn').on('click', function() {
     $( "#price_value" ).val( "{{currency_symbol}} "+$( "#price-range" ).slider( "values", 0 ) +
       " - {{currency_symbol}} " + $( "#price-range" ).slider( "values", 1 ) );
 	  
-	$('#carat-range').draggable();
+	//$('#carat-range').draggable();
 	$('#price-range').draggable();
 	 
 	

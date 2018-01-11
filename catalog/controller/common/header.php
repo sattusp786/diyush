@@ -24,6 +24,17 @@ class ControllerCommonHeader extends Controller {
 			$this->document->addLink($server . 'image/' . $this->config->get('config_icon'), 'icon');
 		}
 
+		if(isset($this->request->get['route'])){
+			$router = $this->request->get['route'];
+		} else {
+			$router = "";
+		}
+		
+		$data['body_class'] = '';
+		if($router == 'product/product'){
+			$data['body_class'] = 'product_body';
+		}
+		
 		$data['title'] = $this->document->getTitle();
 
 		$data['base'] = $server;

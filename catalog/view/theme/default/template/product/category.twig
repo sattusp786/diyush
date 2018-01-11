@@ -45,11 +45,11 @@
 							{% for filter in filter_group.filter %}
 							
 							<div class="item">
-								<div class="filter-product {% if filter.filter_id in filter_category %}active{% endif %} text-center position-relative overflow-hidden">
+								<div class="filter-product text-center position-relative overflow-hidden">
                                     <label>
-                                    	<input type="checkbox" class="filterbylovely"  name="" value="">
-                                        <span class="proimg"><a href="{{ category_href }}&filter={{ filter.filter_href }}"><img src="{% if filter.filter_image is not empty %}{{ filter.filter_image }}{% else %} image/catalog/product/1.png{% endif %}" alt=""/></a></span>
-                                        <span class="product-name text-center "><a href="{{ category_href }}&filter={{ filter.filter_href }}">{{ filter.name }}</a></span>	
+                                    	<input type="checkbox" class="filterbylovely" {% if filter.filter_id in filter_category %}CHECKED{% endif %}  name="categoryfilter" value="{{ filter.filter_id }}" />
+                                        <span class="proimg"><a href="javascript:void(0);"><img src="{% if filter.filter_image is not empty %}{{ filter.filter_image }}{% else %} image/catalog/product/1.png{% endif %}" alt=""/></a></span>
+                                        <span class="product-name text-center "><a href="javascript:void(0);">{{ filter.name }}</a></span>	
                                     </label>
 								</div>
 							</div>
@@ -227,6 +227,19 @@
             </div>
         </section>
         <!-- end content section -->
- 
+ <script>
+$('.filterbylovely').on('click', function() {
+	filter = [];
+
+	$('input[name^=\'categoryfilter\']:checked').each(function(element) {
+		filter.push(this.value);
+	});
+	
+	var price_from = $("#price_from").val();
+	var price_to = $("#price_to").val();
+	
+	location = '{{ action }}&filter=' + filter.join(',')+'&price_from='+price_from+'&price_to='+price_to;
+});
+</script>
 
 {{ footer }} 

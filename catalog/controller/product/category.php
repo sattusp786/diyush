@@ -189,10 +189,6 @@ class ControllerProductCategory extends Controller {
 
 			$url = '';
 
-			if (isset($this->request->get['filter'])) {
-				$url .= '&filter=' . $this->request->get['filter'];
-			}
-
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -205,6 +201,12 @@ class ControllerProductCategory extends Controller {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
 
+			$data['action'] = $this->url->link('product/category', 'path=' . $category_id . $url);
+			
+			if (isset($this->request->get['filter'])) {
+				$url .= '&filter=' . $this->request->get['filter'];
+			}
+			
 			$data['category_href'] = $this->url->link('product/category', 'path=' . $category_id);
 			
 			$data['categories'] = array();
@@ -406,7 +408,7 @@ class ControllerProductCategory extends Controller {
 					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url . '&limit=' . $value)
 				);
 			}
-
+			
 			$url = '';
 
 			if (isset($this->request->get['filter'])) {
