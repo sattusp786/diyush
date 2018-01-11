@@ -101,12 +101,12 @@
 						  <ul class="list-unstyled">
 							{% if not special %}
 							<li>
-							  <h2 class="final_price"><span class="final_prod_price">{{ price }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
+							  <h2 class="final_price"><span class="final_prod_price black-text title-small font-weight-600">{{ price }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
 							</li>
 							{% else %}
 							<li><span style="text-decoration: line-through;">{{ price }}</span></li>
 							<li>
-							  <h2 class="final_price"><span class="final_prod_price">{{ special }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
+							  <h2 class="final_price"><span class="final_prod_price black-text title-small font-weight-600">{{ special }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
 							</li>
 							{% endif %}
                              <li>(Inc. VAT, Postage and Packaging) <a href="#fairpricing" class="highlight-button-dark btn btn-very-small button xs-no-margin popup-with-zoom-anim" style=" margin: 0 10px; line-height: initial;">Fair pricing Policy</a></li>
@@ -444,20 +444,25 @@
                                          <h3 class="text-center margin-two no-margin-top">About Your Ring</h3>
                                          <p class="text-center">{{ description }}</p>
                                           <h3 class="text-center margin-two no-margin-top">Reference Code: {{ sku }}</h3>
-                                          <div class="col-md-10">
+                                          <div class="col-md-12">
                                           	<h3 class="margin-five">Ring Information</h3>
                                             <p>
 												Metal: <span class="metal_purity">{{ metal_name }}</span><br />
 												Metal Weight: Approx. <span class="metal_weight">0</span> gms.
 											</p>
-                                            <h3 style="float:left;" class="margin-five">Stone</h3>
-                                            <h3 style="float:right;display:none;" class="margin-five sidestone_heading">Side Stone</h3>
-											<p style="float:left;clear:both;" id="stone_details">
+                                            <div class="col-md-6 no-padding-left">
+                                            	<h3 class="margin-five">Stone</h3>
+                                                <p id="stone_details">
 												
 											</p>
-											<p style="float:right;" id="sidestone_details">
+                                            </div>
+                                            <div class="col-md-6">
+                                            	<h3 class="margin-five sidestone_heading">Side Stone</h3>
+                                                <p id="sidestone_details">
 												
 											</p>
+                                            </div>
+                                            <div class="clear-both"></div>  
                                           </div>
                                           <div class="col-md-6" style="display:none;">
                                           	<h3 class="margin-five" id="dimension_details">Dimension</h3>
