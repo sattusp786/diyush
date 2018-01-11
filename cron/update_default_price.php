@@ -15,6 +15,8 @@ require_once(DIR_SYSTEM . 'library/db.php');
 
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
 
+$mapping = getOptionValueMapping();
+
 function getConfig($key,$store_id) {
     // Settings
 	global $db;
@@ -39,25 +41,34 @@ function getOptionValuesData($product_id) {
     return $query->rows;
 }
 
-function calculatePrice($data){
+function calculatePrice($data) {
+		
+	global $db,$mapping;
 	
-	global $db;
-	
+	$default_gravity = 15.50;
 	//Code added by Paul to calculate price starts...
 	$final_price = 0;
 	
 	//Calculate Metal Price..
 	$metal_price = 0;
-	$metal_weight = $data['metal_weight'];
+	$metal_weight = $data['metal_weight'];		
 	
-	$metal_price_per_gram = 0;
-	$get_metal_price = $db->query("SELECT * FROM " . DB_PREFIX . "metal_price WHERE code = '".$data['Metal']."' ");
-	if($get_metal_price->num_rows){
-		$metal_price_per_gram = $get_metal_price->row['price'];
-	}
-	
-	if($metal_price_per_gram > 0){
-		$metal_price = $metal_price_per_gram * $metal_weight;
+	if (isset($data['Metal']) && !empty($data['Metal']))
+	{
+		$metal_sql = "SELECT price, gravity, code FROM " . DB_PREFIX . "metal_price WHERE  code = '" . $db->escape($data['Metal']) . "'";
+
+		$metal_query = $db->query($metal_sql);
+		if ($metal_query->num_rows)
+		{
+			foreach($metal_query->rows AS $metal_result)
+			{
+				if ($data['Metal'] == $metal_result['code'])
+				{
+					$metal_weight = ($metal_weight / $default_gravity) * $metal_result['gravity'];
+					$metal_price+= $metal_result['price'] * $metal_weight;
+				}
+			}
+		}
 	}
 	
 	//Calculate Stone Price..
@@ -78,40 +89,71 @@ function calculatePrice($data){
 	}
 	
 	if(isset($data['Clarity']) && !empty($data['Clarity'])){
-		$stone_sql .= " AND clarity = '".$data['Clarity']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Clarity']])){
+			$stone_sql .= " AND clarity IN (" . $mapping[$data['Certificate']][$data['Clarity']] . ") ";
+		} else {
+			$stone_sql .= " AND clarity = '".$data['Clarity']."' ";
+		}
 	}
 	
 	if(isset($data['Colour']) && !empty($data['Colour'])){
-		$stone_sql .= " AND color = '".$data['Colour']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Colour']])){
+			$stone_sql .= " AND color IN (" . $mapping[$data['Certificate']][$data['Colour']] . ") ";
+		} else {
+			$stone_sql .= " AND color = '".$data['Colour']."' ";
+		}
 	}
 	
 	if(isset($data['Certificate']) && !empty($data['Certificate'])){
-		$stone_sql .= " AND lab = '".$data['Certificate']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Certificate']])){
+			$stone_sql .= " AND lab IN (" . $mapping[$data['Certificate']][$data['Certificate']] . ") ";
+		} else {
+			$stone_sql .= " AND lab = '".$data['Certificate']."' ";
+		}
 	}
 	
 	if(isset($data['Cut']) && !empty($data['Cut'])){
-		$stone_sql .= " AND cut = '".$data['Cut']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Cut']])){
+			$stone_sql .= " AND cut IN (" . $mapping[$data['Certificate']][$data['Cut']] . ") ";
+		} else {
+			$stone_sql .= " AND cut = '".$data['Cut']."' ";
+		}
 	}
 	
 	if(isset($data['Polish']) && !empty($data['Polish'])){
-		$stone_sql .= " AND polish = '".$data['Polish']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Polish']])){
+			$stone_sql .= " AND polish IN (" . $mapping[$data['Certificate']][$data['Polish']] . ") ";
+		} else {
+			$stone_sql .= " AND polish = '".$data['Polish']."' ";
+		}
 	}
 	
 	if(isset($data['Symmetry']) && !empty($data['Symmetry'])){
-		$stone_sql .= " AND symmetry = '".$data['Symmetry']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Symmetry']])){
+			$stone_sql .= " AND symmetry IN (" . $mapping[$data['Certificate']][$data['Symmetry']] . ") ";
+		} else {
+			$stone_sql .= " AND symmetry = '".$data['Symmetry']."' ";
+		}
 	}
 	
 	if(isset($data['Fluo.']) && !empty($data['Fluo.'])){
-		$stone_sql .= " AND fluorescence = '".$data['Fluo.']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Fluo.']])){
+			$stone_sql .= " AND fluorescence IN (" . $mapping[$data['Certificate']][$data['Fluo.']] . ") ";
+		} else {
+			$stone_sql .= " AND fluorescence = '".$data['Fluo.']."' ";
+		}
 	}
 	
 	if(isset($data['Intensity']) && !empty($data['Intensity'])){
-		$stone_sql .= " AND intensity = '".$data['Intensity']."' ";
+		if(isset($mapping[$data['Certificate']][$data['Intensity']])){
+			$stone_sql .= " AND intensity IN (" . $mapping[$data['Certificate']][$data['Intensity']] . ") ";
+		} else {
+			$stone_sql .= " AND intensity = '".$data['Intensity']."' ";
+		}
 	}
 	
 	$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 1 ";
 	
-	//echo $stone_sql;
 	
 	$get_stone_price = $db->query($stone_sql);
 	
@@ -119,10 +161,91 @@ function calculatePrice($data){
 		$stone_price = $get_stone_price->row['sprice'];
 	}
 	
-	$final_price = $metal_price + $stone_price;
+	//Calculate Side Stone Price..
+	$sidestone_price = 0;
+	if(isset($data['side_stone']) && !empty($data['side_stone'])){
+		foreach($data['side_stone'] as $side){
+			
+			$sider_stone = (isset($side['stone']) && !empty($side['stone'])) ? $side['stone'] : $data['Stone Type'];
+			$sider_shape = (isset($side['shape']) && !empty($side['shape'])) ? $side['shape'] : $data['Shape'];
+			$sider_carat = (isset($side['carat']) && !empty($side['carat'])) ? $side['carat'] : $data['Carat'];
+			$sider_color = (isset($side['color']) && !empty($side['color'])) ? $side['color'] : $data['Colour'];
+			$sider_clarity = (isset($side['clarity']) && !empty($side['clarity'])) ? $side['clarity'] : $data['Clarity'];
+			$sider_lab = (isset($side['lab']) && !empty($side['lab'])) ? $side['lab'] : $data['Certificate'];
+			$sider_pieces = (isset($side['pieces']) && !empty($side['pieces'])) ? $side['pieces'] : 1;
+			
+			$sider_color = isset($mapping[$data['Certificate']][$sider_color]) ? $mapping[$data['Certificate']][$sider_color] : "'".$sider_color."'";
+			$sider_clarity = isset($mapping[$data['Certificate']][$sider_clarity]) ? $mapping[$data['Certificate']][$sider_clarity] : "'".$sider_clarity."'";
+			$sider_lab = isset($mapping[$data['Certificate']][$sider_lab]) ? $mapping[$data['Certificate']][$sider_lab] : "'".$sider_lab."'";
+			
+			$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sider_stone."' AND shape='".$sider_shape."' AND ".$sider_carat." between crt_from AND crt_to AND clarity IN (" . $sider_clarity . ") AND color IN (" . $sider_color . ") AND lab IN (" . $sider_lab . ") LIMIT 1";
+			
+			$get_sidestone_price = $db->query($sidestone_sql);
+			
+			if($get_sidestone_price->num_rows){
+				$sidestone_price += $get_sidestone_price->row['mprice'] * ($sider_carat) * $sider_pieces;
+			}
+		}
+	}
+	
+	//Calculate Multi Stone Price..
+	$multistone_price = 0;
+	if(isset($data['multi_stone']) && !empty($data['multi_stone'])){
+		foreach($data['multi_stone'] as $multi){
+			
+			$multir_stone = (isset($multi['stone']) && !empty($multi['stone'])) ? $multi['stone'] : $data['Stone Type'];
+			$multir_shape = (isset($multi['shape']) && !empty($multi['shape'])) ? $multi['shape'] : $data['Shape'];
+			$multir_carat = (isset($multi['carat']) && !empty($multi['carat'])) ? $multi['carat'] : $data['Carat'];
+			$multir_color = (isset($multi['color']) && !empty($multi['color'])) ? $multi['color'] : $data['Colour'];
+			$multir_clarity = (isset($multi['clarity']) && !empty($multi['clarity'])) ? $multi['clarity'] : $data['Clarity'];
+			$multir_lab = (isset($multi['lab']) && !empty($multi['lab'])) ? $multi['lab'] : $data['Certificate'];
+			$multir_pieces = (isset($multi['pieces']) && !empty($multi['pieces'])) ? $multi['pieces'] : 1;
+			
+			$multir_color = isset($mapping[$data['Certificate']][$multir_color]) ? $mapping[$data['Certificate']][$multir_color] : "'".$multir_color."'";
+			$multir_clarity = isset($mapping[$data['Certificate']][$multir_clarity]) ? $mapping[$data['Certificate']][$multir_clarity] : "'".$multir_clarity."'";
+			$multir_lab = isset($mapping[$data['Certificate']][$multir_lab]) ? $mapping[$data['Certificate']][$multir_lab] : "'".$multir_lab."'";
+			
+			$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") LIMIT 1";
+			
+			$get_multistone_price = $db->query($multistone_sql);
+			
+			if($get_multistone_price->num_rows){
+				$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
+			}
+		}
+	}
+	
+	
+	$final_price = $metal_price + $stone_price + $sidestone_price + $multistone_price;
 	//Code added by Paul to calculate price ends...
 	
 	return $final_price;
+}
+
+function getOptionValueMapping()
+{
+	global $db;
+	
+	if (!$mapping_array)
+	{
+		$mapping_array = array();
+		$mapping_query = $db->query("SELECT * FROM  " . DB_PREFIX . "stone_mapping sm"
+				. " LEFT JOIN " . DB_PREFIX . "stone_mapping_value smv ON (sm.stone_mapping_id = smv.stone_mapping_id)");
+		
+		//echo "<pre>";print_r($mapping_query->rows);		echo "</pre>"; die;
+		
+		foreach($mapping_query->rows as $map)
+		{
+			if (!empty($map['option_value']))
+			{	
+				$mapping_array[$map['certificate']][$map['option_value']] = "'" . str_replace(",", "','", $map['option_value_mapping']) . "'";
+				$mapping_array[$map['certificate']]['total'] = $map['total'];
+				$mapping_array[$map['certificate']]['markup'] = $map['markup_percent'] . '|'.$map['markup_fixed'];
+			}
+		}
+	}
+
+	return $mapping_array;
 }
 
 $query_products = $db->query("SELECT * FROM " . DB_PREFIX . "product WHERE 1 ");
