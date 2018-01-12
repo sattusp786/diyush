@@ -2317,12 +2317,13 @@ h2.final_price span.rrp { text-decoration:line-through;}
 
 
 #filter-products .owl-item .item .filter-product .proimg {border: 1px solid #676767; padding: 5px; margin:0 10px;}
+#filter-products .owl-item .item .filter-product label { cursor:pointer;}
 #filter-products .owl-item .item .filter-product label input { display:none;}
 /*#filter-products .owl-item .item .filter-product.active .proimg {border: 1px solid #fff;}*/
 #filter-products .owl-item .item .filter-product label input:checked + span.proimg {border: 1px solid #fff;}
 #filter-products .item span.proimg { display: block; padding: 0 15px; }
 #filter-products .item span.proimg a { display: block; background:#fff;}
-#filter-products .item span.product-name a { color:#fff;}
+#filter-products .item span.product-name, #filter-products .item span.product-name a { color:#fff;}
 #filter-products .owl-prev, #filter-products .owl-next { width:30px; height:30px; line-height:30px; top:62%;}
 #filter-products.dark-pagination .owl-next { right:35px;}
 #filter-products.dark-pagination .owl-prev { left:35px;}
@@ -2346,6 +2347,9 @@ h2.final_price span.rrp { text-decoration:line-through;}
 }
 @media only screen and ( max-width: 1600px ) {
 .navbar-right .dropdown-menu { right: -210px!important;}
+}
+@media only screen and ( max-width: 1280px ) {
+.navbar-right .dropdown-menu { right: -200px!important;}
 }
 @media only screen and ( max-width: 768px ) {
 .desktopview { display:none;}
@@ -2712,3 +2716,10 @@ ul.sub-navi li a:before {
 .proreviewbot {border-right: 1px solid #e5e5e5;}
 
 #pro-gridview .home-product img { width:80%;}
+
+@media print {
+body.product_body  #topbar, body.product_body .search-cart-header, body.product_body  #product, body.product_body #support-iconswrap, body.product_body #pro-review-details, body.product_body footer, body.product_body .zoom-gallery .products-thumb, body.product_body .pricewrap .list-unstyled li a.btn.btn-very-small, .print-no { display:none;}
+body.product_body .rating .pull-right { float:left !important;}
+body.product_body a:after { content:''; }
+body.product_body a[href]:after { content: none !important; }
+}

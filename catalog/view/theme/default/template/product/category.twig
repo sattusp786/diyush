@@ -48,8 +48,8 @@
 								<div class="filter-product text-center position-relative overflow-hidden">
                                     <label>
                                     	<input type="checkbox" class="filterbylovely" {% if filter.filter_id in filter_category %}CHECKED{% endif %}  name="categoryfilter" value="{{ filter.filter_id }}" />
-                                        <span class="proimg"><a href="javascript:void(0);"><img src="{% if filter.filter_image is not empty %}{{ filter.filter_image }}{% else %} image/catalog/product/1.png{% endif %}" alt=""/></a></span>
-                                        <span class="product-name text-center "><a href="javascript:void(0);">{{ filter.name }}</a></span>	
+                                        <span class="proimg"><img src="{% if filter.filter_image is not empty %}{{ filter.filter_image }}{% else %} image/catalog/product/1.png{% endif %}" alt=""/></span>
+                                        <span class="product-name text-center ">{{ filter.name }}</span>	
                                     </label>
 								</div>
 							</div>
