@@ -431,7 +431,7 @@ class ControllerProductProduct extends Controller {
 				$data['captcha'] = '';
 			}
 
-			$data['square_box'] = array(5,6,10,11,12,13,15,17,20,21,23);
+			$data['square_box'] = array(3,4,5,6,10,11,12,13,15,16,17,20,21,23);
 			
 			$data['share'] = $this->url->link('product/product', 'product_id=' . (int)$this->request->get['product_id']);
 

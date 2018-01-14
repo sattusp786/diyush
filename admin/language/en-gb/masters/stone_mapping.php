@@ -14,7 +14,7 @@ $_['text_option_value_mapping']  = 'Option Value Mapping';
 // Column
 $_['column_name']  		   = 'Name';
 $_['column_certificate']   = 'Certificate';
-$_['column_total']    	   = 'Total';
+$_['column_position']    	   = 'Position';
 $_['column_markup_percent']    = 'Markup Percent';
 $_['column_markup_fixed']      = 'Markup Fixed';
 $_['column_action']       = 'Action';
@@ -22,7 +22,7 @@ $_['column_action']       = 'Action';
 // Entry
 $_['entry_name']          = 'Name';
 $_['entry_certificate']      = 'Certificate';
-$_['entry_total']          = 'Total';
+$_['entry_position']          = 'Position';
 $_['entry_markup_percent']    = 'Markup Percent';
 $_['entry_markup_fixed']      = 'Markup Fixed';
 
@@ -39,6 +39,6 @@ $_['error_permission']    = 'Warning: You do not have permission to modify stone
 $_['error_exists']        = 'Warning: Stone Mapping code is already in use!';
 $_['error_name']  			= 'Name must be between 2 and 20 characters!';
 $_['error_certificate']         = 'Certificate must be between 2 and 20 characters!';
-$_['error_total']    			= 'Total must be between 2 and 20 characters!';
+$_['error_position']    			= 'Position must be between 2 and 20 characters!';
 $_['error_markup_percent']      = 'Markup Percent must be between 2 and 20 characters!';
 $_['error_markup_fixed']       = 'Markup Fixed must be between 2 and 20 characters!';

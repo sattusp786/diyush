@@ -3,7 +3,7 @@ class ModelMastersMultiStoneMapping extends Model {
 	public function addMultiStoneMapping($data) {
 
 
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "multistone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', total = '" . (int)$data['total'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "multistone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', position = '" . (int)$data['position'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "'");
 		
 		$multistone_mapping_id = $this->db->getLastId();
 		if(isset($data['option_value'])) {
@@ -15,7 +15,7 @@ class ModelMastersMultiStoneMapping extends Model {
 	
 	public function editMultiStoneMapping($multistone_mapping_id, $data) {
 		
-		$this->db->query("UPDATE `" . DB_PREFIX . "multistone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', total = '" . (int)$data['total'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "' WHERE multistone_mapping_id = '" . (int)$multistone_mapping_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "multistone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', position = '" . (int)$data['position'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "' WHERE multistone_mapping_id = '" . (int)$multistone_mapping_id . "'");
 
 		
 			$this->db->query("DELETE FROM " . DB_PREFIX . "multistone_mapping_value WHERE multistone_mapping_id = '" . (int)$multistone_mapping_id . "'");
@@ -48,7 +48,7 @@ class ModelMastersMultiStoneMapping extends Model {
 		$sort_data = array(
 			'name',
 			'certificate',
-			'total',
+			'position',
 			'markup_percent',
 			'markup_fixed'
 		);	

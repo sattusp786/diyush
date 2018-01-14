@@ -3,7 +3,7 @@ class ModelMastersStoneMapping extends Model {
 	public function addStoneMapping($data) {
 
 
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "stone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', total = '" . (int)$data['total'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "stone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', position = '" . (int)$data['position'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "'");
 		
 		$stone_mapping_id = $this->db->getLastId();
 		if(isset($data['option_value'])) {
@@ -15,7 +15,7 @@ class ModelMastersStoneMapping extends Model {
 	
 	public function editStoneMapping($stone_mapping_id, $data) {
 		
-		$this->db->query("UPDATE `" . DB_PREFIX . "stone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', total = '" . (int)$data['total'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "' WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "stone_mapping` SET name = '" . $this->db->escape($data['name']) . "', certificate = '" . $this->db->escape($data['certificate']) . "', position = '" . (int)$data['position'] . "', markup_percent = '" . (float)$data['markup_percent'] . "', markup_fixed = '" . (float)$data['markup_fixed'] . "' WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
 
 		
 			$this->db->query("DELETE FROM " . DB_PREFIX . "stone_mapping_value WHERE stone_mapping_id = '" . (int)$stone_mapping_id . "'");
@@ -48,7 +48,7 @@ class ModelMastersStoneMapping extends Model {
 		$sort_data = array(
 			'name',
 			'certificate',
-			'total',
+			'position',
 			'markup_percent',
 			'markup_fixed'
 		);	

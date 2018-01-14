@@ -152,7 +152,7 @@ function calculatePrice($data) {
 		}
 	}
 	
-	$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 1 ";
+	$stone_sql .= " ORDER BY stone_price_id DESC LIMIT 2,1 ";
 	
 	
 	$get_stone_price = $db->query($stone_sql);
@@ -178,7 +178,7 @@ function calculatePrice($data) {
 			$sider_clarity = isset($mapping[$data['Certificate']][$sider_clarity]) ? $mapping[$data['Certificate']][$sider_clarity] : "'".$sider_clarity."'";
 			$sider_lab = isset($mapping[$data['Certificate']][$sider_lab]) ? $mapping[$data['Certificate']][$sider_lab] : "'".$sider_lab."'";
 			
-			$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sider_stone."' AND shape='".$sider_shape."' AND ".$sider_carat." between crt_from AND crt_to AND clarity IN (" . $sider_clarity . ") AND color IN (" . $sider_color . ") AND lab IN (" . $sider_lab . ") LIMIT 1";
+			$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sider_stone."' AND shape='".$sider_shape."' AND ".$sider_carat." between crt_from AND crt_to AND clarity IN (" . $sider_clarity . ") AND color IN (" . $sider_color . ") AND lab IN (" . $sider_lab . ") LIMIT 2,1";
 			
 			$get_sidestone_price = $db->query($sidestone_sql);
 			
@@ -205,7 +205,7 @@ function calculatePrice($data) {
 			$multir_clarity = isset($mapping[$data['Certificate']][$multir_clarity]) ? $mapping[$data['Certificate']][$multir_clarity] : "'".$multir_clarity."'";
 			$multir_lab = isset($mapping[$data['Certificate']][$multir_lab]) ? $mapping[$data['Certificate']][$multir_lab] : "'".$multir_lab."'";
 			
-			$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") LIMIT 1";
+			$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") LIMIT 2,1";
 			
 			$get_multistone_price = $db->query($multistone_sql);
 			
@@ -243,6 +243,8 @@ function getOptionValueMapping()
 	return $mapping_array;
 }
 
+echo 'STEP 1: Cron Started.<br/><br/>';
+
 $query_products = $db->query("SELECT * FROM " . DB_PREFIX . "product WHERE 1 ");
 if($query_products->num_rows) {
 	$i = 1;
@@ -273,7 +275,7 @@ if($query_products->num_rows) {
 		$update = $db->query("UPDATE " . DB_PREFIX . "product SET price = '".$product_price."' WHERE product_id = '".$product['product_id']."' ");
 	}
 
-    echo 'Completed';
+    echo 'Showcase Price Cron Completed Successfully! Thank You.';
 }
 
 

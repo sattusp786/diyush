@@ -53,10 +53,10 @@
                     {% else %}
                     <a href="{{ sort_certificate }}">{{ column_certificate }}</a>
                     {% endif %}</td>
-                  <td class="text-left">{% if sort == 'total' %}
-                    <a href="{{ sort_total }}" class="{{ order|lower }}">{{ column_total }}</a>
+                  <td class="text-left">{% if sort == 'position' %}
+                    <a href="{{ sort_position }}" class="{{ order|lower }}">{{ column_position }}</a>
                     {% else %}
-                    <a href="{{ sort_total }}">{{ column_total }}</a>
+                    <a href="{{ sort_position }}">{{ column_position }}</a>
                     {% endif %}</td>
                   <td class="text-left">{% if sort == 'markup_percent' %}
                     <a href="{{ sort_markup_percent }}" class="{{ order|lower }}">{{ column_markup_percent }}</a>
@@ -82,7 +82,7 @@
                     {% endif %}</td>
                   <td class="text-left">{{ stone_mapping.name }}</td>
                   <td class="text-left">{{ stone_mapping.certificate }}</td>
-                  <td class="text-left">{{ stone_mapping.total }}</td>
+                  <td class="text-left">{{ stone_mapping.position }}</td>
                   <td class="text-left">{{ stone_mapping.markup_percent }}</td>
                   <td class="text-left">{{ stone_mapping.markup_fixed }}</td>
                   <td class="text-right"><a href="{{ stone_mapping.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>

@@ -82,6 +82,9 @@ class ControllerCommonDashboard extends Controller {
 			$data['security'] = '';
 		}
 		
+		$data['image_cron'] = HTTP_CATALOG.'cron/image_cron.php';
+		$data['showcase_cron'] = HTTP_CATALOG.'cron/update_default_price.php';
+		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

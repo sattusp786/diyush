@@ -182,7 +182,7 @@ class ControllerMastersStoneMapping extends Controller {
 				'stone_mapping_id'  	=> $result['stone_mapping_id'],
 				'name'       			=> $result['name'],
 				'certificate'       	=> $result['certificate'],
-				'total'       			=> $result['total'],
+				'position'       		=> $result['position'],
 				'markup_percent'       	=> $result['markup_percent'],
 				'markup_fixed'       	=> $result['markup_fixed'],
 				'edit'       			=> $this->url->link('masters/stone_mapping/edit', 'user_token=' . $this->session->data['user_token'] . '&stone_mapping_id=' . $result['stone_mapping_id'] . $url, true)
@@ -223,7 +223,7 @@ class ControllerMastersStoneMapping extends Controller {
 
 		$data['sort_name'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=name' . $url, true);
 		$data['sort_certificate'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=certificate' . $url, true);
-		$data['sort_total'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=total' . $url, true);
+		$data['sort_position'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=position' . $url, true);
 		$data['sort_markup_percent'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=markup_percent' . $url, true);
 		$data['sort_markup_fixed'] = $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'] . '&sort=markup_fixed' . $url, true);
 
@@ -288,10 +288,10 @@ class ControllerMastersStoneMapping extends Controller {
 			$data['error_certificate'] = '';
 		}
 
-		if (isset($this->error['total'])) {
-			$data['error_total'] = $this->error['total'];
+		if (isset($this->error['position'])) {
+			$data['error_position'] = $this->error['position'];
 		} else {
-			$data['error_total'] = '';
+			$data['error_position'] = '';
 		}
 
 		if (isset($this->error['markup_percent'])) {
@@ -362,12 +362,12 @@ class ControllerMastersStoneMapping extends Controller {
 			$data['certificate'] = '';
 		}
 
-		if (isset($this->request->post['total'])) {
-			$data['total'] = $this->request->post['total'];
+		if (isset($this->request->post['position'])) {
+			$data['position'] = $this->request->post['position'];
 		} elseif (!empty($stone_mapping_info)) {
-			$data['total'] = $stone_mapping_info['total'];
+			$data['position'] = $stone_mapping_info['position'];
 		} else {
-			$data['total'] = '';
+			$data['position'] = '';
 		}
 
 		if (isset($this->request->post['markup_percent'])) {
