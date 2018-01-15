@@ -1,0 +1,132 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-stone_price" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid"> {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-stone_price" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-diamond-type">{{ entry_diamond_type }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="diamond_type" value="{{ diamond_type }}" placeholder="{{ entry_diamond_type }}" id="input-diamond-type" class="form-control" />
+                  {% if error_diamond_type %}
+                  <div class="text-danger">{{ error_diamond_type }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-shape">{{ entry_shape }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="shape" value="{{ shape }}" placeholder="{{ entry_shape }}" id="input-shape" class="form-control" />
+                  {% if error_shape %}
+                  <div class="text-danger">{{ error_shape }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-carat-from">{{ entry_carat_from }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="carat_from" value="{{ carat_from }}" placeholder="{{ entry_carat_from }}" id="input-carat-from" class="form-control" />
+                  {% if error_carat_from %}
+                  <div class="text-danger">{{ error_carat_from }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-carat-to">{{ entry_carat_to }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="carat_to" value="{{ carat_to }}" placeholder="{{ entry_carat_to }}" id="input-carat-to" class="form-control" />
+                  {% if error_carat_to %}
+                  <div class="text-danger">{{ error_carat_to }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-clairty">{{ entry_clarity }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="clarity" value="{{ clarity }}" placeholder="{{ entry_clarity }}" id="input-clairty" class="form-control" />
+                  {% if error_clarity %}
+                  <div class="text-danger">{{ error_clarity }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-color">{{ entry_color }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="color" value="{{ color }}" placeholder="{{ entry_color }}" id="input-color" class="form-control" />
+                  {% if error_color %}
+                  <div class="text-danger">{{ error_color }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-lab">{{ entry_lab }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="lab" value="{{ lab }}" placeholder="{{ entry_lab }}" id="input-lab" class="form-control" />
+                  {% if error_lab %}
+                  <div class="text-danger">{{ error_lab }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-cut">{{ entry_cut }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="cut" value="{{ cut }}" placeholder="{{ entry_cut }}" id="input-cut" class="form-control" />
+                  {% if error_cut %}
+                  <div class="text-danger">{{ error_cut }}</div>
+                  {% endif %} </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-price">{{ entry_price }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="price" value="{{ price }}" placeholder="{{ entry_price }}" id="input-price" class="form-control" />
+                  {% if error_price %}
+                  <div class="text-danger">{{ error_price }}</div>
+                  {% endif %} 
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="status" id="input-status" class="form-control">
+                    
+                    {% if status %}
+                    
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    
+                    {% else %}
+                    
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    
+                    {% endif %}
+                  
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

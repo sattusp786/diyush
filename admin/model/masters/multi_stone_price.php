@@ -1,5 +1,5 @@
 <?php
-class ModelMastersStonePrice extends Model {
+class ModelMastersMultiStonePrice extends Model {
 	public function addStonePrice($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "stone_price SET diamond_type = '" . $this->db->escape($data['diamond_type']) . "', shape = '" . $this->db->escape($data['shape']) . "', carat_from = '" . $this->db->escape($data['carat_from']) . "', carat_to = '" . $this->db->escape($data['carat_to']) . "', clarity = '" . $this->db->escape($data['clarity']) . "', color = '" . $this->db->escape($data['color']) . "', lab = '" . $this->db->escape($data['lab']) . "', cut = '" . $this->db->escape($data['cut']) . "', price = '" . (float)$data['price'] . "', status = '" . (int)$data['status'] . "', date_added = NOW()");
 
@@ -14,23 +14,23 @@ class ModelMastersStonePrice extends Model {
 	}
 
 	public function deleteStonePrice($stone_price_id) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "stone_price WHERE stone_price_id = '" . (int)$stone_price_id . "' AND mode='s'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "stone_price WHERE stone_price_id = '" . (int)$stone_price_id . "'");
 	}
 
 	public function getStonePrice($stone_price_id) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "stone_price WHERE stone_price_id = '" . (int)$stone_price_id . "' AND mode='s'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "stone_price WHERE stone_price_id = '" . (int)$stone_price_id . "' AND mode='m'");
 
 		return $query->row;
 	}
 
 	public function getStonePriceByCode($code) {
-		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "stone_price WHERE code = '" . $this->db->escape($code) . "' AND mode='s'");
+		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "stone_price WHERE code = '" . $this->db->escape($code) . "' AND mode='m'");
 
 		return $query->row;
 	}
 
 	public function getStonePrices($data = array()) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE mode='s' ";
+		$sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE mode='m' ";
 
 		$sort_data = array(
 			'stone',
@@ -113,7 +113,7 @@ class ModelMastersStonePrice extends Model {
 	}
 
 	public function getTotalStonePrices() {
-		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "stone_price WHERE mode='s' ";
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "stone_price WHERE mode='m' ";
 		
 		if (!empty($data['filter_stone'])) {
 			$sql .= " AND stone LIKE '" . $this->db->escape($data['filter_stone']) . "%'";
@@ -188,7 +188,7 @@ class ModelMastersStonePrice extends Model {
 				$data['total_price'] 		= $data[15];
 				$data['sprice'] 			= $data[16];
 				$data['mprice'] 			= $data[17];
-				$data['mode'] 				= 's';
+				$data['mode'] 				= 'm';
 		
 				$this->addStonePrice($data);
 				
@@ -200,7 +200,7 @@ class ModelMastersStonePrice extends Model {
 	}
 	
 	public function getStonePriceExport($data = array(),$mode=null) {
-		$sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE mode='s' ";
+		$sql = "SELECT * FROM " . DB_PREFIX . "stone_price WHERE mode='m' ";
 
 		$sort_data = array(
 			'stone_price_id',

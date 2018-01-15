@@ -213,11 +213,30 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
+			// Stone Price
+			$stoneprice = array();
+			
 			if ($this->user->hasPermission('access', 'masters/stone_price')) {
-				$masters[] = array(
-					'name'	   => $this->language->get('text_stone_price'),
+				$stoneprice[] = array(
+					'name'     => $this->language->get('text_stone_price'),
 					'href'     => $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()	
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'masters/multi_stone_price')) {
+				$stoneprice[] = array(
+					'name'	   => $this->language->get('text_multi_stone_price'),
+					'href'     => $this->url->link('masters/multi_stone_price', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
+				);
+			}
+			
+			if ($stoneprice) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_stone_prices'),
+					'href'     => '',
+					'children' => $stoneprice
 				);
 			}
 			
