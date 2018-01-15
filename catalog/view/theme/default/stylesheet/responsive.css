@@ -712,6 +712,7 @@
 	.proreviewbot {border-top: 1px solid #e5e5e5; border-right: 0; padding-top:5%;}
 	.rviwcolumn2 {top:5%;}
 	.prodetailsbot { width:100%;}
+	.product_body .mfp-figure .mfp-close { display:block; width:auto; padding: 0 10px;right: 10px;}
 }
 @media (max-width: 767px) {
     /*  custom  */
