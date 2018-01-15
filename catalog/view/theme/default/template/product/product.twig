@@ -68,14 +68,17 @@
 						{% if thumb %}
 							<a href="{{ popup }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" class="width-100" /></a>
 						{% endif %}
-						<div class="products-thumb text-center">
-							<a href="{{ popup }}" title="{{ heading_title }}"> <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a>
-						{% if images %}
-						{% for image in images %}
-							<a href="{{ image.popup }}" title="{{ heading_title }}"> <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a>
-						{% endfor %}
-						{% endif %}
-						</div>
+                            <div class="products-thumb text-center">
+                            	<div id="owl-demo-brand" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">
+                                <div class="item">
+                                <a href="{{ popup }}" title="{{ heading_title }}"> <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></div>
+                                {% if images %}
+                                {% for image in images %}
+                                   <div class="item"> <a href="{{ image.popup }}" title="{{ heading_title }}"> <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a></div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            </div>
                         </div>
                         
                     </div>

@@ -311,7 +311,7 @@ $(document).ready(function () {
         items: 4,
         itemsDesktop: [1200, 4],
         itemsTablet: [800, 3],
-        itemsMobile: [700, 1],
+        itemsMobile: [700, 2],
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
     });
     /*==============================================================*/
