@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = 'Metal Price';
+$_['heading_title']     = 'Metal Purity';
 
 // Text
 $_['text_success']      = 'Success: You have modified metal purity!';
@@ -26,7 +26,6 @@ $_['entry_metal']  		= 'Base Metal:';
 $_['entry_code']        = 'Code:';
 $_['entry_option_value']        = 'Option Value:';
 $_['entry_purity']      = 'Purity:';
-$_['entry_price']      = 'Price:';
 $_['entry_gravity']      = 'Gravity:';
 $_['entry_percent']     = 'Percent:';
 $_['entry_markup_rate'] = 'Markup Rate:';

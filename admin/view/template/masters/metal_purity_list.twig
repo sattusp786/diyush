@@ -3,7 +3,7 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right"><a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-metal_price').submit() : false;"><i class="fa fa-trash-o"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-metal_purity').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
@@ -29,7 +29,7 @@
         <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
       </div>
       <div class="panel-body">
-        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-metal_price">
+        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-metal_purity">
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
@@ -79,23 +79,23 @@
                 </tr>
               </thead>
               <tbody>
-                {% if metal_prices %}
-                {% for metal_price in metal_prices %}
+                {% if metal_puritys %}
+                {% for metal_purity in metal_puritys %}
                 <tr>
-                  <td class="text-center">{% if metal_price.metal_price_id in selected %}
-                    <input type="checkbox" name="selected[]" value="{{ metal_price.metal_price_id }}" checked="checked" />
+                  <td class="text-center">{% if metal_purity.metal_purity_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ metal_purity.metal_purity_id }}" checked="checked" />
                     {% else %}
-                    <input type="checkbox" name="selected[]" value="{{ metal_price.metal_price_id }}" />
+                    <input type="checkbox" name="selected[]" value="{{ metal_purity.metal_purity_id }}" />
                     {% endif %}</td>
-                  <td class="text-left">{{ metal_price.name }}</td>
-                  <td class="text-left">{{ metal_price.code }}</td>
-                  <td class="text-left">{{ metal_price.purity }}</td>
-                  <td class="text-left">{{ metal_price.gravity }}</td>
-                  <td class="text-left">{{ metal_price.option_value }}</td>
-                  <td class="text-left">{{ metal_price.percent }}</td>
-                  <td class="text-right">{{ metal_price.price }}</td>
-                  <td class="text-right">{{ metal_price.sort_order }}</td>
-                  <td class="text-right"><a href="{{ metal_price.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-left">{{ metal_purity.name }}</td>
+                  <td class="text-left">{{ metal_purity.code }}</td>
+                  <td class="text-left">{{ metal_purity.purity }}</td>
+                  <td class="text-left">{{ metal_purity.gravity }}</td>
+                  <td class="text-left">{{ metal_purity.option_value }}</td>
+                  <td class="text-left">{{ metal_purity.percent }}</td>
+                  <td class="text-right">{{ metal_purity.price }}</td>
+                  <td class="text-right">{{ metal_purity.sort_order }}</td>
+                  <td class="text-right"><a href="{{ metal_purity.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
                 {% else %}

@@ -3,7 +3,7 @@
   <div class="page-header">
     <div class="container-fluid">
       <div class="pull-right"><a href="{{ add }}" data-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-metal_price').submit() : false;"><i class="fa fa-trash-o"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger" onclick="confirm('{{ text_confirm }}') ? $('#form-metal').submit() : false;"><i class="fa fa-trash-o"></i></button>
       </div>
       <h1>{{ heading_title }}</h1>
       <ul class="breadcrumb">
@@ -29,7 +29,7 @@
         <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
       </div>
       <div class="panel-body">
-        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-metal_price">
+        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-metal">
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
@@ -44,21 +44,6 @@
                     <a href="{{ sort_code }}" class="{{ order|lower }}">{{ column_code }}</a>
                     {% else %}
                     <a href="{{ sort_code }}">{{ column_code }}</a>
-                    {% endif %}</td>
-					<td class="text-left">{% if sort == 'i.purity' %}
-                    <a href="{{ sort_purity }}" class="{{ order|lower }}">{{ column_purity }}</a>
-                    {% else %}
-                    <a href="{{ sort_purity }}">{{ column_purity }}</a>
-                    {% endif %}</td>
-					<td class="text-left">{% if sort == 'i.gravity' %}
-                    <a href="{{ sort_gravity }}" class="{{ order|lower }}">{{ column_gravity }}</a>
-                    {% else %}
-                    <a href="{{ sort_gravity }}">{{ column_gravity }}</a>
-                    {% endif %}</td>
-					<td class="text-left">{% if sort == 'i.option_value' %}
-                    <a href="{{ sort_option_value }}" class="{{ order|lower }}">{{ column_option_value }}</a>
-                    {% else %}
-                    <a href="{{ sort_option_value }}">{{ column_option_value }}</a>
                     {% endif %}</td>
 					<td class="text-left">{% if sort == 'i.percent' %}
                     <a href="{{ sort_percent }}" class="{{ order|lower }}">{{ column_percent }}</a>
@@ -79,23 +64,20 @@
                 </tr>
               </thead>
               <tbody>
-                {% if metal_prices %}
-                {% for metal_price in metal_prices %}
+                {% if metals %}
+                {% for metal in metals %}
                 <tr>
-                  <td class="text-center">{% if metal_price.metal_price_id in selected %}
-                    <input type="checkbox" name="selected[]" value="{{ metal_price.metal_price_id }}" checked="checked" />
+                  <td class="text-center">{% if metal.metal_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ metal.metal_id }}" checked="checked" />
                     {% else %}
-                    <input type="checkbox" name="selected[]" value="{{ metal_price.metal_price_id }}" />
+                    <input type="checkbox" name="selected[]" value="{{ metal.metal_id }}" />
                     {% endif %}</td>
-                  <td class="text-left">{{ metal_price.name }}</td>
-                  <td class="text-left">{{ metal_price.code }}</td>
-                  <td class="text-left">{{ metal_price.purity }}</td>
-                  <td class="text-left">{{ metal_price.gravity }}</td>
-                  <td class="text-left">{{ metal_price.option_value }}</td>
-                  <td class="text-left">{{ metal_price.percent }}</td>
-                  <td class="text-right">{{ metal_price.price }}</td>
-                  <td class="text-right">{{ metal_price.sort_order }}</td>
-                  <td class="text-right"><a href="{{ metal_price.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-left">{{ metal.name }}</td>
+                  <td class="text-left">{{ metal.code }}</td>
+                  <td class="text-right">{{ metal.percent }}</td>
+                  <td class="text-right">{{ metal.price }}</td>
+                  <td class="text-right">{{ metal.sort_order }}</td>
+                  <td class="text-right"><a href="{{ metal.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
                 {% else %}

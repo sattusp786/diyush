@@ -205,11 +205,62 @@ class ControllerCommonColumnLeft extends Controller {
 			// Masters
 			$masters = array();
 			
-			if ($this->user->hasPermission('access', 'masters/metal_price')) {
+			if ($this->user->hasPermission('access', 'masters/stone_mapping')) {
 				$masters[] = array(
+					'name'	   => $this->language->get('text_stone_mapping'),
+					'href'     => $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'masters/multistone_mapping')) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_multistone_mapping'),
+					'href'     => $this->url->link('masters/multistone_mapping', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			// Metal Price
+			$metal = array();
+			
+			if ($this->user->hasPermission('access', 'masters/metal')) {
+				$metal[] = array(
+					'name'     => $this->language->get('text_metal'),
+					'href'     => $this->url->link('masters/metal', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()	
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'masters/metal_purity')) {
+				$metal[] = array(
+					'name'	   => $this->language->get('text_metal_purity'),
+					'href'     => $this->url->link('masters/metal_purity', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'masters/metal_price')) {
+				$metal[] = array(
 					'name'	   => $this->language->get('text_metal_price'),
 					'href'     => $this->url->link('masters/metal_price', 'user_token=' . $this->session->data['user_token'], true),
 					'children' => array()		
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'masters/metal_conversion')) {
+				$metal[] = array(
+					'name'	   => $this->language->get('text_metal_conversion'),
+					'href'     => $this->url->link('masters/metal_conversion', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
+			if ($metal) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_metals'),
+					'href'     => '',
+					'children' => $metal
 				);
 			}
 			
@@ -237,22 +288,6 @@ class ControllerCommonColumnLeft extends Controller {
 					'name'	   => $this->language->get('text_stone_prices'),
 					'href'     => '',
 					'children' => $stoneprice
-				);
-			}
-			
-			if ($this->user->hasPermission('access', 'masters/stone_mapping')) {
-				$masters[] = array(
-					'name'	   => $this->language->get('text_stone_mapping'),
-					'href'     => $this->url->link('masters/stone_mapping', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()		
-				);
-			}
-			
-			if ($this->user->hasPermission('access', 'masters/multistone_mapping')) {
-				$masters[] = array(
-					'name'	   => $this->language->get('text_multistone_mapping'),
-					'href'     => $this->url->link('masters/multistone_mapping', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()		
 				);
 			}
 

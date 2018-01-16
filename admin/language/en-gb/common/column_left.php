@@ -11,7 +11,11 @@ $_['text_export_import']             = 'Export / Import';
 			
 $_['text_banner']               = 'Banners';
 $_['text_catalog']              = 'Catalog';
+$_['text_metals']          		= 'Metals';
+$_['text_metal']          		= 'Metal';
+$_['text_metal_purity']         = 'Metal Purity';
 $_['text_metal_price']          = 'Metal Price';
+$_['text_metal_conversion']     = 'Metal Conversion';
 $_['text_stone_price']          = 'Single Stone Price';
 $_['text_multi_stone_price']    = 'Multi Stone Price';
 $_['text_stone_prices']         = 'Stone Price';
