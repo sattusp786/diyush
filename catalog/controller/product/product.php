@@ -825,7 +825,7 @@ class ControllerProductProduct extends Controller {
 								}
 								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
 								if($total_carat > 0){
-									$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt. '.$pieces.'<br/>';
+									$json['stones'] .= 'Total Weight : Approx '. round($total_carat,2).' ct. wt. '.$pieces.'<br/>';
 								}
 							} elseif($option['name'] == 'Carat'){
 								if(strtolower($product['multistone']) == 'm' || strtolower($product['multistone']) == 'sm'){
