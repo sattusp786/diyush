@@ -805,7 +805,29 @@ class ControllerProductProduct extends Controller {
 				if(!empty($product['option'])){
 					foreach($product['option'] as $option){
 						if($option['name'] != 'Metal'){
-							if($option['name'] == 'Carat'){
+							if($option['name'] == 'Band Width' || $option['name'] == 'Band Thickness' || $option['name'] == 'Length' || $option['name'] == 'Ring Size'){
+								$pieces = '';
+								$total_carat = 0;
+								if(strtolower($product['multistone']) == 'm' || strtolower($product['multistone']) == 'sm'){	
+									if(isset($option['multi_stones']) && !empty($option['multi_stones'])){
+										foreach($option['multi_stones'] as $multi){
+											$pieces .= '('.$multi['carat'].'ct. x '.$multi['pieces'].')';
+											$total_carat += ($multi['carat']*$multi['pieces']);
+										}
+									}
+								}
+								if(strtolower($product['multistone']) == 's' || strtolower($product['multistone']) == 'sm'){
+									if(isset($option['side_stones']) && !empty($option['side_stones'])){
+										foreach($option['side_stones'] as $sider){
+											$json['side_stones'] .= 'Stone Type : '.$sider['stone'].'<br>Shape : '.$sider['shape'].'<br>Clarity : '.$sider['clarity'].'<br>Colour : '.$sider['color'].'<br>Certificate : '.$sider['lab'].'<br>Total Weight : Approx '. ($sider['carat']*$sider['pieces']).' ct. wt. ('.$sider['carat'].'ct. x '.$sider['pieces'].')';
+										}
+									}
+								}
+								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
+								if($total_carat > 0){
+									$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt. '.$pieces.'<br/>';
+								}
+							} elseif($option['name'] == 'Carat'){
 								if(strtolower($product['multistone']) == 'm' || strtolower($product['multistone']) == 'sm'){
 									$pieces = '';
 									if(isset($option['multi_stones']) && !empty($option['multi_stones'])){
