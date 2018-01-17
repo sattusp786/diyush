@@ -243,7 +243,8 @@ class ControllerProductProduct extends Controller {
 			$data['points'] = $product_info['points'];
 			$data['weight'] = round($product_info['weight'],2);
 			$data['description'] = html_entity_decode($product_info['description'], ENT_QUOTES, 'UTF-8');
-
+			$data['no_price_message'] = 'This product combinations is not available and needs special attention.<br/> Please call us on '.$this->config->get('config_telephone').' for further assistance';
+			
 			$categories_info['delivery_days'] = 0;
 			$categories = $this->model_catalog_product->getCategories($product_id);
 			$get_category_id = $categories[0]['category_id'];
@@ -359,6 +360,7 @@ class ControllerProductProduct extends Controller {
 			$data['options'] = array();
 
 			$data['metal_name'] = '';
+			$data['carat_value'] = 'no';
 			foreach ($this->model_catalog_product->getProductOptions($this->request->get['product_id']) as $option) {
 				$product_option_value_data = array();
 
@@ -397,6 +399,10 @@ class ControllerProductProduct extends Controller {
 					}
 				}
 
+				if($option['name'] == 'Carat'){
+					$data['carat_value'] = 'yes';
+				}
+				
 				$data['options'][] = array(
 					'product_option_id'    => $option['product_option_id'],
 					'product_option_value' => $product_option_value_data,
@@ -792,6 +798,7 @@ class ControllerProductProduct extends Controller {
 				$json['rrp'] = '';
 				$json['yousave'] = '';
 				$json['price'] = $total;
+				$json['no_price'] = $product['no_price'];
 				$json['weight'] = round($product['metal_weight'],2);
 				if($unit_price > 0 && $product['rrp'] > 0){
 					$rrp = $unit_price + ($unit_price * $product['rrp']);
@@ -801,6 +808,7 @@ class ControllerProductProduct extends Controller {
 				
 				$json['stones'] = '';
 				$json['side_stones'] = '';
+				$json['carat_weight'] = '';
 				
 				if(!empty($product['option'])){
 					foreach($product['option'] as $option){
@@ -825,6 +833,7 @@ class ControllerProductProduct extends Controller {
 								}
 								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
 								if($total_carat > 0){
+									$json['carat_weight'] = 'Approx '. round($total_carat,2).' ct. wt.';
 									$json['stones'] .= 'Total Weight : Approx '. round($total_carat,2).' ct. wt. '.$pieces.'<br/>';
 								}
 							} elseif($option['name'] == 'Carat'){

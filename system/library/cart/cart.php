@@ -341,6 +341,7 @@ class Cart {
 				
 				$final_price = $optioner['final_price'];
 				$metal_weight = $optioner['metal_weight'];
+				$no_price = $optioner['no_price'];
 				//Code added by Paul to calculate price ends...
 				
 				
@@ -371,7 +372,8 @@ class Cart {
 					'length_class_id' => $product_query->row['length_class_id'],
 					'rrp' 			  => $product_query->row['rrp'],
 					'multistone' 	  => $product_query->row['multistone'],
-					'recurring'       => $recurring
+					'recurring'       => $recurring,
+					'no_price'        => $no_price
 				);
 			} else {
 				$this->remove($cart['cart_id']);
@@ -384,7 +386,7 @@ class Cart {
 	public function calculatePrice($data) {
 		
 		$mapping = $this->getOptionValueMapping();
-		$multi_mapping = $this->getMultiOptionValueMapping();
+		$multi_mapping = $this->getOptionValueMapping();
 		
 		$default_gravity = 15.50;
 		//Code added by Paul to calculate price starts...
@@ -581,7 +583,13 @@ class Cart {
 				$multir_clarity = isset($multi_mapping[$multir_lab][$multir_clarity]) ? $multi_mapping[$multir_lab][$multir_clarity] : "'".$multir_clarity."'";
 				$multir_lab = isset($multi_mapping[$multir_lab][$multir_lab]) ? $multi_mapping[$multir_lab][$multir_lab] : "'".$multir_lab."'";
 				
-				$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ORDER BY mprice ASC ";
+				$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
+				
+				if($multir_pieces == '1'){
+					$multistone_sql .= " ORDER BY sprice ASC ";
+				} else {
+					$multistone_sql .= " ORDER BY mprice ASC ";
+				}
 				
 				if(isset($multi_mapping[$multir_lab]['position'])){
 					$multi_position = $multi_mapping[$multir_lab]['position'];
@@ -595,7 +603,12 @@ class Cart {
 				$get_multistone_price = $this->db->query($multistone_sql);
 				
 				if($get_multistone_price->num_rows){
-					$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
+					if($multir_pieces == '1'){
+						$multistone_price += $get_multistone_price->row['sprice'];
+					} else {
+						$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
+					}
+					
 					if (isset($multi_mapping[$multir_lab]['markup'])) {
 						$multi_markup = explode('|',$multi_mapping[$multir_lab]['markup']);
 						if(isset($multi_markup[0]) && $multi_markup[0] > 0){
@@ -608,14 +621,20 @@ class Cart {
 			}
 		}
 		
+		$no_price = '0';
+		$all_stone_price = $stone_price + $sidestone_price + $multistone_price;
+		if($metal_price == 0 || $all_stone_price == 0){
+			$no_price = '1';
+		}
 		
 		$final_price = $metal_price + $stone_price + $sidestone_price + $multistone_price;
 		//Code added by Paul to calculate price ends...
 		
 		$option = array();
 		
-		$option['final_price'] = $final_price;
+		$option['final_price'] 	= $final_price;
 		$option['metal_weight'] = $metal_weight;
+		$option['no_price'] 	= $no_price;
 		return $option;
 	}
 

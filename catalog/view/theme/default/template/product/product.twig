@@ -101,7 +101,7 @@
                         <div class="pricewrap width-100">
                         <div class="col-md-9 no-padding-left">
                         {% if price %}
-						  <ul class="list-unstyled">
+						  <ul class="list-unstyled" id="price_block">
 							{% if not special %}
 							<li>
 							  <h2 class="final_price"><span class="final_prod_price black-text title-small font-weight-600">{{ price }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
@@ -126,6 +126,9 @@
 							<li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
 							{% endfor %}
 							{% endif %}-->
+						  </ul>
+						  <ul class="list-unstyled" id="noprice_block" style="display:none;">
+							<li>{{ no_price_message }}</li>
 						  </ul>
 						  {% endif %}
                           </div>
@@ -193,6 +196,16 @@
                               </div>
 							  {% if option.name == 'Ring Size' %}<span class="size-chart"><a href="/size-guide" target="_blank">Size Guide</a></span>{% endif %}
 							</div>
+							{% if option.name == 'Shape' and carat_value == 'no' %}
+								<div id="carat_weight" class="form-group margin-one width-100 f-left no-margin-bottom" style="display:none;">
+									<div class="col-md-2 col-sm-12">
+										<label class="control-label">Total Carat </label>
+									</div>
+									<div id="carat_weight_value" class="col-md-10 col-sm-12">
+										
+									</div>
+								</div>
+							{% endif %}
 							{% endif %}
 							{% if option.type == 'radio' %}
 							<div class="form-group{% if option.required %} required {% endif %} margin-one width-100 f-left no-margin-bottom">
@@ -874,6 +887,17 @@ $('.product-option').on('change', function() {
 					$(".rrp").html('');
 					$(".yousave").html('');
 					$(".sep").html('');
+				}
+				if(json['no_price'] == '1'){
+					$("#noprice_block").show();
+					$("#price_block").hide();
+				} else {
+					$("#noprice_block").hide();
+					$("#price_block").show();
+				}
+				if(json['carat_weight'] != '' && $("#carat_weight").length > 0){
+					$("#carat_weight").show();
+					$("#carat_weight_value").html(json['carat_weight']);
 				}
 			}
 		}
