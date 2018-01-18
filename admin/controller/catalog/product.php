@@ -832,6 +832,14 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['carat_to'] = '';
 		}
+		
+		if (isset($this->request->post['product_markup'])) {
+			$data['product_markup'] = $this->request->post['product_markup'];
+		} elseif (!empty($product_info)) {
+			$data['product_markup'] = $product_info['product_markup'];
+		} else {
+			$data['product_markup'] = '';
+		}
 
 		$this->load->model('localisation/stock_status');
 

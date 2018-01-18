@@ -336,6 +336,7 @@ class Cart {
 				$final_option['metal_weight'] = $product_query->row['weight'] + $option_weight;
 				$final_option['side_stone'] = $side_stone;
 				$final_option['multi_stone'] = $multi_stone;
+				$final_option['product_markup'] = $product_query->row['product_markup'];
 				
 				$optioner = $this->calculatePrice($final_option);
 				
@@ -634,14 +635,50 @@ class Cart {
 		$final_price = $metal_price + $stone_price + $sidestone_price + $multistone_price;
 		//Code added by Paul to calculate price ends...
 		
+		//Add Product Markup..
+		if($data['product_markup'] != ''){
+			$final_price = $this->addProductMarkup($final_price, $data['product_markup']);
+		}
 		$option = array();
 		
 		$option['final_price'] 	= $final_price;
 		$option['metal_weight'] = $metal_weight;
 		$option['no_price'] 	= $no_price;
+		
 		return $option;
 	}
 
+	public function addProductMarkup($price, $code){
+		
+		if(!empty($code)) {
+
+			$markupuery = $this->db->query("SELECT * FROM " . DB_PREFIX . "markup_product WHERE code = '" . $this->db->escape($code) . "' AND status = '1' ");
+			
+			if ($markupuery->num_rows)
+			{
+				if ($markupuery->row['markup'])
+				{
+					$markup_arr = explode("|",$markupuery->row['markup']);
+					$markup_per = 0;
+					$markup_fix = 0;
+					if(isset($markup_arr[0]) && !empty($markup_arr[0])){
+						$markup_per = $markup_arr[0];
+					}
+					if(isset($markup_arr[1]) && !empty($markup_arr[1])){
+						$markup_fix = $markup_arr[1];
+					}
+					if($markup_per > 0){
+						$price += $price * ($markup_per/100) + $markup_fix;
+					} elseif($markup_fix > 0) {
+						$price += $markup_fix;
+					}
+				}
+			}
+		}
+		
+		return $price;
+	}
+	
 	public function add($product_id, $quantity = 1, $option = array(), $recurring_id = 0) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "cart WHERE api_id = '" . (isset($this->session->data['api_id']) ? (int)$this->session->data['api_id'] : 0) . "' AND customer_id = '" . (int)$this->customer->getId() . "' AND session_id = '" . $this->db->escape($this->session->getId()) . "' AND product_id = '" . (int)$product_id . "' AND recurring_id = '" . (int)$recurring_id . "' AND `option` = '" . $this->db->escape(json_encode($option)) . "'");
 

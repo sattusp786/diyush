@@ -108,6 +108,7 @@ $_['entry_option_points']    = 'Points';
 $_['entry_subtract']         = 'Subtract Stock';
 $_['entry_weight_class']     = 'Weight Class';
 $_['entry_weight']           = 'Weight';
+$_['entry_product_markup']   = 'Product Markup';
 $_['entry_stone_type']       = 'Stone Type';
 $_['entry_side_stone']       = 'Side Stone';
 $_['entry_multi_stone']      = 'Multi Stone';

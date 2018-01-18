@@ -205,6 +205,14 @@ class ControllerCommonColumnLeft extends Controller {
 			// Masters
 			$masters = array();
 			
+			if ($this->user->hasPermission('access', 'masters/markup_product')) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_markup_product'),
+					'href'     => $this->url->link('masters/markup_product', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+			
 			if ($this->user->hasPermission('access', 'masters/stone_mapping')) {
 				$masters[] = array(
 					'name'	   => $this->language->get('text_stone_mapping'),

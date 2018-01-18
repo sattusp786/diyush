@@ -1017,6 +1017,7 @@ class ModelToolExportImport extends Model {
 		$multistone = $product['multistone'];
 		$side_stone = $product['side_stone'];
 		$rrp = $product['rrp'];
+		$product_markup = $product['product_markup'];
 		$carat_from = $product['carat_from'];
 		$carat_to = $product['carat_to'];
 		$meta_keywords = $product['meta_keywords'];
@@ -1036,7 +1037,7 @@ class ModelToolExportImport extends Model {
 		$sql .= in_array('isbn',$product_fields) ? "`isbn`," : "";
 		$sql .= in_array('mpn',$product_fields) ? "`mpn`," : "";
 		$sql .= "`location`,`stock_status_id`,`model`,`manufacturer_id`,`image`,`shipping`,`price`,`points`,`date_added`,`date_modified`,`date_available`,`weight`,`weight_class_id`,`status`,";
-		$sql .= "`tax_class_id`,`viewed`,`length`,`width`,`height`,`length_class_id`,`sort_order`,`subtract`,`minimum`,`delivery_days`,`multistone`,`side_stone`,`rrp`,`carat_from`,`carat_to`) VALUES ";
+		$sql .= "`tax_class_id`,`viewed`,`length`,`width`,`height`,`length_class_id`,`sort_order`,`subtract`,`minimum`,`delivery_days`,`multistone`,`side_stone`,`rrp`,`product_markup`,`carat_from`,`carat_to`) VALUES ";
 		$sql .= "($product_id,$quantity,'$sku','$upc',";
 		$sql .= in_array('ean',$product_fields) ? "'$ean'," : "";
 		$sql .= in_array('jan',$product_fields) ? "'$jan'," : "";
@@ -1047,7 +1048,7 @@ class ModelToolExportImport extends Model {
 		$sql .= ($date_modified=='NOW()') ? "$date_modified," : "'$date_modified',";
 		$sql .= ($date_available=='NOW()') ? "$date_available," : "'$date_available',";
 		$sql .= "$weight,$weight_class_id,$status,";
-		$sql .= "$tax_class_id,$viewed,$length,$width,$height,'$length_class_id','$sort_order','$subtract','$minimum','$delivery_days','$multistone','$side_stone','$rrp','$carat_from','$carat_to');";
+		$sql .= "$tax_class_id,$viewed,$length,$width,$height,'$length_class_id','$sort_order','$subtract','$minimum','$delivery_days','$multistone','$side_stone','$rrp','$product_markup','$carat_from','$carat_to');";
 		$this->db->query($sql);
 		foreach ($languages as $language) {
 			$language_code = $language['code'];
@@ -1381,6 +1382,7 @@ class ModelToolExportImport extends Model {
 			$multistone = $this->getCell($data,$i,$j++,'0');
 			$side_stone = $this->getCell($data,$i,$j++,'0');
 			$rrp = $this->getCell($data,$i,$j++,'0');
+			$product_markup = $this->getCell($data,$i,$j++,'');
 			$carat_from = $this->getCell($data,$i,$j++,'0');
 			$carat_to = $this->getCell($data,$i,$j++,'0');
 			$product = array();
@@ -1453,6 +1455,7 @@ class ModelToolExportImport extends Model {
 			$product['multistone'] = $multistone;
 			$product['side_stone'] = $side_stone;
 			$product['rrp'] = $rrp;
+			$product['product_markup'] = $product_markup;
 			$product['carat_from'] = $carat_from;
 			$product['carat_to'] = $carat_to;
 			$product['meta_keywords'] = $meta_keywords;
@@ -4173,7 +4176,7 @@ class ModelToolExportImport extends Model {
 		if ($exist_meta_title) {
 			$expected_heading[] = "meta_title";
 		}
-		$expected_heading = array_merge( $expected_heading, array( "meta_description", "meta_keywords", "stock_status_id", "store_ids", "layout", "related_ids", "tags", "sort_order", "subtract", "minimum", "delivery_days", "multistone", "side_stone", "rrp", "carat_from", "carat_to" ) );
+		$expected_heading = array_merge( $expected_heading, array( "meta_description", "meta_keywords", "stock_status_id", "store_ids", "layout", "related_ids", "tags", "sort_order", "subtract", "minimum", "delivery_days", "multistone", "side_stone", "rrp", "product_markup", "carat_from", "carat_to" ) );
 		if ($exist_meta_title) {
 			$expected_multilingual = array( "name", "description", "meta_title", "meta_description", "meta_keywords", "tags" );
 		} else {
@@ -6934,6 +6937,7 @@ class ModelToolExportImport extends Model {
 		$sql .= "  p.multistone, ";
 		$sql .= "  p.side_stone, ";
 		$sql .= "  p.rrp, ";
+		$sql .= "  p.product_markup, ";
 		$sql .= "  p.carat_from, ";
 		$sql .= "  p.carat_to, ";
 		$sql .= "  GROUP_CONCAT( DISTINCT CAST(pr.related_id AS CHAR(11)) SEPARATOR \",\" ) AS related ";
@@ -7075,6 +7079,7 @@ class ModelToolExportImport extends Model {
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('multistone'),8)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('side_stone'),8)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('rrp'),8)+1);
+		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('product_markup'),8)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('carat_from'),8)+1);
 		$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('carat_to'),8)+1);
 
@@ -7173,6 +7178,7 @@ class ModelToolExportImport extends Model {
 		$data[$j++] = 'multistone';
 		$data[$j++] = 'side_stone';
 		$data[$j++] = 'rrp';
+		$data[$j++] = 'product_markup';
 		$data[$j++] = 'carat_from';
 		$data[$j++] = 'carat_to';
 		$worksheet->getRowDimension($i)->setRowHeight(30);
@@ -7272,6 +7278,7 @@ class ModelToolExportImport extends Model {
 			$data[$j++] = $row['multistone'];
 			$data[$j++] = $row['side_stone'];
 			$data[$j++] = $row['rrp'];
+			$data[$j++] = $row['product_markup'];
 			$data[$j++] = $row['carat_from'];
 			$data[$j++] = $row['carat_to'];
 			$this->setCellRow( $worksheet, $i, $data, $this->null_array, $styles );
