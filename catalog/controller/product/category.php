@@ -200,8 +200,16 @@ class ControllerProductCategory extends Controller {
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
+			
+			$styleurl = '';
+			if (isset($this->request->get['filter']) && !empty($this->request->get['filter'])) {
+				$get_style_filter = $this->model_catalog_category->getNonStyleFilters($this->request->get['filter']);
+				if($get_style_filter != ''){
+					$styleurl .= $get_style_filter;
+				}
+			}
 
-			$data['action'] = $this->url->link('product/category', 'path=' . $category_id . $url);
+			$data['action'] = $this->url->link('product/category', 'path=' . $category_id . $url).'&filter='.$styleurl;
 			
 			if (isset($this->request->get['filter'])) {
 				$url .= '&filter=' . $this->request->get['filter'];

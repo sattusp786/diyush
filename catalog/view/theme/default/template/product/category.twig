@@ -238,7 +238,7 @@ $('.filterbylovely').on('click', function() {
 	var price_from = $("#price_from").val();
 	var price_to = $("#price_to").val();
 	
-	location = '{{ action }}&filter=' + filter.join(',')+'&price_from='+price_from+'&price_to='+price_to;
+	location = '{{ action }}' + filter.join(',')+'&price_from='+price_from+'&price_to='+price_to;
 });
 </script>
 

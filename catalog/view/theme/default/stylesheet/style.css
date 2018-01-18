@@ -2693,7 +2693,7 @@ ul.sub-navi li a:before {
     cursor: pointer; /* Cursor on hover */
 }
 
-.zopim { display:none !important;}
+.zopim { display:none; }
 
 .navbar-toggle { margin-right:0;}
 #settingmenu { display:none; background-color: rgba(27, 22, 28, 0.95); clear: both; min-height: 0;  padding: 0;  position: absolute; right:0;  top: 87px; width: 50%;}

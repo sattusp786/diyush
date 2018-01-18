@@ -87,6 +87,38 @@ class ModelCatalogCategory extends Model {
 		return '1';
 
 	}
+	
+	public function getNonStyleFilters($filter_id) {
+		
+		$filter_id = rtrim($filter_id, ',');
+		$filter_str = '';
+		if($filter_id != ''){
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "filter WHERE filter_id IN (".$filter_id.") AND filter_group_id != '5' ");
+			if($query->num_rows > 0){
+				foreach($query->rows as $filter){
+					$filter_str .= $filter['filter_id'].',';
+				}
+			}
+			//$filter_str = substr($filter_str,0,-1);
+		}
+		return $filter_str;
+	}
+	
+	public function getStyleFilters($filter_id) {
+		
+		$filter_id = rtrim($filter_id, ',');
+		$filter_str = '';
+		if($filter_id != ''){
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "filter WHERE filter_id IN (".$filter_id.") AND filter_group_id = '5' ");
+			if($query->num_rows > 0){
+				foreach($query->rows as $filter){
+					$filter_str .= $filter['filter_id'].',';
+				}
+			}
+			//$filter_str = substr($filter_str,0,-1);
+		}
+		return $filter_str;
+	}
 
 	// Function to get the client IP address
 	public function get_client_ip() {

@@ -49,8 +49,16 @@ class ControllerExtensionModuleFilter extends Controller {
 			if (isset($this->request->get['limit'])) {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
+			
+			$styleurl = '';
+			if (isset($this->request->get['filter']) && !empty($this->request->get['filter'])) {
+				$get_style_filter = $this->model_catalog_category->getStyleFilters($this->request->get['filter']);
+				if($get_style_filter != ''){
+					$styleurl .= $get_style_filter;
+				}
+			}
 
-			$data['action'] = str_replace('&amp;', '&', $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url));
+			$data['action'] = str_replace('&amp;', '&', $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url)).'&filter='.$styleurl;
 
 			if (isset($this->request->get['filter'])) {
 				$data['filter_category'] = explode(',', $this->request->get['filter']);
