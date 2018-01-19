@@ -940,6 +940,30 @@ class ControllerCatalogProduct extends Controller {
 		} else {
 			$data['manufacturer'] = '';
 		}
+		
+		$this->load->model('catalog/product_type');
+
+		if (isset($this->request->post['product_type_id'])) {
+			$data['product_type_id'] = $this->request->post['product_type_id'];
+		} elseif (!empty($product_info)) {
+			$data['product_type_id'] = $product_info['product_type_id'];
+		} else {
+			$data['product_type_id'] = 0;
+		}
+
+		if (isset($this->request->post['product_type'])) {
+			$data['product_type'] = $this->request->post['product_type'];
+		} elseif (!empty($product_info)) {
+			$product_type_info = $this->model_catalog_product_type->getProductType($product_info['product_type_id']);
+
+			if ($product_type_info) {
+				$data['product_type'] = $product_type_info['name'];
+			} else {
+				$data['product_type'] = '';
+			}
+		} else {
+			$data['product_type'] = '';
+		}
 
 		// Categories
 
