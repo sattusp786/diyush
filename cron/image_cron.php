@@ -74,8 +74,14 @@ function getProductOptions($product_id) {
             		$carat = '1.0000-2.0000';
             	} elseif($coder > 200 &&  $coder <= 300){
             		$carat = '2.0000-3.0000';
+            	} elseif($coder > 0 &&  $coder <= 200){
+            		$carat = '0.0000-2.0000';
+            	} elseif($coder > 100 &&  $coder <= 300){
+            		$carat = '1.0000-3.0000';
+            	} elseif($coder > 0 &&  $coder <= 300){
+            		$carat = '0.0000-3.0000';
             	} else {
-            		$carat = '0.0000-1.0000';
+            		$carat = '0.0000-3.0000';
             	}
             }
 
@@ -187,7 +193,7 @@ function getProductOptions($product_id) {
 	
 	echo 'STEP 3: Updating Default Images path.<br/><br/>';
 	
-	$carrat_arr = array('0.0000-1.0000','1.0000-2.0000','2.0000-3.0000','0.0000-3.0000');
+	$carrat_arr = array('0.0000-1.0000','1.0000-2.0000','2.0000-3.0000','0.0000-2.0000','1.0000-3.0000','0.0000-3.0000');
 
 	$query_products = $db->query("SELECT * FROM " . DB_PREFIX . "product WHERE 1");
 	if($query_products->num_rows) {
