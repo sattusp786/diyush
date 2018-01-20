@@ -591,7 +591,7 @@ class Cart {
 				
 				$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND weight >= ".$multir_carat." AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
 				
-				if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7)) {
+				if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7))) {
 					$multistone_sql .= " ORDER BY sprice ASC ";
 				} else {
 					$multistone_sql .= " ORDER BY mprice ASC ";
@@ -609,7 +609,7 @@ class Cart {
 				$get_multistone_price = $this->db->query($multistone_sql);
 				
 				if($get_multistone_price->num_rows){
-					if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7)) {
+					if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7))) {
 						$multistone_price += $get_multistone_price->row['sprice'] * $multir_pieces;
 					} else {
 						$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
