@@ -52,67 +52,27 @@ function getProductOptions($product_id) {
         $product_option_value_query = $db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_id = '" . (int)$product_id . "' AND pov.product_option_id = '" . (int)$product_option['product_option_id'] . "' AND ovd.language_id = '1' ORDER BY ov.sort_order");
 
         foreach ($product_option_value_query->rows as $product_option_value) {
+			$coder = $product_option_value['code'];
         	//Metal
             if($product_option['option_id'] == '14' && $product_option_value['default'] == '1'){
-            	if(stripos($product_option_value['name'],'Rose') !== false){
-            		$metal = 'rr';
-            	} elseif(stripos($product_option_value['name'],'Yellow') !== false){
-            		$metal = 'yy';
-            	} else {
-            		$metal = 'ww';
-            	}
+				$metal_code = strtolower(substr($coder, -1));
+				$metal = $metal_code.$metal_code;
             }
             //Stonetype
             if($product_option['option_id'] == '22' && $product_option_value['default'] == '1'){
-            	if(stripos($product_option_value['name'],'Ruby') !== false){
-            		$stonetype = 'rb';
-            	} elseif(stripos($product_option_value['name'],'Emerald') !== false){
-            		$stonetype = 'em';
-            	} elseif(stripos($product_option_value['name'],'Blue Sapphire') !== false){
-            		$stonetype = 'bs';
-            	} elseif(stripos($product_option_value['name'],'Pink Sapphire') !== false){
-            		$stonetype = 'ps';
-            	} elseif(stripos($product_option_value['name'],'Black Diamond') !== false){
-            		$stonetype = 'bd';
-            	} elseif(stripos($product_option_value['name'],'Diamond') !== false){
-            		$stonetype = 'di';
-            	} else {
-            		$stonetype = 'di';
-            	}
+            	$stonetype = strtolower($coder);
             }
             //Shape
             if($product_option['option_id'] == '20' && $product_option_value['default'] == '1'){
-            	if(stripos($product_option_value['name'],'Radiant') !== false){
-            		$shape = 'rad';
-            	} elseif(stripos($product_option_value['name'],'Cushion') !== false){
-            		$shape = 'cus';
-            	} elseif(stripos($product_option_value['name'],'Marquise') !== false){
-            		$shape = 'mqs';
-            	} elseif(stripos($product_option_value['name'],'Heart') !== false){
-            		$shape = 'hrt';
-            	} elseif(stripos($product_option_value['name'],'Pear') !== false){
-            		$shape = 'per';
-            	} elseif(stripos($product_option_value['name'],'Oval') !== false){
-            		$shape = 'ovl';
-            	} elseif(stripos($product_option_value['name'],'Asscher') !== false){
-            		$shape = 'asc';
-            	} elseif(stripos($product_option_value['name'],'Emerald') !== false){
-            		$shape = 'emr';
-            	} elseif(stripos($product_option_value['name'],'Princess') !== false){
-            		$shape = 'prn';
-            	} elseif(stripos($product_option_value['name'],'Round') !== false){
-            		$shape = 'rnd';
-            	} else {
-            		$shape = 'rnd';
-            	}
+            	$shape = strtolower($coder);
             }
             //Carat
             if($product_option['option_id'] == '5' && $product_option_value['default'] == '1'){
-            	if($product_option_value['name'] > 0 &&  $product_option_value['name'] <= 1){
+            	if($coder > 0 &&  $coder <= 100){
             		$carat = '0.0000-1.0000';
-            	} elseif($product_option_value['name'] > 1 &&  $product_option_value['name'] <= 2){
+            	} elseif($coder > 100 &&  $coder <= 200){
             		$carat = '1.0000-2.0000';
-            	} elseif($product_option_value['name'] > 2 &&  $product_option_value['name'] <= 3){
+            	} elseif($coder > 200 &&  $coder <= 300){
             		$carat = '2.0000-3.0000';
             	} else {
             		$carat = '0.0000-1.0000';
