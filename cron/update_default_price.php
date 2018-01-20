@@ -16,7 +16,7 @@ require_once(DIR_SYSTEM . 'library/db.php');
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
 
 $mapping = getOptionValueMapping();
-$multi_mapping = getMultiOptionValueMapping();
+$multi_mapping = getOptionValueMapping();
 
 function getConfig($key,$store_id) {
     // Settings
@@ -241,7 +241,13 @@ function calculatePrice($data) {
 			$multir_clarity = isset($multi_mapping[$multir_lab][$multir_clarity]) ? $multi_mapping[$multir_lab][$multir_clarity] : "'".$multir_clarity."'";
 			$multir_lab = isset($multi_mapping[$multir_lab][$multir_lab]) ? $multi_mapping[$multir_lab][$multir_lab] : "'".$multir_lab."'";
 			
-			$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ORDER BY mprice ASC ";
+			$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND weight >= ".$multir_carat." AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
+				
+			if($multir_pieces == '1'){
+				$multistone_sql .= " ORDER BY sprice ASC ";
+			} else {
+				$multistone_sql .= " ORDER BY mprice ASC ";
+			}
 			
 			if(isset($multi_mapping[$multir_lab]['position'])){
 				$multi_position = $multi_mapping[$multir_lab]['position'];
@@ -251,11 +257,16 @@ function calculatePrice($data) {
 			
 			$multi_position = (isset($multi_position))?($multi_position-1):1;
 			$multistone_sql .= " limit $multi_position,1";
-				
+			
 			$get_multistone_price = $db->query($multistone_sql);
 			
 			if($get_multistone_price->num_rows){
-				$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
+				if($multir_pieces == '1'){
+					$multistone_price += $get_multistone_price->row['sprice'];
+				} else {
+					$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
+				}
+				
 				if (isset($multi_mapping[$multir_lab]['markup'])) {
 					$multi_markup = explode('|',$multi_mapping[$multir_lab]['markup']);
 					if(isset($multi_markup[0]) && $multi_markup[0] > 0){
@@ -269,10 +280,54 @@ function calculatePrice($data) {
 	}
 	
 	
+	$no_price = '0';
+	$all_stone_price = $stone_price + $sidestone_price + $multistone_price;
+	if($metal_price == 0 || $all_stone_price == 0){
+		$no_price = '1';
+	}
+	
 	$final_price = $metal_price + $stone_price + $sidestone_price + $multistone_price;
 	//Code added by Paul to calculate price ends...
 	
+	//Add Product Markup..
+	if($data['product_markup'] != ''){
+		$final_price = addProductMarkup($final_price, $data['product_markup']);
+	}
+	
 	return $final_price;
+}
+
+function addProductMarkup($price, $code){
+	
+	global $db;
+	
+	if(!empty($code)) {
+
+		$markupuery = $db->query("SELECT * FROM " . DB_PREFIX . "markup_product WHERE code = '" . $db->escape($code) . "' AND status = '1' ");
+		
+		if ($markupuery->num_rows)
+		{
+			if ($markupuery->row['markup'])
+			{
+				$markup_arr = explode("|",$markupuery->row['markup']);
+				$markup_per = 0;
+				$markup_fix = 0;
+				if(isset($markup_arr[0]) && !empty($markup_arr[0])){
+					$markup_per = $markup_arr[0];
+				}
+				if(isset($markup_arr[1]) && !empty($markup_arr[1])){
+					$markup_fix = $markup_arr[1];
+				}
+				if($markup_per > 0){
+					$price += $price * ($markup_per/100) + $markup_fix;
+				} elseif($markup_fix > 0) {
+					$price += $markup_fix;
+				}
+			}
+		}
+	}
+	
+	return $price;
 }
 
 function getOptionValueMapping()
@@ -343,10 +398,10 @@ if($query_products->num_rows) {
 		}
 		
 		$default_options['metal_weight'] = $product['weight'] + $option_weight;
+		$default_options['product_markup'] = $product['product_markup'];
 		
 		$product_price = calculatePrice($default_options);
 		
-		$update = $db->query("UPDATE " . DB_PREFIX . "product SET price = '".$product_price."' WHERE product_id = '".$product['product_id']."' ");
 		$update = $db->query("UPDATE " . DB_PREFIX . "product SET price = '".$product_price."' WHERE product_id = '".$product['product_id']."' ");
 	}
 
