@@ -589,7 +589,15 @@ class Cart {
 				
 				//$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
 				
-				$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND weight >= ".$multir_carat." AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
+				$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' ";
+
+				if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7))) {
+					$multistone_sql .=" AND ".$multir_carat." between crt_from AND crt_to ";
+				} else {
+					$multistone_sql .=" AND weight >= ".$multir_carat;
+				}
+
+				$multistone_sql .=" AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
 				
 				if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7))) {
 					$multistone_sql .= " ORDER BY sprice ASC ";
