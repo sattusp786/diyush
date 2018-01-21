@@ -139,12 +139,16 @@ class ControllerProductCategory extends Controller {
 						$filter_id_arr[] = $filter['filter_id'];
 						$filter_id_arr = array_unique($filter_id_arr);
 						$filter_str = implode(",",$filter_id_arr);
-						$childen_data[] = array(
-							'filter_id' => $filter['filter_id'],
-							'filter_image' => !empty($filter['image']) ? HTTP_SERVER."image/".$filter['image'] : '',
-							'filter_href' => $filter_str,
-							'name'      => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : '')
-						);
+
+						$total_carat = $this->model_catalog_product->getTotalProducts($filter_data);
+						if($total_carat > 0){
+							$childen_data[] = array(
+								'filter_id' => $filter['filter_id'],
+								'filter_image' => !empty($filter['image']) ? HTTP_SERVER."image/".$filter['image'] : '',
+								'filter_href' => $filter_str,
+								'name'      => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : '')
+							);
+						}
 					}
 
 					$data['filter_groups'][] = array(
@@ -264,19 +268,20 @@ class ControllerProductCategory extends Controller {
 			
 			foreach ($results as $result) {
 				
+				/*
 				if ($result['image']) {
 					$image = HTTP_SERVER . 'image/' . $result['image'];
 				} else {
-					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
-				}
-				
-				/*
-				if ($result['image']) {
-					$image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
-				} else {
-					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_category_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_category_height'));
 				}
 				*/
+				
+				if ($result['image']) {
+					$image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_category_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_category_height'));
+				} else {
+					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_category_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_category_height'));
+				}
+				
 				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
 					$price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 				} else {
