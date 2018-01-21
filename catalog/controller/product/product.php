@@ -234,6 +234,7 @@ class ControllerProductProduct extends Controller {
 
 			$data['tab_review'] = sprintf($this->language->get('tab_review'), $product_info['reviews']);
 
+			$data['ring_size_pdf'] = HTTP_SERVER.'storage/download/ring-size-guide.pdf';
 			$data['product_id'] = (int)$this->request->get['product_id'];
 			$data['manufacturer'] = $product_info['manufacturer'];
 			$data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
@@ -879,5 +880,93 @@ class ControllerProductProduct extends Controller {
 		
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
+	}
+
+	public function freeringsizer() {
+		
+		$this->load->model('catalog/email_manager');
+
+		$json = array();
+
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+			$title= 'Free Ring Sizer Request Form';
+			
+				
+			$data = array(
+				'store_name' => $this->config->get('config_name'),
+				'name' => $this->request->post['freeringsizer_firstname'],
+				'lname' => $this->request->post['freeringsizer_lastname'],
+				'email' => $this->request->post['freeringsizer_email'],
+				'phone' => $this->request->post['freeringsizer_phone'],
+				'address' => $this->request->post['freeringsizer_address'],
+				'subject' => $title,
+				'enquiry_type_id' => '4',
+				'text' => $this->request->post['freeringsizer_message']
+			);
+
+			$this->model_catalog_email_manager->addEnquiry($data);
+			$this->model_catalog_email_manager->sendEmail($data, 'free-ring-size-request');
+			//$this->model_catalog_email_manager->sendEmail($data,'designer-form-acknowledgement',$this->request->post['email']);
+			
+			$json['success'] =  'Your details submitted successfully!';
+			
+		}
+		
+		if (isset($this->error['name'])) {
+			$json['error'] = $this->error['name'];
+		}
+
+		if (isset($this->error['email'])) {
+			$json['error'] = $this->error['email'];
+		}
+		
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));			
+
+	}
+
+	public function enquiry() {
+		
+		$this->load->model('catalog/email_manager');
+
+		$json = array();
+
+		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+			$title= 'Make an Enquiry Form';
+			
+				
+			$data = array(
+				'store_name' => $this->config->get('config_name'),
+				'name' => $this->request->post['enquiry_firstname'],
+				'lname' => $this->request->post['enquiry_lastname'],
+				'email' => $this->request->post['enquiry_email'],
+				'phone' => $this->request->post['enquiry_phone'],
+				'address' => $this->request->post['enquiry_address'],
+				'subject' => $title,
+				'enquiry_type_id' => '5',
+				'text' => $this->request->post['enquiry_message']
+			);
+
+			$this->model_catalog_email_manager->addEnquiry($data);
+			$this->model_catalog_email_manager->sendEmail($data, 'make-an-enquiry');
+			//$this->model_catalog_email_manager->sendEmail($data,'designer-form-acknowledgement',$this->request->post['email']);
+			
+			$json['success'] =  'Your details submitted successfully!';
+			
+		}
+		
+		if (isset($this->error['name'])) {
+			$json['error'] = $this->error['name'];
+		}
+
+		if (isset($this->error['email'])) {
+			$json['error'] = $this->error['email'];
+		}
+		
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));			
+
 	}
 }

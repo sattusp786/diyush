@@ -53,36 +53,29 @@ class ControllerInformationVisitShowroom extends Controller {
 		$this->load->language('information/visit_showroom');
 		
 		$this->load->model('catalog/information');
+		$this->load->model('catalog/email_manager');
 
 		$json = array();
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 
-			$mail = new Mail($this->config->get('config_mail_engine'));
-			$mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->smtp_hostname = $this->config->get('config_mail_smtp_hostname');
-			$mail->smtp_username = $this->config->get('config_mail_smtp_username');
-			$mail->smtp_password = html_entity_decode($this->config->get('config_mail_smtp_password'), ENT_QUOTES, 'UTF-8');
-			$mail->smtp_port = $this->config->get('config_mail_smtp_port');
-			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
-
-			$mail->setTo($this->config->get('config_email'));
-			$mail->setFrom($this->config->get('config_email'));
-			$mail->setReplyTo($this->request->post['appointment_email']);
-			$mail->setSender(html_entity_decode('Admin', ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject('New Appointment Request'. $this->request->post['appointment_firstname']);
-			$mail->setText($this->request->post['appointment_message']);
-			$mail->send();
+			$title= 'Appointment Form';
 			
-			$appointment_data = array();
-			$appointment_data['name'] = $this->request->post['appointment_firstname'];
-			$appointment_data['lname'] = $this->request->post['appointment_lastname'];
-			$appointment_data['email'] = $this->request->post['appointment_email'];
-			$appointment_data['phone'] = $this->request->post['appointment_phone'];
-			$appointment_data['subject'] = 'Appointment Form';
-			$appointment_data['text'] = $this->request->post['appointment_message'].'<br/> Appointment Date : '.$this->request->post['appointment_date'];
-			$appointment_data['enquiry_type_id'] = '1';
-			$appointment_info = $this->model_catalog_information->addEnquiry($appointment_data);
+				
+			$data = array(
+				'store_name' => $this->config->get('config_name'),
+				'name' => $this->request->post['appointment_firstname'],
+				'lname' => $this->request->post['appointment_lastname'],
+				'email' => $this->request->post['appointment_email'],
+				'phone' => $this->request->post['appointment_phone'],
+				'subject' => $title,
+				'enquiry_type_id' => '1',
+				'text' => $this->request->post['appointment_message'].'<br/> Appointment Date : '.$this->request->post['appointment_date']
+			);
+
+			$this->model_catalog_email_manager->addEnquiry($data);
+			$this->model_catalog_email_manager->sendEmail($data, 'appointment-form');
+			//$this->model_catalog_email_manager->sendEmail($data,'designer-form-acknowledgement',$this->request->post['email']);
 			
 			$json['success'] =  'Your details submitted successfully!';
 			

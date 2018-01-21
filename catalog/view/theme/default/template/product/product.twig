@@ -313,7 +313,8 @@
 							  <input type="hidden" name="product_id" value="{{ product_id }}" /></div>
 							  <br />
                               <div class="text-center">
-							  <a class="highlight-button-dark btn btn-medium button width-60 no-margin" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"><!--<i class="icon-basket"></i>--> {{ button_cart }}</a></div>
+							  <a class="popup-with-zoom-anim highlight-button-dark btn btn-medium button width-60 no-margin" id="button-enq" data-loading-text="{{ text_loading }}" href="#enquiry"><!--<i class="icon-basket"></i>-->Make an Enquiry</a></div>
+							  <!--<a class="highlight-button-dark btn btn-medium button width-60 no-margin" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"> {{ button_cart }}</a></div>-->
 							</div>
                             <div class="form-group margin-two width-100 f-left text-center">
                             
@@ -518,10 +519,10 @@
                                             <div class="col-md-10 center-col ">
                                             <div class="col-md-6 text-center features-box-style1"><i class="icon-book-open medium-icon gray-text"></i>
          <h3 class="margin-three no-margin-top">Download Ring Sizer</h3>
-          <a href="#" class="highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
+          <a href="{{ ring_size_pdf }}" target="_blank" download="ring-size-guide.pdf" class="highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
                                             <div class="col-md-6 text-center features-box-style1"><i class="icon-envelope medium-icon gray-text"></i>
           <h3 class="margin-three no-margin-top">Free Ring Sizer</h3>
-          <a href="#" class="highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
+          <a href="#freeringsizer" class="popup-with-zoom-anim highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
                                             <div class="clear-both"></div>
                                             
                                             <p class="text-center margin-two"><a href="/size-guide">Read out Complete Size Guide</a></p>
@@ -537,7 +538,7 @@
                 </div>
             	<div class="col-md-6 f-left proreviewbot">
                 	<h2 class="margin-two no-margin-top">Customer Review</h2>
-                    <div class="rviwcolumn2 spaceTop"><a href="#"><img src="catalog/view/theme/default/image/productpage/trustpilot.jpg" alt="" /></a></div>
+                    <div class="rviwcolumn2 spaceTop"><a target="_blank" href="https://uk.trustpilot.com/review/abelini.com"><img src="catalog/view/theme/default/image/productpage/trustpilot.jpg" alt="Customer Reviews" /></a></div>
                     <div class="review-main">
                     	<div class="review">
 							<p class="letter-spacing-2 text-uppercase review-name"><strong>Elaine,</strong> November 17, 2017</p>
@@ -648,8 +649,231 @@
 	</div>
 </section>-->
 {% endif %}
-		
+
+<div id="freeringsizer" class="zoom-anim-dialog mfp-hide col-lg-9 col-md-6 col-sm-7 col-xs-11 center-col bg-white modal-popup-main">
+    <span class="slider-subtitle5 black-text no-margin-bottom  text-center">Order My Free Ring Sizer</span><br/>
+    <section id="contacter-freeringsizer" class="popstep-pane">
+         <form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" name="form-freeringsizer" id ="form-appointment">
+         <div class="row">
+         <div class="col-md-6">
+              <div class="form-group">
+                <div class="col-xs-10">
+                <input type="text" id="freeringsizer-firstname" name="freeringsizer_firstname" tabindex="1" class="form-control" placeholder="First Name" value="" required /></div>
+              </div></div>
+              <div class="col-md-6">
+			  <div class="form-group">
+                <div class="col-xs-10">
+                <input type="text" id="freeringsizer-lastname" name="freeringsizer_lastname" tabindex="2" class="form-control" placeholder="Last Name" value="" required /></div>
+              </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">                
+                <div class="col-xs-10">
+                <input type="email" id="freeringsizer-email" name="freeringsizer_email" tabindex="3" class="form-control" placeholder="Email Address" value="" required /></div>
+              </div></div>
+              <div class="col-md-6">
+			  <div class="form-group">
+                <div class="col-xs-10">
+                <input type="text" id="freeringsizer-phone" name="freeringsizer_phone" tabindex="4" class="form-control" placeholder="Phone" value="" required /></div>
+              </div></div>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
+			  <div class="form-group">
+                <div class="col-xs-10">
+                <textarea name="freeringsizer_address" id="freeringsizer-address" tabindex="5" rows="3" class="form-control" placeholder="Address" required></textarea></div>
+              </div></div>
+              <div class="col-md-6">
+              <div class="form-group">
+                <div class="col-xs-10">
+                <textarea name="freeringsizer_message" id="freeringsizer-message" tabindex="6" rows="3" class="form-control" placeholder="Message" required></textarea></div>
+              </div></div>
+              </div>
+            </form>
+        </section>
+    	<div class="popstep-btns"><a href="javascript:void(0)" class="highlight-button btn btn-small button xs-margin-bottom-five no-margin" onclick="$('#form-freeringsizer').submit();" id="button-freeringsizer">Submit </a></div>
+</div>
+
+<div id="enquiry" class="zoom-anim-dialog mfp-hide col-lg-9 col-md-6 col-sm-7 col-xs-11 center-col bg-white modal-popup-main">
+    <span class="slider-subtitle5 black-text no-margin-bottom  text-center">Make an Enquiry</span><br/>
+    <section id="contacter-enquiry" class="popstep-pane">
+         <form action=""  method="post" enctype="multipart/form-data" class="form-horizontal" name="form-freeringsizer" id ="form-enquiry">
+         <div class="row">
+         <div class="col-md-6">
+              <div class="form-group">
+                <div class="col-xs-10">
+                <input type="text" id="enquiry-firstname" name="enquiry_firstname" tabindex="1" class="form-control" placeholder="First Name" value="" required /></div>
+              </div></div>
+              <div class="col-md-6">
+			  <div class="form-group">
+                <div class="col-xs-10">
+                <input type="text" id="enquiry-lastname" name="enquiry_lastname" tabindex="2" class="form-control" placeholder="Last Name" value="" required /></div>
+              </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
+              <div class="form-group">                
+                <div class="col-xs-10">
+                <input type="email" id="enquiry-email" name="enquiry_email" tabindex="3" class="form-control" placeholder="Email Address" value="" required /></div>
+              </div></div>
+              <div class="col-md-6">
+			  <div class="form-group">
+                <div class="col-xs-10">
+                <input type="text" id="enquiry-phone" name="enquiry_phone" tabindex="4" class="form-control" placeholder="Phone" value="" required /></div>
+              </div></div>
+              </div>
+              <div class="row">
+              <div class="col-md-6">
+			  <div class="form-group">
+                <div class="col-xs-10">
+                <textarea name="enquiry_address" id="enquiry-address" tabindex="5" rows="3" class="form-control" placeholder="Address" required></textarea></div>
+              </div></div>
+              <div class="col-md-6">
+              <div class="form-group">
+                <div class="col-xs-10">
+                <textarea name="enquiry_message" id="enquiry-message" tabindex="6" rows="3" class="form-control" placeholder="Message" required></textarea></div>
+              </div></div>
+              </div>
+            </form>
+        </section>
+    	<div class="popstep-btns"><a href="javascript:void(0)" class="highlight-button btn btn-small button xs-margin-bottom-five no-margin" onclick="$('#form-enquiry').submit();" id="button-enquiry">Submit </a></div>
+</div>
+
+<script type="text/javascript"><!--
+$('#form-freeringsizer').on('submit', function(e) {
+	e.preventDefault();
+	
+	var firstname = $("#freeringsizer-firstname").val();
+	var lastname = $("#freeringsizer-lastname").val();
+	var email = $("#freeringsizer-email").val();
+	var phone = $("#freeringsizer-phone").val();
+	var address = $("#freeringsizer-address").val();
+	
+	if(firstname == ''){
+		alert('Please enter your firstname');
+		return false;
+	} else if(lastname == ''){
+		alert('Please enter your lastname');
+		return false;
+	} else if(email == ''){
+		alert('Please enter your email');
+		return false;
+	} else if(phone == ''){
+		alert('Please enter your phone no.');
+		return false;
+	} else if(address == ''){
+		alert('Please enter your address');
+		return false;
+	}
+	
+  $.ajax({
+    url: 'index.php?route=product/product/freeringsizer',
+    type: 'post',
+    dataType: 'json',
+    data: $("#form-freeringsizer").serialize(),
+    beforeSend: function() {
+      $('#button-freeringsizer').button('loading');
+    },
+    complete: function() {
+      $('#button-freeringsizer').button('reset');
+    },
+    success: function(json) {
+      $('.alert-success, .alert-danger').remove();
+
+      if (json['error']) {
+        $('#contacter-freeringsizer').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+      }
+
+      if (json['success']) {
+        $('#contacter-freeringsizer').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+        $('#freeringsizer-firstname').val('');
+        $('#freeringsizer-lastname').val('');
+        $('#freeringsizer-email').val('');
+        $('#freeringsizer-phone').val('');
+        $('#freeringsizer-address').val('');
+        $('#freeringsizer-message').val('');
+		//setTimeout(function(){ $(".close").trigger('click'); }, 3000);
         
+		if(json['redirect']){
+			location.href= json['redirect'];
+			return false;
+		}
+      }
+    }
+  });
+});
+
+//--></script>
+        
+<script type="text/javascript"><!--
+$('#form-enquiry').on('submit', function(e) {
+	e.preventDefault();
+	
+	var firstname = $("#enquiry-firstname").val();
+	var lastname = $("#enquiry-lastname").val();
+	var email = $("#enquiry-email").val();
+	var phone = $("#enquiry-phone").val();
+	var address = $("#enquiry-address").val();
+	
+	if(firstname == ''){
+		alert('Please enter your firstname');
+		return false;
+	} else if(lastname == ''){
+		alert('Please enter your lastname');
+		return false;
+	} else if(email == ''){
+		alert('Please enter your email');
+		return false;
+	} else if(phone == ''){
+		alert('Please enter your phone no.');
+		return false;
+	} else if(address == ''){
+		alert('Please enter your address');
+		return false;
+	}
+	
+  $.ajax({
+    url: 'index.php?route=product/product/enquiry',
+    type: 'post',
+    dataType: 'json',
+    data: $("#form-enquiry").serialize(),
+    beforeSend: function() {
+      $('#button-enquiry').button('loading');
+    },
+    complete: function() {
+      $('#button-enquiry').button('reset');
+    },
+    success: function(json) {
+      $('.alert-success, .alert-danger').remove();
+
+      if (json['error']) {
+        $('#contacter-enquiry').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+      }
+
+      if (json['success']) {
+        $('#contacter-enquiry').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+        $('#enquiry-firstname').val('');
+        $('#enquiry-lastname').val('');
+        $('#enquiry-email').val('');
+        $('#enquiry-phone').val('');
+        $('#enquiry-address').val('');
+        $('#enquiry-message').val('');
+		//setTimeout(function(){ $(".close").trigger('click'); }, 3000);
+        
+		if(json['redirect']){
+			location.href= json['redirect'];
+			return false;
+		}
+      }
+    }
+  });
+});
+
+//--></script>
+
 <script type="text/javascript"><!--
 $(document).ready(function(){
 	var windowwidth = $(window).width();
