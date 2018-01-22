@@ -261,6 +261,7 @@
     /* fashion */
     .model-details-text { padding: 25px; }
     .architecture-team {padding:0 45px 30px 45px;}
+	.logo { max-width: 160px; }
 }
 /******* Only for iPad Css *******/
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -282,6 +283,9 @@
     /* agency */
     .agency-header span { margin-top: 15%; }
 	.support-icons li { width:20%;}
+	.nav.navbar-nav li.dropdown { margin:10px;}
+	.navbar-nav > li > a { font-size:11px; font-weight:600;}
+	.navbar-right {float: left !important;}
 }
 @media (max-width: 991px) {
     /*  navigation panel  */

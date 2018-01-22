@@ -432,7 +432,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .shrink-nav .container { height: 60px; }
 .shrink-nav { background-color:#FFF; }
 .sticky-nav{ position: fixed; top: 0px; display: inline-table;}
-.logo { max-width: 160px; }
+.logo { max-width: 200px; }
 .logo-style-2 { max-width: 177px; }
 .logo-style-3 { max-width: 210px; }
 .sticky-nav .logo-light { height: 55px; vertical-align: middle; display: table-cell;}
@@ -463,6 +463,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .full-width-pull-menu .container {display:table-cell\9 !important;}
 .menu-new{ background:#c11f1f; padding:0 6px 1px 5px; font-size:10px; color:#fff; margin-left:5px;}
 .megamenu-right-icon { display: none !important; }
+.navbar-nav > li > a { font-size:12px; font-weight:700;}
 
 /*  simple dropdown menu    */
 .simple-dropdown-menu ul { padding: 0 !important; }
@@ -1755,6 +1756,7 @@ ul.list-line li span {min-width:130px; display:inline-block}
 
 .slider-typography-shop .owl-subtitle { font-size: 16px; font-weight: 600; letter-spacing: 7px; line-height: 80px; text-transform: uppercase; font-family: 'Open Sans', sans-serif; }
 .slider-typography-shop .owl-title { font-size: 63px; font-weight: 700; line-height: 65px; width: 50%; }
+.home-product { min-height:350px;}
 .product-name a { font-size:12px; font-weight:400; letter-spacing:2px; display:block}
 .price { font-size:14px; font-weight:600; display:block}
 .price del { color:#898989; margin-right:10px; font-weight: 100}
