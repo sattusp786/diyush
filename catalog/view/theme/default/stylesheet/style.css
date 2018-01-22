@@ -463,7 +463,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .full-width-pull-menu .container {display:table-cell\9 !important;}
 .menu-new{ background:#c11f1f; padding:0 6px 1px 5px; font-size:10px; color:#fff; margin-left:5px;}
 .megamenu-right-icon { display: none !important; }
-.navbar-nav > li > a { font-size:14px; font-weight:400;}
+.navbar-nav > li > a { font-size:14px; font-weight:600;}
 
 /*  simple dropdown menu    */
 .simple-dropdown-menu ul { padding: 0 !important; }
