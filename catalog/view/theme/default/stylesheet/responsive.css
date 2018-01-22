@@ -286,6 +286,7 @@
 	.nav.navbar-nav li.dropdown { margin:10px;}
 	.navbar-nav > li > a { font-size:11px; font-weight:600;}
 	.navbar-right {float: left !important;}
+	.search-cart-header .subtitle { display:none}
 }
 @media (max-width: 991px) {
     /*  navigation panel  */
