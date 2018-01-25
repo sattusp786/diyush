@@ -817,7 +817,7 @@ class ControllerProductProduct extends Controller {
 							if($option['name'] == 'Band Width' || $option['name'] == 'Band Thickness' || $option['name'] == 'Length' || $option['name'] == 'Ring Size'){
 								$pieces = '';
 								$total_carat = 0;
-								if(strtolower($product['multistone']) == 'm' || strtolower($product['multistone']) == 'sm'){	
+								if(stripos($product['multistone'],'M') !== false){
 									if(isset($option['multi_stones']) && !empty($option['multi_stones'])){
 										foreach($option['multi_stones'] as $multi){
 											$pieces .= '('.$multi['carat'].'ct. x '.$multi['pieces'].')';
@@ -825,11 +825,20 @@ class ControllerProductProduct extends Controller {
 										}
 									}
 								}
-								if(strtolower($product['multistone']) == 's' || strtolower($product['multistone']) == 'sm'){
+								if(stripos($product['multistone'],'S') !== false){
 									if(isset($option['side_stones']) && !empty($option['side_stones'])){
+										$s = 0;
+										$total_carats = 0;
+										$spieces = '';
 										foreach($option['side_stones'] as $sider){
-											$json['side_stones'] .= 'Stone Type : '.$sider['stone'].'<br>Shape : '.$sider['shape'].'<br>Clarity : '.$sider['clarity'].'<br>Colour : '.$sider['color'].'<br>Certificate : '.$sider['lab'].'<br>Total Weight : Approx '. ($sider['carat']*$sider['pieces']).' ct. wt. ('.$sider['carat'].'ct. x '.$sider['pieces'].')';
+											if($s == '0'){
+												$json['side_stones'] .= 'Stone Type : '.$sider['stone'].'<br>Shape : '.$sider['shape'].'<br>Clarity : '.$sider['clarity'].'<br>Colour : '.$sider['color'].'<br>Certificate : '.$sider['lab'].'<br>';
+											}
+											$spieces .= '('.$sider['carat'].'ct. x '.$sider['pieces'].')';
+											$total_carats += ($sider['carat']*$sider['pieces']);
+											$s++;
 										}
+										$json['side_stones'] .= 'Total Weight : Approx '. round($total_carats,2).' ct. wt. '.$spieces.'<br/>';
 									}
 								}
 								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
@@ -838,7 +847,7 @@ class ControllerProductProduct extends Controller {
 									$json['stones'] .= 'Total Weight : Approx '. round($total_carat,2).' ct. wt. '.$pieces.'<br/>';
 								}
 							} elseif($option['name'] == 'Carat'){
-								if(strtolower($product['multistone']) == 'm' || strtolower($product['multistone']) == 'sm'){
+								if(stripos($product['multistone'],'M') !== false){
 									$pieces = '';
 									if(isset($option['multi_stones']) && !empty($option['multi_stones'])){
 										foreach($option['multi_stones'] as $multi){
@@ -851,11 +860,20 @@ class ControllerProductProduct extends Controller {
 									$pieces = '('.$option['value'].'ct. x 1)';
 								}
 								
-								if(strtolower($product['multistone']) == 's' || strtolower($product['multistone']) == 'sm'){
+								if(stripos($product['multistone'],'S') !== false){
 									if(isset($option['side_stones']) && !empty($option['side_stones'])){
+										$s = 0;
+										$total_carats = 0;
+										$spieces = '';
 										foreach($option['side_stones'] as $sider){
-											$json['side_stones'] .= 'Stone Type : '.$sider['stone'].'<br>Shape : '.$sider['shape'].'<br>Clarity : '.$sider['clarity'].'<br>Colour : '.$sider['color'].'<br>Certificate : '.$sider['lab'].'<br>Total Weight : Approx '. ($sider['carat']*$sider['pieces']).' ct. wt. ('.$sider['carat'].'ct. x '.$sider['pieces'].')';
+											if($s == '0'){
+												$json['side_stones'] .= 'Stone Type : '.$sider['stone'].'<br>Shape : '.$sider['shape'].'<br>Clarity : '.$sider['clarity'].'<br>Colour : '.$sider['color'].'<br>Certificate : '.$sider['lab'].'<br>';
+											}
+											$spieces .= '('.$sider['carat'].'ct. x '.$sider['pieces'].')';
+											$total_carats += ($sider['carat']*$sider['pieces']);
+											$s++;
 										}
+										$json['side_stones'] .= 'Total Weight : Approx '. round($total_carats,2).' ct. wt. '.$spieces.'<br/>';
 									}
 								}
 								$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt. '.$pieces.'<br/>';
