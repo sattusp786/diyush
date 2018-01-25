@@ -397,7 +397,7 @@ class Cart {
 		$stone_price = 0;
 		$sidestone_price = 0;
 		$multistone_price = 0;
-		
+		$no_price = '0';
 		//Calculate Metal Price..
 		$metal_price = 0;
 		$metal_weight = $data['metal_weight'];		
@@ -506,7 +506,7 @@ class Cart {
 			if(isset($mapping[$data['Certificate']]['position'])){
 				$position = $mapping[$data['Certificate']]['position'];
 			} else {
-				$position = 2;
+				$position = 1;
 			}
 			
 			$position = (isset($position))?($position-1):1;
@@ -526,6 +526,8 @@ class Cart {
 					}
 				}
 				$stone_price = $sprice;
+			} else {
+				$no_price = '1';
 			}
 		}
 		
@@ -536,44 +538,46 @@ class Cart {
 			if(isset($data['side_stone']) && !empty($data['side_stone'])){
 				foreach($data['side_stone'] as $side){
 					
-					$sider_stone = (isset($side['stone']) && !empty($side['stone'])) ? $side['stone'] : $data['Stone Type'];
-					$sider_shape = (isset($side['shape']) && !empty($side['shape'])) ? $side['shape'] : $data['Shape'];
-					$sider_carat = (isset($side['carat']) && !empty($side['carat'])) ? $side['carat'] : $data['Carat'];
-					$sider_color = (isset($side['color']) && !empty($side['color'])) ? $side['color'] : $data['Colour'];
-					$sider_clarity = (isset($side['clarity']) && !empty($side['clarity'])) ? $side['clarity'] : $data['Clarity'];
-					$sider_lab = (isset($side['lab']) && !empty($side['lab'])) ? $side['lab'] : $data['Certificate'];
-					$sider_pieces = (isset($side['pieces']) && !empty($side['pieces'])) ? $side['pieces'] : 1;
+					$sides_stone = (isset($side['stone']) && !empty($side['stone'])) ? $side['stone'] : $data['Stone Type'];
+					$sides_shape = (isset($side['shape']) && !empty($side['shape'])) ? $side['shape'] : $data['Shape'];
+					$sides_carat = (isset($side['carat']) && !empty($side['carat'])) ? $side['carat'] : $data['Carat'];
+					$sides_color = (isset($side['color']) && !empty($side['color'])) ? $side['color'] : $data['Colour'];
+					$sides_clarity = (isset($side['clarity']) && !empty($side['clarity'])) ? $side['clarity'] : $data['Clarity'];
+					$sides_lab = (isset($side['lab']) && !empty($side['lab'])) ? $side['lab'] : $data['Certificate'];
+					$sides_pieces = (isset($side['pieces']) && !empty($side['pieces'])) ? $side['pieces'] : 1;
 					
-					$sider_color = isset($multi_mapping[$sider_lab][$sider_color]) ? $multi_mapping[$sider_lab][$sider_color] : "'".$sider_color."'";
-					$sider_clarity = isset($multi_mapping[$sider_lab][$sider_clarity]) ? $multi_mapping[$sider_lab][$sider_clarity] : "'".$sider_clarity."'";
-					$sider_lab = isset($multi_mapping[$sider_lab][$sider_lab]) ? $multi_mapping[$sider_lab][$sider_lab] : "'".$sider_lab."'";
+					$sider_color = isset($multi_mapping[$sides_lab][$sides_color]) ? $multi_mapping[$sides_lab][$sides_color] : "'".$sides_color."'";
+					$sider_clarity = isset($multi_mapping[$sides_lab][$sides_clarity]) ? $multi_mapping[$sides_lab][$sides_clarity] : "'".$sides_clarity."'";
+					$sider_lab = isset($multi_mapping[$sides_lab][$sides_lab]) ? $multi_mapping[$sides_lab][$sides_lab] : "'".$sides_lab."'";
 					
-					$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sider_stone."' AND shape='".$sider_shape."' AND ".$sider_carat." between crt_from AND crt_to AND clarity IN (" . $sider_clarity . ") AND color IN (" . $sider_color . ") AND lab IN (" . $sider_lab . ") ";
+					$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sides_stone."' AND shape='".$sides_shape."' AND ".$sides_carat." between crt_from AND crt_to AND clarity IN (" . $sider_clarity . ") AND color IN (" . $sider_color . ") AND lab IN (" . $sider_lab . ") ";
 					
 					//$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sider_stone."' AND shape='".$sider_shape."' AND weight >= ".$sider_carat." AND clarity IN (" . $sider_clarity . ") AND color IN (" . $sider_color . ") AND lab IN (" . $sider_lab . ") ";
 					
-					if($sider_pieces == 1 && $sider_carat >= 0.20){
+					if($sides_pieces == 1 && $sides_carat >= 0.20){
 						$sidestone_sql .= " ORDER BY sprice ASC";
 					} else {
 						$sidestone_sql .= " ORDER BY mprice ASC";
 					}
 					
-					if(isset($multi_mapping[$sider_lab]['position'])){
-						$side_position = $multi_mapping[$sider_lab]['position'];
+					if(isset($multi_mapping[$sides_lab]['position'])){
+						$side_position = $multi_mapping[$sides_lab]['position'];
 					} else {
-						$side_position = 2;
+						$side_position = 1;
 					}
 					
 					$side_position = (isset($side_position))?($side_position-1):1;
 					$sidestone_sql .= " limit $side_position,1";
 			
+					//echo $sidestone_sql;
+					
 					$get_sidestone_price = $this->db->query($sidestone_sql);
 					
 					if($get_sidestone_price->num_rows){
-						if($sider_pieces == 1 && $sider_carat >= 0.20){
+						if($sides_pieces == 1 && $sides_carat >= 0.20){
 							$sprice += $get_sidestone_price->row['sprice'];
-							if (isset($multi_mapping[$sider_lab]['markup'])) {
-								$side_markup = explode('|',$multi_mapping[$sider_lab]['markup']);
+							if (isset($multi_mapping[$sides_lab]['markup'])) {
+								$side_markup = explode('|',$multi_mapping[$sides_lab]['markup']);
 								if(isset($side_markup[0]) && $side_markup[0] > 0){
 									$sprice += $sprice * $side_markup[0] + $side_markup[1];
 								} elseif(isset($side_markup[1])) {
@@ -582,8 +586,10 @@ class Cart {
 							}
 							$sidestone_price += $sprice;
 						} else {
-							$sidestone_price += $get_sidestone_price->row['mprice'] * ($sider_carat) * $sider_pieces;
+							$sidestone_price += $get_sidestone_price->row['mprice'] * ($sides_carat) * $sides_pieces;
 						}
+					} else {
+						$no_price = '1';
 					}
 				}
 			}
@@ -596,38 +602,51 @@ class Cart {
 			if(isset($data['multi_stone']) && !empty($data['multi_stone'])){
 				foreach($data['multi_stone'] as $multi){
 					
-					$multir_stone = (isset($multi['stone']) && !empty($multi['stone'])) ? $multi['stone'] : $data['Stone Type'];
-					$multir_shape = (isset($multi['shape']) && !empty($multi['shape'])) ? $multi['shape'] : $data['Shape'];
-					$multir_carat = (isset($multi['carat']) && !empty($multi['carat'])) ? $multi['carat'] : $data['Carat'];
-					$multir_color = (isset($multi['color']) && !empty($multi['color'])) ? $multi['color'] : $data['Colour'];
-					$multir_clarity = (isset($multi['clarity']) && !empty($multi['clarity'])) ? $multi['clarity'] : $data['Clarity'];
-					$multir_lab = (isset($multi['lab']) && !empty($multi['lab'])) ? $multi['lab'] : $data['Certificate'];
-					$multir_pieces = (isset($multi['pieces']) && !empty($multi['pieces'])) ? $multi['pieces'] : 1;
+					$multie_stone = (isset($multi['stone']) && !empty($multi['stone'])) ? $multi['stone'] : $data['Stone Type'];
+					$multie_shape = (isset($multi['shape']) && !empty($multi['shape'])) ? $multi['shape'] : $data['Shape'];
+					$multie_carat = (isset($multi['carat']) && !empty($multi['carat'])) ? $multi['carat'] : $data['Carat'];
+					$multie_color = (isset($multi['color']) && !empty($multi['color'])) ? $multi['color'] : $data['Colour'];
+					$multie_clarity = (isset($multi['clarity']) && !empty($multi['clarity'])) ? $multi['clarity'] : $data['Clarity'];
+					$multie_lab = (isset($multi['lab']) && !empty($multi['lab'])) ? $multi['lab'] : $data['Certificate'];
+					$multie_pieces = (isset($multi['pieces']) && !empty($multi['pieces'])) ? $multi['pieces'] : 1;
 					
-					$multir_color = isset($multi_mapping[$multir_lab][$multir_color]) ? $multi_mapping[$multir_lab][$multir_color] : "'".$multir_color."'";
-					$multir_clarity = isset($multi_mapping[$multir_lab][$multir_clarity]) ? $multi_mapping[$multir_lab][$multir_clarity] : "'".$multir_clarity."'";
-					$multir_lab = isset($multi_mapping[$multir_lab][$multir_lab]) ? $multi_mapping[$multir_lab][$multir_lab] : "'".$multir_lab."'";
+					$multir_color = isset($multi_mapping[$multie_lab][$multie_color]) ? $multi_mapping[$multie_lab][$multie_color] : "'".$multie_color."'";
+					$multir_clarity = isset($multi_mapping[$multie_lab][$multie_clarity]) ? $multi_mapping[$multie_lab][$multie_clarity] : "'".$multie_clarity."'";
+					$multir_lab = isset($multi_mapping[$multie_lab][$multie_lab]) ? $multi_mapping[$multie_lab][$multie_lab] : "'".$multie_lab."'";
 					
 					//$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND ".$multir_carat." between crt_from AND crt_to AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
 					
-					$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multir_stone."' AND shape='".$multir_shape."' AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") ";
+					$multistone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$multie_stone."' AND shape='".$multie_shape."' AND clarity IN (" . $multir_clarity . ") AND color IN (" . $multir_color . ") AND lab IN (" . $multir_lab . ") AND ".$multie_carat." between crt_from AND crt_to ";
 					
-					if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7))){
+					/*
+					if($multie_pieces == '1' || in_array($data['product_type_id'],array(5,7))){
 						if(in_array($data['product_type_id'],array(5,7))) {
-							$multistone_sql .=" AND weight >= ".$multir_carat;
+							//$multistone_sql .=" AND weight >= ".$multir_carat;
+							$multistone_sql .=" AND ".$multir_carat." between crt_from AND crt_to ";
 						} else {
 							$multistone_sql .=" AND ".$multir_carat." between crt_from AND crt_to ";
 						}
-						$multistone_sql .= " ORDER BY sprice ASC ";
+						if($multie_carat >= 0.20){
+							$multistone_sql .= " ORDER BY sprice ASC ";
+						} else {
+							$multistone_sql .= " ORDER BY mprice ASC ";
+						}
 					} else {
-						$multistone_sql .=" AND ".$multir_carat." between crt_from AND crt_to ";
+						$multistone_sql .=" AND ".$multie_carat." between crt_from AND crt_to ";
 						$multistone_sql .= " ORDER BY mprice ASC ";
 					}
+					*/
 					
-					if(isset($multi_mapping[$multir_lab]['position'])){
-						$multi_position = $multi_mapping[$multir_lab]['position'];
+					if($multie_pieces == '1' && $multie_carat >= 0.20){
+						$multistone_sql .= " ORDER BY sprice ASC ";
 					} else {
-						$multi_position = 2;
+						$multistone_sql .= " ORDER BY mprice ASC ";
+					}
+						
+					if(isset($multi_mapping[$multie_lab]['position'])){
+						$multi_position = $multi_mapping[$multie_lab]['position'];
+					} else {
+						$multi_position = 1;
 					}
 					
 					$multi_position = (isset($multi_position))?($multi_position-1):1;
@@ -637,40 +656,42 @@ class Cart {
 					
 					if($get_multistone_price->num_rows){
 						
-						if($multir_pieces == '1' || in_array($data['product_type_id'],array(5,7))) {
+						if($multie_pieces == '1' && $multie_carat >= 0.20) {
 							$mprice += $get_multistone_price->row['sprice'];
 							
-							if (isset($multi_mapping[$multir_lab]['markup'])) {
-								$multi_markup = explode('|',$multi_mapping[$multir_lab]['markup']);
+							if (isset($multi_mapping[$multie_lab]['markup'])) {
+								$multi_markup = explode('|',$multi_mapping[$multie_lab]['markup']);
 								if(isset($multi_markup[0]) && $multi_markup[0] > 0){
 									$mprice += $mprice * $multi_markup[0] + $multi_markup[1];
 								} elseif(isset($multi_markup[1])) {
 									$mprice += $mprice + $multi_markup[1];
 								}
 							}
-							$multistone_price += $mprice * $multir_pieces;
+							$multistone_price += $mprice * $multie_pieces;
 						} else {
-							$multistone_price += $get_multistone_price->row['mprice'] * ($multir_carat) * $multir_pieces;
-						}
-							
+							$multistone_price += $get_multistone_price->row['mprice'] * ($multie_carat) * $multie_pieces;
+						}	
+					} else {
+						$no_price = '1';
 					}
 				}
 			}
 		}
 		
-		$no_price = '0';
 		$all_stone_price = $stone_price + $sidestone_price + $multistone_price;
 		if($metal_price == 0 || $all_stone_price == 0){
 			$no_price = '1';
 		}
 		
-		$final_price = $metal_price + $stone_price + $sidestone_price + $multistone_price;
-		//Code added by Paul to calculate price ends...
-		
-		//Add Product Markup..
-		if($data['product_markup'] != ''){
-			$final_price = $this->addProductMarkup($final_price, $data['product_markup']);
+		if($no_price == '0'){
+			$final_price = $metal_price + $stone_price + $sidestone_price + $multistone_price;
+			
+			//Add Product Markup..
+			if($data['product_markup'] != ''){
+				$final_price = $this->addProductMarkup($final_price, $data['product_markup']);
+			}
 		}
+		
 		$option = array();
 		
 		$option['final_price'] 	= $final_price;
