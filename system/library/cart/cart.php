@@ -391,7 +391,8 @@ class Cart {
 		$mapping = $this->getOptionValueMapping();
 		$multi_mapping = $this->getOptionValueMapping();
 		
-		$default_gravity = 15.50;
+		$default_gravity = 10.80;
+		//$default_gravity = 15.50;
 		//Code added by Paul to calculate price starts...
 		$final_price = 0;
 		$stone_price = 0;
