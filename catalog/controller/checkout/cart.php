@@ -130,7 +130,24 @@ class ControllerCheckoutCart extends Controller {
 					}
 				}
 
+				
+				
+				$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+    			$pprice = 0;
+				$unit_price = $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'));
+				$pprice = $unit_price * $product['quantity'];
+				$pprice = $this->currency->format($pprice, $this->session->data['currency'],'',false);
+				$pid = $this->model_extension_module_tagmanager->tagmangerPmap($product['model'],$product['sku'],$product['product_id']);
+ 				$brand = $this->model_extension_module_tagmanager->getProductBrandName($product['product_id']);
+				$cat = $this->model_extension_module_tagmanager->getProductCatName($product['product_id']);
+				$title = $this->model_extension_module_tagmanager->tagmangerPtitle($product['name'], $brand, $product['model'],$product['product_id']);
 				$data['products'][] = array(
+                  'pid'      => $pid,
+                  'title'    => $title,
+                  'brand'    => $brand,
+                  'category' => $cat,
+                  'pprice'   => number_format((float)$pprice, 2, '.', ''),
 					'cart_id'   => $product['cart_id'],
 					'thumb'     => $image,
 					'name'      => $product['name'],

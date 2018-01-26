@@ -1,6 +1,10 @@
 <?php
 class ControllerCheckoutPaymentMethod extends Controller {
 	public function index() {
+
+				$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+			
 		$this->load->language('checkout/checkout');
 
 		if (isset($this->session->data['payment_address'])) {

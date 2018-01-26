@@ -1,6 +1,10 @@
 <?php
 class ControllerCheckoutRegister extends Controller {
 	public function index() {
+
+				$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+			
 		$this->load->language('checkout/checkout');
 		
 		$data['entry_newsletter'] = sprintf($this->language->get('entry_newsletter'), $this->config->get('config_name'));

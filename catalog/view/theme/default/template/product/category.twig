@@ -180,8 +180,8 @@
                                 <!--<div class="rating margin-five no-margin-top">
                             <span class="pull-left"><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star-o black-text"></i><span class="rating-text text-uppercase">5 Reviews</span></span><span class="rating-text text-uppercase pull-right no-margin"><i class="fa fa-heart black-text"></i> 845 Likes </span> <span class="clearfix"></span>
                         </div>-->
-                                    <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
-                                    <span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
+                                    <a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}} {%endif%}');"{% endif %}><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
+                                    <span class="product-name text-uppercase"><a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}} {%endif%}');"{% endif %}>{{ product.name }}</a></span>
                                     {% if product.price %}
 									<span class="price black-text">
 									{% if not product.special %}
@@ -194,9 +194,9 @@
 									{% endif %}
                                     <div class="quick-buy">
                                         <div class="product-share">
-                                            <a href="javascript:void(0);" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" onclick="wishlist.add('{{ product.product_id }}');" title="{{ button_wishlist }}"><i class="fa fa-heart-o"></i></a>
-                                            <a href="javascript:void(0);" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" onclick="compare.add('{{ product.product_id }}');" title="{{ button_compare }}"><i class="fa fa-refresh"></i></a>
-                                            <a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_cart }}"><i class="fa fa-shopping-cart"></i></a>
+                                            <a href="javascript:void(0);" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddWishlist('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}} {%endif%}');{% endif %}wishlist.add('{{ product.product_id }}');" title="{{ button_wishlist }}"><i class="fa fa-heart-o"></i></a>
+                                            <a href="javascript:void(0);" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddCompare('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}} {%endif%}');{% endif %}compare.add('{{ product.product_id }}');" title="{{ button_compare }}"><i class="fa fa-refresh"></i></a>
+                                            <a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddProduct('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}} {%endif%}');{% endif %}cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_cart }}"><i class="fa fa-shopping-cart"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -242,4 +242,12 @@ $('.filterbylovely').on('click', function() {
 });
 </script>
 
+ {% if tagmanager.code and tagmanager.status =='1' %}
+{% if products %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'productImpression','ecommerce': {'currencyCode': '{{ tagmanager.currency }}','impressions': [ {% set i = 1 %} {% for product in products %}{% if i > 1 %},{% endif %}{'name': '{{ product.title }}','id': '{{ product.pid }}','price': {{ product.pprice }},'brand': '{{ product.brand }}','category': '{% if product.category %}{{ product.category }}{% endif %}','list': '{% if listname %}{{ listname }}{% else %}Not Set{% endif %}','position': {{ i }},'currency': '{{ tagmanager.currency }}'} {% set i = i + 1 %} {% endfor %}]}});
+</script>
+{% endif %}
+{% endif %} 
 {{ footer }} 

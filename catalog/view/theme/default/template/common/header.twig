@@ -111,9 +111,42 @@
 {% for link in links %}
 <link href="{{ link.href }}" rel="{{ link.rel }}" />
 {% endfor %}
-{% for analytic in analytics %}
-{{ analytic }}
-{% endfor %}
+  
+
+{% if tagmanager.code and tagmanager.status =='1' %}
+<!-- Google Tag Manager -->
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({ {% if user_logged and tagmanager.admin =='1' %}'event': 'adminVisit','admin' : '{{ user_logged }}',{% endif %}{% if tagmanager.conversion_id and tagmanager.adword == '1' %}'adwordEnable' : '{{ tagmanager.adword }}','adwordConversionID' : {{ tagmanager.conversion_id }},{% if tagmanager.conversion_label %}'adwordConversionLabel' : '{{ tagmanager.conversion_label }}',{% endif %}{% if tagmanager.remarketing and tagmanager.remarketing == '1' %}'RemarketingEnable' : '1',{% endif %}{% endif %}{% if tagmanager.pixelcode and tagmanager.pixel == '1' %}'facebookPixelID' : '{{tagmanager.pixelcode}}','facebookPixel' : '{{tagmanager.pixel}}',{% endif %}'currencyCode': '{{ tagmanager.currency }}' });
+</script>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ tagmanager.code }}');</script>
+{% if tagmanager.eu_cookie == '1' %}
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.4/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.4/cookieconsent.min.js"></script>
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({"palette": {"popup": {"background": "#eaf7f7","text": "#5c7291"},"button": {"background": "#56cbdb","text": "#ffffff"}},"position": "top","static": true,"content": {			"dismiss":"{% if tagmanager.cookie_button1 %}{{ tagmanager.cookie_button1 }}{% else %} Got it! {% endif %}","link":"{% if tagmanager.cookie_button2 %}{{ tagmanager.cookie_button2 }}{% else %} Learnmore {% endif %}","message": "{% if tagmanager.cookie_text %}{{ tagmanager.cookie_text }}{% else %} Some cookies on this website are strictly necessary and cannot be disabled. We Use Various, Analytics to measure your use of this website to improve your experience.{% endif %}","href": "/{% if tagmanager.cookie_link %}{{tagmanager.cookie_link}}{% else %} {%endif%}"}})});
+</script>
+{% endif %}
+<!-- End Google Tag Manager -->
+{% endif %}
+<script>
+					function whenAvailable(name, callback) {
+					  var interval = 10; // ms
+					  window.setTimeout(function() {
+						  if (window[name]) {
+							  callback(window[name]);
+						  } else {
+							  window.setTimeout(arguments.callee, interval);
+						  }
+					  }, interval);
+				  }
+     			</script>
+			
 </head>
 <body class="{{ body_class }}">
 <!-- Google Code for Sales Conversion Page -->

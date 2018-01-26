@@ -4,6 +4,40 @@ class ControllerCheckoutSuccess extends Controller {
 		$this->load->language('checkout/success');
 
 		if (isset($this->session->data['order_id'])) {
+
+
+				$this->load->model('checkout/order');
+				$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+
+				$data['language'] = $this->config->get('config_language');
+				$data['currency'] = $this->config->get('config_currency');
+
+				$data['orderCoupon'] = $this->model_extension_module_tagmanager->getOrderCoupon($this->session->data['order_id']);
+				$data['orderDetails'] = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+				$data['orderProduct'] = $this->model_extension_module_tagmanager->getOrderProduct($this->session->data['order_id'], $data['orderDetails']);
+				$data['orderDetails']['coupon'] = (isset($this->session->data['coupon'])) ? $this->session->data['coupon'] : false;
+
+    			$data['currency'] = $this->session->data['currency']; // uncheck to enable multi currency input or disable for store default currency
+
+				if ($data['currency'] != $this->config->get('config_currency')) {
+					// Transactio values with conversion
+				
+                  $data['orderDetails']['shipping_total'] = (isset($this->session->data['shipping_method']['cost']) ? $this->session->data['shipping_method']['cost'] : 0) * $data['orderDetails']['currency_value'] ;
+                  $data['orderValue'] = $data['orderDetails']['total'] * $data['orderDetails']['currency_value'];
+                  $data['orderValue'] = number_format((float)$data['orderValue'], 2, '.', '');
+                  $data['orderTax'] = $this->model_extension_module_tagmanager->getOrderTax($this->session->data['order_id']) * $data['orderDetails']['currency_value'];
+
+    			} else {
+				
+                  $data['orderDetails']['shipping_total'] = (isset($this->session->data['shipping_method']['cost']) ? $this->session->data['shipping_method']['cost'] : 0) ;
+                  $data['orderValue'] = number_format((float)$data['orderDetails']['total'], 2, '.', '');
+                  $data['orderTax'] = $this->model_extension_module_tagmanager->getOrderTax($this->session->data['order_id']);
+				}
+				$data['orderTax'] = number_format($orderTax, 2, '.', '');
+
+
+			
 			$this->cart->clear();
 
 			unset($this->session->data['shipping_method']);

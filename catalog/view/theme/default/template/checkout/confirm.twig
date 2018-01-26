@@ -1,3 +1,12 @@
+ {% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'checkoutOption','ecommerce': {'checkout': {'actionField': {'step': 4, 'option': 'Checkout/Confirm'}}}});
+dataLayer.push({'event': 'goalUrl','goalPageUrl'   : '/checkout/confirm','goalPageTitle' : 'checkout/Confirm',});
+{% if tagmanager.pixel == '1' %}
+whenAvailable("fbq", function(t) { fbq('track', 'AddPaymentInfo'); });{% endif %}
+</script>
+{% endif %} 
 {% if not redirect %}
 <div class="table-responsive">
   <table class="table table-bordered table-hover">

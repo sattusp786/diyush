@@ -15,7 +15,7 @@ final class Template {
 
 			ob_start();
 
-			require(modification(modification($file)));
+			require(modification(modification(modification($file))));
 
 			return ob_get_clean();
 		}

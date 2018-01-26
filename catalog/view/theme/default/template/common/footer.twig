@@ -183,4 +183,34 @@ $("#settingmenuclick").click(function(){
 
 </script>
 {{ live_chat }}
+
+{% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+function GAaddWishlist(name,sku,price,brand,category) {
+	dataLayer.push({'event': 'addToWishlist','ecommerce': {'currencyCode': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}','add': {'products': [{'name': name,'id': sku,'price': price,'brand': brand,'category': category,'quantity': 1,'currency': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}]}}});
+	{% if tagmanager.pixel == '1' %}
+    whenAvailable("fbq", function(t) {fbq('track', 'AddToWishlist', {value: price,currency: '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}); });
+	{% endif %}
+}
+function GAaddCompare(name,sku,price,brand,category) {
+	dataLayer.push({'event': 'addToCompare','ecommerce': {'currencyCode': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}','add': {'products': [{'name': name,'id': sku,'price': price,'brand': brand,'category': category,'currency': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}]}}});
+}
+function GAaddProduct(name,sku,price,brand,category) {
+	dataLayer.push({'event': 'addToCart','ecommerce': {'currencyCode': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}','add': {'products': [{'name': name,'id': sku,'price': price,'brand': brand,'category': category,'quantity': 1,'currency': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}]}}});
+{% if tagmanager.pixel == '1' %}
+	whenAvailable("fbq", function(t) {fbq('track', 'AddToCart', {value: price,currency: '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}); });
+{% endif %}
+}
+function GAClick(name,sku,price,brand,category) {
+   dataLayer.push({'event': 'productClick','ecommerce': {'click': {'actionField': {'list': category},'products': [{'name': name,'id': sku,'price': price,'brand': brand,'category': category,'currency': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}]}}});
+}
+function GARemoveCart(name,sku,price,brand,category,qty) {
+   dataLayer.push({'event': 'removeFromCart','ecommerce': {'remove': {'products': [{'name': name,'id': sku,'price': price,'brand': brand,'category': category,'quantity': qty,'currency': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}]}}});
+}
+dataLayer.push({'event': 'remarketing',});
+</script>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ tagmanager.code }}"height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+{% endif %}
+			
 </body></html>

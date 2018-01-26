@@ -1,6 +1,10 @@
 <?php
 class ControllerCheckoutConfirm extends Controller {
 	public function index() {
+
+				$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+			
 		$redirect = '';
 
 		if ($this->cart->hasShipping()) {

@@ -1,3 +1,9 @@
+ {% if tagmanager.code and tagmanager.status =='1' %}
+<script>var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'checkoutOption','ecommerce': {'checkout': {'actionField': {'step': 3, 'option': 'Checkout/PaymentMethod'}}}});
+dataLayer.push({'event': 'goalUrl','goalPageUrl'   : '/checkout/payment','goalPageTitle' : 'checkout/Payment',});
+</script>
+{% endif %} 
 {% if error_warning %}
 <div class="alert alert-warning alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
 {% endif %}

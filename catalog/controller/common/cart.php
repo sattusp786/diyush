@@ -54,6 +54,16 @@ class ControllerCommonCart extends Controller {
 
 		$data['products'] = array();
 
+
+					$data['ecom_prodid'] = array();
+                    $data['ecom_pagetype']='cart';
+                    $data['ecom_totalvalue'] =0;
+
+                    foreach ($data['products'] as $product) {
+	                    $data['ecom_prodid'][] = $product['pid'];
+                        $data['ecom_totalvalue'] += $product['pprice'];
+                    }
+				
 		foreach ($this->cart->getProducts() as $product) {
 			if ($product['image']) {
 				$image = $this->model_tool_image->resize($product['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_cart_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_cart_height'));
@@ -94,7 +104,24 @@ class ControllerCommonCart extends Controller {
 				$total = false;
 			}
 
-			$data['products'][] = array(
+			
+				
+				$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+    			$pprice = 0;
+				$unit_price = $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'));
+				$pprice = $unit_price * $product['quantity'];
+				$pprice = $this->currency->format($pprice, $this->session->data['currency'],'',false);
+				$pid = $this->model_extension_module_tagmanager->tagmangerPmap($product['model'],$product['sku'],$product['product_id']);
+ 				$brand = $this->model_extension_module_tagmanager->getProductBrandName($product['product_id']);
+				$cat = $this->model_extension_module_tagmanager->getProductCatName($product['product_id']);
+				$title = $this->model_extension_module_tagmanager->tagmangerPtitle($product['name'], $brand, $product['model'],$product['product_id']);
+				$data['products'][] = array(
+                  'pid'      => $pid,
+                  'title'    => $title,
+                  'brand'    => $brand,
+                  'category' => $cat,
+                  'pprice'   => number_format((float)$pprice, 2, '.', ''),
 				'cart_id'   => $product['cart_id'],
 				'thumb'     => $image,
 				'name'      => $product['name'],

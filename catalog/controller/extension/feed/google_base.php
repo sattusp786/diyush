@@ -29,6 +29,10 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 				foreach ($products as $product) {
 					if (!in_array($product['product_id'], $product_data) && $product['description']) {
+
+				$this->load->model('extension/module/tagmanager');
+				$pid = $this->model_extension_module_tagmanager->tagmangerPmap($product['model'],$product['sku'],$product['product_id']);
+			
 						
 						$product_data[] = $product['product_id'];
 						
@@ -38,7 +42,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 						$output .= '<description><![CDATA[' . strip_tags(html_entity_decode($product['description'], ENT_QUOTES, 'UTF-8')) . ']]></description>';
 						$output .= '<g:brand><![CDATA[' . html_entity_decode($product['manufacturer'], ENT_QUOTES, 'UTF-8') . ']]></g:brand>';
 						$output .= '<g:condition>new</g:condition>';
-						$output .= '<g:id>' . $product['product_id'] . '</g:id>';
+						$output .= '<g:id>' . $pid . '</g:id>';
 
 						if ($product['image']) {
 							$output .= '  <g:image_link>' . $this->model_tool_image->resize($product['image'], 500, 500) . '</g:image_link>';

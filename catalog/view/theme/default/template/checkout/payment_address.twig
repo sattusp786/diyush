@@ -1,4 +1,11 @@
 <form class="form-horizontal">
+{% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'checkoutOption','ecommerce': {'checkout': {'actionField': {'step': 1, 'option': 'Checkout/BillingAddress'}}}});
+dataLayer.push({'event': 'goalUrl','goalPageUrl'   : '/checkout/billing_address','goalPageTitle' : 'checkout/BillingAddress',});
+</script>
+{% endif % }
   {% if addresses %}
   <div class="radio">
     <label>
@@ -23,6 +30,13 @@
   </div>
   {% endif %}
   <br />
+{% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'checkoutOption','ecommerce': {'checkout': {'actionField': {'step': 1, 'option': 'Checkout/BillingAddress'}}}});
+dataLayer.push({'event': 'goalUrl','goalPageUrl'   : '/checkout/billing_address','goalPageTitle' : 'checkout/BillingAddress',});
+</script>
+{% endif % }
   <div id="payment-new" style="display: {% if addresses %}none{% else %}block{% endif %};">
     <div class="form-group required">
       <label class="col-sm-2 control-label" for="input-payment-firstname">{{ entry_firstname }}</label>

@@ -831,4 +831,13 @@ $(document).delegate('#button-payment-method', 'click', function() {
     });
 });
 //--></script>
+ {% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'checkout','ecommerce': {'checkout': {'actionField': {'step': 1, 'option': 'Checkout/Login/Register'},{% if cartproductsdata %}'products': [ {% set i = 1 %} {% for product in cartproductsdata %} {% if i > 1 %},{% endif %} {'name': '{{ product.title }}','id': '{{ product.pid }}','price': {{ product.price|number_format(2, '.', ',') }},'brand': '{{ product.brand }}','category': '{{ product.category }}','quantity': {{ product.quantity }},'currency': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'}{% set i = i + 1 %}{% endfor %} ]}} {% if tagmanager.remarketing == '1' and tagmanager.adword == '1' %},'google_tag_params' : {'ecomm_prodid' : {{ ecom_prodid|json_encode() }},'ecomm_pagetype' : '{{ ecom_pagetype }}','ecomm_totalvalue' : {{ ecom_totalvalue|number_format(2, '.', ',') }},} {% endif %} {% endif %} });
+{% if tagmanager.pixel == '1' %}
+whenAvailable("fbq", function(t) { fbq('track', 'InitiateCheckout'); });
+{% endif %}
+</script>
+{% endif %} 
 {{ footer }}

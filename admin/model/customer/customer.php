@@ -65,6 +65,11 @@ class ModelCustomerCustomer extends Model {
 								 	$this->Amazonconnector->deleteCustomerEntry($customer_id);
 							 }
 					 
+
+							 if($this->config->get('module_wk_amazon_connector_status')){
+								 	$this->Amazonconnector->deleteCustomerEntry($customer_id);
+							 }
+					 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_activity WHERE customer_id = '" . (int)$customer_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_affiliate WHERE customer_id = '" . (int)$customer_id . "'");

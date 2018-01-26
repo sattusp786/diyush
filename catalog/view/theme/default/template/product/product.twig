@@ -583,8 +583,8 @@
 				<!-- shop item -->
 				<div class="item">
 					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}"/></a>
-						<span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
+						<a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');"{% endif %}><img src="{{ product.thumb }}" alt="{{ product.name }}"/></a>
+						<span class="product-name text-uppercase"><a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');"{% endif %}>{{ product.name }}</a></span>
 						{% if product.price %}
 						  <span class="price black-text"> {% if not product.special %}
 							{{ product.price }}
@@ -625,8 +625,8 @@
 				{% for product in products %}
 				<div class="item">
 					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
-						<span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
+						<a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');"{% endif %}><img src="{{ product.thumb }}" alt="{{ product.name }}" /></a>
+						<span class="product-name text-uppercase"><a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');"{% endif %}>{{ product.name }}</a></span>
 						{% if product.price %}
 						  <span class="price black-text"> {% if not product.special %}
 							{{ product.price }}
@@ -635,9 +635,9 @@
 						  {% endif %}
 						<div class="quick-buy">
 							<div class="product-share">
-								<a href="javascript:void(0);" onclick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_wishlist }}"><i class="fa fa-heart-o"></i></a>
-								<a href="javascript:void(0);" onclick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_compare }}"><i class="fa fa-refresh"></i></a>
-								<a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_cart }}"><i class="fa fa-shopping-cart"></i></a>
+								<a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddWishlist('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');{% endif %}wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_wishlist }}"><i class="fa fa-heart-o"></i></a>
+								<a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddCompare('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');{% endif %}compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_compare }}"><i class="fa fa-refresh"></i></a>
+								<a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddProduct('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{% else %}Related Products{% endif %}');{% endif %} onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="{{ button_cart }}"><i class="fa fa-shopping-cart"></i></a>
 							</div>
 						</div>
 					</div>
@@ -904,7 +904,16 @@ $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 });
 //--></script> 
 <script type="text/javascript"><!--
+
 $('#button-cart').on('click', function() {
+var qty = $('input[name=\'quantity\']').val();
+{% if tagmanager.code and tagmanager.status =='1' %}
+dataLayer.push({'event': 'addToCart','ecommerce': {'currencyCode': '{{ tagmanager.currency }}','add': {'products': [{'name': '{{ title }}','id': '{{ pid }}','price': {{ pprice }},'brand': '{{ manufacturer }}','category': '{{ category }}','currency': '{{ tagmanager.currency }}','variant': '','quantity': Number(qty)}]}}});
+{% if tagmanager.pixel == '1' %}
+fbq('track', 'AddToCart', {content_ids: '{{pid}}', content_type: 'product',value: {{pprice}},currency: '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'});
+{% endif %}
+{% endif %}
+         
 	$.ajax({
 		url: 'index.php?route=checkout/cart/add',
 		type: 'post',
@@ -1192,4 +1201,20 @@ $(document).scroll(function() {
   }
 });
 </script>
-{{ footer }} 
+ {% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'productDetailView','ecommerce': {'detail': {'actionField': {'list': '{{ category }}'},'products': [{'name': '{{ title }}','id': '{{ pid }}','price': {{ pprice }},'brand': '{{ manufacturer }}','category': '{{ category }}','variant': '','currency': '{{tagmanager.currency}}'}]}} {% if tagmanager.remarketing == '1' and tagmanager.adword == '1' %},'google_tag_params' : {'ecomm_prodid' : '{{ pid }}','ecomm_pagetype' : 'Product View','ecomm_totalvalue' : {{ pprice }},}{% endif %}});
+{% if products %}
+dataLayer.push({'event': 'productImpression','ecommerce': {'currencyCode': '{{tagmanager.currency}}','impressions': [ {% set i = 1 %} {% for product in products %} {% if i > 1 %},{% endif %} {'name': '{{ product.title }}','id': '{{ product.pid }}','price': {{ product.pprice }},'brand': '{{ product.brand }}','category': '{% if product.category %}{{ product.category }}{% else %}Related Products{% endif %}','list': 'Related Products',
+'currency': '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}','position': {{ i }}} {% set i = i + 1 %} {% endfor %} ]}});
+{% endif %}
+{% if tagmanager.pixel == '1' %}
+whenAvailable("fbq", function(t) {
+fbq('track', 'ViewContent', { content_name: '{{title}}', content_category: '{{category}}', referrer: document.referrer,  userAgent: navigator.userAgent, language: navigator.language, content_ids: '{{pid}}', content_type: 'product', value: {{pprice}},currency: '{% if tagmanager.currency %}{{tagmanager.currency}}{% endif %}'});
+});
+{% endif %}
+</script>
+{% endif %}
+ {{ footer }}
+ 

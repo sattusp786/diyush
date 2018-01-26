@@ -20,7 +20,12 @@ class ControllerCatalogProduct extends Controller {
 		$this->load->model('catalog/product');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
-			$product_id = $product_id = $this->model_catalog_product->addProduct($this->request->post);
+			$product_id = $product_id = $product_id = $this->model_catalog_product->addProduct($this->request->post);
+							if($this->config->get('module_wk_amazon_connector_status')){
+                  $this->load->model('amazon_map/product');
+                  $this->model_amazon_map_product->__saveOpencartProductData($product_id, $this->request->post, $type = 'add');
+              }
+              
 							if($this->config->get('module_wk_amazon_connector_status')){
                   $this->load->model('amazon_map/product');
                   $this->model_amazon_map_product->__saveOpencartProductData($product_id, $this->request->post, $type = 'add');
@@ -83,6 +88,12 @@ class ControllerCatalogProduct extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);
+
+							if($this->config->get('module_wk_amazon_connector_status')){
+									$this->load->model('amazon_map/product');
+									$this->model_amazon_map_product->__saveOpencartProductData($this->request->get['product_id'], $this->request->post, $type = 'edit');
+							}
+              
 
 							if($this->config->get('module_wk_amazon_connector_status')){
 									$this->load->model('amazon_map/product');
@@ -1130,6 +1141,88 @@ class ControllerCatalogProduct extends Controller {
 								 * end here
 								 */
               
+
+							/**
+							 * opencart Amazon connector code
+							 */
+								if($this->config->get('module_wk_amazon_connector_status')){
+											if(isset($this->error['variation_error'])){
+													$data['variation_error']	= $this->error['variation_error'];
+											}else{
+													$data['variation_error'] = array();
+											}
+
+											$data['amazon_connector_status']  				= true;
+											$data['tab_amazon_authorization'] 				= $this->language->get('tab_amazon_authorization');
+											$data['tab_amazon_specification'] 				= $this->language->get('tab_amazon_specification');
+											$data['tab_amazon_variation']     				= $this->language->get('tab_amazon_variation');
+											$data['entry_uin']     										= $this->language->get('entry_uin');
+											$data['entry_in']     										= $this->language->get('entry_in');
+											$data['entry_amazon_specification']     	= $this->language->get('entry_amazon_specification');
+											$data['entry_amazon_specification_value'] = $this->language->get('entry_amazon_specification_value');
+											$data['entry_combination_list'] 					= $this->language->get('entry_combination_list');
+											$data['text_asin'] 												= $this->language->get('text_asin');
+											$data['text_ean'] 												= $this->language->get('text_ean');
+											$data['text_gtin'] 												= $this->language->get('text_gtin');
+											$data['text_upc'] 												= $this->language->get('text_upc');
+											$data['info_asin'] 												= $this->language->get('info_asin');
+											$data['info_ean'] 												= $this->language->get('info_ean');
+											$data['info_gtin'] 												= $this->language->get('info_gtin');
+											$data['info_upc'] 												= $this->language->get('info_upc');
+											$data['info_in'] 												  = $this->language->get('info_in');
+
+											$data['getAmazonSpecification']   				= $this->Amazonconnector->_getAmazonSpecification();
+											$data['getAmazonVariation']       				= $this->Amazonconnector->_getAmazonVariation();
+
+											if (isset($this->request->get['product_id'])) {
+													$data['getProductFields'] = $this->Amazonconnector->__getProductFields($this->request->get['product_id']);
+											}else{
+													$data['getProductFields'] = array();
+											}
+
+											//Amazon Specification
+											$this->load->model('catalog/attribute');
+											if (isset($this->request->post['amazon_product_specification'])) {
+												$amazon_product_specification = $this->request->post['amazon_product_specification'];
+											} elseif (isset($this->request->get['product_id'])) {
+												$amazon_product_specification = $this->Amazonconnector->getProductSpecification($this->request->get['product_id']);
+											} else {
+												$amazon_product_specification = array();
+											}
+
+											$data['amazon_product_specifications'] = array();
+											foreach ($amazon_product_specification as $key => $specification) {
+												$specification_info = $this->model_catalog_attribute->getAttribute($specification['attribute_id']);
+												if ($specification_info) {
+													$data['amazon_product_specifications'][] = array(
+														'attribute_id'                  => $specification['attribute_id'],
+														'name'                          => $specification_info['name'],
+														'product_attribute_description' => $specification['product_attribute_description']
+													);
+												}
+											}
+
+											//Amazon variation
+											if(isset($this->request->post['amazon_product_variation'])){
+													 $data['amazon_product_variation'] = $this->request->post['amazon_product_variation'];
+											} elseif (isset($this->request->get['product_id'])) {
+												$data['amazon_product_variation'] = $this->Amazonconnector->_getProductVariation($this->request->get['product_id'],'amazon_product_variation');
+											} else {
+													$data['amazon_product_variation'] = array();
+											}
+
+											if(isset($this->request->post['amazon_product_variation_value'])){
+														$data['amazon_product_variation_value'] = $this->request->post['amazon_product_variation_value'];
+											} elseif (isset($this->request->get['product_id'])) {
+														$data['amazon_product_variation_value'] = $this->Amazonconnector->_getProductVariation($this->request->get['product_id'],'amazon_product_variation_value');
+											} else {
+														$data['amazon_product_variation_value'] = array();
+											}
+									}
+								/**
+								 * end here
+								 */
+              
 		$this->load->model('catalog/category');
 
 		if (isset($this->request->post['product_category'])) {
@@ -1512,6 +1605,31 @@ class ControllerCatalogProduct extends Controller {
 			}
 		}
 
+
+							if($this->config->get('module_wk_amazon_connector_status') && isset($this->request->post['amazon_product_variation_value']) && $this->request->post['amazon_product_variation_value']){
+										foreach ($this->request->post['amazon_product_variation_value'] as $option_id => $option_data) {
+												if(isset($option_data['option_value']) && !empty($option_data)){
+														foreach ($option_data['option_value'] as $option_value_id => $option_value_data) {
+																if(empty($option_value_data['sku'])){
+																	$this->error['variation_error'][$option_id]['option_value'][$option_value_id]['sku'] = 'Provide product sku for variation!';
+																}
+																if(empty($option_value_data['id_type'])){
+																		$this->error['variation_error'][$option_id]['option_value'][$option_value_id]['id_type'] = 'Provide Product id type for variation!';
+																}
+																if(empty($option_value_data['id_value'])){
+																		$this->error['variation_error'][$option_id]['option_value'][$option_value_id]['id_value'] = 'Provide Product id value for variation!';
+																}
+																if(empty($option_value_data['quantity'])){
+																	$this->error['variation_error'][$option_id]['option_value'][$option_value_id]['quantity'] = 'Provide product variation quantity!';
+																}
+																if(empty($option_value_data['price'])){
+																	$this->error['variation_error'][$option_id]['option_value'][$option_value_id]['price'] = 'Provide product variation price!';
+																}
+														}
+												}
+										}
+							}
+              
 
 							if($this->config->get('module_wk_amazon_connector_status') && isset($this->request->post['amazon_product_variation_value']) && $this->request->post['amazon_product_variation_value']){
 										foreach ($this->request->post['amazon_product_variation_value'] as $option_id => $option_data) {

@@ -9,7 +9,50 @@ class ControllerCheckoutCheckout extends Controller {
 		// Validate minimum quantity requirements.
 		$products = $this->cart->getProducts();
 
-		foreach ($products as $product) {
+		
+				//MOD
+			  	$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+			  
+				$this->load->model('catalog/product');
+              	$data['shipping_total'] = (isset($this->session->data['shipping_method']['cost'])) ? $this->session->data['shipping_method']['cost'] : 0;
+              	$data['coupon'] = (isset($this->session->data['coupon'])) ? $this->session->data['coupon'] : false;
+              	//MOD
+				$data['ecom_prodid'] = array();
+                $data['ecom_pagetype']='checkout';
+                $data['ecom_totalvalue'] =0;
+
+              	foreach ($products as $product) {
+                  //MOD
+				  $data['ecom_prodid'][] = $product['product_id'];
+                  $data['ecom_totalvalue'] += $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'],'',false);
+
+                  $option_data = array();
+                      foreach ($product['option'] as $option) {
+                          if ($option['type'] != 'file') { $value = $option['value']; } else { $value = ''; }
+                          $option_data[] = array( 'name'  => $option['name'], 'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value) );
+                      } 
+					  
+					  $pid = $this->model_extension_module_tagmanager->tagmangerPmap($product['model'],$product['sku'],$product['product_id']);
+					  $brand = $this->model_extension_module_tagmanager->getProductBrandName($product['product_id']);
+					  $cat = $this->model_extension_module_tagmanager->getProductCatName($product['product_id']);
+					  $title = $this->model_extension_module_tagmanager->tagmangerPtitle($product['name'], $brand, $product['model'],$product['product_id']);
+
+                      $data['cartproductsdata'][] = array(
+                          'product_id' => $product['product_id'],
+                          'name'       => $product['name'],
+                          'model'      => $product['model'],
+						  'pid'        => $pid,
+						  'title'      => $title,
+                          'brand' 	   => $brand,
+                          'category'   => $cat,
+                          'option'     => $option_data,
+                          'quantity'   => $product['quantity'],
+                          'price'      => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'],'',false)
+                      );
+
+               //MOD
+			
 			$product_total = 0;
 
 			foreach ($products as $product_2) {

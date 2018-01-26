@@ -40,4 +40,13 @@
     {{ column_right }}</div>
 </div>
 </section>
+ {% if tagmanager.code and tagmanager.status =='1' %}{% if orderDetails %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'ecommerceComplete','ecommerce': {'purchase': {'actionField': {'id': '{{ orderDetails.order_id }}','affiliation': 'Online Store','revenue': {{ orderValue }},'tax':{{ orderTax }},'shipping':  {{orderDetails.shipping_total|number_format(2, '.', ',')}},{% if not orderCoupon is empty %}'coupon': '{{ orderCoupon }}',{% endif %}'currency': '{{ currency }}'}, {% if orderProduct %} 'products': [{% set i = 1 %}{% for product in orderProduct %}{% if i > 1%} , {% endif %}{'name': '{{ product.title }}','id': '{{ product.pid }}','price': {{ product.price|number_format(2, '.', ',') }},'brand': '{{ product.brand }}','category': '{{ product.category }}','quantity': {{ product.quantity }},'currency': '{{ currency }}'}{%set i = i + 1 %}{% if product.option %} {% for option in product.option %} {% if i > 1%} , {% endif %} {'name': '{{ option.name }}','id': 'OPTION_{{ product.pid }}','price': {{ option.price|number_format(2, '.', ',') }},'brand': '{{ product.brand }}','category': '{{ product.category }}','quantity': {{ product. quantity }},'currency': '{{ currency }}'} {% endfor %} {% endif %} {% endfor %} ] {% endif %} }} {% if not tagmanager.conversion_id is empty and tagmanager.adword == '1' %} , 'adwordCurrency': '{{ currency }}', 'adwordOrderID': '{{ orderDetails.order_id }}', 'adwordConversionValue': {{ orderValue }} {% endif %} }); 
+{% if tagmanager.pixel == '1' and orderDetails %}
+whenAvailable("fbq", function(t) {fbq('track', 'Purchase', {value: {{orderValue}}, currency: '{{ currency }}'}); });
+{% endif %}
+</script>
+{% endif %} {% endif %}
 {{ footer }}

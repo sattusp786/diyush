@@ -1,5 +1,12 @@
 <div class="row">
   <div class="col-sm-6">
+ {% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'checkoutOption','ecommerce': {'checkout': {'actionField': {'step': 1, 'option': 'Checkout/BillingAddress'}}}});
+dataLayer.push({'event': 'goalUrl','goalPageUrl'   : '/checkout/billing_address','goalPageTitle' : 'checkout/BillingAddress',});   
+</script>
+{% endif %} 
     <fieldset id="account">
       <legend>{{ text_your_details }}</legend>
       <div class="form-group" style="display: {% if customer_groups|length > 1 %} block {% else %} none {% endif %};">

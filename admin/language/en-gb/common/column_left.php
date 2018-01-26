@@ -113,7 +113,18 @@ $_['text_product_type']    		= 'Product Type';
 				$_['text_blog_article']                = 'Articles';
 				$_['text_blog_setting']                = 'Settings';
             
+
+				$_['text_blog']                        = 'Blog';
+				$_['text_blog_article']                = 'Articles';
+				$_['text_blog_setting']                = 'Settings';
+            
 $_['text_other_status']         = 'Other Statuses';
+
+              // opencart Amazon connector code starts
+                $_['text_opencart_amazon_connector']  = 'Opencart Amazon Connector';
+                $_['text_amazon_account']             = 'Manage Amazon Accounts';
+              // opencart Amazon connector code ends
+                  
 
               // opencart Amazon connector code starts
                 $_['text_opencart_amazon_connector']  = 'Opencart Amazon Connector';

@@ -1,7 +1,10 @@
 <div class="swiper-viewport">
   <div id="slideshow{{ module }}" class="swiper-container">
+{% set i = 1 %}
     <div class="swiper-wrapper"> {% for banner in banners %}
-      <div class="swiper-slide text-center">{% if banner.link %}<a href="{{ banner.link }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" /></a>{% else %}<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />{% endif %}</div>
+      <div class="swiper-slide text-center">{% if banner.link %}<a href="{{ banner.link }}" {% if tagmanager.code and tagmanager.status =='1' %} onclick="onSlideClick('{{i}}','{{banner.title}}');"{% endif %}><img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" /></a>{% else %}<img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-responsive" />{% endif %}</div>
+{% set i = 1 + 1 %}
+			
       {% endfor %} </div>
   </div>
   <div class="swiper-pagination slideshow{{ module }}"></div>
@@ -24,3 +27,13 @@ $('#slideshow{{ module }}').swiper({
 	loop: true
 });
 --></script>
+ {% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+{% set i = 1 %}
+dataLayer.push({'event': 'promotionView','ecommerce': {'promoView': {'promotions': [ {% set i = 1 %}{% for banner in banners %}{%if i > 1 %},{% endif %} {'id': 'SLIDE_{{ i }}','name': '{{ banner.title }}','creative': 'Slide Banner','position': {{ i }}} {% set i = i + 1 %} {% endfor %} ]}}});
+function onSlideClick(id,title) {
+  dataLayer.push({'event': 'promotionClick','ecommerce': {'promoClick': {'promotions': [{'id': 'SLIDE_'+id,'name': title,'creative': 'Slide Banner','position': id}]}}});
+}
+</script>
+{% endif %} 

@@ -1,10 +1,18 @@
 <h3>{{ heading_title }}</h3>
+
+{% if tagmanager.code and tagmanager.status =='1' %}
+{% if products %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];dataLayer.push({'event': 'productImpression','ecommerce': {'currencyCode': '{{ tagmanager.currency }}', 'impressions': [{% set i = 1 %}{% for product in products %}{% if i > 1 %},{% endif %}{'name': '{{ product.title }}','id': '{{ product.pid }}','price': {{ product.pprice }},'brand': '{{ product.brand }}','category': '{% if product.category %}{{ product.category }}{% endif %}','list': '{% if listname %}{{ listname }}{% else %}Not Set{% endif %}','currency': '{{ tagmanager.currency }}','position': {{ i }}}{% set i = i + 1 %}{% endfor %}]}});
+</script>
+{% endif %}
+{% endif %} 
 <div class="row product-layout">{% for product in products %}
   <div class="col-lg-3 col-md-3s col-sm-6 col-xs-12">
     <div class="product-thumb transition">
-      <div class="image"><a target="_blank" href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
+      <div class="image"><a target="_blank" href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{ product.category }}{% else %}Module{% endif %}');"{% endif %}><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
       <div class="caption">
-        <p><a href="{{ product.href }}">{{ product.name }}</a></p>
+        <p><a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{ product.category }}{% else %}Module{% endif %}');"{% endif %}>{{ product.name }}</a></p>
         <p class="price">{{ product.price }}</p>
       </div>
     </div>

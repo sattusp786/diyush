@@ -84,7 +84,7 @@
                                     </td>
                                     <td class="product-subtotal text-left">{{ product.total }}</td>
                                     <td class="product-remove text-center">
-                                        <a href="javascript:void(0);" onclick="cart.remove('{{ product.cart_id }}');"><i class="fa fa-times"></i></a>
+                                        <a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status == '1' %}GARemoveCart('{{ product.name }}', '{{ product.pid }}', '{{ product.pprice }}','{{ product.brand }}','{{ product.category }}','{{ product.quantity }}' ); {% endif %} cart.remove('{{ product.cart_id }}');"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
 								{% endfor %}
@@ -165,4 +165,14 @@
             </div>
         </section>
         <!-- end content section -->
+ {% if tagmanager.code and tagmanager.status =='1' %}
+{% if tagmanager.remarketing == '1' and tagmanager.adword == '1' %}
+{% if ecom_totalvalue > 0 %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'google_tag_params' : {'ecomm_prodid' : {{ ecom_prodid|json_encode() }},'ecomm_pagetype' : '{{ ecom_pagetype }}','ecomm_totalvalue' : {{ ecom_totalvalue }},}});
+</script>
+{% endif %}
+{% endif %}
+{% endif %} 
 {{ footer }} 

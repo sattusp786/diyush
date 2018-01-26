@@ -9,18 +9,26 @@
 		<div class="row">
 			<!-- featured products slider -->
 			<div id="shop-products" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">
+
+{% if tagmanager.code and tagmanager.status =='1' %}
+{% if products %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];dataLayer.push({'event': 'productImpression','ecommerce': {'currencyCode': '{{ tagmanager.currency }}', 'impressions': [{% set i = 1 %}{% for product in products %}{% if i > 1 %},{% endif %}{'name': '{{ product.title }}','id': '{{ product.pid }}','price': {{ product.pprice }},'brand': '{{ product.brand }}','category': '{% if product.category %}{{ product.category }}{% endif %}','list': '{% if listname %}{{ listname }}{% else %}Not Set{% endif %}','currency': '{{ tagmanager.currency }}','position': {{ i }}}{% set i = i + 1 %}{% endfor %}]}});
+</script>
+{% endif %}
+{% endif %} 
 			 {% for product in products %}
 				<!-- shop item -->
 				<div class="item">
 					<div class="home-product text-center position-relative overflow-hidden">
-						<a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
-						<span class="product-name text-uppercase"><a href="{{ product.href }}">{{ product.name }}</a></span>
+						<a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{ product.category }}{% else %}Module{% endif %}');"{% endif %}><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
+						<span class="product-name text-uppercase"><a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{ product.category }}{% else %}Module{% endif %}');"{% endif %}>{{ product.name }}</a></span>
 						<span class="price black-text">From {{ product.price }}</span>
 						<div class="quick-buy">
 							<div class="product-share">
-								<a href="javascript:void(0);" onclick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
-								<a href="javascript:void(0);" onclick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
-								<a href="javascript:void(0);" onclick="cart.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
+								<a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddWishlist('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{ product.category }}{% else %}Module{% endif %}');{% endif %} wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
+								<a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddCompare('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{ product.category }}{% else %}Module{% endif %}');{% endif %} compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
+								<a href="javascript:void(0);" onclick="{% if tagmanager.code and tagmanager.status =='1' %}GAaddProduct('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{ product.category }}{% else %}Module{% endif %}');{% endif %} cart.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
 							</div>
 						</div>
 					</div>

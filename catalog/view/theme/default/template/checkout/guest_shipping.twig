@@ -1,3 +1,10 @@
+ {% if tagmanager.code and tagmanager.status =='1' %}
+<script>
+var dataLayer = window.dataLayer = window.dataLayer || [];
+dataLayer.push({'event': 'checkoutOption','ecommerce': {'checkout': {'actionField': {'step': 1, 'option': 'Checkout/DeliveryAddress'}}}});
+dataLayer.push({'event': 'goalUrl','goalPageUrl'   : '/checkout/delivery-addresss','goalPageTitle' : 'checkout/DeliveryAddress',});
+</script>
+{% endif %} 
 <form class="form-horizontal">
   <div class="form-group required">
     <label class="col-sm-2 control-label" for="input-shipping-firstname">{{ entry_firstname }}</label>

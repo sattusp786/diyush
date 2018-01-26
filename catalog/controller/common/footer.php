@@ -3,8 +3,20 @@ class ControllerCommonFooter extends Controller {
 	public function index() {
 		$this->load->language('common/footer');
 
+
+				$this->load->model('extension/module/tagmanager');
+				$data['tagmanager'] = $this->model_extension_module_tagmanager->getTagmanger();
+
+			
+
 		$this->load->model('catalog/information');
 
+
+				$data['blog'] = array(
+					'name' => $this->config->get('easy_blog_home_page_name'),
+					'href'  => $this->url->link('extension/extension/blog/blog')
+				);
+            
 
 				$data['blog'] = array(
 					'name' => $this->config->get('easy_blog_home_page_name'),
