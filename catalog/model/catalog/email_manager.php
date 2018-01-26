@@ -27,9 +27,9 @@ class ModelCatalogEmailManager extends Model
 			}else{
 				$sender_email = $this->config->get('config_email');
 				if($sendto == $sender_email){
-					$sender_email = 'help@sacet.com';
-					$smtp_username = 'help@sacet.com';
-					$smtp_password = 'Empathy@999';
+					$sender_email = 'info@abelini.com';
+					$smtp_username = 'info@abelini.com';
+					$smtp_password = 'Abelini$123';
 				}
 				$sender_name = $this->config->get('config_name');
 			}
