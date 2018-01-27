@@ -12,7 +12,7 @@ class ControllerExtensionModuleFilter extends Controller {
 		$data['carat_from'] = 0.20;
 		$data['carat_to'] = 1.00;
 		$data['price_from'] = 0;
-		$data['price_to'] = 5000;
+		$data['price_to'] = 10000;
 		
 		$category_id = end($parts);
 
