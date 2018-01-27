@@ -1204,6 +1204,7 @@
 	#wpbs_slider { right:0;}
 	#wpbs_cont {width:100%;}
 	.rviwcolumn2 { position:static; margin:20px 0;}
+	.pricewrap.stick { width:96%;}
     
 }
 @media (max-width: 700px) {
