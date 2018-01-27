@@ -1201,6 +1201,21 @@ $(document).scroll(function() {
   }
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var s = $(".pricewrap");
+	var pos = s.position();					   
+	$(window).scroll(function() {
+		var windowpos = $(window).scrollTop();
+		if (windowpos >= pos.top & windowpos <=300) {
+			s.addClass("stick");
+		} else {
+			s.removeClass("stick");	
+		}
+	});
+});
+/* sticky price javascript ends here */
+</script>
  {% if tagmanager.code and tagmanager.status =='1' %}
 <script>
 var dataLayer = window.dataLayer = window.dataLayer || [];
@@ -1215,6 +1230,8 @@ fbq('track', 'ViewContent', { content_name: '{{title}}', content_category: '{{ca
 });
 {% endif %}
 </script>
+
+
 {% endif %}
  {{ footer }}
  
