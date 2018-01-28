@@ -46,7 +46,7 @@ class Pagination {
 
 		$this->url = str_replace('%7Bpage%7D', '{page}', $this->url);
 
-		$output = '<div class="pagination margin-ten no-margin-bottom">';
+		$output = '<div class="pagination margin-two no-margin-bottom">';
 
 		if ($page > 1) {
 			$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '"><img src="catalog/view/theme/default/image/arrow-pre-small.png" alt=""/></a>';
