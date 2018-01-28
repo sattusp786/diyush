@@ -1,0 +1,196 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-code">{{ entry_code }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_code" placeholder="{{ entry_code }}" class="form-control" value="{{ module_tagmanager_code }}"/>
+              {% if error_code %}
+              <div class="text-danger">{{ error_code }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_status" id="input-status" class="form-control">
+                {% if module_tagmanager_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %} 
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-admin">{{ entry_admin }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_admin" id="input-admin" class="form-control">
+                {% if module_tagmanager_admin %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-eu">{{ entry_eu_cookie }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_eu_cookie" id="input-eu" class="form-control">
+                {% if module_tagmanager_eu_cookie %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>   
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-cid">{{ entry_cookie_text }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_cookie_text" placeholder="{{ entry_cookie_text }}" class="form-control" value="{{ module_tagmanager_cookie_text }}"/>
+            </div>
+          </div> 
+           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-cookielink">{{ entry_cookie_link }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_cookie_link" placeholder="{{ entry_cookie_link }}" class="form-control" value="{{ module_tagmanager_cookie_link }}"/>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-cid">{{ entry_cookie_button1 }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_cookie_button1" placeholder="{{ entry_cookie_button1 }}" class="form-control" value="{{ module_tagmanager_cookie_button1 }}"/>
+            </div>
+         </div> 
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-cid">{{ entry_cookie_button2 }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_cookie_button2" placeholder="{{ entry_cookie_button2 }}" class="form-control" value="{{ module_tagmanager_cookie_button2 }}"/>
+           </div>
+         </div> 
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-adword">{{ entry_adword }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_adword" id="input-adword" class="form-control">
+                {% if module_tagmanager_adword %}
+                <option value="1" selected="selected">{{ text_enabled }} </option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-cid">{{ entry_conversion_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_conversion_id" placeholder="{{ entry_conversion_id }}" class="form-control" value="{{ module_tagmanager_conversion_id }}"/>
+            </div>
+          </div>   
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-clabel">{{ entry_conversion_label }} </label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_conversion_label" placeholder="{{ entry_conversion_label }}" class="form-control" value="{{ module_tagmanager_conversion_label }}"/>
+            </div>
+          </div> 
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-adword">{{ entry_remarketing }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_remarketing" id="input-adword" class="form-control">
+                {% if module_tagmanager_remarketing %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>  
+           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-pixel">{{ entry_pixel }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_pixel" id="input-pixel" class="form-control">
+                {% if module_tagmanager_pixel %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>   
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-pixelcode">{{ entry_pixelcode }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_tagmanager_pixelcode" placeholder="{{ entry_pixelcode }}" class="form-control" value="{{ module_tagmanager_pixelcode }}"/>
+            </div>
+          </div>  
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-product">{{ entry_product }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_product" id="input-adword" class="form-control">
+                {% for pmap in product_map %}
+                    {% if pmap == module_tagmanager_product %}
+                    <option value="{{ pmap }}" selected="selected">{{ pmap }}</option>
+                    {% else %}
+                  <option value="{{ pmap }}">{{ pmap }}</option>
+                    {% endif %}
+                    {% endfor %}
+              </select>
+            </div>
+          </div> 
+             <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-ptitle">{{ entry_ptitle }}</label>
+            <div class="col-sm-10">
+              <select name="module_tagmanager_ptitle" id="input-ptitle" class="form-control">
+                    {% for ptitle in product_title %}
+                      {% if ptitle == module_tagmanager_ptitle %}
+                    <option value="{{ ptitle }}" selected="selected">{{ ptitle }}</option>
+                    {% else %}
+                  <option value="{{ ptitle }}">{{ ptitle }}</option>
+                    {% endif %}
+                    {% endfor %}
+              </select>
+            </div>
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /system/
+Disallow: /admin/
+Disallow: /cron/
+Disallow: /demo/
+Disallow: /old/
+Disallow: /ebay/
+Disallow: /storage/
+
+Disallow: /index.php?route=product/search&search
+Disallow: /index.php?route=checkout/checkout
