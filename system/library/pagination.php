@@ -16,10 +16,14 @@ class Pagination {
 	public $limit = 20;
 	public $num_links = 8;
 	public $url = '';
-	public $text_first = '|&lt;';
-	public $text_last = '&gt;|';
-	public $text_next = '&gt;';
-	public $text_prev = '&lt;';
+	//public $text_first = '|&lt;';
+//	public $text_last = '&gt;|';
+//	public $text_next = '&gt;';
+//	public $text_prev = '&lt;';
+	public $text_first = 'First';
+	public $text_last = 'Last';
+	public $text_next = 'Next';
+	public $text_prev = 'Prev';
 
 	/**
      * 
@@ -49,7 +53,8 @@ class Pagination {
 		$output = '<div class="pagination margin-two no-margin-bottom">';
 
 		if ($page > 1) {
-			$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '"><img src="catalog/view/theme/default/image/arrow-pre-small.png" alt=""/></a>';
+			//$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '"><img src="catalog/view/theme/default/image/arrow-pre-small.png" alt=""/></a>';
+			$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '">First</a>';
 			
 			if ($page - 1 === 1) {
 				$output .= '<a href="' . str_replace(array('&amp;page={page}', '?page={page}', '&page={page}'), '', $this->url) . '">' . $this->text_prev . '</a>';
@@ -92,7 +97,8 @@ class Pagination {
 
 		if ($page < $num_pages) {
 			$output .= '<a href="' . str_replace('{page}', $page + 1, $this->url) . '">' . $this->text_next . '</a>';
-			$output .= '<a href="' . str_replace('{page}', $num_pages, $this->url) . '"><img src="catalog/view/theme/default/image/arrow-next-small.png" alt=""/></a>';
+			//$output .= '<a href="' . str_replace('{page}', $num_pages, $this->url) . '"><img src="catalog/view/theme/default/image/arrow-next-small.png" alt=""/></a>';
+			$output .= '<a href="' . str_replace('{page}', $num_pages, $this->url) . '">Last</a>';
 		}
 
 		$output .= '</div>';
