@@ -1,0 +1,298 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="button" onclick="$('#form').submit();" form="form-product_type" data-toggle="tooltip" title="{{ button_calculate }}" class="btn btn-primary"><i class="fa fa-save">{{ button_calculate }}</i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
+    <div id="tab-general">
+      <table class="form">
+      <tr>
+          <td>{{ entry_currency }}</td>
+          <td>
+            <select name="currency">
+            {% for currencie in currencies %}
+              {% if currencie.code_currencie.value == currency %}
+              <option value="{{ currencie.code }}_{{ currencie.value }}" selected="selected">{{ currencie.code }}</option>
+              {% elseif currencie.code == default_currency %}
+              <option value="{{ currencie.code }}_{{ currencie.value }}" selected="selected">{{ currencie.code }}</option>
+              {% else %}
+              <option value="{{ currencie.code }}_{{ currencie.value }}" >{{ currencie.code }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          </td>
+          <td>{{ entry_product_type }}</td>
+          <td>
+            <select name="product_type_id">
+            <option value="">{{ text_select }}</option>
+            {% for producttype in product_types %}
+              {% if producttype.product_type_id == product_type_id %}
+              <option value="{{ producttype.product_type_id }}" selected="selected">{{ producttype.name }}</option>
+              {% else %}
+              <option value="{{ producttype.product_type_id }}">{{ producttype.name }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          </td>
+          <td>{{ entry_metal_weight }}</td>
+          <td><input type="text" name="metal_weight" value="{{ metal_weight }}" class="calculate"/></td>  
+      </tr>
+      <tr>
+        {% if options %}
+        {% for option in options %}
+        <td>{{ option.option_name }}</td>
+          <td>
+          <select name="{{ option.option_name }}" >
+          <option value="">{{ text_select }}</option>
+          {% for option_value in option.option_values %}
+            <option value="{{ option_value.code }}">{{ option_value.name }}</option>
+          {% endfor %}
+          </select>
+        </td>  
+        {% endfor %}
+        {% endif %}
+        </tr>
+      
+        <table class="form">
+        <tr>
+          <td>{{ entry_markup }}</td>
+          <td><select name="markup" >
+             <option value="">{{ text_select }}</option>
+             {% for mark in markups %}
+              <option value="{{ mark.code }}">{{ mark.title }}( {{ mark.code }} )</option>
+            {% endfor %}
+          </select></td>              
+        </tr>
+        <tr>
+          <td>{{ entry_tax }}</td>
+          <td><select name="tax" >
+             <option value="">{{ text_select }}</option>
+             {% for taxs in taxss %}
+              {% if taxs.rate == tax %}
+              <option value="{{ taxs.rate }}" selected="selected">{{ taxs.name }}</option>
+              {% else %}
+              <option value="{{ taxs.rate }}">{{ taxs.name }}</option>
+              {% endif %}
+            {% endfor %}
+          </select></td>              
+        </tr>
+            <tr>
+          <td>{{ entry_store }}</td>
+          <td><select name="stores">
+            <option value="0" {% if store_id == '0' %} SELECTED {% endif %}>{{ text_default }}</option>
+            {% for value in stores %}
+            {% if value.store_id == store_id %}
+              <option value="{{ value.store_id }}" selected="selected">{{ value.name }}</option>
+              {% else %}
+              <option value="{{ value.store_id }}">{{ value.name }}</option>
+              {% endif %}
+            {% endfor %}
+          </select></td>              
+        </tr>
+        </table>  
+      </table> 
+
+{% if price.error and price.error != '' %}
+  <div id="output" style="font-size:15px;">
+    <h3>RESULT :</h3>
+    <table class="list">
+      <tr>
+        <td align="center" style="font-size:15px;height:50px;vertical-align:middle;color:red;">{{ price.error }}</td>
+      </tr>
+    </table>
+  </div>
+{% elseif price.metal_price and price.metal_price != '' %}
+  <div id="output" style="font-size:15px;">
+    <h3>RESULT :</h3>
+    <table class="list">
+      <tr>
+        <td class="right">Metal Price :</td>
+        <td class="right">{{ price.actual_metal_price }}</td>
+        <td class="right">Selling Metal Price :</td>
+        <td class="right"><a href="index.php?route=metal/metal_price&user_token={{ user_token }}&filter_code={{ price.metal_code }}" target="_blank"><img src="view/image/external_link.png" alt="Goto" width="16" /></a> &nbsp;  &nbsp; &nbsp; &nbsp; {{ price.metal_price }}</td>     
+      </tr>
+      <tr>
+        <td class="right">Stone Carat Price :</td>
+        <td class="right">{{ price.actual_stone_price }}</td>
+        <td class="right">Selling Stone Price :</td>
+        <td class="right"><a href="index.php?route=stone/stone_price&user_token={{ user_token }}&filter_stoneprice_id={{ price.stoneprice_id }}&sort=sprice&order=ASC" target="_blank"><img src="view/image/external_link.png" alt="Goto" width="16" /></a> &nbsp;  &nbsp; &nbsp; &nbsp; {{ price.stone_price }}</td>
+      </tr>
+      <tr>
+        <td class="right" colspan="2"> &nbsp; </td>
+        <td class="right">Total Metal & Stone Selling Price :</td>
+        <td class="right">{{ price.price }}</td>
+      </tr>
+      <tr>
+        <td class="right" colspan="2"> &nbsp; </td>
+        <td class="right">Price with Markup :</td>
+        <td class="right">{{ price.price_with_prod_markup }}</td>
+      </tr>
+      <tr>
+        <td class="right" colspan="2"> &nbsp; </td>
+        <td class="right">Price with Tax :</td>
+        <td class="right">{{ price.price_with_tax }}</td>
+      </tr>
+      <tr>
+        <td class="right" style="font-size:15px;">Total Price :</td>
+        <td class="right" style="font-size:15px;">{{ price.actual_price }}</td>
+        <td class="right" style="font-size:15px;font-weight:bold;">Final Selling Price :</td>
+        <td class="right" style="font-size:15px;font-weight:bold;">{{ price.final_price }}</td>
+      </tr>
+    </table>
+  </div>
+{% endif %}
+     </div>
+      </form>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript">
+
+$('.datetimepicker').datetimepicker({
+  pickTime: false
+});
+
+var stone_row = {{ stone_row }};
+
+function addStone() {
+  html ='<tbody id="stone-row'+ stone_row +'" class="stonebody">';
+    html +='<tr><td class="left">';
+                
+  html +='<input type="text" name="stone['+stone_row+'][quantity]" value="" size = "4" /></td>';
+  html +='<td class="left">';     
+  html +='<select  name="stone['+stone_row+'][position]" style="width:120px" >';
+  html +=' <option value="0">{{ text_select }}</option>';     
+  html +='<option value="Center Stone">Center Stone</option>';
+  html +='<option value="Side Stone">Side Stone</option>';
+  html +='</select></td>';
+  html +='<td class="left">';     
+  html +='<select  name="stone['+stone_row+'][type]" style="width:120px" >';
+  html +=' <option value="0">{{ text_select }}</option>';
+  {% for stone_type in stone_types %}         
+  html +='<option value="{{ stone_type.code }}">{{ stone_type.name }}</option>';
+  {% endfor %}
+  html +='</select></td>';
+
+  html +='<td class="left">';     
+  html +='<select name="stone['+stone_row+'][shape]" style="width:120px">';
+  html +=' <option value="0">{{ text_select }}</option>';
+  {% for shape in shapes %}
+  html +='<option value="{{ shape.code }}">{{ shape.name }}</option>';
+  {% endfor %}
+  html +='</select></td>';
+    html +=' <td class="left"><input type="text" name="stone['+stone_row+'][carat]" value="" size = "4" /></td>';  
+  html += '<td class="left" id="clarity">';         
+  html +='<select name="stone['+stone_row+'][clarity]" style="width:100px">';
+  html +='<option value="0">{{ text_select }}</option>';
+  {% for clarity in clarities %}
+  html +='<option value="{{ clarity.code }}">{{ clarity.name }}</option>';
+  {% endfor %}
+  html +='</select> </td>';
+    html +='<td class="left"><select name="stone['+stone_row+'][color]" style="width:100px">';        
+  html +=' <option value="0">{{ text_select }}</option>';
+  {% for color in colors %}
+  html +='<option value="{{ color.code }}">{{ color.name }}</option>';
+  {% endfor %}
+  html +='</select></td>';
+  html +='<td class="left"><select name="stone['+stone_row+'][certificate]" style="width:100px">';    
+  html +='<option value="0">{{ text_select }}</option>';
+  {% for certificate in certificates %}
+  html +='<option value="{{ certificate.code }}">{{ certificate.name }}</option>';
+  {% endfor %}
+  html +='</select></td>';
+    html +='<td class="left"><a onclick="$(\'#stone-row'+stone_row+'\').remove();" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i> {{ button_remove }}</a></td>';
+    html +='</tr>';
+    html +='</tbody>';
+  
+  $('#stone tfoot').before(html);
+ 
+  stone_row++;
+}
+
+function auto_add_stone(variant_image_id){
+
+  if(variant_image_id != ''){
+  
+    $(".stonebody").remove();
+    
+    $.ajax({
+        url: 'index.php?route=catalog/price_calculator/autoAddStone&user_token={{ user_token }}',
+        type: 'post',
+        dataType: 'html',
+        data: 'variant_image_id='+variant_image_id,
+        beforeSend: function(){},
+        success: function(ouput) {
+          $("#stone").append(ouput);
+        },
+        failure: function(){},
+        error: function(){}
+      });
+  } else {
+    alert('Please select Variant Image');
+    return false;
+  }
+}
+
+$('input[name=\'product_variant\']').autocomplete({
+  delay: 500,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=catalog/price_calculator/autocomplete&user_token={{ user_token }}&name=' +  encodeURIComponent(request),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.code,
+            value: item.product_variant_id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(item) {
+    $('input[name=\'product_variant\']').val(item.label);
+    $.ajax({
+        url: 'index.php?route=catalog/price_calculator/getVariantImage&user_token={{ user_token }}',
+        type: 'post',
+        dataType: 'html',
+        data: 'product_variant_id='+item.value,
+        beforeSend: function(){},
+        success: function(data) {
+          $("#variant_image").html(data);
+        },
+        failure: function(){},
+        error: function(){}
+      });
+    
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+
+</script>
+<style>
+#footer {
+  position: relative;
+}
+</style>
+{{ footer }}

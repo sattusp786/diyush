@@ -107,7 +107,8 @@ $_['text_paypal_search']        = 'Search';
 $_['text_complete_status']      = 'Orders Completed';
 $_['text_processing_status']    = 'Orders Processing';
 $_['text_markup_product']    	= 'Product Markup';
-$_['text_product_type']    		= 'Product Type';
+$_['text_product_type']       = 'Product Type';
+$_['text_price_calculator']    		= 'Price Calculator';
 
 				$_['text_blog']                        = 'Blog';
 				$_['text_blog_article']                = 'Articles';
