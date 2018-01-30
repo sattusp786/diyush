@@ -89,7 +89,7 @@
                     	<div class="topstickbarleft">
                         <!-- product rating -->
                         <div class="rating margin-one no-margin-top" style="margin-right:100px;">
-                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><a href="#pro-review-details"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></a></span>
+                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span id="proreview-click-1" class="pull-right"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></span>
                             <div class="clearfix"></div>
                         </div>
                         
@@ -168,7 +168,7 @@
                     	
                         <!-- product rating -->
                         <div class="rating margin-one no-margin-top" style="margin-right:100px;">
-                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><a href="#pro-review-details"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></a></span>
+                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span id="proreview-click-2" class="pull-right"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></span>
                             <div class="clearfix"></div>
                         </div>
                         
@@ -497,6 +497,7 @@
                     </div>
                 </div>
             </div>
+            <div id="proreview-stop"></div>
         </section>
         
 <section id="support-iconswrap" class="padding-one border-top-light border-bottom-light">
@@ -1120,7 +1121,6 @@ $('button[id^=\'button-upload\']').on('click', function() {
 				complete: function() {
 					$(node).button('reset');
 				},
-
 				success: function(json) {
 					$('.text-danger').remove();
 
@@ -1304,19 +1304,20 @@ $(document).scroll(function() {
 });
 </script>
 <script type="text/javascript">
-/*$(document).ready(function() {
-	var s = $(".topstickbar");
-	var pos = s.position();					   
-	$(window).scroll(function() {
-		var windowpos = $(window).scrollTop();
-		if (windowpos >= pos.top) {
-			s.addClass("stick");
-		} else {
-			s.removeClass("stick");	
-		}
-	});
-});*/
+$("#proreview-click-1").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#proreview-stop").offset().top
+    }, 2000);
+});
 
+$("#proreview-click-2").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#proreview-stop").offset().top
+    }, 2000);
+});
+
+</script>
+<script type="text/javascript">
 $(function() {
   $('.topstickbar').hide();
   $(window).scroll(function() {

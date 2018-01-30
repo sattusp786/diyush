@@ -19,7 +19,7 @@
 									<ul>
 									{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
 									{% for child in children %}
-										<li><a href="{{ child.href }}">{{ child.name }}</a></li>
+										<li><span class="icon-bg" style="background-image:url('https://www.abelini.com/image/catalog/filters-icon/round.jpg'); display:none;"></span> <a href="{{ child.href }}">{{ child.name }}</a></li>
 									{% endfor %}
 									{% endfor %}
 									</ul>
@@ -84,6 +84,7 @@
 									<div style="color:#fff;">Customer Care</div>
 									<ul>
 										<li><a href="/free-shipping">Free Delivery</a></li>
+
 										<li><a href="/return-and-exchange">Return & Exchange</a></li>
 										<li><a href="/warranty-and-care">Warranty & Care</a></li>
 										<li><a href="/jewellery-insurance">Jewellery Insurance</a></li>
