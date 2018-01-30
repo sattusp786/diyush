@@ -479,6 +479,7 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .dropdown-menu li a:hover i { color: #fff; }
 .sticky-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0.1)}
 .shrink-nav.nav-border-bottom { border-bottom: 1px solid rgba(0,0,0,0.1)}
+body.product_body .sticky-nav.nav-border-bottom, body.product_body .shrink-nav.nav-border-bottom { border-bottom:0;}
 .nav-border-bottom-fix {border-bottom: 1px solid rgba(0,0,0,0.1)}
 
 .nav-white .search-cart-header .subtitle, .nav-white .top-cart .fa-shopping-cart, .nav-white .search-button, .nav-white .top-cart a:hover .fa-shopping-cart  { color: #fff}
@@ -610,7 +611,8 @@ nav .container{ display: table-cell; vertical-align: middle; height: 80px; posit
 .content-top-margin { margin-top: 88px;}
 .page-title { padding: 80px 0}
 .page-title h1 { letter-spacing: 6px; font-weight: 600; font-size: 20px; margin-bottom: 5px}
-.page-title span {letter-spacing: 1px; font-weight: 400; font-size: 14px;}
+
+.page-title span {letter-spacing: 1px; font-weight: 400; font-size: 11px; line-height:16px;}
 .breadcrumb ul li { display: inline-block; letter-spacing: 3px; font-size: 11px; font-weight: 400; color: #575757}
 .breadcrumb ul li a { color: #575757}
 .breadcrumb ul > li+li:before {  color: #898989; content: ">"; font-size: 10px; padding: 0 5px; position: relative; top: -1px;}
@@ -1096,8 +1098,8 @@ footer ul.list-inline li:first-child {padding-left: 6px}
 
 /* blog pagination */
 .pagination { text-align: center; width: 100%; margin: 40px 0 0 0}
-.pagination a { margin: 0 25px; font-size: 14px; margin-right: 10px; color: #7a7a7a }
-.pagination a.active  { border-bottom: 1px solid #000; font-weight: 600; color: #000}
+.pagination a { margin: 0; font-size: 14px; margin-right: 10px; color: #7a7a7a; border: 1px solid #7a7a7a; padding: 5px 10px; display:inline-block;}
+.pagination a.active  { border-bottom: 1px solid #000; font-weight: 600; color: #fff; background:#000;}
 .pagination a:hover { color: #000}
 .pagination i { color: #000; font-size: 17px;}
 
@@ -2720,13 +2722,21 @@ ul.sub-navi li a:before {
 
 #pro-gridview .home-product img { width:80%;}
 
-.pricewrap.stick {position: fixed; top: 0; background: #fff; width: 49% !important; border-bottom: 1px solid; z-index: 99; padding-bottom: 10px;}
+.topstickbar {position: fixed; top: 0; left:0; background: #fff; width: 100% !important; border-bottom: 1px solid; z-index: 99; padding:10px 2%;}
+.topstickbar .topstickbarleft{ float:left; width:60%;}
+.topstickbar .topstickbarright{ float:right; width:35%;}
+.topstickbar .deliveredtext, .topstickbar .separator-line { display:none;}  
 
 @media print {
-body.product_body  #topbar, body.product_body .search-cart-header, body.product_body #support-iconswrap, body.product_body #pro-review-details, body.product_body footer, body.product_body .zoom-gallery .products-thumb, body.product_body .pricewrap .list-unstyled li a.btn.btn-very-small, .print-no { display:none;}
+body.product_body  #topbar, body.product_body .search-cart-header, body.product_body #support-iconswrap, body.product_body #pro-review-details, body.product_body footer, body.product_body .zoom-gallery .products-thumb, body.product_body .pricewrap .list-unstyled li a.btn.btn-very-small, #product .size-chart, .print-no { display:none;}
 body.product_body .rating .pull-right { float:left !important;}
 body.product_body a:after { content:''; }
 body.product_body a[href]:after { content: none !important; }
-.pricewrap.stick {position: static; top: 0; background: none; width: auto !important; border-bottom: 0; z-index: 99; padding-bottom: 0;}
+.pricewrap.stick {position: static; top: 0; background: none; width: auto !important; border-bottom: 0; z-index: 99; padding-bottom: 0; text-align:left !important;}
+#product .col-md-2 { width: 16.66666667%  !important; float: left !important;}
+#product .col-md-10 { width: 83.33333333%  !important; float: left !important;}
+#wpbs_slider { display:none;}
+#product #input-option10088 { width:120px !important;}
+.pro-delivered-text span { font-size:0 !important; border-bottom:0 !important;}
 }
 

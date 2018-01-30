@@ -85,21 +85,28 @@
                     <!-- end product images -->
 					{% endif %}
                     <div class="col-md-6 col-sm-12 col-md-offset-1">
+                    <div class="topstickbar" style="display:none;">
+                    	<div class="topstickbarleft">
                         <!-- product rating -->
-                        <div class="rating margin-five no-margin-top" style="margin-right:100px;">
-                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star-o black-text"></i><span class="rating-text text-uppercase">5 Reviews</span></span>
+                        <div class="rating margin-one no-margin-top" style="margin-right:100px;">
+                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><a href="#pro-review-details"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></a></span>
+                            <div class="clearfix"></div>
                         </div>
+                        
                         <!-- end product rating -->
                         <!-- product name -->
                         <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
                         <!-- end product name -->
                         <!-- product stock -->
-                        <p class="text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by {{ delivery_date_top }}</p>
+                        <p class="deliveredtext text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by {{ delivery_date_top }}</p>
 						<!--<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>-->
-                        <!-- end product stock -->
                         <div class="separator-line bg-black no-margin-lr margin-two"></div>
+                        </div>
+                        <div class="topstickbarright">
+                        <!-- end product stock -->
+                        
                         <div class="pricewrap width-100">
-                        <div class="col-md-9 no-padding-left">
+                        <div class="col-md-12 no-padding-left">
                         {% if price %}
 						  <ul class="list-unstyled" id="price_block">
 							{% if not special %}
@@ -156,7 +163,90 @@
                           </div>-->
                           <div class="clearfix"></div>
                          </div>
+                         </div>
+                         <div class="clearfix"></div>
+                         </div>
 						
+                        <div class="promaininfoshow">
+                    	
+                        <!-- product rating -->
+                        <div class="rating margin-one no-margin-top" style="margin-right:100px;">
+                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><a href="#pro-review-details"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></a></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <!-- end product rating -->
+                        <!-- product name -->
+                        <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
+                        <!-- end product name -->
+                        <!-- product stock -->
+                        <p class="deliveredtext text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by {{ delivery_date_top }}</p>
+						<!--<p>{{ text_weight }} <span class="metal_weight">{{ weight }}</span> gms</p>-->
+                        <div class="separator-line bg-black no-margin-lr margin-two"></div>
+                        
+                        <!-- end product stock -->
+                        
+                        <div class="pricewrap width-100">
+                        <div class="col-md-12 no-padding-left">
+                        {% if price %}
+						  <ul class="list-unstyled" id="price_block">
+							{% if not special %}
+							<li>
+							  <h2 class="final_price"><span class="final_prod_price black-text title-small font-weight-600">{{ price }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
+							</li>
+							{% else %}
+							<li><span style="text-decoration: line-through;">{{ price }}</span></li>
+							<li>
+							  <h2 class="final_price"><span class="final_prod_price black-text title-small font-weight-600">{{ special }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
+							</li>
+							{% endif %}
+                             <li>(Inc. VAT, Postage and Packaging) <a href="#fairpricing" class="highlight-button-dark btn btn-very-small button xs-no-margin popup-with-zoom-anim" style=" margin: 0 10px; line-height: initial;">Fair pricing Policy</a></li>
+							<!--{% if tax %}                           
+							<li>{{ text_tax }} {{ tax }}</li>
+							{% endif %}
+							{% if points %}
+							<li>{{ text_points }} {{ points }}</li>
+							{% endif %}
+							{% if discounts %}
+							<li>							 
+							
+							{% for discount in discounts %}
+							<li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
+							{% endfor %}
+							{% endif %}-->
+						  </ul>
+						  <ul class="list-unstyled" id="noprice_block" style="display:none;">
+							<li>{{ no_price_message }}</li>
+						  </ul>
+						  {% endif %}
+                          </div>
+                          <div id="fairpricing" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 text-center center-col bg-white modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Fair pricing Policy </span>
+                                <h3 class="margin-four">WE COMPARE SO YOU DONT HAVE TO</h3>
+                                <p>It's easy to lose sight of what value really means. If your version of value is like ours and about getting more and paying less, then you're in the right place. Buying direct from manufacturer online can save half of high street jewellers. We don't do endless promotions and high low pricing; we offer our lowest price permanently. Compare us and we know that you'll feel the difference.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
+                          <!--<div class="col-md-4 padding-two border border-gray">
+                          	<ul>
+                            	<li><a class="popup-with-zoom-anim" href="#lifetimewarranty-popup"><i><img src="catalog/view/theme/default/image/certificate-img.png" style="width:20px;" /></i> Life Time Warranty</a></li>
+                                <li><a class="popup-with-zoom-anim" href="#finanaceavailable-popup"><i><img src="catalog/view/theme/default/image/finance-img.png" style="width:20px;" /></i>Finanace Available ></a></li>
+                            </ul>
+                            <div id="lifetimewarranty-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Life Time Warranty</span>
+                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
+                            <div id="finanaceavailable-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                                <span class="slider-subtitle5 black-text no-margin-bottom">Finanace Available</span>
+                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
+                            </div>
+                          </div>-->
+                          <div class="clearfix"></div>
+                         </div>
+                        
+                         </div>
+                        
 						<form name="product-option-form" id="product-option-form" onSubmit="return false" action="" method="post">
 						  <div id="product"> {% if options %}
 							<hr>
@@ -302,12 +392,12 @@
                               
 							</div>
 							{% endif %}
-                            <div class="form-group margin-two width-100 pro-delivered-text f-left text-center">
+                            <div class="form-group margin-two width-100 pro-delivered-text f-left text-center  ">
                             	<span class="margin-left-right-two"><a href="javascript:void(0);">Delivered by: {{ delivery_date }}</a></span>
                                 <!--<span class="margin-left-right-two"><a href="#finance-calculation" class="popup-with-zoom-anim">0% Finanace - Click to Calculation</a></span>-->
                                 <span class="margin-left-right-two"><a href="#lifetimewarranty" class="popup-with-zoom-anim">Life Time Warranty</a></span>
                             </div>
-							<div class="form-group margin-one width-100 text-center">
+							<div class="form-group margin-one width-100 text-center print-no ">
 							  <div class="col-md-2 col-sm-12" style="display:none;"><label class="control-label" for="input-quantity">{{ entry_qty }}</label></div>
 							  <div class="col-md-10 col-sm-12" style="display:none;"><input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
 							  <input type="hidden" name="product_id" value="{{ product_id }}" /></div>
@@ -316,12 +406,12 @@
 							  <a class="popup-with-zoom-anim highlight-button-dark btn btn-medium button width-60 no-margin" id="button-enq" data-loading-text="{{ text_loading }}" href="#enquiry"><!--<i class="icon-basket"></i>-->Make an Enquiry</a></div>
 							  <!--<a class="highlight-button-dark btn btn-medium button width-60 no-margin" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"> {{ button_cart }}</a></div>-->
 							</div>
-                            <div class="form-group margin-two width-100 f-left text-center">
+                            <div class="form-group margin-two width-100 f-left text-center print-no ">
                             
                             	<a href="index.php?route=information/visit_showroom/popup" class="agree highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
                                 <!--<a href="#freesample-popup" class="popup-with-zoom-anim highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Order Free Sample</a>-->
                             </div>
-                            <div id="visitshowroom-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
+                            <div id="visitshowroom-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main print-no ">
                                 <span class="slider-subtitle5 black-text no-margin-bottom">Visit Showroom</span>
                                 <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
@@ -1202,8 +1292,8 @@ $(document).scroll(function() {
 });
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-	var s = $(".pricewrap");
+/*$(document).ready(function() {
+	var s = $(".topstickbar");
 	var pos = s.position();					   
 	$(window).scroll(function() {
 		var windowpos = $(window).scrollTop();
@@ -1213,7 +1303,22 @@ $(document).ready(function() {
 			s.removeClass("stick");	
 		}
 	});
-});
+});*/
+
+$(function() {
+  $('.topstickbar').hide();
+  $(window).scroll(function() {
+    var scroll = $(window).scrollTop();
+    if (scroll >= 350) {
+      $('.promaininfoshow').hide();
+      $('.topstickbar').show();
+    } else {
+      $('.promaininfoshow').show();
+      $('.topstickbar').hide();
+    }
+  });
+})
+
 /* sticky price javascript ends here */
 </script>
  {% if tagmanager.code and tagmanager.status =='1' %}
