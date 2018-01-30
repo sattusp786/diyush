@@ -243,6 +243,20 @@
                          </div>
                         
                          </div>
+                         <div class="mobileview">
+                         	<!-- product rating -->
+                        <div class="rating margin-one no-margin-top" style="margin-right:100px;">
+                            <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><a href="#pro-review-details"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></a></span>
+                            <div class="clearfix"></div>
+                        </div>
+                        
+                        <!-- end product rating -->
+                        <!-- product name -->
+                        <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
+                        <!-- end product name -->
+                        <!-- product stock -->
+                        <p class="deliveredtext text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by {{ delivery_date_top }}</p>
+                         </div>
                         
 						<form name="product-option-form" id="product-option-form" onSubmit="return false" action="" method="post">
 						  <div id="product"> {% if options %}
@@ -1106,6 +1120,7 @@ $('button[id^=\'button-upload\']').on('click', function() {
 				complete: function() {
 					$(node).button('reset');
 				},
+
 				success: function(json) {
 					$('.text-danger').remove();
 

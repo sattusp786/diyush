@@ -2726,6 +2726,7 @@ ul.sub-navi li a:before {
 .topstickbar .topstickbarleft{ float:left; width:60%;}
 .topstickbar .topstickbarright{ float:right; width:35%;}
 .topstickbar .deliveredtext, .topstickbar .separator-line { display:none;}  
+.topstickbar .product-name-details { font-size: 16px;}
 
 @media print {
 body.product_body  #topbar, body.product_body .search-cart-header, body.product_body #support-iconswrap, body.product_body #pro-review-details, body.product_body footer, body.product_body .zoom-gallery .products-thumb, body.product_body .pricewrap .list-unstyled li a.btn.btn-very-small, #product .size-chart, .print-no { display:none;}
