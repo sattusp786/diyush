@@ -1,7 +1,5 @@
 system/storage/*
-image/cache/*
-image/product/*
-image/upload_images/*
+image/*
 config.php
 admin/config.php
 storage/*
