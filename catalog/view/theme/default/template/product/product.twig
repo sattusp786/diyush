@@ -85,22 +85,16 @@
                     <!-- end product images -->
 					{% endif %}
                     <div class="col-md-6 col-sm-12 col-md-offset-1">
-                    <div class="topstickbar" style="display:none;">
+                    <!--<div class="topstickbar" style="display:none;">
                     	<div class="topstickbarleft">
-                        <!-- product rating -->
                         <div class="rating margin-one no-margin-top" style="margin-right:100px;">
                             <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span id="proreview-click-1" class="pull-right"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></span>
                             <div class="clearfix"></div>
                         </div>
-                        
-                        <!-- end product rating -->
-                        <!-- product name -->
                         <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
-                        <!-- end product name -->
                  
                         </div>
                         <div class="topstickbarright">
-                        <!-- end product stock -->
                         
                         <div class="pricewrap width-100">
                         <div class="col-md-12 no-padding-left">
@@ -117,19 +111,6 @@
 							</li>
 							{% endif %}
                              <li>(Inc. VAT, Postage and Packaging) <a href="#fairpricing" class="highlight-button-dark btn btn-very-small button xs-no-margin popup-with-zoom-anim" style=" margin: 0 10px; line-height: initial;">Fair pricing Policy</a></li>
-							<!--{% if tax %}                           
-							<li>{{ text_tax }} {{ tax }}</li>
-							{% endif %}
-							{% if points %}
-							<li>{{ text_points }} {{ points }}</li>
-							{% endif %}
-							{% if discounts %}
-							<li>							 
-							
-							{% for discount in discounts %}
-							<li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
-							{% endfor %}
-							{% endif %}-->
 						  </ul>
 						  <ul class="list-unstyled" id="noprice_block" style="display:none;">
 							<li>{{ no_price_message }}</li>
@@ -142,27 +123,11 @@
                                 <p>It's easy to lose sight of what value really means. If your version of value is like ours and about getting more and paying less, then you're in the right place. Buying direct from manufacturer online can save half of high street jewellers. We don't do endless promotions and high low pricing; we offer our lowest price permanently. Compare us and we know that you'll feel the difference.</p>
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
-                          <!--<div class="col-md-4 padding-two border border-gray">
-                          	<ul>
-                            	<li><a class="popup-with-zoom-anim" href="#lifetimewarranty-popup"><i><img src="catalog/view/theme/default/image/certificate-img.png" style="width:20px;" /></i> Life Time Warranty</a></li>
-                                <li><a class="popup-with-zoom-anim" href="#finanaceavailable-popup"><i><img src="catalog/view/theme/default/image/finance-img.png" style="width:20px;" /></i>Finanace Available ></a></li>
-                            </ul>
-                            <div id="lifetimewarranty-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
-                                <span class="slider-subtitle5 black-text no-margin-bottom">Life Time Warranty</span>
-                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
-                            </div>
-                            <div id="finanaceavailable-popup" class="zoom-anim-dialog mfp-hide col-lg-3 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main">
-                                <span class="slider-subtitle5 black-text no-margin-bottom">Finanace Available</span>
-                                <p class="margin-four">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
-                            </div>
-                          </div>-->
                           <div class="clearfix"></div>
                          </div>
                          </div>
                          <div class="clearfix"></div>
-                         </div>
+                         </div>-->
 						
                         <div class="promaininfoshow">
                     	
@@ -243,20 +208,15 @@
                          </div>
                         
                          </div>
-                         <div class="mobileview">
-                         	<!-- product rating -->
+                         <!--<div class="mobileview">
                         <div class="rating margin-one no-margin-top" style="margin-right:100px;">
                             <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><a href="#pro-review-details"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></a></span>
                             <div class="clearfix"></div>
                         </div>
-                        
-                        <!-- end product rating -->
-                        <!-- product name -->
+                    
                         <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
-                        <!-- end product name -->
-                        <!-- product stock -->
-                        <p class="deliveredtext text-uppercase letter-spacing-2 margin-two"><!--In Stock / Shipping Available--> Free and Insured - delivered by {{ delivery_date_top }}</p>
-                         </div>
+                        <p class="deliveredtext text-uppercase letter-spacing-2 margin-two"> Free and Insured - delivered by {{ delivery_date_top }}</p>
+                         </div>-->
                         
 						<form name="product-option-form" id="product-option-form" onSubmit="return false" action="" method="post">
 						  <div id="product"> {% if options %}
@@ -539,24 +499,24 @@
     </div>
 </section>
 
-<section id="pro-review-details" class="padding-two  border-bottom-light">
+<!--<section id="pro-review-details" class="padding-two  border-bottom-light">
 	<div class="container width-100">
 		<div class="row">
         	<div class="col-md-12">
             <div class="col-md-6 f-right prodetailsbot">
                 	<div class="tab-style1">
                             <div class="col-md-12 col-sm-12 no-padding">
-                                <!-- tab navigation -->
+                                
                                 <ul class="nav nav-tabs nav-tabs-light text-left protabs">
                                     <li class="active"><a href="#tab_sec1" data-toggle="tab">Details</a></li>
                                     <li><a href="#tab_sec2" data-toggle="tab">Shipping &amp; Return</a></li>
                                     <li><a href="#tab_sec3" data-toggle="tab">Size Guide</a></li>
                                 </ul>
-                                <!-- tab end navigation -->
+                               
                             </div>
-                            <!-- tab content section -->
+                            
                             <div class="tab-content">
-                                <!-- tab content -->
+                               
                                 <div class="tab-pane med-text fade in active" id="tab_sec1">
                                     <div class="row">   
                                     <div class="col-md-12 col-sm-12 ">
@@ -595,8 +555,7 @@
                                          </div>
                                     </div>
                                 </div>
-                                <!-- end tab content -->
-                                <!-- tab content -->
+                               
                                 <div class="tab-pane fade in" id="tab_sec2">
                                     <div class="row">
                                         
@@ -612,8 +571,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end tab content -->
-                                <!-- tab content -->
+                               
                                 <div class="tab-pane fade in" id="tab_sec3">
                                     <div class="row">                                        
                                         <div class="col-md-12 col-sm-12 sm-margin-top-seven">
@@ -632,10 +590,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- end tab content -->
+                              
                                
                             </div>
-                            <!-- end tab content section -->
+                         
                         </div>
                 </div>
             	<div class="col-md-6 f-left proreviewbot">
@@ -654,20 +612,14 @@
 							<p><strong>Great company to deal with</strong></p>
 							<p>Great company to deal with. There was a question whether the item could be delivered in time for my partners birthday but Abelini went the extra mile and arranged next day deluvery. Product was extremely good quality, delighted with both product and service.</p>
 						</div>
-						<!--<ul class="list-inline comment-pagination">
-							<li><a href="#" class="active">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">...</a></li>
-							<li><a href="#">8</a></li>
-							<li><a href="#">9</a></li>
-						</ul>-->
+						
                     </div>
                 </div>
                 
             </div>
         </div>
      </div>
- </section>           
+ </section> -->          
 
 {% if products %}
 <section class="padding-two">
@@ -1318,6 +1270,7 @@ $("#proreview-click-2").click(function() {
 
 </script>
 <script type="text/javascript">
+/*
 $(function() {
   $('.topstickbar').hide();
   $(window).scroll(function() {
@@ -1331,7 +1284,7 @@ $(function() {
     }
   });
 })
-
+*/
 /* sticky price javascript ends here */
 </script>
  {% if tagmanager.code and tagmanager.status =='1' %}
