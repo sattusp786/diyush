@@ -23,7 +23,7 @@
       <div class="panel-body">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form">
     <div id="tab-general">
-      <table class="form">
+      <table class="form" cellspacing="25" cellpadding="25" border="0" style="width:100%;">
       <tr>
           <td>{{ entry_currency }}</td>
           <td>
@@ -53,10 +53,19 @@
           </select>
           </td>
           <td>{{ entry_metal_weight }}</td>
-          <td><input type="text" name="metal_weight" value="{{ metal_weight }}" class="calculate"/></td>  
+          <td><input type="text" name="metal_weight" value="{{ metal_weight }}" class="calculate"/></td> 
+		  <td>{{ entry_multistone }} (C,S,M,CS,CM,SM,CSM)</td>
+          <td><input type="text" name="multistone" value="" class="calculate"/></td> 
       </tr>
+	  <tr>
+		  <td colspan="2">{{ entry_side_stone }}</td>
+          <td colspan="2"><input type="text" name="side_stone" style="width:400px;"  value="" class="calculate"/></td>  
+		  <td colspan="2">{{ entry_multi_stone }}</td>
+          <td colspan="2"><input type="text" name="multi_stone" style="width:400px;" value="" class="calculate"/></td>
+	  </tr>
       <tr>
         {% if options %}
+		{% set i = 0 %}
         {% for option in options %}
         <td>{{ option.option_name }}</td>
           <td>
@@ -66,7 +75,11 @@
             <option value="{{ option_value.code }}">{{ option_value.name }}</option>
           {% endfor %}
           </select>
-        </td>  
+        </td>
+		{% set i = i + 1 %}
+		{% if i % 4 == 0 %}
+			</tr><tr>
+		{% endif %}
         {% endfor %}
         {% endif %}
         </tr>
@@ -74,7 +87,7 @@
         <table class="form">
         <tr>
           <td>{{ entry_markup }}</td>
-          <td><select name="markup" >
+          <td><select name="product_markup" >
              <option value="">{{ text_select }}</option>
              {% for mark in markups %}
               <option value="{{ mark.code }}">{{ mark.title }}( {{ mark.code }} )</option>
@@ -110,12 +123,12 @@
         </table>  
       </table> 
 
-{% if price.error and price.error != '' %}
+{% if price.no_price and price.no_price == '1' %}
   <div id="output" style="font-size:15px;">
     <h3>RESULT :</h3>
     <table class="list">
       <tr>
-        <td align="center" style="font-size:15px;height:50px;vertical-align:middle;color:red;">{{ price.error }}</td>
+        <td align="center" style="font-size:15px;height:50px;vertical-align:middle;color:red;">No Price Found for the selected options.</td>
       </tr>
     </table>
   </div>
@@ -123,38 +136,37 @@
   <div id="output" style="font-size:15px;">
     <h3>RESULT :</h3>
     <table class="list">
+	  <tr>
+        <td class="right">Total Metal Weight :</td>
+        <td class="right">{{ price.metal_weight }}</td>
+      </tr>
       <tr>
         <td class="right">Metal Price :</td>
-        <td class="right">{{ price.actual_metal_price }}</td>
-        <td class="right">Selling Metal Price :</td>
-        <td class="right"><a href="index.php?route=metal/metal_price&user_token={{ user_token }}&filter_code={{ price.metal_code }}" target="_blank"><img src="view/image/external_link.png" alt="Goto" width="16" /></a> &nbsp;  &nbsp; &nbsp; &nbsp; {{ price.metal_price }}</td>     
+        <td class="right">{{ price.metal_price }}</td>
       </tr>
       <tr>
-        <td class="right">Stone Carat Price :</td>
-        <td class="right">{{ price.actual_stone_price }}</td>
-        <td class="right">Selling Stone Price :</td>
-        <td class="right"><a href="index.php?route=stone/stone_price&user_token={{ user_token }}&filter_stoneprice_id={{ price.stoneprice_id }}&sort=sprice&order=ASC" target="_blank"><img src="view/image/external_link.png" alt="Goto" width="16" /></a> &nbsp;  &nbsp; &nbsp; &nbsp; {{ price.stone_price }}</td>
+        <td class="right">Center Stone Price :</td>
+        <td class="right">{{ price.center_stone_price }}</td>
       </tr>
-      <tr>
-        <td class="right" colspan="2"> &nbsp; </td>
-        <td class="right">Total Metal & Stone Selling Price :</td>
-        <td class="right">{{ price.price }}</td>
+	  <tr>
+        <td class="right">Side Stone Price :</td>
+        <td class="right">{{ price.side_stone_price }}</td>
+      </tr>	  
+	  <tr>
+        <td class="right">Multi Stone Price :</td>
+        <td class="right">{{ price.multi_stone_price }}</td>
       </tr>
-      <tr>
-        <td class="right" colspan="2"> &nbsp; </td>
-        <td class="right">Price with Markup :</td>
-        <td class="right">{{ price.price_with_prod_markup }}</td>
+	  <tr>
+        <td class="right">Price Before Product Markup :</td>
+        <td class="right">{{ price.price_before_markup }}</td>
       </tr>
-      <tr>
-        <td class="right" colspan="2"> &nbsp; </td>
-        <td class="right">Price with Tax :</td>
+	  <tr>
+        <td class="right">Price After Product Markup :</td>
+        <td class="right">{{ price.price_after_markup }}</td>
+      </tr>
+	  <tr>
+        <td class="right">Final Price After Tax :</td>
         <td class="right">{{ price.price_with_tax }}</td>
-      </tr>
-      <tr>
-        <td class="right" style="font-size:15px;">Total Price :</td>
-        <td class="right" style="font-size:15px;">{{ price.actual_price }}</td>
-        <td class="right" style="font-size:15px;font-weight:bold;">Final Selling Price :</td>
-        <td class="right" style="font-size:15px;font-weight:bold;">{{ price.final_price }}</td>
       </tr>
     </table>
   </div>
@@ -164,132 +176,6 @@
       </div>
     </div>
   </div>
-<script type="text/javascript">
-
-$('.datetimepicker').datetimepicker({
-  pickTime: false
-});
-
-var stone_row = {{ stone_row }};
-
-function addStone() {
-  html ='<tbody id="stone-row'+ stone_row +'" class="stonebody">';
-    html +='<tr><td class="left">';
-                
-  html +='<input type="text" name="stone['+stone_row+'][quantity]" value="" size = "4" /></td>';
-  html +='<td class="left">';     
-  html +='<select  name="stone['+stone_row+'][position]" style="width:120px" >';
-  html +=' <option value="0">{{ text_select }}</option>';     
-  html +='<option value="Center Stone">Center Stone</option>';
-  html +='<option value="Side Stone">Side Stone</option>';
-  html +='</select></td>';
-  html +='<td class="left">';     
-  html +='<select  name="stone['+stone_row+'][type]" style="width:120px" >';
-  html +=' <option value="0">{{ text_select }}</option>';
-  {% for stone_type in stone_types %}         
-  html +='<option value="{{ stone_type.code }}">{{ stone_type.name }}</option>';
-  {% endfor %}
-  html +='</select></td>';
-
-  html +='<td class="left">';     
-  html +='<select name="stone['+stone_row+'][shape]" style="width:120px">';
-  html +=' <option value="0">{{ text_select }}</option>';
-  {% for shape in shapes %}
-  html +='<option value="{{ shape.code }}">{{ shape.name }}</option>';
-  {% endfor %}
-  html +='</select></td>';
-    html +=' <td class="left"><input type="text" name="stone['+stone_row+'][carat]" value="" size = "4" /></td>';  
-  html += '<td class="left" id="clarity">';         
-  html +='<select name="stone['+stone_row+'][clarity]" style="width:100px">';
-  html +='<option value="0">{{ text_select }}</option>';
-  {% for clarity in clarities %}
-  html +='<option value="{{ clarity.code }}">{{ clarity.name }}</option>';
-  {% endfor %}
-  html +='</select> </td>';
-    html +='<td class="left"><select name="stone['+stone_row+'][color]" style="width:100px">';        
-  html +=' <option value="0">{{ text_select }}</option>';
-  {% for color in colors %}
-  html +='<option value="{{ color.code }}">{{ color.name }}</option>';
-  {% endfor %}
-  html +='</select></td>';
-  html +='<td class="left"><select name="stone['+stone_row+'][certificate]" style="width:100px">';    
-  html +='<option value="0">{{ text_select }}</option>';
-  {% for certificate in certificates %}
-  html +='<option value="{{ certificate.code }}">{{ certificate.name }}</option>';
-  {% endfor %}
-  html +='</select></td>';
-    html +='<td class="left"><a onclick="$(\'#stone-row'+stone_row+'\').remove();" class="btn btn-danger btn-sm"><i class="fa fa-remove"></i> {{ button_remove }}</a></td>';
-    html +='</tr>';
-    html +='</tbody>';
-  
-  $('#stone tfoot').before(html);
- 
-  stone_row++;
-}
-
-function auto_add_stone(variant_image_id){
-
-  if(variant_image_id != ''){
-  
-    $(".stonebody").remove();
-    
-    $.ajax({
-        url: 'index.php?route=catalog/price_calculator/autoAddStone&user_token={{ user_token }}',
-        type: 'post',
-        dataType: 'html',
-        data: 'variant_image_id='+variant_image_id,
-        beforeSend: function(){},
-        success: function(ouput) {
-          $("#stone").append(ouput);
-        },
-        failure: function(){},
-        error: function(){}
-      });
-  } else {
-    alert('Please select Variant Image');
-    return false;
-  }
-}
-
-$('input[name=\'product_variant\']').autocomplete({
-  delay: 500,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=catalog/price_calculator/autocomplete&user_token={{ user_token }}&name=' +  encodeURIComponent(request),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.code,
-            value: item.product_variant_id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(item) {
-    $('input[name=\'product_variant\']').val(item.label);
-    $.ajax({
-        url: 'index.php?route=catalog/price_calculator/getVariantImage&user_token={{ user_token }}',
-        type: 'post',
-        dataType: 'html',
-        data: 'product_variant_id='+item.value,
-        beforeSend: function(){},
-        success: function(data) {
-          $("#variant_image").html(data);
-        },
-        failure: function(){},
-        error: function(){}
-      });
-    
-    return false;
-  },
-  focus: function(event, ui) {
-        return false;
-    }
-});
-
-</script>
 <style>
 #footer {
   position: relative;

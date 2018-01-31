@@ -27,7 +27,31 @@ class ControllerCatalogPriceCalculator extends Controller {
 			
 			$total_price = array();
 			
+			if($this->request->post['tax'] == '20.0000'){
+				$tax_class_id = '9';
+			} else {
+				$tax_class_id = '0';
+			}
+					
 			$price = $this->model_catalog_price_calculator->calculatePrice($this->request->post);
+			
+			$currency_arr = explode("_",$this->request->post['currency']);
+			$currency = $currency_arr[0];
+			
+			$price['metal_weight'] = round($price['metal_weight'],2).' gm';
+			$price['metal_price'] = $this->currency->format($price['metal_price'], $currency);
+			$price['center_stone_price'] = $this->currency->format($price['center_stone_price'], $currency);
+			$price['side_stone_price'] = $this->currency->format($price['side_stone_price'], $currency);
+			$price['multi_stone_price'] = $this->currency->format($price['multi_stone_price'], $currency);
+			$price['price_before_markup'] = $this->currency->format($price['price_before_markup'], $currency);
+			$price['price_after_markup_false'] = $this->currency->format($price['final_price'], $currency, '', false);
+			$price['price_after_markup'] = $this->currency->format($price['final_price'], $currency);
+			
+			if($tax_class_id > 0){
+				$price['price_with_tax'] = $this->currency->format($this->tax->calculate($price['price_after_markup_false'], $tax_class_id, $this->config->get('config_tax')), $currency);
+			} else {
+				$price['price_with_tax'] = $this->currency->format($price['price_after_markup_false'], $currency);
+			}
 			
 			$GLOBALS["pricing"] = $price;
 		}
