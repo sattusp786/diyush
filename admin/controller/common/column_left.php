@@ -269,6 +269,14 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
+			if ($this->user->hasPermission('access', 'masters/stone_price')) {
+				$masters[] = array(
+					'name'	   => $this->language->get('text_stone_price'),
+					'href'     => $this->url->link('masters/stone_price', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
+
 			// Metal Price
 			$metal = array();
 			
@@ -312,6 +320,7 @@ class ControllerCommonColumnLeft extends Controller {
 				);
 			}
 			
+			/*
 			// Stone Price
 			$stoneprice = array();
 			
@@ -338,6 +347,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => $stoneprice
 				);
 			}
+			*/
 
 			if ($masters) {
 				$data['menus'][] = array(
@@ -594,37 +604,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => $blog
 				);
 			}
-            
-
-            $blog = array();
-			if ($this->user->hasPermission('access', 'extension/extension/blog/article')) {
-				$blog[] = array(
-					'name'	   => $this->language->get('text_blog_article'),
-					'href'     => $this->url->link('extension/extension/blog/article', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()
-				);
-			}
-			if ($this->user->hasPermission('access', 'extension/extension/blog/setting')) {
-				$blog[] = array(
-					'name'	   => $this->language->get('text_blog_setting'),
-					'href'     => $this->url->link('extension/extension/blog/setting', 'user_token=' . $this->session->data['user_token'], true),
-					'children' => array()
-				);
-			}
-			$blog[] = array (
-			        'name'      => 'More functions',
-			        'href'      => 'http://www.opencart.com/index.php?route=extension/extension/info&extension_id=23490',
-			        'children'  => array()
-			);
-			if ($blog) {
-				$data['menus'][] = array(
-					'id'       => 'menu-blog',
-					'icon'	   => 'fa-pencil-square-o',
-					'name'	   => $this->language->get('text_blog'),
-					'href'     => '',
-					'children' => $blog
-				);
-			}
+           
             
 			// Marketing
 			$marketing = array();

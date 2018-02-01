@@ -159,7 +159,7 @@ function calculatePrice($data) {
 			}
 		}
 		
-		$stone_sql .= " ORDER BY sprice ASC";
+		$stone_sql .= " ORDER BY carat_price ASC";
 			
 		if(isset($mapping[$data['Certificate']]['position'])){
 			$position = $mapping[$data['Certificate']]['position'];
@@ -174,7 +174,7 @@ function calculatePrice($data) {
 		$get_stone_price = $db->query($stone_sql);
 			
 		if($get_stone_price->num_rows){
-			$sprice = $get_stone_price->row['sprice'];
+			$sprice = $get_stone_price->row['carat_price'];
 			if (isset($mapping[$data['Certificate']]['markup'])) {
 				$markup = explode('|',$mapping[$data['Certificate']]['markup']);
 				if(isset($markup[0]) && $markup[0] > 0){
@@ -213,9 +213,9 @@ function calculatePrice($data) {
 				//$sidestone_sql = "SELECT * FROM ".DB_PREFIX."stone_price WHERE stone='".$sider_stone."' AND shape='".$sider_shape."' AND weight >= ".$sider_carat." AND clarity IN (" . $sider_clarity . ") AND color IN (" . $sider_color . ") AND lab IN (" . $sider_lab . ") ";
 				
 				if($sides_pieces == 1 && $sides_carat >= 0.20){
-					$sidestone_sql .= " ORDER BY sprice ASC";
+					$sidestone_sql .= " ORDER BY carat_price ASC";
 				} else {
-					$sidestone_sql .= " ORDER BY mprice ASC";
+					$sidestone_sql .= " ORDER BY carat_price ASC";
 				}
 				
 				if(isset($multi_mapping[$sides_lab]['position'])){
@@ -233,7 +233,7 @@ function calculatePrice($data) {
 				
 				if($get_sidestone_price->num_rows){
 					if($sides_pieces == 1 && $sides_carat >= 0.20){
-						$sprice += $get_sidestone_price->row['sprice'];
+						$sprice += $get_sidestone_price->row['carat_price'];
 						if (isset($multi_mapping[$sides_lab]['markup'])) {
 							$side_markup = explode('|',$multi_mapping[$sides_lab]['markup']);
 							if(isset($side_markup[0]) && $side_markup[0] > 0){
@@ -244,7 +244,7 @@ function calculatePrice($data) {
 						}
 						$sidestone_price += $sprice;
 					} else {
-						$sidestone_price += $get_sidestone_price->row['mprice'] * ($sides_carat) * $sides_pieces;
+						$sidestone_price += $get_sidestone_price->row['carat_price'] * ($sides_carat) * $sides_pieces;
 					}
 				} else {
 					$no_price = '1';
@@ -297,9 +297,9 @@ function calculatePrice($data) {
 				*/
 				
 				if($multie_pieces == '1' && $multie_carat >= 0.20){
-					$multistone_sql .= " ORDER BY sprice ASC ";
+					$multistone_sql .= " ORDER BY carat_price ASC ";
 				} else {
-					$multistone_sql .= " ORDER BY mprice ASC ";
+					$multistone_sql .= " ORDER BY carat_price ASC ";
 				}
 					
 				if(isset($multi_mapping[$multie_lab]['position'])){
@@ -316,7 +316,7 @@ function calculatePrice($data) {
 				if($get_multistone_price->num_rows){
 					
 					if($multie_pieces == '1' && $multie_carat >= 0.20) {
-						$mprice += $get_multistone_price->row['sprice'];
+						$mprice += $get_multistone_price->row['carat_price'];
 						
 						if (isset($multi_mapping[$multie_lab]['markup'])) {
 							$multi_markup = explode('|',$multi_mapping[$multie_lab]['markup']);
@@ -328,7 +328,7 @@ function calculatePrice($data) {
 						}
 						$multistone_price += $mprice * $multie_pieces;
 					} else {
-						$multistone_price += $get_multistone_price->row['mprice'] * ($multie_carat) * $multie_pieces;
+						$multistone_price += $get_multistone_price->row['carat_price'] * ($multie_carat) * $multie_pieces;
 					}	
 				} else {
 					$no_price = '1';
