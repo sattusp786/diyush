@@ -5,7 +5,7 @@
         <section class=" page-title page-title-small border-bottom-light border-top-light padding-one print-no">
         <div class="bookapnt mobileview" ><a href="#" class="highlight-button-dark btn btn-medium button no-margin text-center width-100"> <i class="fa fa-map-marker white-text" ></i> Book Appointment</a></div>
         <div class="clearfix"></div>
-            <div class="container width-100">
+            <div class="container width-100"> 
                 <div class="row">
                     <div class="col-md-12 col-sm-12 breadcrumb text-uppercase wow fadeInUp xs-display-none" data-wow-duration="600ms">
                         <!-- breadcrumb -->
@@ -26,7 +26,7 @@
                         <!--<a href="#" class="f-left no-padding text-left" style="width:25%;"><i class="fa fa-angle-left"></i> Previous</a>-->
                         <span class="f-left text-left">{{ heading_title }}</span>
                         <!--<a href="#" class="f-rgiht no-padding text-right" style="width:20%;">Next<i class="fa fa-angle-right"></i></a>-->
-                        <span class="clearfix"></span>
+                        <span class="clear-both"></span>
                         </div>
                        
                     </div>
@@ -85,19 +85,29 @@
                     <!-- end product images -->
 					{% endif %}
                     <div class="col-md-6 col-sm-12 col-md-offset-1">
-                    <!--<div class="topstickbar" style="display:none;">
-                    	<div class="topstickbarleft">
+                    <div class="topstickbar" style="display:none;">
+                    	<div class="topstickbarleft width-40 f-left">
                         <div class="rating margin-one no-margin-top" style="margin-right:100px;">
                             <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span id="proreview-click-1" class="pull-right"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></span>
-                            <div class="clearfix"></div>
+                            <div class="clear-both"></div>
                         </div>
-                        <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
+                        <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text"><!--{{ heading_title }}--> Free and Insured - delivered by {{ delivery_date_top }}</span>
                  
                         </div>
-                        <div class="topstickbarright">
+                        <div class="topstickbarmid width-30 f-left padding-one">
+                        	<div class="width-60 f-left">
+                        	 <a class="popup-with-zoom-anim highlight-button-dark btn btn-small button width-100 no-margin text-center" id="button-enq" data-loading-text="Loading..." href="#enquiry">Make an Enquiry</a>
+                             </div>
+                             <div class="width-40 f-right">
+                        	 
+                             <a href="index.php?route=information/visit_showroom/popup" class="agree highlight-button btn btn-small button xs-margin-bottom-five margin-left-right-two">Visit Showroom</a>
+                             </div>
+                             <div class="clear-both"></div>
+                        </div>
+                        <div class="topstickbarright width-30 f-right">
                         
                         <div class="pricewrap width-100">
-                        <div class="col-md-12 no-padding-left">
+                        <div class="col-md-12 no-padding-right">
                         {% if price %}
 						  <ul class="list-unstyled" id="price_block">
 							{% if not special %}
@@ -123,18 +133,34 @@
                                 <p>It's easy to lose sight of what value really means. If your version of value is like ours and about getting more and paying less, then you're in the right place. Buying direct from manufacturer online can save half of high street jewellers. We don't do endless promotions and high low pricing; we offer our lowest price permanently. Compare us and we know that you'll feel the difference.</p>
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
-                          <div class="clearfix"></div>
+                          <div class="clear-both"></div>
                          </div>
                          </div>
-                         <div class="clearfix"></div>
-                         </div>-->
+                         <div class="clear-both"></div>
+                         <div class="stickbar-points bg-mid-gray">
+                         	<div class="width-40 f-left">
+                            	<div class="col-md-4 blt"><div class="text-center">Life Time Warranty</div></div>
+                                <div class="col-md-4 blt"><div class="text-center">Free Resizing</div></div>
+                                <div class="col-md-4"><div class="text-center">Need Quick Delivery?</div></div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="width-20 f-left"><div class="col-md-12 text-center stickbar-downarrow"><i class="fa fa-caret-down"></i></div></div>
+                            <div class="width-40 f-right">
+                            	<div class="col-md-4 blt"><div class="text-center">Order with Deposit</div></div>
+                                <div class="col-md-4 blt"><div class="text-center">60 Days Returns</div></div>
+                                <div class="col-md-4"><div class="text-center">Free Certificate & Valuation</div></div>
+                                <div class="clear-both"></div>
+                            </div>
+                            <div class="clear-both"></div>
+                         </div>
+                         </div>
 						
                         <div class="promaininfoshow">
                     	
                         <!-- product rating -->
                         <div class="rating margin-one no-margin-top" style="margin-right:100px;">
                             <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span id="proreview-click-2" class="pull-right"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></span>
-                            <div class="clearfix"></div>
+                            <div class="clear-both"></div>
                         </div>
                         
                         <!-- end product rating -->
@@ -204,19 +230,19 @@
                                 <a class="highlight-button btn btn-very-small button popup-modal-dismiss no-margin" href="#">Dismiss</a>
                             </div>
                           </div>-->
-                          <div class="clearfix"></div>
+                          <div class="clear-both"></div>
                          </div>
                         
                          </div>
-                         <!--<div class="mobileview">
+                         <div class="mobileview">
                         <div class="rating margin-one no-margin-top" style="margin-right:100px;">
                             <span class="rating-text text-uppercase pull-left no-margin">STYLE ID: <span class="black-text">{{ sku }}</span></span><span class="pull-right"><a href="#pro-review-details"><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><span class="rating-text text-uppercase">Reviews</span></a></span>
-                            <div class="clearfix"></div>
+                            <div class="clear-both"></div>
                         </div>
                     
                         <span class="product-name-details text-uppercase font-weight-600 letter-spacing-2 black-text">{{ heading_title }}</span>
                         <p class="deliveredtext text-uppercase letter-spacing-2 margin-two"> Free and Insured - delivered by {{ delivery_date_top }}</p>
-                         </div>-->
+                         </div>
                         
 						<form name="product-option-form" id="product-option-form" onSubmit="return false" action="" method="post">
 						  <div id="product"> {% if options %}
@@ -230,7 +256,7 @@
                               </div>
                               <div class="{% if option.name|lower == 'ring size' %} col-md-3 {% else %} col-md-10 {% endif %} col-sm-12">
 							  {% if option.option_id in square_box %}
-							  <ul class="size clearfix size-details no-margin">
+							  <ul class="size clear-both size-details no-margin">
 								{% set o = 1 %}
 								{% set default_val = '0' %}
 								{% for option_value in option.product_option_value %}
@@ -279,7 +305,7 @@
 									</label>
 								</div>
 								{% endfor %} </div></div>
-								<div class="clear" style="clear:both;"></div>
+								<div class="clear-both" style="clear:both;"></div>
 							</div>
 							{% endif %}
 							{% if option.type == 'checkbox' %}
@@ -499,51 +525,36 @@
     </div>
 </section>
 
-<!--<section id="pro-review-details" class="padding-two  border-bottom-light">
+<section id="aboutring-details" class="padding-two bg-gray border-bottom-light">
 	<div class="container width-100">
 		<div class="row">
         	<div class="col-md-12">
-            <div class="col-md-6 f-right prodetailsbot">
-                	<div class="tab-style1">
-                            <div class="col-md-12 col-sm-12 no-padding">
-                                
-                                <ul class="nav nav-tabs nav-tabs-light text-left protabs">
-                                    <li class="active"><a href="#tab_sec1" data-toggle="tab">Details</a></li>
-                                    <li><a href="#tab_sec2" data-toggle="tab">Shipping &amp; Return</a></li>
-                                    <li><a href="#tab_sec3" data-toggle="tab">Size Guide</a></li>
-                                </ul>
-                               
-                            </div>
-                            
-                            <div class="tab-content">
-                               
-                                <div class="tab-pane med-text fade in active" id="tab_sec1">
-                                    <div class="row">   
-                                    <div class="col-md-12 col-sm-12 ">
-                                         <h3 class="text-center margin-two no-margin-top">About Your Ring</h3>
-                                         <p class="text-center">{{ description }}</p>
-                                          <h3 class="text-center margin-two no-margin-top">Reference Code: {{ sku }}</h3>
-                                          <div class="col-md-12">
-                                          	<h3 class="margin-five">Ring Information</h3>
+            	<div class="col-md-6">
+                 <h3 class="text-center margin-two no-margin-top">About Your Ring</h3>
+                 <h3 class="text-center margin-two no-margin-top">Reference Code: {{ sku }}</h3>
+                 <p class="text-center">{{ description }}</p>
+                  
+                  <div class="col-md-12">
+                                          	<h3 class="margin-two">Ring Information</h3>
                                             <p>
 												Metal: <span class="metal_purity">{{ metal_name }}</span><br />
 												Metal Weight: Approx. <span class="metal_weight">0</span> gms.
 											</p>
                                             <div class="col-md-6 no-padding-left">
-                                            	<h3 class="margin-five">Stone</h3>
+                                            	<h3 class="margin-two">Stone</h3>
                                                 <p id="stone_details">
 												
 											</p>
                                             </div>
                                             <div class="col-md-6">
-                                            	<h3 class="margin-five sidestone_heading" style="display:none;">Side Stone</h3>
+                                            	<h3 class="margin-two sidestone_heading" style="display:none;">Side Stone</h3>
                                                 <p id="sidestone_details">
 												
 											</p>
                                             </div>
                                             <div class="clear-both"></div>  
                                           </div>
-                                          <div class="col-md-6" style="display:none;">
+                  <div class="col-md-6" style="display:none;">
                                           	<h3 class="margin-five" id="dimension_details">Dimension</h3>
                                             <p>
 												Setting Height: 6.7mm<br />
@@ -552,74 +563,25 @@
 												Band Thickness: 1.5mm
 											</p>
                                           </div>
-                                         </div>
-                                    </div>
-                                </div>
-                               
-                                <div class="tab-pane fade in" id="tab_sec2">
-                                    <div class="row">
-                                        
-                                        <div class="col-md-12 col-sm-12 ">
-                                           <h3 class="margin-two no-margin-top">Free International Shipping</h3>
-<p>WE ARE PROUD TO OFFER FREE DELIVERY IN UK. FOR CUSTOMERS OUTSIDE OF THE UK, WE APPLY A SMALL CHARGE AND EMPLOY FEDEX TO DISPATCH THE GOODS DIRECT TO YOUR DOOR, ALL WITH COMPREHENSIVE INSURANCE THAT KEEPS YOUR PURCHASE SAFE IN TRANSIT. </p>
-<p><a href="/free-shipping">Read More</a></p>
-
-<h3 class="margin-two no-margin-top">30 Days Return</h3>
-<p>Our primary goal at Abelini is to deliver the highest standards of customer service and satisfaction at all times. After you purchase from us, if you are not completely satisfied with any item we will gladly offer you a full refund or exchange.</p>
-<p><a href="/return-and-exchange">Read More</a></p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                               
-                                <div class="tab-pane fade in" id="tab_sec3">
-                                    <div class="row">                                        
-                                        <div class="col-md-12 col-sm-12 sm-margin-top-seven">
-                                            <p>Regardless of whether you need to know the size of your ring finger or a current ring, we have made things straightforward. Here is your guide for measuring your ring size yourself at your home.</p>
-                                            <div class="col-md-10 center-col ">
-                                            <div class="col-md-6 text-center features-box-style1"><i class="icon-book-open medium-icon gray-text"></i>
-         <h3 class="margin-three no-margin-top">Download Ring Sizer</h3>
-          <a href="{{ ring_size_pdf }}" target="_blank" download="ring-size-guide.pdf" class="highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
-                                            <div class="col-md-6 text-center features-box-style1"><i class="icon-envelope medium-icon gray-text"></i>
-          <h3 class="margin-three no-margin-top">Free Ring Sizer</h3>
-          <a href="#freeringsizer" class="popup-with-zoom-anim highlight-button-dark btn btn-medium button xs-margin-bottom-five margin-four no-margin-lr">Click Here</a></div>
-                                            <div class="clear-both"></div>
-                                            
-                                            <p class="text-center margin-two"><a href="/size-guide">Read out Complete Size Guide</a></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                              
-                               
-                            </div>
-                         
-                        </div>
                 </div>
-            	<div class="col-md-6 f-left proreviewbot">
-                	<h2 class="margin-two no-margin-top">Customer Review</h2>
-                    <div class="rviwcolumn2 spaceTop"><a target="_blank" href="https://uk.trustpilot.com/review/abelini.com"><img src="catalog/view/theme/default/image/productpage/trustpilot.jpg" alt="Customer Reviews" /></a></div>
-                    <div class="review-main">
-                    	<div class="review">
-							<p class="letter-spacing-2 text-uppercase review-name"><strong>Elaine,</strong> November 17, 2017</p>
-							<p><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa black-text fa-star"></i></p>
-							<p><strong>Absolutely stunning jewellery …</strong></p>
-							<p>Absolutely stunning jewellery beautifully made excellent craftsmanship the wow factor when you receive your jewellery well there is nothing like it ,,my pieces of jewelry fro Abelini I will never take them off ..the staff and customer service is outstanding so helpful and such a quick delivery unbelievable I would recommend .anyone to buy from Abelini I certainly will again I would give them 10 starsif I could ...Brilliant .</p>
-						</div>
-						<div class="review">
-							<p class="letter-spacing-2 text-uppercase review-name"><strong>Bob Staples,</strong> November 13, 2017</p>
-							<p><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa fa-star black-text"></i><i class="fa black-text fa-star"></i></p>
-							<p><strong>Great company to deal with</strong></p>
-							<p>Great company to deal with. There was a question whether the item could be delivered in time for my partners birthday but Abelini went the extra mile and arranged next day deluvery. Product was extremely good quality, delighted with both product and service.</p>
-						</div>
-						
+                <div class="col-md-6 text-center">
+                	<p class="text-uppercase margin-two no-margin-top">Expert Advice from our</p>
+                    <h2 class="margin-two no-margin-top">Jewelry Consultants</h2>
+                    <p class="margin-five">Our Consultants are here to help every step of the way, from selecting the perfect setting and stones to ensuring a seamiess delivery.</p>
+                    <div class="col-md-12">
+                    	<div class="col-md-4 text-center"><a href="tel:+44(0)2036377362"> <i class="icon-phone small-icon black-text"></i></a><h6 class="black-text margin-two no-margin-bottom"> <a href="tel:{{ config_telephone }}">+44 (0) 2036377362</a></h6></div>
+                        <div class="col-md-4 text-center"><a href="/book-appointment"><i class="icon-map-pin small-icon black-text"></i></a><h6 class="margin-two no-margin-bottom"><a href="/book-appointment" class="black-text">Visit Our Showroom</a></h6></div>
+                        <div class="col-md-4 text-center"><a href="javascript:$zopim.livechat.window.show();"><i class="icon-chat small-icon black-text"></i></a><h6 class="margin-two no-margin-bottom"><a href="javascript:$zopim.livechat.window.show();" class="black-text">Live Chat</a></h6></div>
+                        <div class="clear-both"></div>
                     </div>
+                    <div class="clear-both"></div>
+                     <p class="margin-four"><a href="/faq" class="btn btn-medium button xs-margin-bottom-five margin-left-right-two">View FAQ ></a></p>
                 </div>
-                
+                <div class="clear-both"></div>
             </div>
         </div>
-     </div>
- </section> -->          
+    </div>
+</section>                
 
 {% if products %}
 <section class="padding-two">
@@ -703,6 +665,65 @@
 	</div>
 </section>-->
 {% endif %}
+
+<section class="padding-two">
+  <div class="container width-100">
+    <div class="row">
+    <h2 class="margin-two no-margin-top text-center">Customer Review</h2>
+      <div id="owl-review" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">        
+        <div class="item">
+          <div class="review text-center padding-left-right">            
+            <p><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i></p>
+            <h3 class="margin-three"><strong>Absolutely stunning jewellery..</strong></h3>
+            <p>Absolutely stunning jewellery beautifully made excellent craftsmanship the wow factor when you receive your jewellery well there is nothing like it ,,my pieces of jewelry fro Abelini I will never take them off ..the staff and customer service is outstanding so helpful and such a quick delivery unbelievable I would recommend .anyone to buy from Abelini I certainly will again I would give them 10 starsif I could ...Brilliant .</p>
+            <p class="letter-spacing-2 text-uppercase review-name"><strong>Elaine,</strong> November 17, 2017</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="review text-center padding-left-right">            
+            <p><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i></p>
+            <h3 class="margin-three"><strong>Great company to deal with</strong></h3>
+            <p>Great company to deal with. There was a question whether the item could be delivered in time for my partners birthday but Abelini went the extra mile and arranged next day deluvery. Product was extremely good quality, delighted with both product and service.</p>
+            <p class="letter-spacing-2 text-uppercase review-name"><strong>Bob Staples,</strong> November 13, 2017</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="review text-center padding-left-right">            
+            <p><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i></p>
+            <h3 class="margin-three"><strong>Absolutely stunning jewellery..</strong></h3>
+            <p>Absolutely stunning jewellery beautifully made excellent craftsmanship the wow factor when you receive your jewellery well there is nothing like it ,,my pieces of jewelry fro Abelini I will never take them off ..the staff and customer service is outstanding so helpful and such a quick delivery unbelievable I would recommend .anyone to buy from Abelini I certainly will again I would give them 10 starsif I could ...Brilliant .</p>
+            <p class="letter-spacing-2 text-uppercase review-name"><strong>Elaine,</strong> November 17, 2017</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="review text-center padding-left-right">            
+            <p><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i></p>
+            <h3 class="margin-three"><strong>Great company to deal with</strong></h3>
+            <p>Great company to deal with. There was a question whether the item could be delivered in time for my partners birthday but Abelini went the extra mile and arranged next day deluvery. Product was extremely good quality, delighted with both product and service.</p>
+            <p class="letter-spacing-2 text-uppercase review-name"><strong>Bob Staples,</strong> November 13, 2017</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="review text-center padding-left-right">            
+            <p><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i></p>
+            <h3 class="margin-three"><strong>Absolutely stunning jewellery..</strong></h3>
+            <p>Absolutely stunning jewellery beautifully made excellent craftsmanship the wow factor when you receive your jewellery well there is nothing like it ,,my pieces of jewelry fro Abelini I will never take them off ..the staff and customer service is outstanding so helpful and such a quick delivery unbelievable I would recommend .anyone to buy from Abelini I certainly will again I would give them 10 starsif I could ...Brilliant .</p>
+            <p class="letter-spacing-2 text-uppercase review-name"><strong>Elaine,</strong> November 17, 2017</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="review text-center padding-left-right">            
+            <p><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i><i class="fa fa-star yellow-text"></i></p>
+            <h3 class="margin-three"><strong>Great company to deal with</strong></h3>
+            <p>Great company to deal with. There was a question whether the item could be delivered in time for my partners birthday but Abelini went the extra mile and arranged next day deluvery. Product was extremely good quality, delighted with both product and service.</p>
+            <p class="letter-spacing-2 text-uppercase review-name"><strong>Bob Staples,</strong> November 13, 2017</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <div id="freeringsizer" class="zoom-anim-dialog mfp-hide col-lg-9 col-md-6 col-sm-7 col-xs-11 center-col bg-white modal-popup-main">
     <span class="slider-subtitle5 black-text no-margin-bottom  text-center">Order My Free Ring Sizer</span><br/>
@@ -850,6 +871,8 @@ $('#form-freeringsizer').on('submit', function(e) {
         $('#freeringsizer-address').val('');
         $('#freeringsizer-message').val('');
 		//setTimeout(function(){ $(".close").trigger('click'); }, 3000);
+
+
         
 		if(json['redirect']){
 			location.href= json['redirect'];
@@ -979,6 +1002,7 @@ fbq('track', 'AddToCart', {content_ids: '{{pid}}', content_type: 'product',value
 		complete: function() {
 			$('#button-cart').button('reset');
 		},
+
 		success: function(json) {
 			$('.alert-dismissible, .text-danger').remove();
 			$('.form-group').removeClass('has-error');
@@ -1270,7 +1294,7 @@ $("#proreview-click-2").click(function() {
 
 </script>
 <script type="text/javascript">
-/*
+
 $(function() {
   $('.topstickbar').hide();
   $(window).scroll(function() {
@@ -1284,7 +1308,7 @@ $(function() {
     }
   });
 })
-*/
+
 /* sticky price javascript ends here */
 </script>
  {% if tagmanager.code and tagmanager.status =='1' %}

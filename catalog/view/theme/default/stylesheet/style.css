@@ -2724,11 +2724,14 @@ ul.sub-navi li a:before {
 
 #pro-gridview .home-product img { width:80%;}
 
-.topstickbar {position: fixed; top: 0; left:0; background: #fff; width: 100% !important; border-bottom: 1px solid; z-index: 99; padding:10px 2%;}
+.topstickbar {position: fixed; top: 0; left:0; background: #fff; width: 100% !important; border-bottom: 1px solid #c3c3c3; z-index: 99; padding:10px 1% 0;}
 .topstickbar .topstickbarleft{ float:left; width:60%;}
 .topstickbar .topstickbarright{ float:right; width:35%;}
 .topstickbar .deliveredtext, .topstickbar .separator-line { display:none;}  
-.topstickbar .product-name-details { font-size: 16px;}
+.topstickbar .product-name-details { font-size: 12px;}
+.stickbar-points { margin:0 -1%; font-size:11px; color: #000; font-weight: 400; margin-top: 5px;}
+.stickbar-points .blt::after { content: ".";  font-size: 30px;  position: absolute; right: 0; top: -8px;}
+.stickbar-points .stickbar-downarrow .fa{font-size: 80px; color: #fff; top: -35px; position: absolute;}
 #proreview-click-1, #proreview-click-2 { cursor:pointer;}
 
 @media print {

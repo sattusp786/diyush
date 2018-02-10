@@ -1204,8 +1204,9 @@
 	#wpbs_slider { right:0;}
 	#wpbs_cont {width:100%;}
 	.rviwcolumn2 { position:static; margin:20px 0;}
-	.topstickbar .topstickbarleft{ display:none;}
-	.topstickbar .topstickbarright { width:100%; text-align:center;}
+	.topstickbar { padding:10px 1%!important;}
+	.topstickbar .topstickbarleft, .topstickbar .topstickbarmid, .stickbar-points { display:none!important;}
+	.topstickbar .topstickbarright { width:100%!important; text-align:center;}
 	.zopim { left:-120% !important;}
 	.logo { max-width: 150px; }
 	.page-title span { display:none;}
