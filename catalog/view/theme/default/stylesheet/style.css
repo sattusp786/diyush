@@ -1761,6 +1761,7 @@ ul.list-line li span {min-width:130px; display:inline-block}
 .slider-typography-shop .owl-subtitle { font-size: 16px; font-weight: 600; letter-spacing: 7px; line-height: 80px; text-transform: uppercase; font-family: 'Open Sans', sans-serif; }
 .slider-typography-shop .owl-title { font-size: 63px; font-weight: 700; line-height: 65px; width: 50%; }
 .home-product { min-height:350px;}
+.product_body .home-product { min-height:250px;}
 .product-name a { font-size:12px; font-weight:400; letter-spacing:2px; display:block}
 .price { font-size:14px; font-weight:600; display:block}
 .price del { color:#898989; margin-right:10px; font-weight: 100}

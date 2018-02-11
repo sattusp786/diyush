@@ -600,20 +600,20 @@
 				<div class="item">
 					<div class="home-product text-center position-relative overflow-hidden">
 						<a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');"{% endif %}><img src="{{ product.thumb }}" alt="{{ product.name }}"/></a>
-						<span class="product-name text-uppercase"><a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');"{% endif %}>{{ product.name }}</a></span>
+						<!--<span class="product-name text-uppercase"><a href="{{ product.href }}" {% if tagmanager.code and tagmanager.status =='1' %}onclick="GAClick('{{ product.title }}','{{ product.pid }}','{{ product.pprice }}','{{ product.brand }}','{% if product.category %}{{product.category}}{%else%}Related Products{%endif%}');"{% endif %}>{{ product.name }}</a></span>-->
 						{% if product.price %}
 						  <span class="price black-text"> {% if not product.special %}
-							{{ product.price }}
+							From {{ product.price }}
 							{% else %} {{ product.special }} <del>{{ product.price }}</del> {% endif %}
 							</span>
 						  {% endif %}
-						<div class="quick-buy">
+						<!--<div class="quick-buy">
 							<div class="product-share">
 								<a href="javascript:void(0);" onClick="wishlist.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Wishlist"><i class="fa fa-heart-o"></i></a>
 								<a href="javascript:void(0);" onClick="compare.add('{{ product.product_id }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Compare"><i class="fa fa-refresh"></i></a>
 								<a href="javascript:void(0);" onClick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" class="highlight-button-dark btn btn-small no-margin-right quick-buy-btn" title="Add to Cart"><i class="fa fa-shopping-cart"></i></a>
 							</div>
-						</div>
+						</div>-->
 					</div>
 				</div>
 				<!-- end shop item -->
@@ -668,23 +668,18 @@
 
 <section class="padding-two">
   <div class="container width-100">
-    <div class="row">
+    <div class="row no-margin">
     <h2 class="margin-two no-margin-top text-center">Customer Review</h2>
         <form class="form-horizontal" id="form-review">
             <div id="review"></div>
-            <h2>{{ text_write }}</h2>
-            {% if review_guest %}
+            <div class="clear-both"></div>
+            <h2 class="text-center">{{ text_write }}</h2>
+              {% if review_guest %}
+            <div class="col-md-6">
             <div class="form-group required">
               <div class="col-sm-12">
                 <label class="control-label" for="input-name">{{ entry_name }}</label>
                 <input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group required">
-              <div class="col-sm-12">
-                <label class="control-label" for="input-review">{{ entry_review }}</label>
-                <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
-                <div class="help-block">{{ text_note }}</div>
               </div>
             </div>
             <div class="form-group required">
@@ -701,11 +696,21 @@
                 &nbsp;
                 <input type="radio" name="rating" value="5" />
                 &nbsp;{{ entry_good }}</div>
-            </div>
+            </div></div>
+            <div class="col-md-6">
+            <div class="form-group required">
+              <div class="col-sm-12">
+                <label class="control-label" for="input-review">{{ entry_review }}</label>
+                <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                <div class="help-block">{{ text_note }}</div>
+              </div>
+            </div></div>
+            
+            
             {{ captcha }}
             <div class="buttons clearfix">
               <div class="pull-right">
-                <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
+                <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="highlight-button-dark btn btn-small button width-100 no-margin text-center">{{ button_continue }}</button>
               </div>
             </div>
             {% else %}
@@ -1223,6 +1228,7 @@ $('.product-option').on('change', function() {
 			}
 
 			if (json['success'] == '1') {
+
 				var metal_name = $(".imager:checked").attr('alt');
 				$(".metal_purity").html(metal_name);
 				$(".metal_weight").html(json['weight']);

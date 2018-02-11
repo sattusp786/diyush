@@ -292,10 +292,10 @@ $(document).ready(function () {
     });
     $("#shop-products").owlCarousel({
         navigation: true,
-        items: 3,
-        itemsDesktop: [1200, 3],
-        itemsTablet: [800, 3],
-        itemsMobile: [700, 1],
+        items: 6,
+        itemsDesktop: [1200, 6],
+        itemsTablet: [800, 4],
+        itemsMobile: [700, 2],
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
     });
 	$("#filter-products").owlCarousel({
@@ -314,7 +314,7 @@ $(document).ready(function () {
         itemsMobile: [700, 2],
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
     });
-	$("#owl-review").owlCarousel({
+	$("#review").owlCarousel({
         navigation: true,
         items: 3,
         itemsDesktop: [1200, 3],

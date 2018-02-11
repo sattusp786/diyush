@@ -1,4 +1,4 @@
-{% if reviews %}
+<!--{% if reviews %}
 {% for review in reviews %}
 <table class="table table-striped table-bordered">
   <tr>
@@ -16,4 +16,25 @@
 <div class="text-right">{{ pagination }}</div>
 {% else %}
 <p>{{ text_no_reviews }}</p>
+{% endif %} -->
+
+
+{% if reviews %}
+{% for review in reviews %}
+	<div class="item col-md-4">
+    	<div class="review text-center padding-left-right">   
+         <p> {% for i in 1..5 %}
+      {% if review.rating < i %} <span class="fa fa-stack yellow-text"><i class="fa fa-star-o fa-stack-2x yellow-text"></i></span> {% else %} <span class="fa fa-stack yellow-text"><i class="fa fa-star fa-stack-2x yellow-text"></i><i class="fa fa-star-o fa-stack-2x yellow-text"></i></span> {% endif %}
+      {% endfor %}</p> 
+       <p>{{ review.text }}</p>
+            <p class="letter-spacing-2 text-uppercase review-name"><strong>{{ review.author }},</strong> {{ review.date_added }}</p>
+        </div>
+     </div>
+{% endfor %}
+<div class="text-right">{{ pagination }}</div>
+{% else %}
+<p>{{ text_no_reviews }}</p>
 {% endif %} 
+
+
+
