@@ -174,7 +174,11 @@ function calculatePrice($data) {
 		$get_stone_price = $db->query($stone_sql);
 			
 		if($get_stone_price->num_rows){
-			$sprice = $get_stone_price->row['carat_price'];
+			if(isset($data['Carat']) && !empty($data['Carat'])) {
+					$sprice = $get_stone_price->row['carat_price'] * ($data['Carat']/100);
+				} else {
+					$sprice = $get_stone_price->row['carat_price'];
+				}
 			if (isset($mapping[$data['Certificate']]['markup'])) {
 				$markup = explode('|',$mapping[$data['Certificate']]['markup']);
 				if(isset($markup[0]) && $markup[0] > 0){
@@ -232,20 +236,18 @@ function calculatePrice($data) {
 				$get_sidestone_price = $db->query($sidestone_sql);
 				
 				if($get_sidestone_price->num_rows){
-					if($sides_pieces == 1 && $sides_carat >= 0.20){
-						$sprice += $get_sidestone_price->row['carat_price'];
+					
+						$sprice = $get_sidestone_price->row['carat_price'] * $sides_carat;
 						if (isset($multi_mapping[$sides_lab]['markup'])) {
 							$side_markup = explode('|',$multi_mapping[$sides_lab]['markup']);
 							if(isset($side_markup[0]) && $side_markup[0] > 0){
-								$sprice += $sprice * $side_markup[0] + $side_markup[1];
+								$sprice = $sprice * $side_markup[0] + $side_markup[1];
 							} elseif(isset($side_markup[1])) {
-								$sprice += $sprice + $side_markup[1];
+								$sprice = $sprice + $side_markup[1];
 							}
 						}
-						$sidestone_price += $sprice;
-					} else {
-						$sidestone_price += $get_sidestone_price->row['carat_price'] * ($sides_carat) * $sides_pieces;
-					}
+						$sidestone_price += $sprice * $sides_pieces;
+					
 				} else {
 					$no_price = '1';
 				}
@@ -315,21 +317,19 @@ function calculatePrice($data) {
 				
 				if($get_multistone_price->num_rows){
 					
-					if($multie_pieces == '1' && $multie_carat >= 0.20) {
-						$mprice += $get_multistone_price->row['carat_price'];
+					
+						$mprice = $get_multistone_price->row['carat_price'] * $multie_carat;
 						
 						if (isset($multi_mapping[$multie_lab]['markup'])) {
 							$multi_markup = explode('|',$multi_mapping[$multie_lab]['markup']);
 							if(isset($multi_markup[0]) && $multi_markup[0] > 0){
-								$mprice += $mprice * $multi_markup[0] + $multi_markup[1];
+								$mprice = $mprice * $multi_markup[0] + $multi_markup[1];
 							} elseif(isset($multi_markup[1])) {
-								$mprice += $mprice + $multi_markup[1];
+								$mprice = $mprice + $multi_markup[1];
 							}
 						}
 						$multistone_price += $mprice * $multie_pieces;
-					} else {
-						$multistone_price += $get_multistone_price->row['carat_price'] * ($multie_carat) * $multie_pieces;
-					}	
+					
 				} else {
 					$no_price = '1';
 				}
@@ -456,7 +456,7 @@ if($query_products->num_rows) {
         $default_options = array();
 		$default_options = getOptionValuesData($product['product_id']);
 		foreach ($default_options as $option) {
-			if($option['default'] == '1' && $option['required'] == '1'){
+			if($option['default'] == '1'){
 				$default_options[$option['name']] = $option['code'];
 				
 				//Sidestones..

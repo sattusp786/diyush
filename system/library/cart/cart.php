@@ -388,7 +388,7 @@ class Cart {
 	}
 	
 	public function calculatePrice($data) {
-		
+
 		$mapping = $this->getOptionValueMapping();
 		$multi_mapping = $this->getOptionValueMapping();
 		
@@ -518,7 +518,12 @@ class Cart {
 			$get_stone_price = $this->db->query($stone_sql);
 			
 			if($get_stone_price->num_rows){
-				$sprice = $get_stone_price->row['carat_price'];
+				
+				if(isset($data['Carat']) && !empty($data['Carat'])){
+					$sprice = $get_stone_price->row['carat_price'] * ($data['Carat']/100);
+				} else {
+					$sprice = $get_stone_price->row['carat_price'];
+				}
 				if (isset($mapping[$data['Certificate']]['markup'])) {
 					$markup = explode('|',$mapping[$data['Certificate']]['markup']);
 					if(isset($markup[0]) && $markup[0] > 0){
@@ -576,20 +581,18 @@ class Cart {
 					$get_sidestone_price = $this->db->query($sidestone_sql);
 					
 					if($get_sidestone_price->num_rows){
-						if($sides_pieces == 1 && $sides_carat >= 0.20){
-							$sprice += $get_sidestone_price->row['carat_price'];
+						
+							$sprice = $get_sidestone_price->row['carat_price'] * $sides_carat;
 							if (isset($multi_mapping[$sides_lab]['markup'])) {
 								$side_markup = explode('|',$multi_mapping[$sides_lab]['markup']);
 								if(isset($side_markup[0]) && $side_markup[0] > 0){
-									$sprice += $sprice * $side_markup[0] + $side_markup[1];
+									$sprice = $sprice * $side_markup[0] + $side_markup[1];
 								} elseif(isset($side_markup[1])) {
-									$sprice += $sprice + $side_markup[1];
+									$sprice = $sprice + $side_markup[1];
 								}
 							}
-							$sidestone_price += $sprice;
-						} else {
-							$sidestone_price += $get_sidestone_price->row['carat_price'] * ($sides_carat) * $sides_pieces;
-						}
+							$sidestone_price += $sprice * $sides_pieces;
+						
 					} else {
 						$no_price = '1';
 					}
@@ -658,21 +661,18 @@ class Cart {
 					
 					if($get_multistone_price->num_rows){
 						
-						if($multie_pieces == '1' && $multie_carat >= 0.20) {
-							$mprice += $get_multistone_price->row['carat_price'];
+							$mprice = $get_multistone_price->row['carat_price'] * $multie_carat;
 							
 							if (isset($multi_mapping[$multie_lab]['markup'])) {
 								$multi_markup = explode('|',$multi_mapping[$multie_lab]['markup']);
 								if(isset($multi_markup[0]) && $multi_markup[0] > 0){
-									$mprice += $mprice * $multi_markup[0] + $multi_markup[1];
+									$mprice = $mprice * $multi_markup[0] + $multi_markup[1];
 								} elseif(isset($multi_markup[1])) {
-									$mprice += $mprice + $multi_markup[1];
+									$mprice = $mprice + $multi_markup[1];
 								}
 							}
 							$multistone_price += $mprice * $multie_pieces;
-						} else {
-							$multistone_price += $get_multistone_price->row['carat_price'] * ($multie_carat) * $multie_pieces;
-						}	
+						
 					} else {
 						$no_price = '1';
 					}
@@ -684,7 +684,17 @@ class Cart {
 		if($metal_price == 0 || $all_stone_price == 0){
 			$no_price = '1';
 		}
-		
+
+		/*
+		echo "Metal : ".$metal_price;
+		echo "<br/>";
+		echo "Stone : ".$stone_price;
+		echo "<br/>";
+		echo "SideStone : ".$sidestone_price;
+		echo "<br/>";
+		echo "MultiStone : ".$multistone_price;
+		*/
+
 		if($no_price == '0'){
 			$final_price = $metal_price + $stone_price + $sidestone_price + $multistone_price;
 			
@@ -872,9 +882,9 @@ class Cart {
 	
 	public function getOptionValueMapping()
 	{
-		$mapping_array = $this->cache->get('option.stone_mapping.' . (int)$this->config->get('config_language_id'));
-		if (!$mapping_array)
-		{
+		//$mapping_array = $this->cache->get('option.stone_mapping.' . (int)$this->config->get('config_language_id'));
+		//if (!$mapping_array)
+		//{
 			$mapping_array = array();
 			$mapping_query = $this->db->query("SELECT * FROM  " . DB_PREFIX . "stone_mapping sm"
 					. " LEFT JOIN " . DB_PREFIX . "stone_mapping_value smv ON (sm.stone_mapping_id = smv.stone_mapping_id)");
@@ -890,17 +900,17 @@ class Cart {
 				}
 			}
 
-			$this->cache->set('option.stone_mapping.' . (int)$this->config->get('config_language_id') , $mapping_array);
-		}
+			//$this->cache->set('option.stone_mapping.' . (int)$this->config->get('config_language_id') , $mapping_array);
+		//}
 
 		return $mapping_array;
 	}
 	
 	public function getMultiOptionValueMapping()
 	{
-		$multi_mapping_array = $this->cache->get('option.multi_stone_mapping.' . (int)$this->config->get('config_language_id'));
-		if (!$multi_mapping_array)
-		{
+		//$multi_mapping_array = $this->cache->get('option.multi_stone_mapping.' . (int)$this->config->get('config_language_id'));
+		//if (!$multi_mapping_array)
+		//{
 			$multi_mapping_array = array();
 			$multi_mapping_query = $this->db->query("SELECT * FROM  " . DB_PREFIX . "multistone_mapping sm"
 					. " LEFT JOIN " . DB_PREFIX . "multistone_mapping_value smv ON (sm.multistone_mapping_id = smv.multistone_mapping_id)");
@@ -916,8 +926,8 @@ class Cart {
 				}
 			}
 
-			$this->cache->set('option.multi_stone_mapping.' . (int)$this->config->get('config_language_id') , $multi_mapping_array);
-		}
+			//$this->cache->set('option.multi_stone_mapping.' . (int)$this->config->get('config_language_id') , $multi_mapping_array);
+		//}
 
 		return $multi_mapping_array;
 	}
