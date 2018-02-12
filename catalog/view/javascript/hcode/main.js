@@ -314,7 +314,7 @@ $(document).ready(function () {
         itemsMobile: [700, 2],
         navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
     });
-	$("#review").owlCarousel({
+	$("#review-old").owlCarousel({
         navigation: true,
         items: 3,
         itemsDesktop: [1200, 3],
