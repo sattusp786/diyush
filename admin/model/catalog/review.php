@@ -29,7 +29,7 @@ class ModelCatalogReview extends Model {
 	}
 
 	public function getReviews($data = array()) {
-		$sql = "SELECT r.review_id, pd.name, r.author, r.rating, r.status, r.date_added FROM " . DB_PREFIX . "review r LEFT JOIN " . DB_PREFIX . "product_description pd ON (r.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT r.review_id, pd.name, r.author, r.rating, r.status, r.date_added FROM " . DB_PREFIX . "review r LEFT JOIN " . DB_PREFIX . "product_description pd ON (r.product_id = pd.product_id) WHERE 1 ";
 
 		if (!empty($data['filter_product'])) {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_product']) . "%'";
@@ -85,7 +85,7 @@ class ModelCatalogReview extends Model {
 	}
 
 	public function getTotalReviews($data = array()) {
-		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "review r LEFT JOIN " . DB_PREFIX . "product_description pd ON (r.product_id = pd.product_id) WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "review r LEFT JOIN " . DB_PREFIX . "product_description pd ON (r.product_id = pd.product_id) WHERE 1 ";
 
 		if (!empty($data['filter_product'])) {
 			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_product']) . "%'";
