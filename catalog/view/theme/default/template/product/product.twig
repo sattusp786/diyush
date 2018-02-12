@@ -671,51 +671,7 @@
     <div class="row no-margin">
     <h2 class="margin-two no-margin-top text-center">Customer Review</h2>
         <form class="form-horizontal" id="form-review">
-            <div id="review"></div>
-            <div class="clear-both"></div>
-            <h2 class="text-center">{{ text_write }}</h2>
-              {% if review_guest %}
-            <div class="col-md-6">
-            <div class="form-group required">
-              <div class="col-sm-12">
-                <label class="control-label" for="input-name">{{ entry_name }}</label>
-                <input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
-              </div>
-            </div>
-            <div class="form-group required">
-              <div class="col-sm-12">
-                <label class="control-label">{{ entry_rating }}</label>
-                &nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
-                <input type="radio" name="rating" value="1" />
-                &nbsp;
-                <input type="radio" name="rating" value="2" />
-                &nbsp;
-                <input type="radio" name="rating" value="3" />
-                &nbsp;
-                <input type="radio" name="rating" value="4" />
-                &nbsp;
-                <input type="radio" name="rating" value="5" />
-                &nbsp;{{ entry_good }}</div>
-            </div></div>
-            <div class="col-md-6">
-            <div class="form-group required">
-              <div class="col-sm-12">
-                <label class="control-label" for="input-review">{{ entry_review }}</label>
-                <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
-                <div class="help-block">{{ text_note }}</div>
-              </div>
-            </div></div>
-            
-            
-            {{ captcha }}
-            <div class="buttons clearfix">
-              <div class="pull-right">
-                <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="highlight-button-dark btn btn-small button width-100 no-margin text-center">{{ button_continue }}</button>
-              </div>
-            </div>
-            {% else %}
-            {{ text_login }}
-            {% endif %}
+            <div id="review"></div>            
           </form>
       <!--<div id="owl-review" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">        
         <div class="item">
