@@ -671,7 +671,7 @@
     <div class="row no-margin">
     <h2 class="margin-two no-margin-top text-center">Customer Review</h2>
         <form class="form-horizontal" id="form-review">
-            <div id="review"></div>            
+            <div id="review" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple"></div>            
           </form>
       <!--<div id="owl-review" class="owl-carousel owl-theme dark-pagination owl-no-pagination owl-prev-next-simple">        
         <div class="item">
@@ -1132,7 +1132,33 @@ $('#review').delegate('.pagination a', 'click', function(e) {
     $('#review').fadeIn('slow');
 });
 
-$('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
+$(document).ready(function(){
+	$.ajax({
+		url: 'index.php?route=product/product/review&product_id={{ product_id }}',
+		type: 'get',
+		dataType: 'html',
+		data: 'product_id={{ product_id }}',
+		beforeSend: function() {
+		  
+		},
+		complete: function() {
+		  
+		},
+		success: function(htmldata) {
+			$('#review').html(htmldata);
+			$("#review").owlCarousel({
+				navigation: true,
+				items: 3,
+				itemsDesktop: [1200, 3],
+				itemsTablet: [800, 2],
+				itemsMobile: [700, 1],
+				navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"]
+			});
+		}
+	  });
+});
+  
+//$('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
 
 $('#button-review').on('click', function() {
 	$.ajax({
