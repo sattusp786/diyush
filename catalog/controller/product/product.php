@@ -672,7 +672,7 @@ class ControllerProductProduct extends Controller {
 
 		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($this->request->get['product_id']);
 
-		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
+		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 3, 3);
 
 		foreach ($results as $result) {
 			$data['reviews'][] = array(
@@ -686,12 +686,12 @@ class ControllerProductProduct extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $review_total;
 		$pagination->page = $page;
-		$pagination->limit = 5;
+		$pagination->limit = 3;
 		$pagination->url = $this->url->link('product/product/review', 'product_id=' . $this->request->get['product_id'] . '&page={page}');
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 5) + 1 : 0, ((($page - 1) * 5) > ($review_total - 5)) ? $review_total : ((($page - 1) * 5) + 5), $review_total, ceil($review_total / 5));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 3) + 1 : 0, ((($page - 1) * 3) > ($review_total - 3)) ? $review_total : ((($page - 1) * 3) + 3), $review_total, ceil($review_total / 3));
 
 		$this->response->setOutput($this->load->view('product/review', $data));
 	}
@@ -903,7 +903,7 @@ class ControllerProductProduct extends Controller {
 								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
 								if($total_carat > 0){
 									$json['carat_weight'] = 'Approx '. round($total_carat,2).' ct. wt.';
-									$json['stones'] .= 'Total Weight : Approx '. round($total_carat,2).' ct. wt. '.$pieces.'<br/>';
+									$json['stones'] .= 'Total Weight : Approx '. round($total_carat,2).' ct. wt. <br/>';
 								}
 							} elseif($option['name'] == 'Carat'){
 								if(stripos($product['multistone'],'M') !== false){
@@ -935,7 +935,7 @@ class ControllerProductProduct extends Controller {
 										$json['side_stones'] .= 'Total Weight : Approx '. round($total_carats,2).' ct. wt. '.$spieces.'<br/>';
 									}
 								}
-								$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt. '.$pieces.'<br/>';
+								$json['stones'] .= 'Total Weight : Approx '. $total_carat.' ct. wt.<br/>';
 							} else {
 								$json['stones'] .= $option['name']. ' : '. $option['value'].'<br/>';
 							}
