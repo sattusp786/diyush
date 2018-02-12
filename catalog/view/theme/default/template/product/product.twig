@@ -109,7 +109,7 @@
                         <div class="pricewrap width-100">
                         <div class="col-md-12 no-padding-right">
                         {% if price %}
-						  <ul class="list-unstyled" id="price_block">
+						  <ul class="list-unstyled price_block">
 							{% if not special %}
 							<li>
 							  <h2 class="final_price"><span class="final_prod_price black-text title-small font-weight-600">{{ price }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
@@ -122,7 +122,7 @@
 							{% endif %}
                              <li>(Inc. VAT, Postage and Packaging) <a href="#fairpricing" class="highlight-button-dark btn btn-very-small button xs-no-margin popup-with-zoom-anim" style=" margin: 0 10px; line-height: initial;">Fair pricing Policy</a></li>
 						  </ul>
-						  <ul class="list-unstyled" id="noprice_block" style="display:none;">
+						  <ul class="list-unstyled noprice_block" style="display:none;">
 							<li>{{ no_price_message }}</li>
 						  </ul>
 						  {% endif %}
@@ -177,7 +177,7 @@
                         <div class="pricewrap width-100">
                         <div class="col-md-12 no-padding-left">
                         {% if price %}
-						  <ul class="list-unstyled" id="price_block">
+						  <ul class="list-unstyled price_block">
 							{% if not special %}
 							<li>
 							  <h2 class="final_price"><span class="final_prod_price black-text title-small font-weight-600">{{ price }}</span> <span class="rrp"></span><span class="sep"></span><span class="yousave"></span></h2>
@@ -203,7 +203,7 @@
 							{% endfor %}
 							{% endif %}-->
 						  </ul>
-						  <ul class="list-unstyled" id="noprice_block" style="display:none;">
+						  <ul class="list-unstyled noprice_block" style="display:none;">
 							<li>{{ no_price_message }}</li>
 						  </ul>
 						  {% endif %}
@@ -1248,11 +1248,11 @@ $('.product-option').on('change', function() {
 					$(".sep").html('');
 				}
 				if(json['no_price'] == '1'){
-					$("#noprice_block").show();
-					$("#price_block").hide();
+					$(".noprice_block").show();
+					$(".price_block").hide();
 				} else {
-					$("#noprice_block").hide();
-					$("#price_block").show();
+					$(".noprice_block").hide();
+					$(".price_block").show();
 				}
 				if(json['carat_weight'] != '' && $("#carat_weight").length > 0){
 					$("#carat_weight").show();
