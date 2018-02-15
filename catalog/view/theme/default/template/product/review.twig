@@ -1,6 +1,6 @@
 {% if reviews %}
 {% for review in reviews %}
-	<div class="item col-md-4">
+	<div class="item">
     	<div class="review text-center padding-left-right">   
          <p> {% for i in 1..5 %}
       {% if review.rating < i %} <span class="fa fa-stack yellow-text"><i class="fa fa-star-o fa-stack-2x yellow-text"></i></span> {% else %} <span class="fa fa-stack yellow-text"><i class="fa fa-star fa-stack-2x yellow-text"></i><i class="fa fa-star-o fa-stack-2x yellow-text"></i></span> {% endif %}
