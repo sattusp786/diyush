@@ -672,7 +672,7 @@ class ControllerProductProduct extends Controller {
 
 		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($this->request->get['product_id']);
 
-		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 3, 3);
+		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 10, 10);
 
 		foreach ($results as $result) {
 			$data['reviews'][] = array(
@@ -686,12 +686,12 @@ class ControllerProductProduct extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $review_total;
 		$pagination->page = $page;
-		$pagination->limit = 3;
+		$pagination->limit = 10;
 		$pagination->url = $this->url->link('product/product/review', 'product_id=' . $this->request->get['product_id'] . '&page={page}');
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 3) + 1 : 0, ((($page - 1) * 3) > ($review_total - 3)) ? $review_total : ((($page - 1) * 3) + 3), $review_total, ceil($review_total / 3));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($review_total - 10)) ? $review_total : ((($page - 1) * 10) + 10), $review_total, ceil($review_total / 10));
 
 		$this->response->setOutput($this->load->view('product/review', $data));
 	}
