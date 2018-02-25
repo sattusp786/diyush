@@ -2735,6 +2735,9 @@ ul.sub-navi li a:before {
 .stickbar-points .stickbar-downarrow .fa{font-size: 80px; color: #fff; top: -35px; position: absolute;}
 #proreview-click-1, #proreview-click-2 { cursor:pointer;}
 #review { opacity: 1!important;}
+.ring-size-table td { padding:10px !important;}
+.navigate-links li { display:inline-block; padding:0 2%;}
+.navigate-links li img { width:20%;}
 @media print {
 body.product_body  #topbar, body.product_body .search-cart-header, body.product_body #support-iconswrap, body.product_body #pro-review-details, body.product_body footer, body.product_body .zoom-gallery .products-thumb, body.product_body .pricewrap .list-unstyled li a.btn.btn-very-small, #product .size-chart, .print-no { display:none;}
 body.product_body .rating .pull-right { float:left !important;}
