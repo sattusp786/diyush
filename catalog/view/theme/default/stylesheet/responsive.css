@@ -287,6 +287,10 @@
 	.navbar-nav > li > a { font-size:11px; font-weight:600;}
 	.navbar-right {float: left !important;}
 	.search-cart-header .subtitle { display:none}
+	
+	.topstickbar { padding:10px 1%!important;}
+	.topstickbar .topstickbarleft, .topstickbar .topstickbarmid, .stickbar-points { display:none!important;}
+	.topstickbar .topstickbarright { width:100%!important; text-align:center;}
 }
 @media (max-width: 991px) {
     /*  navigation panel  */
@@ -724,9 +728,6 @@
 	#wpbs_slider { right:0;}
 	#wpbs_cont {width:100%;}
 	.rviwcolumn2 { position:static; margin:20px 0;}
-	.topstickbar { padding:10px 1%!important;}
-	.topstickbar .topstickbarleft, .topstickbar .topstickbarmid, .stickbar-points { display:none!important;}
-	.topstickbar .topstickbarright { width:100%!important; text-align:center;}
 	.zopim { left:-120% !important;}
 	.logo { max-width: 150px; }
 	.page-title span { display:none;}
