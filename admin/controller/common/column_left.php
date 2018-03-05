@@ -147,6 +147,14 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
+
+			if ($this->user->hasPermission('access', 'catalog/filter_meta')) {
+				$catalog[] = array(
+					'name'	   => $this->language->get('text_filter_meta'),
+					'href'     => $this->url->link('catalog/filter_meta', 'user_token=' . $this->session->data['user_token'], true),
+					'children' => array()		
+				);
+			}
 			
 
 			// Attributes

@@ -18,6 +18,7 @@ $_['column_action']     = 'Action';
 // Entry
 $_['entry_group']       = 'Filter Group Name';
 $_['entry_name']        = 'Filter Name';
+$_['entry_keyword']     = 'Filter Keyword';
 $_['entry_image']       = 'Filter Image';
 $_['entry_sort_order']  = 'Sort Order';
 

@@ -50,6 +50,7 @@
               <thead>
                 <tr>
                   <td class="text-left required">{{ entry_name }}</td>
+                  <td class="text-left required">{{ entry_keyword }}</td>
                   <td class="text-left">{{ entry_image }}</td>
                   <td class="text-right">{{ entry_sort_order }}</td>
                   <td></td>
@@ -60,10 +61,19 @@
               {% set filter_row = 0 %}
               {% for filter in filters %}
               <tr id="filter-row{{ filter_row }}">
-                <td class="text-left" style="width: 70%;"><input type="hidden" name="filter[{{ filter_row }}][filter_id]" value="{{ filter.filter_id }}" />
+                <td class="text-left" style="width: 40%;"><input type="hidden" name="filter[{{ filter_row }}][filter_id]" value="{{ filter.filter_id }}" />
                   {% for language in languages %}
                   <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
                     <input type="text" name="filter[{{ filter_row }}][filter_description][{{ language.language_id }}][name]" value="{{ filter.filter_description[language.language_id] ? filter.filter_description[language.language_id].name }}" placeholder="{{ entry_name }}" class="form-control" />
+                  </div>
+                  {% if error_filter[filter_row][language.language_id] %}
+                  <div class="text-danger">{{ error_filter[filter_row][language.language_id] }}</div>
+                  {% endif %}
+                  {% endfor %}</td>
+                  <td class="text-left" style="width: 30%;">
+                  {% for language in languages %}
+                  <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                    <input type="text" name="filter[{{ filter_row }}][filter_description][{{ language.language_id }}][keyword]" value="{{ filter.filter_description[language.language_id] ? filter.filter_description[language.language_id].keyword }}" placeholder="{{ entry_keyword }}" class="form-control" />
                   </div>
                   {% if error_filter[filter_row][language.language_id] %}
                   <div class="text-danger">{{ error_filter[filter_row][language.language_id] }}</div>
@@ -80,7 +90,7 @@
               
               <tfoot>
                 <tr>
-                  <td colspan="2"></td>
+                  <td colspan="4"></td>
                   <td class="text-right"><button type="button" onclick="addFilterRow();" data-toggle="tooltip" title="{{ button_filter_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
                 </tr>
               </tfoot>
@@ -95,13 +105,20 @@ var filter_row = {{ filter_row }};
 
 function addFilterRow() {
 	html  = '<tr id="filter-row' + filter_row + '">';
-    html += '  <td class="text-left" style="width: 70%;"><input type="hidden" name="filter[' + filter_row + '][filter_id]" value="" />';
+    html += '  <td class="text-left" style="width: 40%;"><input type="hidden" name="filter[' + filter_row + '][filter_id]" value="" />';
 	{% for language in languages %}
 	html += '  <div class="input-group">';
 	html += '    <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span><input type="text" name="filter[' + filter_row + '][filter_description][{{ language.language_id }}][name]" value="" placeholder="{{ entry_name }}" class="form-control" />';
     html += '  </div>';
 	{% endfor %}
 	html += '  </td>';
+  html += '  <td class="text-left" style="width: 30%;">';
+  {% for language in languages %}
+  html += '  <div class="input-group">';
+  html += '    <span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span><input type="text" name="filter[' + filter_row + '][filter_description][{{ language.language_id }}][keyword]" value="" placeholder="{{ entry_keyword }}" class="form-control" />';
+    html += '  </div>';
+  {% endfor %}
+  html += '  </td>';
 	html += '  <td class="text-left"><a href="" id="thumb-image' + filter_row + '"data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="filter[' + filter_row + '][image]" value="" id="input-image' + filter_row + '" /></td>';
 	html += '  <td class="text-right"><input type="text" name="filter[' + filter_row + '][sort_order]" value="" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" /></td>';
 	html += '  <td class="text-right"><button type="button" onclick="$(\'#filter-row' + filter_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';

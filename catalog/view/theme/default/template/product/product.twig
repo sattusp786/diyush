@@ -96,7 +96,8 @@
                         </div>
                         <div class="topstickbarmid width-30 f-left padding-one">
                         	<div class="width-60 f-left">
-                        	 <a class="popup-with-zoom-anim highlight-button-dark btn btn-small button width-100 no-margin text-center" id="button-enq" data-loading-text="Loading..." href="#enquiry">Make an Enquiry</a>
+                        	 <a style="display:none;" class="popup-with-zoom-anim highlight-button-dark btn btn-small button width-100 no-margin text-center button-enq" data-loading-text="Loading..." href="#enquiry">Make an Enquiry</a>
+                        	 <a class="highlight-button-dark btn btn-small button width-100 no-margin text-center button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"> {{ button_cart }}</a>
                              </div>
                              <div class="width-40 f-right">
                         	 
@@ -400,8 +401,8 @@
 							  <input type="hidden" name="product_id" value="{{ product_id }}" /></div>
 							  <br />
                               <div class="text-center">
-							  <a class="popup-with-zoom-anim highlight-button-dark btn btn-medium button width-60 no-margin" id="button-enq" data-loading-text="{{ text_loading }}" href="#enquiry"><!--<i class="icon-basket"></i>-->Make an Enquiry</a></div>
-							  <!--<a class="highlight-button-dark btn btn-medium button width-60 no-margin" id="button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"> {{ button_cart }}</a></div>-->
+							  <a style="display:none;" class="popup-with-zoom-anim highlight-button-dark btn btn-medium button width-60 no-margin button-enq" data-loading-text="{{ text_loading }}" href="#enquiry"><i class="icon-basket"></i>Make an Enquiry</a>
+							  <a class="highlight-button-dark btn btn-medium button width-60 no-margin button-cart" data-loading-text="{{ text_loading }}" href="javascript:void(0);"> {{ button_cart }}</a></div>
 							</div>
                             <div class="form-group margin-two width-100 f-left text-center print-no ">
                             
@@ -985,7 +986,7 @@ $('select[name=\'recurring_id\'], input[name="quantity"]').change(function(){
 //--></script> 
 <script type="text/javascript"><!--
 
-$('#button-cart').on('click', function() {
+$('.button-cart').on('click', function() {
 var qty = $('input[name=\'quantity\']').val();
 {% if tagmanager.code and tagmanager.status =='1' %}
 dataLayer.push({'event': 'addToCart','ecommerce': {'currencyCode': '{{ tagmanager.currency }}','add': {'products': [{'name': '{{ title }}','id': '{{ pid }}','price': {{ pprice }},'brand': '{{ manufacturer }}','category': '{{ category }}','currency': '{{ tagmanager.currency }}','variant': '','quantity': Number(qty)}]}}});
@@ -1000,10 +1001,10 @@ fbq('track', 'AddToCart', {content_ids: '{{pid}}', content_type: 'product',value
 		data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
 		dataType: 'json',
 		beforeSend: function() {
-			$('#button-cart').button('loading');
+			$('.button-cart').button('loading');
 		},
 		complete: function() {
-			$('#button-cart').button('reset');
+			$('.button-cart').button('reset');
 		},
 
 		success: function(json) {
@@ -1197,10 +1198,10 @@ $('.product-option').on('change', function() {
 		dataType: 'json',
 		data: $("#product-option-form").serialize(),
 		beforeSend: function() {
-			$('#button-cart').button('loading');
+			$('.button-cart').button('loading');
 		},
 		complete: function() {
-			$('#button-cart').button('reset');
+			$('.button-cart').button('reset');
 		},
 		success: function(json) {
 			$('.alert-dismissible').remove();
@@ -1232,9 +1233,13 @@ $('.product-option').on('change', function() {
 				if(json['no_price'] == '1'){
 					$(".noprice_block").show();
 					$(".price_block").hide();
+					$(".button-cart").hide();
+					$(".button-enq").show();
 				} else {
 					$(".noprice_block").hide();
 					$(".price_block").show();
+					$(".button-enq").hide();
+					$(".button-cart").show();
 				}
 				if(json['carat_weight'] != '' && $("#carat_weight").length > 0){
 					$("#carat_weight").show();

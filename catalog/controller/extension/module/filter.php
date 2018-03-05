@@ -3,8 +3,10 @@ class ControllerExtensionModuleFilter extends Controller {
 	public function index() {
 		if (isset($this->request->get['path'])) {
 			$parts = explode('_', (string)$this->request->get['path']);
+			$data['path'] = $this->request->get['path'];
 		} else {
 			$parts = array();
+			$data['path'] = '';
 		}
 
 		$data['currency_symbol'] = $this->currency->getSymbolLeft($this->session->data['currency']);
@@ -110,4 +112,44 @@ class ControllerExtensionModuleFilter extends Controller {
 			}
 		}
 	}
+
+
+	public function writeurl() {
+
+        $json = array();
+
+        if ($this->request->server['REQUEST_METHOD'] == 'POST') {
+
+            $url = "";
+            if (isset($this->request->get['path'])) {
+                $url .= "&path=" . $this->request->get['path'];
+            }            
+
+            if (!empty($this->request->post['filter'])) {
+                $url .= "&filter=" . $this->request->post['filter'];
+            }
+
+            if(!empty($this->request->post['price_min'])) {
+                $url .= "&price_min=" . $this->request->post['price_min'];
+            } 
+            if(!empty($this->request->post['price_max'])) {
+                $url .= "&price_max=" . $this->request->post['price_max'];
+            } 
+            if(!empty($this->request->post['carat_min'])) {
+                $url .= "&carat_min=" . $this->request->post['carat_min'];
+            } 
+            if(!empty($this->request->post['carat_max'])) {
+                $url .= "&carat_max=" . $this->request->post['carat_max'];
+            } 
+            if(!empty($this->request->post['limit']) && $this->request->post['limit'] != 24){
+                $url .= "&limit=" . $this->request->post['limit'];
+            }
+            if (!isset($json['error'])) {
+                $json['redirect'] = rawurldecode(str_replace('&amp;', '&', $this->url->link('product/category', $url)));
+            }
+        }
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
 }

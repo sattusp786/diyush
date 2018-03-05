@@ -15,6 +15,13 @@ class ControllerStartupSeoUrl extends Controller {
 				array_pop($parts);
 			}
 
+			if(!empty($this->request->get['filter'])) {
+				preg_match_all('/(\w+)=([^&]+)/', $_SERVER["QUERY_STRING"], $pairs);
+				$FILTERS = array_combine($pairs[1], $pairs[2]);
+				$parts1 = explode('+', $FILTERS['filter']);
+				$parts = array_merge ($parts, $parts1);
+			}
+
 			foreach ($parts as $part) {
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE keyword = '" . $this->db->escape($part) . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "'");
 
@@ -33,6 +40,14 @@ class ControllerStartupSeoUrl extends Controller {
 						}
 					}
 
+					if ($url[0] == 'filter_id') {
+						if (!isset($this->request->get['filter'])) {
+							$this->request->get['filter'] = $url[1];
+						} else {
+							$this->request->get['filter'] .= ',' . $url[1];
+						}
+					}
+
 					if ($url[0] == 'manufacturer_id') {
 						$this->request->get['manufacturer_id'] = $url[1];
 					}
@@ -41,7 +56,7 @@ class ControllerStartupSeoUrl extends Controller {
 						$this->request->get['information_id'] = $url[1];
 					}
 
-					if ($query->row['query'] && $url[0] != 'information_id' && $url[0] != 'manufacturer_id' && $url[0] != 'category_id' && $url[0] != 'product_id') {
+					if ($query->row['query'] && $url[0] != 'information_id' && $url[0] != 'manufacturer_id' && $url[0] != 'category_id' && $url[0] != 'product_id' && $url[0] != 'filter_id') {
 						$this->request->get['route'] = $query->row['query'];
 					}
 				} else {
@@ -100,6 +115,28 @@ class ControllerStartupSeoUrl extends Controller {
 					}
 
 					unset($data[$key]);
+				} elseif (($data['route'] == 'product/category') && ($key == 'filter')) {
+
+					$filters = explode(',', $value);
+
+					if(!empty($filters)) {
+												
+						foreach ($filters as $filter) {
+
+							$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "seo_url WHERE `query` = 'filter_id=" . $this->db->escape($filter) . "' AND store_id = '" . (int)$this->config->get('config_store_id') . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
+					
+							if ($query->num_rows && $query->row['keyword']) {
+								$url .= '/' . $query->row['keyword'];
+							} else {
+								$url = '';
+
+								break;
+							}
+						}
+
+
+					}	
+					unset($data[$key]);						
 				}
 			}
 		}

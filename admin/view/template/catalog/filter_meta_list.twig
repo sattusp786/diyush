@@ -1,0 +1,189 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right"><a onclick="location = '{{ insert }}'" data-toggle="tooltip" title="{{ button_insert }}" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+        <a onclick="$('form').submit();" data-toggle="tooltip" title="{{ button_delete }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        {{ breadcrumb.separator }}<a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+	 <div class="row">
+	<div id="filter-filter" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-filter"></i> {{ text_filter }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="control-label" for="input-name">{{ column_title }}</label>
+              <input type="text" name="filter_title" value="{{ filter_title }}" placeholder="{{ column_title }}" id="input-name" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-model">{{ column_category }}</label>
+              <input type="text" name="filter_category" value="{{ filter_category }}" placeholder="{{ column_category }}" id="input-model" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="input-status">{{ entry_status }}</label>
+              <select name="filter_status" id="input-status" class="form-control">
+                <option value=""></option>
+               {% if filter_status == '1' %} 
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+              {% else %}
+				<option value="1">{{ text_enabled }}</option>
+                 {% endif %}
+                  {% if filter_status == '0' %}
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                
+                  {% else %}
+                <option value="0">{{ text_disabled }}</option>
+               
+                  {% endif %}
+              </select>
+            </div>
+            <div class="form-group text-right">
+              <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-filter"></i> {{ button_filter }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+	<div class="col-md-9 col-md-pull-3 col-sm-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-information">
+          <div class="table-responsive">
+		  <div class="box">
+			<input type="file" name="import_file" id="import_file" class="col-sm-3">
+			<a onclick="importfile();" data-toggle="tooltip" title="{{ button_import }}" class="btn btn-primary"><i class="fa fa-upload"></i></a>
+			{% if total!=0 %}
+			<a href="{{ export }}" data-toggle="tooltip" title="{{ button_export }}" class="btn btn-primary"><i class="fa fa-download"></i></a>
+			{% endif %}
+			{% if text_counter %}
+			<span class="warning">{{ text_counter }} </span>
+			{% endif %}
+			</div>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
+                  <td class="text-left">{% if sort %}
+                    <a href="{{ sort_title }}" class="{{ order|lower }}">{{ column_title }}</a>
+                    {% else %}
+                    <a href="{{ sort_title }}">{{ column_title }}</a>
+                    {% endif %}</td>
+                  <td class="text-right">{% if sort == 'category' %}
+                    <a href="{{ sort_category }}" class="{{ order|lower }}">{{ column_category }}</a>
+                    {% else %}
+                    <a href="{{ sort_category }}">{{ column_category }}</a>
+                    {% endif %}</td>
+					
+					<td class="text-right">{% if sort == 'fq.sort_order' %}
+                    <a href="{{ sort_order }}" class="{{ order|lower }}">{{ column_sort_order }}</a>
+                    {% else %}
+                    <a href="{{ sort_order }}">{{ column_sort_order }}</a>
+                    {% endif %}</td>
+					
+					<td class="text-right">{% if sort == 'fq.status' %}
+                    <a href="{{ sort_status }}" class="{{ order|lower }}">{{ column_status }}</a>
+                    {% else %}
+                    <a href="{{ sort_status }}">{{ column_status }}</a>
+                    {% endif %}</td>
+				
+                  <td class="text-right">{{ column_action }}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% if filter_meta %}
+                {% for information_filter in filter_meta %}
+                <tr>
+                  <td class="text-center">{% if information_filter.information_filter_id in selected %}
+                    <input type="checkbox" name="selected[]" value="{{ information_filter.information_filter_id }}" checked="checked" />
+                    {% else %}
+                    <input type="checkbox" name="selected[]" value="{{ information_filter.information_filter_id }}" />
+                    {% endif %}</td>
+                  <td class="text-left">{{ information_filter.title }}</td>
+                  <td class="text-left">{{ information_filter.category }}</td>
+                  <td class="text-right">{{ information_filter.sort_order }}</td>
+                  <td class="text-right">{{ information_filter.status }}</td>
+                  <td class="text-right">
+				  {% for action in information_filter.action %}
+                <a href="{{ action.href }}" data-toggle="tooltip" title="{{ action.text }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+               {% endfor %}
+				</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td class="text-center" colspan="4">{{ text_no_results }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-sm-6 text-left">{{ pagination }}</div>
+          <div class="col-sm-6 text-right">{{ results }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript"><!--
+
+function importfile(path)
+{
+	 var impurl = 'index.php?route=catalog/filter_meta/import&user_token={{ user_token }}';
+		if($("#import_file").val() != ''){
+		var didConfirm = confirm("Existing records will be updated. Are you sure want to continue?");
+			if (didConfirm == true) {
+			$('#form').attr('action', impurl);
+			$('#form').submit();
+		}
+	}
+	else{  alert("Please select valid file or file format (.csv)!")
+	}
+}
+function filter() {
+	url = 'index.php?route=catalog/filter_meta&user_token={{ user_token }}';
+	
+	var filter_title = $('input[name=\'filter_title\']').attr('value');
+	
+	if (filter_title) {
+		url += '&filter_title=' + encodeURIComponent(filter_title);
+	}
+	
+	var filter_category = $('input[name=\'filter_category\']').attr('value');
+	
+	if (filter_category) {
+		url += '&filter_category=' + encodeURIComponent(filter_category);
+	}
+	
+	var filter_status = $('select[name=\'filter_status\']').attr('value');
+	
+	if (filter_status != '*') {
+		url += '&filter_status=' + encodeURIComponent(filter_status);
+	}	
+
+	location = url;
+}
+//--></script>
+{{ footer }}

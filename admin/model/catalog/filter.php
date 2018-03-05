@@ -16,7 +16,11 @@ class ModelCatalogFilter extends Model {
 				$filter_id = $this->db->getLastId();
 
 				foreach ($filter['filter_description'] as $language_id => $filter_description) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "filter_description SET filter_id = '" . (int)$filter_id . "', language_id = '" . (int)$language_id . "', filter_group_id = '" . (int)$filter_group_id . "', name = '" . $this->db->escape($filter_description['name']) . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "filter_description SET filter_id = '" . (int)$filter_id . "', language_id = '" . (int)$language_id . "', filter_group_id = '" . (int)$filter_group_id . "', name = '" . $this->db->escape($filter_description['name']) . "', keyword = '" . $this->db->escape($filter_description['keyword']) . "'");
+
+					if (!empty($filter_description['keyword'])) {
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET language_id = '" . (int)$language_id . "', query = 'filter_id=" . (int)$filter_id ."', keyword = '" . $this->db->escape($filter_description['keyword']) . "'");
+					}
 				}
 			}
 		}
@@ -47,7 +51,14 @@ class ModelCatalogFilter extends Model {
 				$filter_id = $this->db->getLastId();
 
 				foreach ($filter['filter_description'] as $language_id => $filter_description) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "filter_description SET filter_id = '" . (int)$filter_id . "', language_id = '" . (int)$language_id . "', filter_group_id = '" . (int)$filter_group_id . "', name = '" . $this->db->escape($filter_description['name']) . "'");
+					$this->db->query("INSERT INTO " . DB_PREFIX . "filter_description SET filter_id = '" . (int)$filter_id . "', language_id = '" . (int)$language_id . "', filter_group_id = '" . (int)$filter_group_id . "', name = '" . $this->db->escape($filter_description['name']) . "', keyword = '" . $this->db->escape($filter_description['keyword']) . "'");
+
+					// SEO URL
+					$this->db->query("DELETE FROM `" . DB_PREFIX . "seo_url` WHERE query = 'filter_id=" . (int)$filter_id."'");
+
+					if (!empty($filter_description['keyword'])) {
+						$this->db->query("INSERT INTO " . DB_PREFIX . "seo_url SET language_id = '" . (int)$language_id . "', query = 'filter_id=" . (int)$filter_id ."', keyword = '" . $this->db->escape($filter_description['keyword']) . "'");
+					}
 				}
 			}
 		}
@@ -158,7 +169,7 @@ class ModelCatalogFilter extends Model {
 			$filter_description_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "filter_description WHERE filter_id = '" . (int)$filter['filter_id'] . "'");
 
 			foreach ($filter_description_query->rows as $filter_description) {
-				$filter_description_data[$filter_description['language_id']] = array('name' => $filter_description['name']);
+				$filter_description_data[$filter_description['language_id']] = array('name' => $filter_description['name'], 'keyword' => $filter_description['keyword']);
 			}
 
 			$filter_data[] = array(

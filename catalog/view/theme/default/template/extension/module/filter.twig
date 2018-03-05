@@ -48,15 +48,15 @@
 	<div id="carat-range"></div>
     </div>
     </div>-->
-     <div class="width-20 f-left text-left">
-     <div class="col-md-12">
+    <!--<div class="width-20 f-left text-left">
+    <div class="col-md-12">
 	<h3>
 	<label for="amount">Price Range:</label>
 	<input type="text" id="price_value" readonly style="border:0; color:#f6931f; font-weight:bold;">
 	</h3>
 	<div id="price-range"></div>
     </div>
-    </div>
+    </div>-->
     <div class="clearfix"></div>
     </div>
     
@@ -115,13 +115,13 @@
 		</li>
 		{% endfor %}
 	</ul>
-     <div class="col-md-12">
+    <!--<div class="col-md-12">
 	<p>
 	<label for="amount">Price Range:</label>
 	<input type="text" id="price_value" readonly style="border:0; color:#f6931f; font-weight:bold;">
 	</p>
 	<div id="price-range"></div>
-    </div>
+    </div>-->
 	
     <div class="clear-both"></div>
     <div class="filterbtns">
@@ -179,19 +179,50 @@ $(".closefilter").on('click', function() {
    $("#filterssearch").fadeOut();
    $("body").removeClass("bodyfixed");
 });
+
+
 $('.button-filter').on('click', function() {
+	/*
 	filter = [];
 
 	$('input[name^=\'filter\']:checked').each(function(element) {
 		filter.push(this.value);
 	});
 	
-	//var carat_from = $("#carat_from").val();
-	//var carat_to = $("#carat_to").val();
+	var carat_from = $("#carat_from").val();
+	var carat_to = $("#carat_to").val();
 	var price_from = $("#price_from").val();
 	var price_to = $("#price_to").val();
 	
 	location = '{{ action }}' + filter.join(',')+'&price_from='+price_from+'&price_to='+price_to;
+	*/
+
+	filter = [];
+
+	$('input[name^=\'filter\']:checked').each(function(element) {
+		filter.push(this.value);
+	});
+
+	var filterer = filter.join(',');
+
+	$.ajax({
+			url: 'index.php?route=extension/module/filter/writeurl&path={{ path }}',
+			type: 'post',
+			dataType: 'json',
+			data: 'filter='+filterer,
+			beforeSend: function() {
+				$(this).attr('disabled',true);
+			},
+			complete: function() {
+				$(this).removeAttr('disabled');
+			},
+			success: function(json) {
+				if (json['redirect']) {
+					location.href  = json['redirect'];
+				}
+			}
+		});
+
 });
 $('.clear-btn').on('click', function() {
 	$('input[name^=\'filter\']:checked').each(function(element) {
