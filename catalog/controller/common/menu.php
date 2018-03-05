@@ -34,7 +34,7 @@ class ControllerCommonMenu extends Controller {
 								$style_data[] = array(
 									'style_id' => $filter['filter_id'],
 									'name'  => $filter['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($style_filter_data) . ')' : ''),
-									'href'  => $this->url->link('product/category', 'path=' . $category['category_id']).'&filter='.$filter['filter_id']
+									'href'  => $this->url->link('product/category', 'path=' . $category['category_id']).'/'.$filter['keyword']
 								);
 							}
 						}
