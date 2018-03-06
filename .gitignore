@@ -1,5 +1,6 @@
 system/storage/*
 image/*
+image/product/*
 config.php
 admin/config.php
 storage/*
